@@ -6,6 +6,13 @@ build-*
 src/*.dylib
 Makefile
 .qmake.stash
-src/Makefile
-test/Makefile
-app/Makefile
+
+src/Makefile.*
+test/Makefile.*
+app/Makefile.*
+
+*.dll
+*.a
+
+release/
+debug/

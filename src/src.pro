@@ -2,12 +2,16 @@ include(../defaults.pri)
 QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+macx{
+  TARGET = ../$${APP_NAME}
+}
 win32 {
-  TARGET = ../$APP_NAME
+  TARGET = ../$${APP_NAME}
 }
-unix {
-  TARGET = $APP_NAME
+unix:!macx {
+  TARGET = $${APP_NAME}
 }
+
 CONFIG -= testlib
 TEMPLATE = lib
 
