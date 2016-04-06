@@ -13,6 +13,9 @@ app/Makefile.*
 
 *.dll
 *.a
+*.ilk
+*.lib
+*.pdb
 
 release/
 debug/
