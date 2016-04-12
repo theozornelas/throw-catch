@@ -109,40 +109,47 @@ protected:
         enum nodeType { REGULAR, HEAD, TAIL };
 
         /*** CONSTRUCTOR FOR THE NODE ***/
-        // Default constructor for the node
+        /// Default constructor for the node sets all values to null
         node() : up_(0), down_(0), left_(0), right_(0), nodeType_(REGULAR) { }
+        // Non default constructor
         node(node* up, node* down, node* left, node* right, nodeType Type = REGULAR);
-        // Destructor for the node, Uses default for now
-        //~node();
 
         /*** SET METHODS - SETS THE POINTERS ***/
+        /// Sets the node up from this node
         void setUp(node* up)       { up_ = up; }
+        /// Sets the node down from this node
         void setDown(node* down)   { down_ = down; }
+        /// Sets the node left from this node
         void setLeft(node* left)   { left_ = left; }
+        /// Sets the node right from this node
         void setRight(node* right) { right_ = right; }
 
         /*** GET METHODS - GETS THE DIFFERENT POINTERS***/
+        /// Gets the node up from this node
         node* up() const { return up_; }
+        /// Gets the node down from this node
         node* down() const { return down_; }
+        /// Gets the node left from this node
         node* left() const { return left_; }
+        /// Gets the node right from this node
         node* right() const { return right_; }
-        // Returns the type of node for comparison purposes
-        nodeType type() const { return nodeType_; }
-        // returns the key of this node
-        K key() const { return data_.key(); }
-        // Returns the value in this node
-        V value() {return data_.value(); }
 
         /*** UTILITY METHODS ***/
-        // Returns TRUE if the data list for this node is empty
+        /// Returns the type of node for comparison purposes
+        nodeType type() const { return nodeType_; }
+        /// returns the key of this node
+        K key() const { return data_.key(); }
+        /// Returns the value in this node
+        V value() {return data_.value(); }
+        /// Returns TRUE if the data list for this node is empty
         bool empty() const { return data_.empty(); }
-        // sets the node status as a head node
+        /// sets the node status as a head node
         void setNodeType(const nodeType& n) { nodeType_ = n; }
-        // Adds an element to this node
+        /// Adds an element to this node
         void add(const item &e) { data_ = e; }
-        // Adds an element to this node by values
+        /// Adds an element to this node by values
         void add(const K &k, const V &v) { add(item(k,v)); }
-        // Clears the data from this node
+        /// Clears the data from this node
         void clear() { data_.clear(); }
 
         /*** COMPARISON OPERATOR OVERLOADS ***/
@@ -476,9 +483,9 @@ bool skiplist<K,V>::node::operator<(const node& that) const
     return false;
   }
   else{
-    return this->key() < that.key();
+    return this->data_ < that.data_;
   }
-};
+}
 
 /**
  * @brief overloads the > operator
@@ -493,9 +500,9 @@ bool skiplist<K,V>::node::operator>(const node& that) const
     return true;
   }
   else{
-    return this->key() > that.key();
+    return this->data_ > that.data_;
   }
-};
+}
 
 /**
  * @breif overloads the <= operator
@@ -505,8 +512,8 @@ bool skiplist<K,V>::node::operator<=(const node& that) const
 {
   if(this->nodeType_ == HEAD) { return true; }
   else if(this->nodeType_ == TAIL) { return false; }
-  else{ return this->key() <= that.key(); }
-};
+  else{ return this->data_ <= that.data_; }
+}
 
 /**
  * @breif overloads the >= operator
@@ -516,8 +523,8 @@ bool skiplist<K,V>::node::operator>=(const node& that) const
 {
   if(this->nodeType_ == HEAD) { return false; }
   else if(this->nodeType_ == TAIL) { return true; }
-  else{ return this->key() >= that.key(); }
-};
+  else{ return this->data_ >= that.data_; }
+}
 
 /**
  * @breif overloads the == operator
@@ -526,7 +533,7 @@ template <typename K, typename V>
 bool skiplist<K,V>::node::operator==(const skiplist::node &that) const {
   if(this->nodeType_ == that.nodeType_) {
     if(this->nodeType_ == REGULAR && !this->empty() && !that.empty()){
-      return this->key() == that.key();
+      return this->data_ == that.data_;
     }
     else {
       return true;

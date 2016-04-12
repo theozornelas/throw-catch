@@ -1,4 +1,5 @@
 #include <QtTest/QtTest>
+#include "header/skiplist.h"
 
 class Test_Main : public QObject
 {
