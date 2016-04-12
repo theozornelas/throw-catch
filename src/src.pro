@@ -17,7 +17,9 @@ CONFIG += staticlib
 TEMPLATE = lib
 
 SOURCES  += source/mainwindow.cpp
-HEADERS  += header/mainwindow.h
+HEADERS  += header/mainwindow.h \
+            header/skiplist.h \
+    header/entry.h
 FORMS    += form/mainwindow.ui
 
 QTPLUGIN += qsqlmysql
