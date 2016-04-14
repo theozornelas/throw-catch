@@ -6,4 +6,4 @@ This program allows baseball fans to plan their dream vacation.
 
 # Description
 
-> Create by throw-catch
+> Created by throw-catch
