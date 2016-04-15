@@ -24,8 +24,8 @@ static TestRunner& Instance()
 template <typename T>
 char RegisterTest(char* name)
 {
-   if ( std::find_if( begin(m_tests), end(m_tests), [&name](QSharedPointer<QObject>& elem)
-   { return elem->objectName() == name; }) == end(m_tests) )
+   if ( std::find_if( m_tests.begin(), m_tests.end(), [&name](QSharedPointer<QObject>& elem)
+   { return elem->objectName() == name; }) == m_tests.end() )
     {
       QSharedPointer<QObject> test(new T());
       test->setObjectName(name);
@@ -37,7 +37,7 @@ char RegisterTest(char* name)
 int RunAll(int argc, char *argv[])
 {
    int errorCode = 0;
-   std::for_each( begin(m_tests), end(m_tests), [&] (QSharedPointer<QObject>& test)
+   std::for_each( m_tests.begin(), m_tests.end(), [&] (QSharedPointer<QObject>& test)
    {
       errorCode |= QTest::qExec(test.data(), argc, argv);
       std::cout << std::endl;
@@ -48,15 +48,15 @@ int RunAll(int argc, char *argv[])
 
 void RegisterTest(QObject* test)
 {
-   auto testName = test->objectName();
+   QString testName = test->objectName();
 
-   if ( std::find_if(begin(m_tests), end(m_tests), [&testName](QSharedPointer<QObject>& elem)
+   if ( std::find_if(m_tests.begin(), m_tests.end(), [&testName](QSharedPointer<QObject>& elem)
         { return elem->objectName() == testName; }) == end(m_tests) )
        m_tests.push_back(QSharedPointer<QObject>(test));
 }
 
 private:
-   std::list<QSharedPointer<QObject>> m_tests;
+   std::list< QSharedPointer<QObject> > m_tests;
 };
 
 // Use this macro after your test declaration
