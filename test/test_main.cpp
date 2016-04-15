@@ -1,4 +1,5 @@
 #include <QtTest/QtTest>
+#include <QString>
 #include "header/skiplist.h"
 
 class Test_Main : public QObject
@@ -10,6 +11,7 @@ private slots:
 
 private:
     // Put testing variables here
+    skiplist<int, Qstring> list;
 };
 
 void Test_Main::initTest(){

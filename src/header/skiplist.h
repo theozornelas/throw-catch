@@ -8,7 +8,6 @@
 #include <ctime>
 #include <iomanip>
 #include "entry.h"
-using std::cout;
 using std::endl;
 
 /**
@@ -49,10 +48,10 @@ public:
     std::string printVert() const;
 
     /*** Iterator Methods ***/
-    // TODO - Returns an Iterator to the beginning of the list
-    Iterator begin();
+    // TODO - Returns an Iterator to the first item in the list
+    Iterator begin() { Iterator temp(head_); return temp++;}
     // TODO - Returns an Iterator to the end() of the list
-    Iterator end();
+    Iterator end() { return Iterator(tail_); }
 
 protected:
     /*** UTILITY METHODS ***/
@@ -80,8 +79,8 @@ public:
      *******************************************************************************************/
     class Iterator {
     public:
-        /// Basic Iterator constructor to the given position
-        Iterator(node* position) : pos_(position) {}
+        /// Basic Iterator constructor to the given position, always points to bottom level
+        Iterator(node* position) : pos_(position) { while(pos_->down() != nullptr){ pos_ = pos_->down(); } }
 
         /*** OPERATOR OVERLOADS ***/
         /// Returns a read only version of value at this location
@@ -110,7 +109,7 @@ protected:
 
         /*** CONSTRUCTOR FOR THE NODE ***/
         /// Default constructor for the node sets all values to null
-        node() : up_(0), down_(0), left_(0), right_(0), nodeType_(REGULAR) { }
+        node() : up_(nullptr), down_(nullptr), left_(nullptr), right_(nullptr), nodeType_(REGULAR) { }
         // Non default constructor
         node(node* up, node* down, node* left, node* right, nodeType Type = REGULAR);
 
@@ -204,16 +203,16 @@ typename skiplist<K,V>::node *skiplist<K,V>::search(const K &k) const {
 
   while(itr->down() != nullptr) {
     if (tempNode == *itr->right() ) {
+      // Move right if equal
       itr = itr->right();
-      //cout << "move right, equal\n";
     }
     else if (tempNode < *itr->right() ) {
+      // Move down if less than
       itr = itr->down();
-      //cout << "move down, less than\n";
     }
     else if (tempNode > *itr->right() ) {
+      // Move right if greater than
       itr = itr->right();
-      //cout << "move right, greater\n";
     }
   }
 
@@ -284,12 +283,9 @@ void skiplist<K,V>::insert(const item &e) {
     node* leftScan = location;    // Pointer for scanning left to find a horizontal links
     int level = 1;                // Counter to keep track of the current level
 
-    cout << "*** COIN FLIP WAS: ";
     // Make a new column of a random height by flipping a "coin" repeatedly
     while(flipCoin()) {
-      cout << "HEADS->";
-      //cout << "COIN FLIP POSITIVE - ADD NEW LEVEL!!";
-      // If the top level is rached, make a new one!
+      // If the top level is reached, make a new one!
       if(level >= height_) { addBlankLevel(); }
 
       // Scan left for a node with an up-pointer
@@ -311,7 +307,6 @@ void skiplist<K,V>::insert(const item &e) {
       level++;
 
     }//END OF TOWER BUILDING WHILE LOOP
-    cout << "TAILS ... DONE BUILDING TOWER OF HEIGHT " << level << "!\n";
     //increment the size of the skpi list
     size_++;
   }//END OF NEW NODE INSERT
@@ -456,12 +451,12 @@ std::string skiplist<K,V>::printVert() const {
  *                     IMPLEMENTATION OF NODE CLASS METHODS
  *************************************************************************************/
 
+
 /**
  * @brief The non-default constructor of the node class, where you can set the links
  */
 template <typename K, typename V>
-skiplist<K,V>::node::node(skiplist::node *up, skiplist::node *down, skiplist::node *left,
-                          skiplist::node *right, skiplist::node::nodeType Type)
+skiplist<K,V>::node::node(node *up, node *down, node *left, node *right, nodeType Type)
 {
   up_       = up;
   down_     = down;
@@ -530,7 +525,7 @@ bool skiplist<K,V>::node::operator>=(const node& that) const
  * @breif overloads the == operator
  */
 template <typename K, typename V>
-bool skiplist<K,V>::node::operator==(const skiplist::node &that) const {
+bool skiplist<K,V>::node::operator==(const node &that) const {
   if(this->nodeType_ == that.nodeType_) {
     if(this->nodeType_ == REGULAR && !this->empty() && !that.empty()){
       return this->data_ == that.data_;
@@ -546,6 +541,6 @@ bool skiplist<K,V>::node::operator==(const skiplist::node &that) const {
  * @breif overloads the != operator
  */
 template <typename K, typename V>
-bool skiplist<K,V>::node::operator!=(const skiplist::node &that) const {
+bool skiplist<K,V>::node::operator!=(const node &that) const {
   return !(*this == that);
 }
