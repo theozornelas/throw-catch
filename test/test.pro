@@ -9,12 +9,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = test
 CONFIG +=console
 CONFIG += app_bundle
+CONFIG += -std=c++11
 
 #input
 SOURCES += \
-    test_main.cpp
+    main.cpp
 
 INCLUDEPATH += .
 
 LIBS += -L../src -l$${APP_NAME}
+
+HEADERS += \
+    testrunner.h \
+    testadder.h \
+    testclass.h \
+    test2class.h
 
