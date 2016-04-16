@@ -23,5 +23,5 @@ HEADERS += \
     testrunner.h \
     testadder.h \
     testclass.h \
-    test2class.h
+    SkipListTests.h
 

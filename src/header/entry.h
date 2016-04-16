@@ -21,10 +21,12 @@ public:
     /*** GET AND SET METHODS ***/
     /// RETURNS the KEY of the entry
     const K& key() const { return key_; }
+    K& key() { return key_; }
     /// SETS the KEY of the value
     void setKey(const K& k) { key_ = k; }
     /// RETURNS the VALUE of the entry
     const V& value() const { return value_; }
+    V& value() { return value_; }
     /// SETS the VALUE of the entry, and changes the state to OCCUPIED
     void setValue(const V& v) { value_ = v; state_ = OCCUPIED; }
     /// CLEARS the entry and set to DELETED state
@@ -45,12 +47,12 @@ public:
     }
 
     /*** COMPARISON OVERLOADS***/
-    bool operator<(const Entry& that)  const { this->key_ < that.key_; }
-    bool operator>(const Entry& that)  const { this->key_ > that.key_; }
-    bool operator<=(const Entry& that) const { this->key_ <= that.key_; }
-    bool operator>=(const Entry& that) const { this->key_ >= that.key_; }
-    bool operator==(const Entry& that) const { this->key_ == that.key_; }
-    bool operator!=(const Entry& that) const { this->key_ != that.key_; }
+    bool operator<(const Entry& that)  const { return (this->key_ < that.key_); }
+    bool operator>(const Entry& that)  const { return (this->key_ > that.key_); }
+    bool operator<=(const Entry& that) const { return (this->key_ <= that.key_); }
+    bool operator>=(const Entry& that) const { return (this->key_ >= that.key_); }
+    bool operator==(const Entry& that) const { return (this->key_ == that.key_); }
+    bool operator!=(const Entry& that) const { return (this->key_ != that.key_); }
 
 private:
     K     key_;     //< Key

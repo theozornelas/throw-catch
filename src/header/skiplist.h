@@ -17,10 +17,11 @@ using std::endl;
  *******************************************************************************************/
 template <typename K, typename V>
 class skiplist {
-protected:
     /*** forward declare nested classes and initiate typedefs***/
-    class   node;
+public:
     class   Iterator;
+protected:
+    class   node;
     typedef Entry<K,V> item;
 
 public:
@@ -49,7 +50,7 @@ public:
 
     /*** Iterator Methods ***/
     // TODO - Returns an Iterator to the first item in the list
-    Iterator begin() { Iterator temp(head_); return temp++;}
+    Iterator begin() { Iterator temp(head_); temp++; return temp; }
     // TODO - Returns an Iterator to the end() of the list
     Iterator end() { return Iterator(tail_); }
 
@@ -90,6 +91,7 @@ public:
         /// Returns TRUE if iterators point to the same position
         bool operator==(const Iterator& p) const { return pos_ == p.pos_; }
         /// Traverse the list in the forward direction
+        Iterator& operator++(int) { pos_ = pos_->right(); return *this; }
         Iterator& operator++() { pos_ = pos_->right(); return *this; }
         /// Traverse the list in the reverse direction
         Iterator& operator--() { pos_ = pos_->left(); return *this; }
@@ -139,7 +141,7 @@ protected:
         /// returns the key of this node
         K key() const { return data_.key(); }
         /// Returns the value in this node
-        V value() {return data_.value(); }
+        V& value() {return data_.value(); }
         /// Returns TRUE if the data list for this node is empty
         bool empty() const { return data_.empty(); }
         /// sets the node status as a head node
