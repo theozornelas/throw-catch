@@ -13,8 +13,6 @@ CONFIG += -std=c++11
 
 #input
 SOURCES += \
-    test_main.cpp \
-    testclassmethods.cpp \
     main.cpp
 
 INCLUDEPATH += .
@@ -23,6 +21,7 @@ LIBS += -L../src -l$${APP_NAME}
 
 HEADERS += \
     testrunner.h \
+    testadder.h \
     testclass.h \
-    testadder.h
+    test2class.h
 

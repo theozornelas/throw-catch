@@ -1,10 +1,10 @@
-#ifndef TESTCLASS_H
-#define TESTCLASS_H
+#ifndef TEST2CLASS_H
+#define TEST2CLASS_H
 
 #include "TestRunner.h"
 #include <QObject>
 
-class TestingSuiteOne : public QObject
+class TestingSuiteTwo : public QObject
 {
  Q_OBJECT
 private slots:
@@ -26,6 +26,6 @@ private slots:
 
 };
 
-DECLARE_TEST(TestingSuiteOne)
+DECLARE_TEST(TestingSuiteTwo)
 
-#endif // TESTCLASS_H
+#endif // TEST2CLASS_H
