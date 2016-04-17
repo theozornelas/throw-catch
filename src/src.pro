@@ -2,13 +2,10 @@ include(../defaults.pri)
 QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-macx{
-  TARGET = ../$${APP_NAME}
-}
 win32 {
   TARGET = ../$${APP_NAME}
 }
-unix:!macx {
+unix: {
   TARGET = $${APP_NAME}
 }
 
@@ -18,8 +15,8 @@ TEMPLATE = lib
 
 SOURCES  += source/mainwindow.cpp
 HEADERS  += header/mainwindow.h \
-    header/heap.h \
-    header/team.h
+            header/heap.h \
+            header/team.h
 FORMS    += form/mainwindow.ui
 
 QTPLUGIN += qsqlmysql
