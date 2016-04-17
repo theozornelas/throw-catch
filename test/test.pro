@@ -12,7 +12,8 @@ CONFIG += app_bundle
 
 #input
 SOURCES += \
-    test_main.cpp
+    test_main.cpp \
+    test_dbmanager.cpp
 
 INCLUDEPATH += .
 

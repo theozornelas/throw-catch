@@ -1,6 +1,6 @@
 #include <QtTest/QtTest>
 
-class Test_Main : public QObject
+class Test_DBManager : public QObject
 {
     Q_OBJECT
 private slots:
@@ -11,11 +11,12 @@ private:
     // Put testing variables here
 };
 
-void Test_Main::initTest(){
+void Test_DBManager::initTest(){
     QVERIFY(true);
 }
 
 //#endif //TEST_DATABASE_H
 
-//QTEST_MAIN(Test_Main)
-//#include "test_main.moc"
+QTEST_MAIN(Test_DBManager)
+#include "test_dbmanager.moc"
+
