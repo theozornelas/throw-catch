@@ -1,4 +1,4 @@
-#include "TestRunner.h"
+#include "testrunner.h"
 
 int main(int argc, char *argv[])
 {

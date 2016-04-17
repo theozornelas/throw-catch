@@ -1,7 +1,7 @@
 #ifndef TEST2CLASS_H
 #define TEST2CLASS_H
 
-#include "TestRunner.h"
+#include "testrunner.h"
 #include <QObject>
 #include <QString>
 #include "skiplist.h"

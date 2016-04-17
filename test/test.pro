@@ -6,10 +6,10 @@ TEMPLATE = app
 QT += core testlib sql gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = test
-CONFIG +=console
+TARGET  = test
+CONFIG += console
 CONFIG += app_bundle
-CONFIG += -std=c++11
+CONFIG += c++11
 
 #input
 SOURCES += \
