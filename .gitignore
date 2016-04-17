@@ -19,3 +19,5 @@ app/Makefile.*
 
 release/
 debug/
+
+.DS_Store
