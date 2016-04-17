@@ -182,7 +182,7 @@ protected:
  * @breif The constructor for the skip-list, it makes the basic linkage
  */
 template <typename K, typename V>
-skiplist<K,V>::skiplist() : size_(0), height_(1)
+skiplist<K,V>::skiplist() : height_(1), size_(0)
 {
   head_ = new node(nullptr, nullptr, nullptr, nullptr, node::HEAD);
   tail_ = new node(nullptr, nullptr, nullptr, nullptr, node::TAIL);
