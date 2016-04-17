@@ -8,7 +8,6 @@
 #include <ctime>
 #include <iomanip>
 #include "entry.h"
-using std::endl;
 
 /**
  * @brief  A skip list implementation of a map, keys must be unique
@@ -91,11 +90,11 @@ public:
         /// Returns TRUE if iterators point to the same position
         bool operator==(const Iterator& p) const { return pos_ == p.pos_; }
         /// Traverse the list in the forward direction - Postfix requires int parameter?
-        Iterator operator++(int) { pos_ = pos_->right(); return *this; }
+        Iterator operator++(int) { if(pos_->type() != node::TAIL){ pos_ = pos_->right(); } return *this; }
         /// Traverse the list in the forward direction - prefix with no int parameter?
-        Iterator& operator++() { pos_ = pos_->right(); return *this; }
+        Iterator& operator++() { if(pos_->type() != node::TAIL){ pos_ = pos_->right(); } return *this; }
         /// Traverse the list in the reverse direction
-        Iterator& operator--() { pos_ = pos_->left(); return *this; }
+        Iterator& operator--() { if(pos_->type() != node::HEAD){ pos_ = pos_->left(); } return *this; }
 
     private:
         node* pos_;  // Position of the iterator
@@ -251,8 +250,8 @@ void skiplist<K,V>::erase(const K &k) {
       delete itr;
       itr = tempItr;
     }// END OF WHILE LOOP
+    size_--;
   }// END OF IF STATEMENT
-  size_--;
 }// END OF ERASE KEY METHOD
 
 /**
@@ -443,7 +442,7 @@ std::string skiplist<K,V>::printVert() const {
       out << std::setw(val_width+size_width) << "   |   ";
       height++;
     }
-    out << endl;
+    out << std::endl;
     itr = itr->right();
   }
 

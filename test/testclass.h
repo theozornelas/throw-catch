@@ -26,6 +26,6 @@ private slots:
 
 };
 
-DECLARE_TEST(TestingSuiteOne)
+//DECLARE_TEST(TestingSuiteOne)
 
 #endif // TESTCLASS_H
