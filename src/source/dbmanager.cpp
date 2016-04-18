@@ -128,7 +128,7 @@ QVector<Stadium> stadiums;
 //                                              query.value("league_type").toString())));
 
             stadiums.push_back( *(new Stadium(query.value("id").toInt(),
-                                query.value("stradium_name").toString(),
+                                query.value("stadium_name").toString(),
                                 query.value("team_name").toString(),
                                 query.value("street_address").toString(),
                                 query.value("city").toString(),
@@ -136,9 +136,10 @@ QVector<Stadium> stadiums;
                                 query.value("zipcode").toString(),
                                 query.value("box_office_number").toString(),
                                 query.value("date_opened").toString(),
-                                query.value("seating_capcity").toInt(),
+                                query.value("seating_capacity").toInt(),
                                 query.value("surface").toString(),
-                                query.value("league_type").toString())));
+                                query.value("league_type").toString(),
+                                query.value("typology").toString())));
             
         }
     }

@@ -19,6 +19,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -39,6 +40,7 @@ public:
     QLabel *homeHeading;
     QWidget *viewStadiumsPage;
     QLabel *viewStadiumHeading;
+    QTableWidget *viewStadiumsList;
     QFrame *headerFrame;
     QLabel *teamNameLabel;
 
@@ -46,7 +48,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(867, 591);
+        MainWindow->resize(947, 638);
         MainWindow->setStyleSheet(QStringLiteral(""));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -62,7 +64,7 @@ public:
 ""));
         options = new QStackedWidget(centralWidget);
         options->setObjectName(QStringLiteral("options"));
-        options->setGeometry(QRect(0, 20, 241, 581));
+        options->setGeometry(QRect(0, 20, 201, 621));
         options->setStyleSheet(QLatin1String("QPushButton:hover {\n"
 "background-color: #EAEAE9;\n"
 "color: #293539;\n"
@@ -79,7 +81,7 @@ public:
         customerOptions->setObjectName(QStringLiteral("customerOptions"));
         sidebarFrame = new QFrame(customerOptions);
         sidebarFrame->setObjectName(QStringLiteral("sidebarFrame"));
-        sidebarFrame->setGeometry(QRect(0, -10, 251, 631));
+        sidebarFrame->setGeometry(QRect(0, 12, 201, 613));
         sidebarFrame->setStyleSheet(QLatin1String("#sidebarFrame {\n"
 "background: #293539;\n"
 "border: none;\n"
@@ -88,20 +90,20 @@ public:
         sidebarFrame->setFrameShadow(QFrame::Raised);
         homePageButton = new QPushButton(sidebarFrame);
         homePageButton->setObjectName(QStringLiteral("homePageButton"));
-        homePageButton->setGeometry(QRect(0, 214, 241, 61));
+        homePageButton->setGeometry(QRect(0, 214, 201, 61));
         planATripButton = new QPushButton(sidebarFrame);
         planATripButton->setObjectName(QStringLiteral("planATripButton"));
-        planATripButton->setGeometry(QRect(0, 340, 241, 61));
+        planATripButton->setGeometry(QRect(0, 340, 201, 61));
         viewStadiumsPageButton = new QPushButton(sidebarFrame);
         viewStadiumsPageButton->setObjectName(QStringLiteral("viewStadiumsPageButton"));
-        viewStadiumsPageButton->setGeometry(QRect(0, 277, 241, 61));
+        viewStadiumsPageButton->setGeometry(QRect(0, 277, 201, 61));
         options->addWidget(customerOptions);
         adminOptions = new QWidget();
         adminOptions->setObjectName(QStringLiteral("adminOptions"));
         options->addWidget(adminOptions);
         display = new QStackedWidget(centralWidget);
         display->setObjectName(QStringLiteral("display"));
-        display->setGeometry(QRect(240, 20, 631, 571));
+        display->setGeometry(QRect(203, 40, 801, 596));
         display->setStyleSheet(QLatin1String("\n"
 "background-color: #EAEAE9\n"
 ""));
@@ -116,10 +118,30 @@ public:
         viewStadiumHeading = new QLabel(viewStadiumsPage);
         viewStadiumHeading->setObjectName(QStringLiteral("viewStadiumHeading"));
         viewStadiumHeading->setGeometry(QRect(20, 30, 181, 16));
+        viewStadiumsList = new QTableWidget(viewStadiumsPage);
+        if (viewStadiumsList->columnCount() < 7)
+            viewStadiumsList->setColumnCount(7);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        viewStadiumsList->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        viewStadiumsList->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        viewStadiumsList->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        viewStadiumsList->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        viewStadiumsList->setHorizontalHeaderItem(4, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        viewStadiumsList->setHorizontalHeaderItem(5, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        viewStadiumsList->setHorizontalHeaderItem(6, __qtablewidgetitem6);
+        viewStadiumsList->setObjectName(QStringLiteral("viewStadiumsList"));
+        viewStadiumsList->setGeometry(QRect(20, 160, 702, 421));
+        viewStadiumsList->setSortingEnabled(true);
         display->addWidget(viewStadiumsPage);
         headerFrame = new QFrame(centralWidget);
         headerFrame->setObjectName(QStringLiteral("headerFrame"));
-        headerFrame->setGeometry(QRect(0, 0, 871, 41));
+        headerFrame->setGeometry(QRect(0, 0, 951, 41));
         headerFrame->setStyleSheet(QLatin1String("#headerFrame {\n"
 "background: #01CDE6;\n"
 "border: none;\n"
@@ -148,6 +170,20 @@ public:
         viewStadiumsPageButton->setText(QApplication::translate("MainWindow", "VIEW STADIUMS", 0));
         homeHeading->setText(QApplication::translate("MainWindow", "HOME", 0));
         viewStadiumHeading->setText(QApplication::translate("MainWindow", "VIEW STADIUMS", 0));
+        QTableWidgetItem *___qtablewidgetitem = viewStadiumsList->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Stadium", 0));
+        QTableWidgetItem *___qtablewidgetitem1 = viewStadiumsList->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Name", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = viewStadiumsList->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Seating Capacity", 0));
+        QTableWidgetItem *___qtablewidgetitem3 = viewStadiumsList->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Location", 0));
+        QTableWidgetItem *___qtablewidgetitem4 = viewStadiumsList->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Surface", 0));
+        QTableWidgetItem *___qtablewidgetitem5 = viewStadiumsList->horizontalHeaderItem(5);
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "Date Opened", 0));
+        QTableWidgetItem *___qtablewidgetitem6 = viewStadiumsList->horizontalHeaderItem(6);
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "Typology", 0));
         teamNameLabel->setText(QApplication::translate("MainWindow", "throw-catch", 0));
     } // retranslateUi
 

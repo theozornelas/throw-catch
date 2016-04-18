@@ -47,7 +47,7 @@ public:
             QString team, QString street, QString city,
             QString state, QString zipCode,
             QString number, QString date, unsigned int capacity,
-            QString surf, QString league);
+            QString surf, QString league, QString typo);
 
     ~Stadium();
 
@@ -63,6 +63,7 @@ public:
     unsigned int getSeatingCapacity() const;
     QString      getSurface() const;
     QString      getLeagueType() const;
+    QString      getTypology() const;
 
 
     /***************
@@ -77,6 +78,7 @@ public:
     void setSeatingCapacity(unsigned int newCapacity);
     void setSurface(QString newSurface);
     void setLeagueType(QString newLeagueType);
+    void setTypology(QString typo);
 
 
     // Mutators for Stadium's souvenir list.
@@ -95,6 +97,7 @@ private:
     unsigned int seatingCapacity;
     QString surface;
     QString leagueType;
+    QString typology;
 };
 
 #endif // STADIUM

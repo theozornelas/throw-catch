@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>867</width>
-    <height>591</height>
+    <width>947</width>
+    <height>638</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,8 +34,8 @@ border-bottom: 1px solid black; }
      <rect>
       <x>0</x>
       <y>20</y>
-      <width>241</width>
-      <height>581</height>
+      <width>201</width>
+      <height>621</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -57,9 +57,9 @@ border:none;
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-10</y>
-        <width>251</width>
-        <height>631</height>
+        <y>12</y>
+        <width>201</width>
+        <height>613</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -79,7 +79,7 @@ border: none;
         <rect>
          <x>0</x>
          <y>214</y>
-         <width>241</width>
+         <width>201</width>
          <height>61</height>
         </rect>
        </property>
@@ -92,7 +92,7 @@ border: none;
         <rect>
          <x>0</x>
          <y>340</y>
-         <width>241</width>
+         <width>201</width>
          <height>61</height>
         </rect>
        </property>
@@ -105,7 +105,7 @@ border: none;
         <rect>
          <x>0</x>
          <y>277</y>
-         <width>241</width>
+         <width>201</width>
          <height>61</height>
         </rect>
        </property>
@@ -120,10 +120,10 @@ border: none;
    <widget class="QStackedWidget" name="display">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>20</y>
-      <width>631</width>
-      <height>571</height>
+      <x>203</x>
+      <y>40</y>
+      <width>801</width>
+      <height>596</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -160,6 +160,54 @@ background-color: #EAEAE9
        <string>VIEW STADIUMS</string>
       </property>
      </widget>
+     <widget class="QTableWidget" name="viewStadiumsList">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>160</y>
+        <width>702</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>Stadium</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Seating Capacity</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Location</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Surface</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Date Opened</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Typology</string>
+       </property>
+      </column>
+     </widget>
     </widget>
    </widget>
    <widget class="QFrame" name="headerFrame">
@@ -167,7 +215,7 @@ background-color: #EAEAE9
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>871</width>
+      <width>951</width>
       <height>41</height>
      </rect>
     </property>

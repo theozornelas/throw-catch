@@ -1,5 +1,5 @@
 #include "stadium.h"
-
+#include <iostream>
 /**
  * C O N S T R U C T O R & D E S T R U C T O R
  */
@@ -19,21 +19,25 @@ Stadium::Stadium(int id, QString name,
                      QString team, QString street, QString city,
                      QString state, QString zipCode,
                      QString number, QString date, unsigned int capacity,
-                     QString surf, QString league)
+                     QString surf, QString league,  QString typo)
 {
 
-    stadiumID       = id;
-    stadiumName     = name;
-    teamName        = team;
-    stadiumAddress.streetAddress = street;
-    stadiumAddress.city = city;
-    stadiumAddress.state = state;
-    stadiumAddress.zipCode = zipCode;
-    boxOfficeNumber = number;
-    dateOpened = date;
-    seatingCapacity = capacity;
-    surface         = surf;
-    leagueType      = league;
+    stadiumID                    = id;
+    stadiumName                  = name;
+    teamName                     = team;
+
+    // Sets up address
+    stadiumAddress.streetAddress = street + '\n';
+    stadiumAddress.city          = city;
+    stadiumAddress.state         = state;
+    stadiumAddress.zipCode       = zipCode;
+
+    boxOfficeNumber              = number;
+    dateOpened                   = date;
+    seatingCapacity              = capacity;
+    surface                      = surf;
+    leagueType                   = league;
+    typology                     = typo;
 }
 
 /**
@@ -83,10 +87,12 @@ QString Stadium::getTeamName() const {
  * @return a QString address
  */
 QString Stadium::getAddress() const {
-    return stadiumAddress.streetAddress + "\n"
-           + stadiumAddress.city + ", "
-           + stadiumAddress.state + " "
-           + stadiumAddress.zipCode;
+
+
+    QString str = stadiumAddress.streetAddress + "\n" +stadiumAddress.city + ", " +
+    stadiumAddress.state + " " + stadiumAddress.zipCode;
+
+    return str;
 }
 
 /**
@@ -129,6 +135,13 @@ QString Stadium::getLeagueType() const {
     return leagueType;
 }
 
+/**
+ * @brief Stadium::getTypology
+ * @return a QString typology
+ */
+QString Stadium::getTypology() const {
+    return typology;
+}
 
 /**
  * M U T A T O R S
@@ -205,6 +218,13 @@ void Stadium::setLeagueType(QString newLeagueType) {
     leagueType = newLeagueType;
 }
 
+/**
+ * @brief Stadium::setTypology Changes typology to typo
+ * @param typo
+ */
+void Stadium::setTypology(QString typo) {
+    typology = typo;
+}
 
 // Mutators for Stadium's souvenir list.
 /**
@@ -224,8 +244,3 @@ void Stadium::addSouvenir(QString name, double price, int quantity) {
 void Stadium::removeSouvenir(QString name) {
 
 }
-
-/**
- * A C C E S S O R S
- */
-
