@@ -1,5 +1,20 @@
 #include "stadium.h"
 
+/**
+ * C O N S T R U C T O R & D E S T R U C T O R
+ */
+
+/**
+ * @brief Stadium::Stadium Non-default constructor
+ * @param id
+ * @param name
+ * @param team
+ * @param address
+ * @param number
+ * @param capacity
+ * @param surf
+ * @param league
+ */
 Stadium::Stadium(int id, QString name,
                 QString team, Address address,
                 QString number, unsigned int capacity,
@@ -15,6 +30,9 @@ Stadium::Stadium(int id, QString name,
     leagueType      = league;
 }
 
+/**
+ * @brief Stadium::~Stadium Destructor
+ */
 Stadium::~Stadium() {
     seatingCapacity = 0;
     boxOfficeNumber.clear();
