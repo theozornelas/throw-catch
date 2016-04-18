@@ -37,7 +37,8 @@ char RegisterTest(char* name)
 int RunAll(int argc, char *argv[])
 {
    int errorCode = 0;
-   std::for_each( m_tests.begin(), m_tests.end(), [&] (QSharedPointer<QObject>& test)
+   std::for_each(m_tests.begin(), m_tests.end(), [&](QSharedPointer<QObject>& test)
+   //Function to execute each iteration
    {
       errorCode |= QTest::qExec(test.data(), argc, argv);
       std::cout << std::endl;
