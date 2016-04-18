@@ -6,14 +6,204 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>540</height>
+    <width>867</width>
+    <height>591</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true">#centralWidget {
+background-color: #EAEAE9;
+}
+
+#headerFrame {
+background: #8af;
+border: none;
+border-bottom: 1px solid black; }
+
+</string>
+   </property>
+   <widget class="QStackedWidget" name="options">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>20</y>
+      <width>241</width>
+      <height>581</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton:hover {
+background-color: #EAEAE9;
+color: #293539;
+}
+
+QPushButton {
+background-color: #293539;
+color: white;
+border:none;
+	font: 75 15pt &quot;Helvetica&quot;;
+}
+</string>
+    </property>
+    <widget class="QWidget" name="customerOptions">
+     <widget class="QFrame" name="sidebarFrame">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-10</y>
+        <width>251</width>
+        <height>631</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#sidebarFrame {
+background: #293539;
+border: none;
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QPushButton" name="homePageButton">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>214</y>
+         <width>241</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HOME</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="planATripButton">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>340</y>
+         <width>241</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>PLAN A TRIP</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="viewStadiumsPageButton">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>277</y>
+         <width>241</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>VIEW STADIUMS</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="adminOptions"/>
+   </widget>
+   <widget class="QStackedWidget" name="display">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>20</y>
+      <width>631</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: #EAEAE9
+</string>
+    </property>
+    <widget class="QWidget" name="homePage">
+     <widget class="QLabel" name="homeHeading">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>201</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>HOME</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="viewStadiumsPage">
+     <widget class="QLabel" name="viewStadiumHeading">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>181</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>VIEW STADIUMS</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="headerFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>871</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#headerFrame {
+background: #01CDE6;
+border: none;
+}</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="teamNameLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#teamNameLabel {
+color: white;
+	font: 75 30pt &quot;Gill Sans&quot;;
+}</string>
+     </property>
+     <property name="text">
+      <string>throw-catch</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

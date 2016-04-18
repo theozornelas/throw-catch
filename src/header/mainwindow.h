@@ -7,6 +7,16 @@
 #include "stadium.h"
 #include "skiplist.h"
 
+enum display {
+    HOME,
+    VIEW_STADIUMS,
+};
+
+enum options {
+    CUSTOMER,
+    ADMIN
+};
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,6 +28,10 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+private slots:
+    void on_homePageButton_clicked();
+    void on_viewStadiumsPageButton_clicked();
 
 private:
     Ui::MainWindow *ui;
