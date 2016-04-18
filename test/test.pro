@@ -13,9 +13,7 @@ CONFIG += c++11
 
 #input
 SOURCES += \
-    main.cpp \
-    test_main.cpp \
-    test_dbmanager.cpp
+    main.cpp
 
 INCLUDEPATH += .
 
@@ -24,4 +22,3 @@ LIBS += -L../src -l$${APP_NAME}
 HEADERS += \
     testrunner.h \
     SkipListTests.h
-
