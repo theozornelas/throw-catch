@@ -2,6 +2,7 @@
 build-*
 *.o
 *.moc
+moc_*
 *pro.user
 src/*.dylib
 Makefile
@@ -17,5 +18,9 @@ app/Makefile.*
 *.lib
 *.pdb
 
+# Compiled stuff folders
 release/
 debug/
+test/test.app/
+
+.DS_Store

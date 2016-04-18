@@ -5,7 +5,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 win32 {
   TARGET = ../$${APP_NAME}
 }
-unix: {
+unix {
   TARGET = $${APP_NAME}
 }
 
@@ -13,10 +13,19 @@ CONFIG -= testlib
 CONFIG += staticlib
 TEMPLATE = lib
 
-SOURCES  += source/mainwindow.cpp
+SOURCES  += source/mainwindow.cpp \
+    source/dbmanager.cpp \
+    source/stadium.cpp
+
 HEADERS  += header/mainwindow.h \
-            header/heap.h \
-            header/team.h
+    header/dbmanager.h \
+    header/souvenir.h \
+    header/stadium.h \
+    header/skiplist.h \
+    header/entry.h \
+    header/heap.h \
+    header/team.h
+
 FORMS    += form/mainwindow.ui
 
 QTPLUGIN += qsqlmysql
