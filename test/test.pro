@@ -13,7 +13,9 @@ CONFIG += c++11
 
 #input
 SOURCES += \
-    main.cpp
+    main.cpp \
+    test_main.cpp \
+    test_dbmanager.cpp
 
 INCLUDEPATH += .
 
