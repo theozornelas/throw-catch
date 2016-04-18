@@ -18,3 +18,6 @@ INCLUDEPATH += .
 
 LIBS += -L../src -l$${APP_NAME}
 
+HEADERS += \
+    heaptest.h
+

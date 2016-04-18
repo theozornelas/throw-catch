@@ -31,7 +31,7 @@ public:
 
 
     //inserts in to the heap. Bubbles up is necessary.
-    void Insert(Team<K,V> newTeam);
+    void Insert(K key, V value);
 
 
     //returns the last element in the list
@@ -112,8 +112,11 @@ bool Heap<class K, class V> ::  IsEmpty()
 
 //this insertion uses the bubble up method to arrange the contents in the heap.
 template <class K, class V>
-void Heap<class K, class V> :: Insert(Team<K,V> newTeam)
+void Heap<class K, class V> :: Insert(K key, V value)
 {
+
+    Team<K,V> newTeam(key,value);
+
     //insert in the heap
     myTree.push_back(newTeam);
 
