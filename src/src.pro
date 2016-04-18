@@ -11,6 +11,8 @@ unix {
 
 CONFIG -= testlib
 CONFIG += staticlib
+CONFIG += c++11
+
 TEMPLATE = lib
 
 

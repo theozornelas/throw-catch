@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <dbmanager.h>
+
+#include "dbmanager.h"
+#include "skiplist.h"
+#include "stadium.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +22,8 @@ public:
 private:
     Ui::MainWindow *ui;
     DBManager db;
+
+    //skiplist<int, Stadium> stadiums;
 };
 
 #endif // MAINWINDOW_H

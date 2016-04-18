@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //stadiums = db.getStadiums();
+
 }
 
 MainWindow::~MainWindow()

@@ -7,6 +7,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
+CONFIG += c++11
+
 
 SOURCES += source/main.cpp
 

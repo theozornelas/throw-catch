@@ -116,9 +116,9 @@ QString Stadium::getLeagueType() const {
 }
 
 
-/***************
- *  MUTATORS
- **************/
+/**
+ * M U T A T O R S
+ */
 
 /**
  * @brief Stadium::setStadiumName Changes the stadium name to newName

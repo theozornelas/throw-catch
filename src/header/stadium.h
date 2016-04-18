@@ -38,10 +38,11 @@ struct Address {
  * @date April-14-2016
  */
 class Stadium {
-
+public:
     /*****************************
      *  CONSTRUCTOR & DESTRUCTOR
      *****************************/
+    Stadium();
     Stadium(int id, QString name,
             QString team, Address address,
             QString number, unsigned int capacity,

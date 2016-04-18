@@ -96,3 +96,12 @@ bool DBManager::RemoveSouvenir(int stadiumKey, QString name) {
 //bool DBManager::ChangeSouvenirQuantity(int stadiumKey, QString souvenirName, int newQuantity) {
 
 //}
+
+/**
+ * A C C E S S O R S
+ */
+
+//skiplist<int, Stadium> DBManager::getStadiums() {
+//    skiplist<int, Stadium> listOfStadiums;
+
+//}

@@ -7,6 +7,9 @@
 
 #include <QDebug>
 
+#include "skiplist.h"
+#include "stadium.h"
+
 class DBManager
 {
 public:
@@ -19,7 +22,7 @@ public:
     /****************
      *   ACCESSORS
      ****************/
-    // SkipList<int, Stadium> getStadiums();
+   // skiplist<int, Stadium> getStadiums();
     // ---- getSouvenirs();
 
     /****************
