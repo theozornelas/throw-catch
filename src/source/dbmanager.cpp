@@ -101,7 +101,48 @@ bool DBManager::RemoveSouvenir(int stadiumKey, QString name) {
  * A C C E S S O R S
  */
 
-//skiplist<int, Stadium> DBManager::getStadiums() {
-//    skiplist<int, Stadium> listOfStadiums;
+QVector<Stadium> DBManager::getStadiums() {
+   // skiplist<int, Stadium> *listOfStadiums = new skiplist<int, Stadium>;
+QVector<Stadium> stadiums;
 
-//}
+    QSqlQuery query;
+    
+    query.prepare("SELECT * FROM Stadiums");
+    
+    if(query.exec()) {
+        while(query.next()) {
+
+            // Can't get skiplist to work, deafulted to qvectors for now.
+//            listOfStadiums->insert(query.value("id").toInt(),
+//                                  *(new Stadium(query.value("id").toInt(),
+//                                              query.value("stradium_name").toString(),
+//                                              query.value("team_name").toString(),
+//                                              query.value("street address").toString(),
+//                                              query.value("city").toString(),
+//                                              query.value("state").toString(),
+//                                              query.value("zipcode").toString(),
+//                                              query.value("box_office_number").toString(),
+//                                              query.value("date_opened").toString(),
+//                                              query.value("seating_capacity").toInt(),
+//                                              query.value("surface").toString(),
+//                                              query.value("league_type").toString())));
+
+            stadiums.push_back( *(new Stadium(query.value("id").toInt(),
+                                query.value("stradium_name").toString(),
+                                query.value("team_name").toString(),
+                                query.value("street_address").toString(),
+                                query.value("city").toString(),
+                                query.value("state").toString(),
+                                query.value("zipcode").toString(),
+                                query.value("box_office_number").toString(),
+                                query.value("date_opened").toString(),
+                                query.value("seating_capcity").toInt(),
+                                query.value("surface").toString(),
+                                query.value("league_type").toString())));
+            
+        }
+    }
+    
+    return stadiums;
+
+}

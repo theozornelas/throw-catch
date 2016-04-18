@@ -16,15 +16,21 @@
  * @param league
  */
 Stadium::Stadium(int id, QString name,
-                QString team, Address address,
-                QString number, unsigned int capacity,
-                QString surf, QString league) {
+                     QString team, QString street, QString city,
+                     QString state, QString zipCode,
+                     QString number, QString date, unsigned int capacity,
+                     QString surf, QString league)
+{
 
     stadiumID       = id;
     stadiumName     = name;
     teamName        = team;
-    stadiumAddress  = address;
+    stadiumAddress.streetAddress = street;
+    stadiumAddress.city = city;
+    stadiumAddress.state = state;
+    stadiumAddress.zipCode = zipCode;
     boxOfficeNumber = number;
+    dateOpened = date;
     seatingCapacity = capacity;
     surface         = surf;
     leagueType      = league;
@@ -84,11 +90,19 @@ QString Stadium::getAddress() const {
 }
 
 /**
- * @brief getBoxOfficeNumber
- * @return
+ * @brief getBoxOfficeNumber returns box office number in qstring form
+ * @return a QString box office number
  */
 QString Stadium::getBoxOfficeNumber() const {
     return boxOfficeNumber;
+}
+
+/**
+ * @brief Stadium::getDateOpened returns date opened in qstring form
+ * @return a QString date openeed
+ */
+QString Stadium::getDateOpened() const {
+    return dateOpened;
 }
 
 /**
@@ -160,6 +174,14 @@ void Stadium::setBoxOfficeNumber(QString newNumber) {
 }
 
 /**
+ * @brief Stadium::setDateOpened Changes the date opened to newDate.
+ * @param newDate
+ */
+void Stadium::setDateOpened(QString newDate) {
+    dateOpened = newDate;
+}
+
+/**
  * @brief Stadium::setSeatingCapacity Changes seating capacity to newCapacity
  * @param newCapacity
  */
@@ -202,4 +224,8 @@ void Stadium::addSouvenir(QString name, double price, int quantity) {
 void Stadium::removeSouvenir(QString name) {
 
 }
+
+/**
+ * A C C E S S O R S
+ */
 

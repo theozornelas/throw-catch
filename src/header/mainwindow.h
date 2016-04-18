@@ -4,8 +4,8 @@
 #include <QMainWindow>
 
 #include "dbmanager.h"
-#include "skiplist.h"
 #include "stadium.h"
+#include "skiplist.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +23,7 @@ private:
     Ui::MainWindow *ui;
     DBManager db;
 
-    //skiplist<int, Stadium> stadiums;
+    QVector<Stadium> stadiums;
 };
 
 #endif // MAINWINDOW_H

@@ -22,7 +22,7 @@ public:
     /****************
      *   ACCESSORS
      ****************/
-   // skiplist<int, Stadium> getStadiums();
+    QVector<Stadium> getStadiums();
     // ---- getSouvenirs();
 
     /****************

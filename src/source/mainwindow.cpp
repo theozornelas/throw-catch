@@ -8,7 +8,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //stadiums = db.getStadiums();
+    stadiums = db.getStadiums();
+
+    for(int i = 0; i < stadiums.length(); i++) {
+        qDebug() << stadiums[i].getStadiumName() << endl;
+    }
 
 }
 

@@ -172,8 +172,6 @@ protected:
 
 }; // END OF SKIP-LIST CLASS**********************************************************
 
-#endif //PROJECT_SKIPLIST_H
-
 /*************************************************************************************
  *                        IMPLEMENTATION OF SKIP LIST METHODS
  *************************************************************************************/
@@ -546,3 +544,6 @@ template <typename K, typename V>
 bool skiplist<K,V>::node::operator!=(const node &that) const {
   return !(*this == that);
 }
+
+#endif //PROJECT_SKIPLIST_H
+

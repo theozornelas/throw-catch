@@ -42,10 +42,11 @@ public:
     /*****************************
      *  CONSTRUCTOR & DESTRUCTOR
      *****************************/
-    Stadium();
+    Stadium() { }
     Stadium(int id, QString name,
-            QString team, Address address,
-            QString number, unsigned int capacity,
+            QString team, QString street, QString city,
+            QString state, QString zipCode,
+            QString number, QString date, unsigned int capacity,
             QString surf, QString league);
 
     ~Stadium();
@@ -58,6 +59,7 @@ public:
     QString      getTeamName() const;
     QString      getAddress() const;
     QString      getBoxOfficeNumber() const;
+    QString      getDateOpened() const;
     unsigned int getSeatingCapacity() const;
     QString      getSurface() const;
     QString      getLeagueType() const;
@@ -71,6 +73,7 @@ public:
     void setAddress(QString streetAddress, QString city,
                     QString state, QString zipCode);
     void setBoxOfficeNumber(QString newNumber);
+    void setDateOpened(QString newDate);
     void setSeatingCapacity(unsigned int newCapacity);
     void setSurface(QString newSurface);
     void setLeagueType(QString newLeagueType);
@@ -88,6 +91,7 @@ private:
     QString teamName;
     Address stadiumAddress;
     QString boxOfficeNumber;
+    QString dateOpened;
     unsigned int seatingCapacity;
     QString surface;
     QString leagueType;
