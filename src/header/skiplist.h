@@ -546,4 +546,3 @@ bool skiplist<K,V>::node::operator!=(const node &that) const {
 }
 
 #endif //PROJECT_SKIPLIST_H
-
