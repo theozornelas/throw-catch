@@ -12,11 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     stadiums = db.getStadiums();
 
-    for(int i = 0; i < stadiums.length(); i++) {
-        qDebug() << stadiums[i].getStadiumName();
-    }
-
-
     ui->viewStadiumsList->setRowCount(stadiums.length() + 1);
 
     for(int row = 0; row < stadiums.length(); row++) {

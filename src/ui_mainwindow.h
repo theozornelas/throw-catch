@@ -111,13 +111,17 @@ public:
         homePage->setObjectName(QStringLiteral("homePage"));
         homeHeading = new QLabel(homePage);
         homeHeading->setObjectName(QStringLiteral("homeHeading"));
-        homeHeading->setGeometry(QRect(20, 30, 201, 31));
+        homeHeading->setGeometry(QRect(20, 20, 201, 31));
+        homeHeading->setStyleSheet(QLatin1String("font: 75 30pt \"Gill Sans\";\n"
+""));
         display->addWidget(homePage);
         viewStadiumsPage = new QWidget();
         viewStadiumsPage->setObjectName(QStringLiteral("viewStadiumsPage"));
         viewStadiumHeading = new QLabel(viewStadiumsPage);
         viewStadiumHeading->setObjectName(QStringLiteral("viewStadiumHeading"));
-        viewStadiumHeading->setGeometry(QRect(20, 30, 181, 16));
+        viewStadiumHeading->setGeometry(QRect(20, 10, 311, 41));
+        viewStadiumHeading->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
+""));
         viewStadiumsList = new QTableWidget(viewStadiumsPage);
         if (viewStadiumsList->columnCount() < 7)
             viewStadiumsList->setColumnCount(7);

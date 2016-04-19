@@ -102,7 +102,7 @@ bool DBManager::RemoveSouvenir(int stadiumKey, QString name) {
  */
 
 QVector<Stadium> DBManager::getStadiums() {
-   // skiplist<int, Stadium> *listOfStadiums = new skiplist<int, Stadium>;
+  // skiplist<int, Stadium> *listOfStadiums = new skiplist<int, Stadium>;
 QVector<Stadium> stadiums;
 
     QSqlQuery query;
@@ -112,7 +112,7 @@ QVector<Stadium> stadiums;
     if(query.exec()) {
         while(query.next()) {
 
-            // Can't get skiplist to work, deafulted to qvectors for now.
+//            // Can't get skiplist to work, deafulted to qvectors for now.
 //            listOfStadiums->insert(query.value("id").toInt(),
 //                                  *(new Stadium(query.value("id").toInt(),
 //                                              query.value("stradium_name").toString(),
