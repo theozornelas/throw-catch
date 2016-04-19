@@ -41,29 +41,29 @@ private:
 };
 
 template<class K, class V>
-Team::Team()
+Team<K,V>::Team()
 {
 //	name.clear();
 //	key_  = 0;
 }
 template<class K, class V>
-Team::Team(K newKey, V newName)
+Team<K,V>::Team(K newKey, V newName)
 {
     key_ = newKey;
     value_ = newName;
 }
 
 template<class K, class V>
-Team::~Team(){}
+Team<K,V>::~Team(){}
 
 template<class K, class V>
-K Team::getKey()
+K Team<K,V>::getKey()
 {
     return key_;
 }
 
 template<class K, class V>
-V Team::getValue()
+V Team<K,V>::getValue()
 {
     return value_;
 }

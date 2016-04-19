@@ -81,7 +81,7 @@ private:
 };
 
 template <class K, class V>
-Heap<class K, class V> :: Heap()
+Heap<K,V> :: Heap()
 {
     size = 0;
     root = 1;
@@ -92,27 +92,27 @@ Heap<class K, class V> :: Heap()
 
 //destroys the heap
 template <class K, class V>
-Heap<class K, class V> :: ~Heap()
+Heap<K,V> :: ~Heap()
 {
     myTree.clear();
 }
 
 template <class K, class V>
-int Heap<class K, class V> ::  Size()
+int Heap<K,V> ::  Size()
 {
-    return myTree.size()-1;
+    return size;
 }
 
 //checks if the heap is empty
 template <class K, class V>
-bool Heap<class K, class V> ::  IsEmpty()
+bool Heap<K,V> ::  IsEmpty()
 {
     return myTree.empty();
 }
 
 //this insertion uses the bubble up method to arrange the contents in the heap.
 template <class K, class V>
-void Heap<class K, class V> :: Insert(K key, V value)
+void Heap<K,V> :: Insert(K key, V value)
 {
 
     Team<K,V> newTeam(key,value);
@@ -129,39 +129,43 @@ void Heap<class K, class V> :: Insert(K key, V value)
 }
 
 template <class K, class V>
-Team<K,V> Heap<class K, class V> :: MinElement()
+Team<K,V> Heap<K,V> :: MinElement()
 {
     //return the root of the heap(smallest element)
     return myTree[root];
 }
 
 template <class K, class V>
-void Heap<class K, class V> :: removeMin()
+void Heap<K,V> :: removeMin()
 {
-    //last is now the first
-    myTree[root] = myTree.at(size);
-
-    //pop the last
-    myTree.pop_back();
-
-    //decrease the size of the heap
-    size--;
-    if(size>0)
+    if(size > 0)
     {
-        //rearange the heap
-        BubbleDown(root);
+        //last is now the first
+        myTree[root] = myTree.at(size);
+
+        //pop the last
+        myTree.pop_back();
+
+        //decrease the size of the heap
+        size--;
+        if(size>1)
+        {
+            //rearange the heap
+            BubbleDown(root);
+        }
     }
+
 
 }
 
 template <class K, class V>
-Team<K,V> Heap<class K, class V> :: Left(int index)
+Team<K,V> Heap<K,V> :: Left(int index)
 {
     return myTree[index *2];
 }
 
 template <class K, class V>
-Team<K,V> Heap<class K, class V> :: Right(int index)
+Team<K,V> Heap<K,V> :: Right(int index)
 {
     return myTree[(index *2) + 1];
 }
@@ -169,7 +173,7 @@ Team<K,V> Heap<class K, class V> :: Right(int index)
 //this method arranges the heap after an insertion. It searches the
 //appropiate spot and and swaps in order to keep order.
 template <class K, class V>
-void Heap<class K, class V> :: BubbleUp(int index)
+void Heap<K,V> :: BubbleUp(int index)
 {
     //swap(index1 , index2/2)//depends if swapping from left or right
     if(index > 0)
@@ -192,7 +196,7 @@ void Heap<class K, class V> :: BubbleUp(int index)
 //this method swaps the last with the root and pops it, then rearanges the
 //heap in order to maintain its property.
 template <class K, class V>
-void Heap<class K, class V> :: BubbleDown(int index)
+void Heap<K,V> :: BubbleDown(int index)
 {
     int leftIndex;
     int rightIndex;
@@ -245,7 +249,7 @@ void Heap<class K, class V> :: BubbleDown(int index)
 
 //swaps a and b of spot
 template <class K, class V>
-void Heap<class K, class V> ::  Swap(int a, int b)
+void Heap<K,V> ::  Swap(int a, int b)
 {
     Team<K,V> temp;
 
@@ -257,40 +261,40 @@ void Heap<class K, class V> ::  Swap(int a, int b)
 }
 //returns the parent of that index
 template <class K, class V>
-int  Heap<class K, class V> :: ParentIndex(int index)
+int  Heap<K,V> :: ParentIndex(int index)
 {
     return (index)/2;
 }
 
 template <class K, class V>
-int  Heap<class K, class V> :: LeftPosition(int index)
+int  Heap<K,V> :: LeftPosition(int index)
 {
     return index*2;
 }
 
 template <class K, class V>
-int  Heap<class K, class V> :: RightPosition(int index)
+int  Heap<K,V> :: RightPosition(int index)
 {
     return (index*2) + 1;
 }
 
 //prints the heap
 template <class K, class V>
-string Heap<class K, class V> :: Print()
+string Heap<K,V> :: Print()
 {
-    vector<Team<K,V>>::iterator it;
-    ostringstream out;
-    int count = 1;
+//    typename vector<Team<K,V>>::iterator it;
+//    ostringstream out;
+//    int count = 1;
 
 
-    for(it = myTree.begin()+1; it != myTree.end(); it++)
-    {
-        out <<left<< setw(5)<< it->getKey()  << setw(12) << it->getName()
-            << " Index: " << "[" << count << "] "<< endl;
-        count++;
-    }
+//    for(it = myTree.begin()+1; it != myTree.end(); it++)
+//    {
+//        out <<left<< setw(5)<< it->getKey()  << setw(12) << it->getName()
+//            << " Index: " << "[" << count << "] "<< endl;
+//        count++;
+//    }
 
-    return out.str();
+    return " ";
 }
 
 #endif // HEAP_H
