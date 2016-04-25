@@ -25,7 +25,10 @@ HEADERS  += header/mainwindow.h \
     header/souvenir.h \
     header/stadium.h \
     header/skiplist.h \
-    header/entry.h 
+    header/entry.h \
+    header/graph.h \
+    header/vertex.h \
+    header/edge.h
 
 FORMS    += form/mainwindow.ui
 
