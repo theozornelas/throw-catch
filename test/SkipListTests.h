@@ -6,6 +6,7 @@
 #include <QString>
 #include "skiplist.h"
 #include "entry.h"
+#include "stadium.h"
 
 class SkipListTests : public QObject
 {
@@ -26,11 +27,11 @@ private slots:
     void test_erase();  // tests the erase() method
     void test_get();    // Tests the get() method
     void test_size();   // Tests the size() method
-
+    void test_constructObjList();   // Tests making a list of souvenier objects
 
 private:
-    skiplist<int, QString>* list_;   //< The skip list for testing
-
+    skiplist<int, QString>* list_;      //< The skip list for testing
+    skiplist<int, Stadium>* StadList_; //< THe list of objects to test
 };
 
 /********************************************************************************************
@@ -55,6 +56,16 @@ void SkipListTests::cleanup() {
 /********************************************************************************************
  *                                  IMPLEMENTATION OF TESTS
  ********************************************************************************************/
+
+// Tests making a list of objects
+void SkipListTests::test_constructObjList() {
+    StadList_ = new skiplist<int, Stadium>;
+    Stadium dodgers(5, "Dodgers Stadium", "Dodgers", "1st Ave", "Los Angeles","CA",
+                       "92671", "Number", "24-AUG-1980", 501234,
+                       "Astroturf", "American", "Retro");
+
+    StadList_->insert(1, dodgers);
+}
 
 // Tests adding to the list by ensuring that everything is added in the proper order
 void SkipListTests::test_insert() {

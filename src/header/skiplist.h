@@ -199,7 +199,7 @@ template <typename K, typename V>
 typename skiplist<K,V>::node *skiplist<K,V>::search(const K &k) const {
   node  tempNode;
   node* itr = head_;
-  tempNode.add(item(k, "FINDER"));
+  tempNode.add(item(k, V()));   // Created a dumy entry for searching
 
   while(itr->down() != nullptr) {
     if (tempNode == *itr->right() ) {
