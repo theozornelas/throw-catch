@@ -4,6 +4,7 @@
 #include "testrunner.h"
 #include <QObject>
 #include <QString>
+#include <QList>
 #include "graph.h"
 #include "entry.h"
 #include "stadium.h"
@@ -23,8 +24,9 @@ private slots:
     void cleanup();
 
     /*** TESTS FOR THE CLASS ***/
-    void test_insert();     // Test the ability to insert edges with new verticies to the graph
-    void test_assignment12();
+    void test_insert_edges();   // Test the ability to insert edges with new verticies to the graph
+    void test_insert_vetex();   // Test the ability to insert vertecies without edges
+    void test_assignment12();   // Runs assignment 12 and checks the results of the DFS
 
 private:
     Graph<QString>* stringGraph_;   //< Graph of strings
@@ -47,15 +49,33 @@ void GraphTests::cleanup() {
  *                                  IMPLEMENTATION OF TESTS
  ********************************************************************************************/
 
-void GraphTests::test_insert() {
+void GraphTests::test_insert_edges() {
     stringGraph_->insertEdge("first", "second", 200);
     stringGraph_->insertEdge("first", "third", 300);
     stringGraph_->insertEdge("first", "fourth", 400);
     stringGraph_->insertEdge("second", "fourth", 800);
+    QVERIFY2(stringGraph_->numVertices() == 4, "The number of Vertices is incorrect!");
+    QVERIFY2(stringGraph_->numEdges() == 4, "The number of Edges is incorrect!");
+}
+
+void GraphTests::test_insert_vetex() {
+    stringGraph_->insertVertex("first");
+    stringGraph_->insertVertex("second");
+    stringGraph_->insertVertex("third");
+    stringGraph_->insertVertex("first");
+    stringGraph_->insertVertex("second");
+    stringGraph_->insertVertex("fourth");
+    QVERIFY2(stringGraph_->numVertices() == 4, "The number of Vertices is incorrect!");
+    QVERIFY2(stringGraph_->numEdges() == 0, "The number of Edges is incorrect!");
 }
 
 void GraphTests::test_assignment12()
 {
+    QList<QString> properOut;
+    properOut << "Dallas" << "Houston" << "Atlanta" << "Miami" << "Kansas City"
+              << "Chicago" << "New York" << "Boston" << "Denver" << "Los Angeles"
+              << "San Francisco" << "Seattle";
+
     stringGraph_->insertEdge("Seattle","Chicago", 2097);
     stringGraph_->insertEdge("Seattle","Denver", 1331);
     stringGraph_->insertEdge("Seattle","San Francisco", 807);
@@ -82,12 +102,22 @@ void GraphTests::test_assignment12()
 
     Graph<QString>::VertexList outlist = stringGraph_->dft("Dallas");
 
-    qDebug() << outlist.size();
+    QVERIFY2(outlist.size() == 12, "Not all of the vertices were visited!");
 
-    for(Graph<QString>::VertexList::iterator itr = outlist.begin(); itr != outlist.end(); itr++){
-        qDebug() << **itr;
+    QString DFSoutput = "[";
+    Graph<QString>::VertexList::iterator actual = outlist.begin();
+    QList<QString>::iterator expected = properOut.begin();
+
+    while(actual != outlist.end()){
+        DFSoutput += **actual;
+        if(**actual != *outlist.back()) {DFSoutput += ", ";}
+        QCOMPARE(**actual, *expected);
+        actual++;
+        expected++;
     }
 
+    DFSoutput += "]";
+    qDebug() << "DEPTH FIRST SEARCH:" << DFSoutput;
 }
 
 /*** THIS ADDS THE TEST TO THE LIST OF CLASSES TO RUN ***/

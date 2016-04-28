@@ -43,8 +43,6 @@ public:
     public:
         // Basic Constructor
         Vertex(const E& data) : data_(data), visited_(false) {}
-        // Sets the position aware iterator in this vertex
-//        void setItr(VertexItr itr) { itr_ = itr; }
         // Sets the data stored in this vertex to a new value
         void setData(const E& data) { data_ = data; }
         // Sets the state of this vertex to visited
@@ -88,7 +86,6 @@ public:
         E    data_;            // Data stored at this node
         bool visited_;         // Has this vertex been visited?
         EdgeItrList incident_; // Adjacency list of edges
-//        VertexItr   itr_;      // Iterator to this vertex's position Graph list
     };  // END OF VERTEX CLASS
 
     /**
@@ -145,7 +142,6 @@ public:
         bool visited_;     // Has this Edge been visited?
         VertexItr start_;  // Iterator to vertex at end of this edge
         VertexItr end_;    // Iterator to vertex at end of this edge
-        EdgeItr   itr_;    // Iterator to this edge's position in Edge List
     }; // END EDGE CLASS
 
 /********************************************/
@@ -154,10 +150,8 @@ public:
 public:
     // Basic Constructor
     Graph() : vertices_() {}
-    // Returns a list of all vertices in the graph
-    VertexList vertices() { return vertices_; }
-    // Returns a list of all edges in the graph
-    EdgeList edges() { return edges_; }
+
+    /***  U T I L I T Y  M E T H O D S  ***/
     // Inserts a new vertex storing element e
     void insertVertex(const E& e);
     // Inserts a new undirected edge connecting 'v' and 'w' and storing 'x'
@@ -166,12 +160,26 @@ public:
 //    eraseVertex(v);
     // Removes the edge e
 //    eraseEdge(e);
+
+    /***    G E T - T H I N G S   M E T H O D S    ***/
+    // Returns a list of all vertices in the graph
+    VertexList vertices() { return vertices_; }
+    // Returns a list of all edges in the graph
+    EdgeList edges() { return edges_; }
+    // Get the number of vertices in the graph
+    int numVertices() { return vertices_.size(); }
+    // Get the number of edges in the graph
+    int numEdges() { return edges_.size(); }
     // Print the graph as a dot text file
     void print(std::ofstream &output, std::string title = "Graph Output");
+
+    /*** ALGORITHMS ***/
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
     VertexList dft(const E &e);
 
 protected:
+    // Resets all the verticies and edges to un-visited
+    void unvisitAll();
     // Finds the vertex containing 'e' and returns an iterator to that vertex
     VertexItr findVertex(const E &e);
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
@@ -182,86 +190,9 @@ private:
     EdgeList   edges_;      // List of Edges
 };
 
-/*****************************************************************************
- *                         IMPLEMENTATION OF VERTEX METHODS                  *
- *****************************************************************************/
-
-/**
- * @returns TRUE if vertex 'v' is adjacent to this vertex
- */
-template <typename E>
-bool Graph<E>::Vertex::isAdjacentTo(const E &v) {
-    bool found = false;
-    EdgeItrItr itr = incident_.begin();
-    while(itr != incident_.end() && !found){
-        found = found || (**itr).isIncidentOn(Vertex(v));
-        itr++;
-    }
-    return found;
-}
-
-// Inserts a new undirected edge connecting 'v' and 'w' and storing 'x'
-template <typename E>
-void Graph<E>::insertEdge(const E& v, const E& w, const int& x)
-{
-	// Create a new edge with the weight of x
-    Edge newEdge(x);
-
-    // Find out if vertex are already in list, and get position if they are
-    VertexItr vItr = findVertex(v);
-    VertexItr wItr = findVertex(w);
-
-    // Create new temporary Vertex Obj for v and w
-    Vertex tempV(v);
-    Vertex tempW(w);
-
-    // If V was not in the list add it
-    if(vItr == vertices_.end()){
-    	vertices_.push_back(tempV);
-    	vItr = vertices_.end();
-    	vItr--;
-    }
-
-    // If W was not in the list add it
-    if(wItr == vertices_.end()){
-		vertices_.push_back(tempW);
-		wItr = vertices_.end();
-		wItr--;
-	}
-
-#if VERBOSE_DEBUG
-    qDebug() << *vItr << newEdge << *wItr << endl;
-#endif
-
-    // Set the start and end of the edge and add it to the edge list
-    newEdge.setStart(vItr);
-    newEdge.setEnd(wItr);
-    edges_.push_back(newEdge);
-
-    // Add the new edge to both vertex
-    EdgeItr tempEdgeItr = edges_.end();
-    tempEdgeItr--;
-    (*vItr).addEdge(tempEdgeItr);
-    (*wItr).addEdge(tempEdgeItr);
-}
-
 /******************************************************************************
  *                          IMPLEMENTATION OF GRAPH METHODS                   *
  ******************************************************************************/
-
-template <typename E>
-typename Graph<E>::VertexItr  Graph<E>::Edge::opposite(Vertex v)
-{
-  if(v == *start_){
-      return end_;
-  }
-  else if(v == *end_){
-      return start_;
-  }
-  else{
-      qDebug() << "***** ERROR - NODE NOT INCIDENT *****\n";
-  }
-}
 
 /**
  * @brief prints the graph to a dot output file with the given title
@@ -326,6 +257,7 @@ template <typename E>
 typename Graph<E>::VertexList Graph<E>::dft(const E &e) {
     VertexItr eItr = findVertex(e);
     VertexList outList;
+    unvisitAll();
 
     dftHelper(*eItr, outList);
     return outList;
@@ -339,8 +271,9 @@ void Graph<E>::dftHelper(Vertex &location, VertexList &outList) {
 #if VERBOSE_DEBUG
     qDebug() << location;
 #endif
-    // mark location as visited
+    // mark location as visited and add to output list
 	location.visit();
+    outList.push_back(location);
 
 #if EXTRA_VERBOSE_DEBUG
 qDebug() << location << location.visited() << endl;
@@ -354,7 +287,7 @@ std::cin.get();
     EdgeItrList edges = location.incidentEdges();
 
     for(EdgeItrItr itr = edges.begin(); itr != edges.end(); itr++){
-    	if(!(**itr).visited()){
+        if(!(**itr).visited()){
     		VertexItr w = (**itr).opposite(location);
     		if(!(*w).visited()){
     			(**itr).visit();
@@ -384,13 +317,108 @@ typename Graph<E>::VertexItr Graph<E>::findVertex(const E &e) {
             outVal++;
         }
     }
-
     return outVal;
+}
+
+/**
+ *
+ */
+template <typename E>
+void Graph<E>::unvisitAll() {
+    // Reset the edges
+    for(EdgeItr i = edges_.begin(); i != edges_.end(); i++){
+        i->resetVisited();
+    }
+
+    // Reset the vertices
+    for(VertexItr j = vertices_.begin(); j != vertices_.end(); j++){
+        j->resetVisited();
+    }
+}
+
+/*****************************************************************************
+ *                         IMPLEMENTATION OF VERTEX METHODS                  *
+ *****************************************************************************/
+
+/**
+ * @returns TRUE if vertex 'v' is adjacent to this vertex
+ */
+template <typename E>
+bool Graph<E>::Vertex::isAdjacentTo(const E &v) {
+    bool found = false;
+    EdgeItrItr itr = incident_.begin();
+    while(itr != incident_.end() && !found){
+        found = found || (**itr).isIncidentOn(Vertex(v));
+        itr++;
+    }
+    return found;
+}
+
+// Inserts a new undirected edge connecting 'v' and 'w' and storing 'x'
+template <typename E>
+void Graph<E>::insertEdge(const E& v, const E& w, const int& x)
+{
+    // Create a new edge with the weight of x
+    Edge newEdge(x);
+
+    // Find out if vertex are already in list, and get position if they are
+    VertexItr vItr = findVertex(v);
+    VertexItr wItr = findVertex(w);
+
+    // Create new temporary Vertex Obj for v and w
+    Vertex tempV(v);
+    Vertex tempW(w);
+
+    // If V was not in the list add it
+    if(vItr == vertices_.end()){
+        vertices_.push_back(tempV);
+        vItr = vertices_.end();
+        vItr--;
+    }
+
+    // If W was not in the list add it
+    if(wItr == vertices_.end()){
+        vertices_.push_back(tempW);
+        wItr = vertices_.end();
+        wItr--;
+    }
+
+#if VERBOSE_DEBUG
+    qDebug() << *vItr << newEdge << *wItr << endl;
+#endif
+
+    // Set the start and end of the edge and add it to the edge list
+    newEdge.setStart(vItr);
+    newEdge.setEnd(wItr);
+    edges_.push_back(newEdge);
+
+    // Add the new edge to both vertex
+    EdgeItr tempEdgeItr = edges_.end();
+    tempEdgeItr--;
+    (*vItr).addEdge(tempEdgeItr);
+    (*wItr).addEdge(tempEdgeItr);
 }
 
 /**************************************************************************
  *                          IMPLEMENTATION OF EDGE METHODS                *
  **************************************************************************/
+
+/**
+ *
+ */
+template <typename E>
+typename Graph<E>::VertexItr  Graph<E>::Edge::opposite(Vertex v)
+{
+  if(v == *start_){
+      return end_;
+  }
+  else if(v == *end_){
+      return start_;
+  }
+  else{
+      qDebug() << "***** ERROR - NODE NOT INCIDENT *****\n";
+  }
+}
 
 // bool isAdjacentTo(Edge f) (they share a common edge);
 template <typename E>
