@@ -2,10 +2,16 @@
 #define EDGE_H
 #include "vertex.h"
 
+
+template <typename E>
 class Edge {
 public:
+    /*** CLASS TYPEDEFS***/
+    typedef unsigned int weight;
+    typedef Vertex<E> Vertex;
+
     // Basic Constructor for the edge class
-    Edge(const int &weight = 0) : weight_(weight), visited_(false) {}
+    Edge(const weight &weight = 0) : weight_(weight), visited_(false) {}
     // Returns vertex at the beginning of this edge
     Vertex start() { return *start_; }
     // Returns vertex at the beginning of this edge
@@ -31,7 +37,7 @@ public:
 
     /*** OPERATOR OVERLOADS ***/
     // Overload for the * Operator
-    E& operator*() { return weight_; }
+    weight& operator*() { return weight_; }
     // Overload the output stream operator
     friend std::ostream &operator<<(std::ostream &output, const Edge &obj){
             output << *(obj.start_) << "<--->" << *(obj.end_);
@@ -46,16 +52,29 @@ public:
     bool operator<=(const Edge &other) const { return this->weight_ <= other.weight_ ; }
 
 private:
-    int weight_;       // weight of the edge
-    bool visited_;     // Has this Edge been visited?
-    VertexItr start_;  // Iterator to vertex at end of this edge
-    VertexItr end_;    // Iterator to vertex at end of this edge
-    EdgeItr   itr_;    // Iterator to this edge's position in Edge List
+    weight weight_;       // weight of the edge
+    bool   visited_;      // Has this Edge been visited?
+    VertexItr start_;     // Iterator to vertex at end of this edge
+    VertexItr end_;       // Iterator to vertex at end of this edge
+    EdgeItr   itr_;       // Iterator to this edge's position in Edge List
 };
 
 /**************************************************************************
  *                          IMPLEMENTATION OF EDGE METHODS                *
  **************************************************************************/
+
+VertexItr  Edge::opposite(Vertex v)
+{
+  if(v == *start_){
+      return end_;
+  }
+  else if(v == *end_){
+      return start_;
+  }
+  else{
+      std::cout << "***** ERROR - NODE NOT INCIDENT *****\n";std::cout.flush();
+  }
+}
 
 // bool isAdjacentTo(Edge f) (they share a common edge);
 bool Edge::isAdjacentTo(Edge f)

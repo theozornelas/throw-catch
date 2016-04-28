@@ -26,10 +26,9 @@ using std::endl;
 template <typename E>
 class Graph {
 public:
-    /*** FORWARD DECLARE NESTED CLASSES ***/
-    class Vertex;
-    class Edge;
     /*** TYPEDEF FOR CLASS USE ***/
+    typedef Vertex<E> vertex;
+    typedef Edge<E> edge;
     typedef std::list<Vertex> VertexList;
     typedef std::list<Edge> EdgeList;
     typedef typename VertexList::iterator VertexItr;
@@ -64,27 +63,13 @@ protected:
     void dftHelper(Vertex &location, VertexList &outList);
 
 private:
-    VertexList vertices_;   // List of vertex
+    VertexList vertices_;   // List of vertecies in the graph
     EdgeList   edges_;      // List of Edges
 };
 
 /******************************************************************************
  *                          IMPLEMENTATION OF GRAPH METHODS                   *
  ******************************************************************************/
-
-template <typename E>
-typename Graph<E>::VertexItr  Graph<E>::Edge::opposite(Vertex v)
-{
-  if(v == *start_){
-      return end_;
-  }
-  else if(v == *end_){
-      return start_;
-  }
-  else{
-	  std::cout << "***** ERROR - NODE NOT INCIDENT *****\n";std::cout.flush();
-  }
-}
 
 /**
  * @brief prints the graph to a dot output file with the given title
