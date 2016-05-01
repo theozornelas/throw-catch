@@ -18,14 +18,16 @@ TEMPLATE = lib
 
 SOURCES  += source/mainwindow.cpp \
     source/dbmanager.cpp \
-    source/stadium.cpp
+    source/stadium.cpp \
+    source/date.cpp
 
 HEADERS  += header/mainwindow.h \
     header/dbmanager.h \
     header/souvenir.h \
     header/stadium.h \
     header/skiplist.h \
-    header/entry.h 
+    header/entry.h \ 
+    header/date.h
 
 FORMS    += form/mainwindow.ui
 
