@@ -19,6 +19,7 @@
 #include <QDebug>
 #include <queue>
 #include <climits>
+#include <functional>
 #include "priorityqueue.h"
 
 
@@ -41,6 +42,7 @@ public:
     typedef std::list<EdgeItr> EdgeItrList;
     typedef typename EdgeItrList::iterator EdgeItrItr;
     typedef std::priority_queue<Vertex> Heap;
+    typedef std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge> > EdgePQueue;
 
     /**
      * @brief The Vertex class
@@ -101,7 +103,7 @@ public:
 
     private:
 
-         int  value_;
+        int  value_;
         E    data_;            // Data stored at this node
         bool visited_;         // Has this vertex been visited?
         EdgeItrList incident_; // Adjacency list of edges
@@ -124,9 +126,9 @@ public:
         void resetVisited() { visited_ = false; }
 
         // Returns vertex at the beginning of this edge
-        Vertex start() { return *start_; }
+        Vertex& start() { return *start_; }
         // Returns vertex at the beginning of this edge
-        Vertex end() { return *end_; }
+        Vertex& end() { return *end_; }
         // Returns the weight of the edge
         int weight() { return weight_; }
         // Return the end vertex of this edge distinct from vertex v
@@ -139,6 +141,9 @@ public:
         bool isIncidentOn(Vertex v);
         // Checks if this vertex has been visited
         bool visited() { return visited_; }
+
+        /*** COMPARATOR***/
+        bool sortComp(Edge i,Edge j) { return (i<j); }
 
         /*** OPERATOR OVERLOADS ***/
         // Overload for the * Operator
@@ -198,7 +203,8 @@ public:
 
     void Dijkstra(const E &e);
 
-    void MSTPrim(const E &e);
+    void MSTPrimJarnik(const E &e);
+    void MSTPrim();
 
     int Distace(Vertex u, Vertex v);
 
@@ -424,62 +430,114 @@ std::cin.get();
 }
 
 
+//template <typename E>
+//void Graph<E>:: Dijkstra(const E &e)
+//{
+
+//    VertexItr startPos = findVertex(e);
+
+//    //get all adjacent vertices from the starting position
+//    VertexList nearVertices = (*startPos).adjacentVertex();
+
+//    (*startPos).setValue(0);
+//    Heap graphVertices;
+
+//    graphVertices.push(*startPos);
+
+//    //initialize all vertices as infinite
+//    for(VertexItr i = nearVertices.begin(); i != nearVertices.end(); i++)
+//    {
+//        (*i).setValue(INT_MAX);
+
+//        graphVertices.push(*i);
+
+//    }
+
+
+//    //
+
+
+//    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
+//    {
+//        graphVertices.push((*k));
+//    }
+
+//    Vertex u = graphVertices.top();
+
+//    while(!graphVertices.empty())
+//    {
+
+//        //crashes at this line
+
+//        for(VertexItr j = (*u).adjacentVertex().begin(); j != (*u).adjacentVertex().end(); j++)
+//        {
+//            if(((*u).getValue() + Distace(*u,*j)) < (*j).getValue())
+//            {
+//                (*j).setValue((*u).getValue() + Distace(*u,*j));
+//                (*j).setValue((*u).getValue());
+//            }
+//        }
+//    u = graphVertices.top();
+//    }
+//}
+
+/**
+ * @brief Graph<E>::MSTPrim
+ */
 template <typename E>
-void Graph<E>:: Dijkstra(const E &e)
-{
+void Graph<E>::MSTPrim() {
+    unvisitAll();           // ensure all edges and vertices are unvisited
+    EdgeList usedEdges();   // List of edges to use in MST
+    EdgeList unusedEdges(edges_.begin(), edges_.end()); // list of unused edges
+    int VertexCount = 0;        // Count of vertecies visited
 
-    VertexItr startPos = findVertex(e);
+    // sort the list of unused edges
+    std::sort(unusedEdges.begin(), unusedEdges.end() );
 
-    //get all adjacent vertices from the starting position
-    VertexList nearVertices = (*startPos).adjacentVertex();
+    // add first vertex to the list and set it to visited
+    vertices_.begin()->visit();
+    VertexCount++;
 
-    (*startPos).setValue(0);
-    Heap graphVertices;
+    // create iterator to the front of the unused edge list
+    EdgeItr itr = unusedEdges.begin();
+    // loop while vertecies in the done cloud is less than total
+    while( VertexCount < vertices_.size() ) {
+        // find the shortest edge connected a vistied vertex to an unvisted vertex
+        // using homemade XOR with modulus 2 of the sum of booleans
+        if((itr->start().visited() + itr->end().visited())%2  ){
+            // visit both verticies
+            itr->start().visit();
+            itr->end().visit();
 
-    graphVertices.push(*startPos);
-
-    //initialize all vertices as infinite
-    for(VertexItr i = nearVertices.begin(); i != nearVertices.end(); i++)
-    {
-        (*i).setValue(INT_MAX);
-
-        graphVertices.push(*i);
-
-    }
-
-
-    //
-
-
-    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
-    {
-        graphVertices.push((*k));
-    }
-
-    VertexItr u;
-
-    while(!graphVertices.empty())
-    {
-
-        //crashes at this line
-        *u = graphVertices.top();
-        for(VertexItr j = (*u).adjacentVertex().begin(); j != (*u).adjacentVertex().end(); j++)
-        {
-            if(((*u).getValue() + Distace(*u,*j)) < (*j).getValue())
-            {
-                (*j).setValue((*u).getValue() + Distace(*u,*j));
-                (*j).setValue((*u).getValue());
-            }
+            // remove edge from unused list and add to edge list
+            usedEdges().push_back(*itr);
+            VertexCount++;
+            unusedEdges.erase(itr);
+            // reset itr to the front of the unused list
+            itr = unusedEdges.begin();
         }
+        // If the edge is double visited remove that edge from possible edges and move on
+        else if( itr->start().visited() && itr->end().visited() ){
+            EdgeItr tempItr = itr;
+            unusedEdges.erase(tempItr);
+            itr++;
+        }
+        else if ( !itr->start().visited() && !itr->end().visited() ) {
+            itr++;
+        }
+    } // END OF MST WHILE LOOP
+
+    for(EdgeList::iterator j = usedEdges().begin(); j != usedEdges().end(); j++){
+        qDebug() << *j;
     }
 }
 
-
 /**
- *
+ * @brief Graph<E>::MSTPrim
+ * @param e
  */
 template <typename E>
-void Graph<E>::MSTPrim(const E &e)
+void Graph<E>::MSTPrimJarnik(const E &e)
 {
     VertexItr startPos = findVertex(e);
     (*startPos)->setValue(0);
