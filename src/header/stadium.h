@@ -2,6 +2,7 @@
 #define STADIUM
 
 #include <QString>
+#include <QDebug>
 #include "souvenir.h"
 using namespace std;
 
@@ -48,6 +49,7 @@ public:
             QString state, QString zipCode,
             QString number, QString date, unsigned int capacity,
             QString surf, QString league, QString typo);
+    Stadium(int id, QString name) : stadiumID(id), stadiumName(name) { }
 
     ~Stadium();
 
@@ -84,6 +86,20 @@ public:
     // Mutators for Stadium's souvenir list.
     void addSouvenir(QString name, double price, int quantity);
     void removeSouvenir(QString name);
+
+    /************************
+     *  OPERATOR OVERLOADS
+     ************************/
+    friend QDebug operator<<(QDebug output, const Stadium &obj){
+        output << "[" << obj.stadiumID << ", " << obj.stadiumName << "]";
+        return output;
+    }
+    bool operator==(const Stadium& that) const { return this->stadiumID == that.stadiumID; }
+    bool operator!=(const Stadium& that) const { return this->stadiumID != that.stadiumID; }
+    bool operator <(const Stadium& that) const { return this->stadiumID < that.stadiumID; }
+    bool operator<=(const Stadium& that) const { return this->stadiumID <= that.stadiumID; }
+    bool operator >(const Stadium& that) const { return this->stadiumID > that.stadiumID; }
+    bool operator>=(const Stadium& that) const { return this->stadiumID >= that.stadiumID; }
 
 private:
     Souvenir* findSouvenir(QString name);
