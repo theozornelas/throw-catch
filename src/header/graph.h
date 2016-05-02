@@ -460,6 +460,8 @@ void Graph<E>:: Dijkstra(const E &e)
 
     while(!graphVertices.empty())
     {
+
+        //crashes at this line
         *u = graphVertices.top();
         for(VertexItr j = (*u).adjacentVertex().begin(); j != (*u).adjacentVertex().end(); j++)
         {
