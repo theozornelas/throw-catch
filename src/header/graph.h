@@ -16,6 +16,10 @@
 #include <queue>
 #include <fstream>
 #include <QDebug>
+#include <queue>
+#include <climits>
+#include "priorityqueue.h"
+
 
 /**
  *  @brief Undirected Graph
@@ -35,6 +39,7 @@ public:
     typedef typename EdgeList::iterator EdgeItr;
     typedef std::list<EdgeItr> EdgeItrList;
     typedef typename EdgeItrList::iterator EdgeItrItr;
+    typedef std::priority_queue<Vertex> Heap;
 
     /**
      * @brief The Vertex class
@@ -177,6 +182,10 @@ public:
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
     VertexList dft(const E &e);
 
+    void Dijkstra(const E &e);
+
+    void MSTPrim(const E &e);
+
 protected:
     // Resets all the verticies and edges to un-visited
     void unvisitAll();
@@ -300,6 +309,108 @@ std::cin.get();
     }
 }
 
+
+template <typename E>
+void Graph<E>:: Dijkstra(const E &e)
+{
+
+    VertexItr startPos = findVertex(e);
+
+    //get all adjacent vertices from the starting position
+    VertexList nearVertices = (*startPos).adjacentVertex();
+
+    (*startPos).setValue(0);
+    Heap graphVertices;
+
+    graphVertices.push(*startPos);
+
+    //initialize all vertices as infinite
+    for(VertexItr i = nearVertices.begin(); i != nearVertices.end(); i++)
+    {
+        (*i).setValue(INT_MAX);
+
+        graphVertices.push(*i);
+
+    }
+
+
+    //
+
+
+    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
+    {
+        graphVertices.push((*k));
+    }
+
+    VertexItr u;
+
+    while(!graphVertices.empty())
+    {
+        *u = graphVertices.top();
+        for(VertexItr j = (*u).adjacentVertex().begin(); j != (*u).adjacentVertex().end(); j++)
+        {
+            if(((*u).getValue() + Distace(*u,*j)) < (*j).getValue())
+            {
+                (*j).setValue((*u).getValue() + Distace(*u,*j));
+                (*j).setValue((*u).getValue());
+            }
+        }
+    }
+}
+
+
+/**
+ *
+ */
+template <typename E>
+void Graph<E>::MSTPrim(const E &e)
+{
+    VertexItr startPos = findVertex(e);
+    (*startPos)->setValue(0);
+
+    const int INFINITY_VAL = INT_MAX;
+
+    VertexList startList = (*startPos)->adjacentVertex();
+
+    PriorityQueue<Vertex> v;
+    std::vector<Vertex> mstList;
+
+    for(VertexItr i = startList.begin(); i != startList.end(); i++)
+    {
+        if(i != startPos)
+        {
+            (*i)->setValue(INFINITY_VAL);
+        }
+        else
+        {
+            (*i)->setValue(0);
+        }
+
+        //v.insert(*i);
+    }
+
+
+    //h is supposed to be equals something, IDKWTF it is.
+    PriorityQueue<Vertex> Q;
+
+    VertexItr crawl;
+    crawl = startList.begin();
+
+    while(!Q.empty())
+    {
+        Vertex ue = Q.removeMin();
+
+        v.push_back(ue);
+
+        while(crawl != startList.end())
+        {
+
+        }
+
+
+
+    }
+}
 
 /**
  *
