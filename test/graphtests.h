@@ -27,7 +27,10 @@ private slots:
     void test_insert_edges();   // Test the ability to insert edges with new verticies to the graph
     void test_insert_vetex();   // Test the ability to insert vertecies without edges
     void test_assignment12();   // Runs assignment 12 and checks the results of the DFS
-    void test_AddStadium(); // Tests the basic creation of a graph of stadiums and adding a few stadiums
+    void test_removeVertex1();  // Tests the removal of a vertex and all incident edges
+    void test_removeVertex2();  // Tests the removal of a vertex and all incident edges
+    void test_removeEdge1();    // Test the removal of an edge
+    void test_AddStadium();     // Tests the basic creation of a graph of stadiums and adding a few stadiums
 
 private:
     Graph<QString>* stringGraph_;   // Graph of strings for testing
@@ -122,7 +125,40 @@ void GraphTests::test_assignment12()
     qDebug() << "DEPTH FIRST SEARCH:" << DFSoutput;
 }
 
-void GraphTests::test_AddStadium(){
+void GraphTests::test_removeVertex1() {
+    stringGraph_->insertEdge("first", "second", 200);
+    stringGraph_->insertEdge("first", "third", 300);
+    stringGraph_->insertEdge("first", "fourth", 400);
+
+    stringGraph_->eraseVertex("first");
+
+    QVERIFY2(stringGraph_->numVertices() == 3, "The number of Vertices is incorrect!");
+    QVERIFY2(stringGraph_->numEdges() == 0, "The number of Edges is incorrect!");
+}
+
+void GraphTests::test_removeVertex2() {
+    stringGraph_->insertEdge("first", "second", 200);
+    stringGraph_->insertEdge("first", "third", 300);
+    stringGraph_->insertEdge("first", "fourth", 400);
+
+    stringGraph_->eraseVertex("second");
+
+    QVERIFY2(stringGraph_->numVertices() == 3, "The number of Vertices is incorrect!");
+    QVERIFY2(stringGraph_->numEdges() == 2, "The number of Edges is incorrect!");
+}
+
+void GraphTests::test_removeEdge1() {
+    stringGraph_->insertEdge("first", "second", 200);
+    stringGraph_->insertEdge("first", "third", 300);
+    stringGraph_->insertEdge("first", "fourth", 400);
+
+    stringGraph_->eraseEdge("first", "second", 200);
+
+    QVERIFY2(stringGraph_->numVertices() == 4, "The number of Vertices is incorrect!");
+    QVERIFY2(stringGraph_->numEdges() == 2, "The number of Edges is incorrect!");
+}
+
+void GraphTests::test_AddStadium() {
     StadiumGraph_ = new Graph<Stadium>;
 
     Stadium dodgers(5, "Dodgers Stadium");

@@ -8,7 +8,8 @@
 
 #ifndef DATA_STRUCTURES_GRAPH_H
 #define DATA_STRUCTURES_GRAPH_H
-#define VERBOSE_DEBUG 0
+
+#define VERBOSE_DEBUG 1
 #define EXTRA_VERBOSE_DEBUG 0
 
 #include <vector>
@@ -60,6 +61,9 @@ public:
                    && **insertPoint < *newEdge){ insertPoint++; }
             incident_.insert(insertPoint, newEdge);
         }
+
+        // removes the edge pointed to by the given iterator from this adjaceny list
+        void removeEdge(EdgeItr edge);
 
         // Checks if this vertex has been visited
         bool visited() { return visited_; }
@@ -126,7 +130,7 @@ public:
         int& operator*() { return weight_; }
         // Overload the output stream operator
         friend QDebug operator<<(QDebug output, const Edge &obj){
-            output << *(obj.start_) << "<--->" << *(obj.end_);
+            output << *(obj.start_) << "<-->" << *(obj.end_);
             return output;
         }
         // Overload all the comparison operators
@@ -156,10 +160,10 @@ public:
     void insertVertex(const E& e);
     // Inserts a new undirected edge connecting 'v' and 'w' and storing 'x'
     void insertEdge(const E &v, const E &w, const int &x);
-    // Removes vertex 'v' and all its incident edges
-//    eraseVertex(v);
-    // Removes the edge e
-//    eraseEdge(e);
+    // Removes vertex containing the data 'e' and all inciden edges
+    void eraseVertex(const E& e);
+    // Removes the edge that connects 'v' to 'w' with weight 'x'
+    void eraseEdge(const E &v, const E &w, const int &x);
 
     /***    G E T - T H I N G S   M E T H O D S    ***/
     // Returns a list of all vertices in the graph
@@ -182,6 +186,8 @@ protected:
     void unvisitAll();
     // Finds the vertex containing 'e' and returns an iterator to that vertex
     VertexItr findVertex(const E &e);
+    // Finds the edge connecting 'v' to 'w' with weight 'x'
+    EdgeItr findEdge(const E &v, const E &w, const int &x);
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
     void dftHelper(Vertex &location, VertexList &outList);
 
@@ -219,6 +225,56 @@ void Graph<E>::print(std::ofstream &output, std::string title) {
     }
 
     output << "}\n";
+}
+
+/**
+ * @brief Inserts a new undirected edge connecting 'v' and 'w' and storing 'x'
+ * @param v [IN] vertex data at 'start' of edge
+ * @param w [IN] vertex data at 'end' of edge
+ * @param x [IN] weight of the edge as an integer
+ */
+template <typename E>
+void Graph<E>::insertEdge(const E& v, const E& w, const int& x)
+{
+    // Create a new edge with the weight of x
+    Edge newEdge(x);
+
+    // Find out if vertex are already in list, and get position if they are
+    VertexItr vItr = findVertex(v);
+    VertexItr wItr = findVertex(w);
+
+    // Create new temporary Vertex Obj for v and w
+    Vertex tempV(v);
+    Vertex tempW(w);
+
+    // If V was not in the list add it
+    if(vItr == vertices_.end()){
+        vertices_.push_back(tempV);
+        vItr = vertices_.end();
+        vItr--;
+    }
+
+    // If W was not in the list add it
+    if(wItr == vertices_.end()){
+        vertices_.push_back(tempW);
+        wItr = vertices_.end();
+        wItr--;
+    }
+
+    // Set the start and end of the edge and add it to the edge list
+    newEdge.setStart(vItr);
+    newEdge.setEnd(wItr);
+    edges_.push_back(newEdge);
+
+    // Add the new edge to both vertex
+    EdgeItr tempEdgeItr = edges_.end();
+    tempEdgeItr--;
+    (*vItr).addEdge(tempEdgeItr);
+    (*wItr).addEdge(tempEdgeItr);
+
+#if VERBOSE_DEBUG
+    qDebug() << "ADDED EDGE:" << *tempEdgeItr;
+#endif
 }
 
 /**
@@ -300,9 +356,10 @@ std::cin.get();
     }
 }
 
-
 /**
- *
+ * @brief Finds the vertex with data 'e'
+ * @param e [IN] the data to find in a given vertex
+ * @return iterator to the vertex containing 'e' or VertexList::end() if not found
  */
 template <typename E>
 typename Graph<E>::VertexItr Graph<E>::findVertex(const E &e) {
@@ -321,7 +378,36 @@ typename Graph<E>::VertexItr Graph<E>::findVertex(const E &e) {
 }
 
 /**
- *
+ * @brief finds the edge matching the given criteria
+ * @param v [IN] vertex data at 'start' of edge
+ * @param w [IN] vertex data at 'end' of edge
+ * @param x [IN] weight of the edge as an integer
+ * @return iterator to the edge or EdgeItrList::end() if not found
+ */
+template <typename E>
+typename Graph<E>::EdgeItr Graph<E>::findEdge(const E &v, const E &w, const int &x){
+    bool found = false;
+    Edge testEdge(x);
+    Vertex testVertex1(v);
+    Vertex testVertex2(w);
+    EdgeItr outVal = edges_.begin();
+
+    while(outVal != edges_.end() && !found){
+        if( *outVal == testEdge
+            && outVal->isIncidentOn(testVertex1)
+            && outVal->isIncidentOn(testVertex2) )
+        {
+            found = true;
+        }
+        else{
+            outVal++;
+        }
+    }
+    return outVal;
+}
+
+/**
+ * @brief Graph<E>::unvisitAll
  */
 template <typename E>
 void Graph<E>::unvisitAll() {
@@ -336,12 +422,76 @@ void Graph<E>::unvisitAll() {
     }
 }
 
+/**
+ * @brief Erases the given vertex and all edges incident
+ * @param e [IN] The vertex to remove
+ */
+template <typename E>
+void Graph<E>::eraseVertex(const E &e) {
+    // find the vertex if it exists
+    VertexItr itr = findVertex(e);
+
+    // remove the vertex if it exists
+    if(itr != vertices_.end()){
+        EdgeItrList edges = itr->incidentEdges();
+
+        // remove all incident edges from master edge list
+        for(EdgeItrItr j = edges.begin(); j != edges.end(); j++){
+            #if VERBOSE_DEBUG
+            qDebug() << "ERASING EDGE:" << **j;
+            #endif
+            edges_.erase(*j);
+        }
+
+        // remove vertex from master vertex list
+        #if VERBOSE_DEBUG
+        qDebug() << "ERASING:" << *itr;
+        #endif
+        vertices_.erase(itr);
+    }
+}
+
+/**
+ * @brief Erases the edge with the given start, end, and weight
+ * @param v [IN] vertex data at 'start' of edge to delete
+ * @param w [IN] vertex data at 'end' of edge to delete
+ * @param x [IN] weight of the edge as an integer
+ */
+template <typename E>
+void Graph<E>::eraseEdge(const E &v, const E &w, const int &x) {
+    // find the edge if it exists
+    EdgeItr edge2remove = findEdge(v, w, x);
+
+    // remove the edge if it exists
+    if(edge2remove != edges_.end()){
+
+        // remove edge from any incident vertices
+        for(VertexItr i = vertices_.begin(); i != vertices_.end(); i++) {
+            if( edge2remove->isIncidentOn(*i) ){
+                #if VERBOSE_DEBUG
+                qDebug() << "ERASING EDGE FROM:" << *i;
+                #endif
+                i->removeEdge(edge2remove);
+            }
+        }
+
+        // remove edge from master edge list
+        #if VERBOSE_DEBUG
+        qDebug() << "ERASING:" << *edge2remove;
+        #endif
+        edges_.erase(edge2remove);
+    }
+}
+
 /*****************************************************************************
  *                         IMPLEMENTATION OF VERTEX METHODS                  *
  *****************************************************************************/
 
+
 /**
- * @returns TRUE if vertex 'v' is adjacent to this vertex
+ * @brief tests if this vertex is adjacent to vertex 'v'
+ * @param v [IN] the value of the vertex to check for
+ * @return TRUE if vertex is adjacent
  */
 template <typename E>
 bool Graph<E>::Vertex::isAdjacentTo(const E &v) {
@@ -354,49 +504,25 @@ bool Graph<E>::Vertex::isAdjacentTo(const E &v) {
     return found;
 }
 
-// Inserts a new undirected edge connecting 'v' and 'w' and storing 'x'
+/**
+ * @brief Removed the edge pointed to by the given iterator from this vertex's adjaceny list
+ * @param edge [IN] iterator to the edge to remove from this vertex
+ */
 template <typename E>
-void Graph<E>::insertEdge(const E& v, const E& w, const int& x)
-{
-    // Create a new edge with the weight of x
-    Edge newEdge(x);
+void Graph<E>::Vertex::removeEdge(EdgeItr edge) {
+    bool found = false;
+    EdgeItrItr itr = incident_.begin();
 
-    // Find out if vertex are already in list, and get position if they are
-    VertexItr vItr = findVertex(v);
-    VertexItr wItr = findVertex(w);
-
-    // Create new temporary Vertex Obj for v and w
-    Vertex tempV(v);
-    Vertex tempW(w);
-
-    // If V was not in the list add it
-    if(vItr == vertices_.end()){
-        vertices_.push_back(tempV);
-        vItr = vertices_.end();
-        vItr--;
+    // find edge to remove if it exists, and remove it
+    while(itr != incident_.end() && !found){
+        if(*itr == edge){
+            incident_.erase(itr);
+            found = true;
+        }
+        else{
+            itr++;
+        }
     }
-
-    // If W was not in the list add it
-    if(wItr == vertices_.end()){
-        vertices_.push_back(tempW);
-        wItr = vertices_.end();
-        wItr--;
-    }
-
-#if VERBOSE_DEBUG
-    qDebug() << *vItr << newEdge << *wItr << endl;
-#endif
-
-    // Set the start and end of the edge and add it to the edge list
-    newEdge.setStart(vItr);
-    newEdge.setEnd(wItr);
-    edges_.push_back(newEdge);
-
-    // Add the new edge to both vertex
-    EdgeItr tempEdgeItr = edges_.end();
-    tempEdgeItr--;
-    (*vItr).addEdge(tempEdgeItr);
-    (*wItr).addEdge(tempEdgeItr);
 }
 
 /**************************************************************************
@@ -404,11 +530,12 @@ void Graph<E>::insertEdge(const E& v, const E& w, const int& x)
  **************************************************************************/
 
 /**
- *
+ * @brief Graph<E>::Edge::opposite
+ * @param v
+ * @return
  */
 template <typename E>
-typename Graph<E>::VertexItr  Graph<E>::Edge::opposite(Vertex v)
-{
+typename Graph<E>::VertexItr  Graph<E>::Edge::opposite(Vertex v) {
   if(v == *start_){
       return end_;
   }
@@ -420,19 +547,25 @@ typename Graph<E>::VertexItr  Graph<E>::Edge::opposite(Vertex v)
   }
 }
 
-// bool isAdjacentTo(Edge f) (they share a common edge);
+/**
+ * @brief Graph<E>::Edge::isAdjacentTo
+ * @param f
+ * @return
+ */
 template <typename E>
-bool  Graph<E>::Edge::isAdjacentTo(Edge f)
-{
+bool  Graph<E>::Edge::isAdjacentTo(Edge f) {
     return this->end_==f.end_ || this->start_==f.end_;
 }
 
-// Test whether this edge is incident on v (they share a common vertex)
+/**
+ * @brief Test whether this edge is incident on v
+ * @param v [IN] vertex to test with
+ * @return TRUE if this edge is incident on vertex 'v'
+ */
 template <typename E>
-bool  Graph<E>::Edge::isIncidentOn(Vertex v)
-{
+bool  Graph<E>::Edge::isIncidentOn(Vertex v) {
     return *start_== v || *end_==v;
 }
 
-
 #endif //DATA_STRUCTURES_GRAPH_H
+
