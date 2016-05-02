@@ -27,9 +27,11 @@ private slots:
     void test_insert_edges();   // Test the ability to insert edges with new verticies to the graph
     void test_insert_vetex();   // Test the ability to insert vertecies without edges
     void test_assignment12();   // Runs assignment 12 and checks the results of the DFS
+    void test_AddStadium(); // Tests the basic creation of a graph of stadiums and adding a few stadiums
 
 private:
-    Graph<QString>* stringGraph_;   //< Graph of strings
+    Graph<QString>* stringGraph_;   // Graph of strings for testing
+    Graph<Stadium>* StadiumGraph_;  // Graph of stadium objects for testing
 };
 
 /********************************************************************************************
@@ -118,6 +120,21 @@ void GraphTests::test_assignment12()
 
     DFSoutput += "]";
     qDebug() << "DEPTH FIRST SEARCH:" << DFSoutput;
+}
+
+void GraphTests::test_AddStadium(){
+    StadiumGraph_ = new Graph<Stadium>;
+
+    Stadium dodgers(5, "Dodgers Stadium");
+    Stadium yankees(2, "Yankees Stadium");
+    Stadium marlins(9, "marlins Stadium");
+
+    StadiumGraph_->insertEdge(dodgers, yankees, 1500);
+    StadiumGraph_->insertEdge(dodgers, marlins, 1200);
+    StadiumGraph_->insertEdge(yankees, marlins, 800);
+
+    QVERIFY2(StadiumGraph_->numVertices() == 3, "The number of Vertices is incorrect!");
+    QVERIFY2(StadiumGraph_->numEdges() == 3, "The number of Edges is incorrect!");
 }
 
 /*** THIS ADDS THE TEST TO THE LIST OF CLASSES TO RUN ***/
