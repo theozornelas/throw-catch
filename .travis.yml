@@ -29,6 +29,7 @@ script:
   - qmake -r
   - make
   - make check
+  - ./test
 
 notifications:
   email: false
