@@ -43,13 +43,18 @@ public:
     /*****************************
      *  CONSTRUCTOR & DESTRUCTOR
      *****************************/
+    // Empty constructor needed for Data Structure uses
     Stadium() { }
+    // Fully featured constructor filling all private members
     Stadium(int id, QString name,
             QString team, QString street, QString city,
             QString state, QString zipCode,
             QString number, QString date, unsigned int capacity,
             QString surf, QString league, QString typo);
+    // Constructor of testing, provides everything needed for text output
     Stadium(int id, QString name) : stadiumID(id), stadiumName(name) { }
+    // Constructor for stadium with only an id, for comparisons and searches
+    Stadium(int id) : stadiumID(id) {}
 
     ~Stadium();
 
