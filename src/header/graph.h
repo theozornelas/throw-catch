@@ -56,6 +56,14 @@ public:
         // Sets the state of this vertex to unvisited
         void resetVisited() { visited_ = false; }
 
+        //returns a list of vertices to the appointed vertex
+        VertexList adjacentVertex();
+
+
+        void setValue(const int &newValue){ value_ = newValue;}
+
+        int getValue(){return value_;}
+
         // Return an edge list of the edges incident on 'u'
         EdgeItrList incidentEdges() { return incident_; }
         // Adds an edge connecting this vertex to vertex 'v'
@@ -92,6 +100,8 @@ public:
         bool operator<=(const Vertex &other) const { return this->data_ <= other.data_ ; }
 
     private:
+
+         int  value_;
         E    data_;            // Data stored at this node
         bool visited_;         // Has this vertex been visited?
         EdgeItrList incident_; // Adjacency list of edges
@@ -190,6 +200,8 @@ public:
 
     void MSTPrim(const E &e);
 
+    int Distace(Vertex u, Vertex v);
+
 protected:
     // Resets all the verticies and edges to un-visited
     void unvisitAll();
@@ -234,6 +246,52 @@ void Graph<E>::print(std::ofstream &output, std::string title) {
     }
 
     output << "}\n";
+}
+
+
+template <typename E>
+int Graph<E>:: Distace(Vertex u, Vertex v)
+{
+    int distance;
+
+
+
+    EdgeItrList Uedges = u.incidentEdges();
+    EdgeItrList Vedges = (v.incidentEdges());
+
+    bool found=false;
+    EdgeItrItr itU;
+    EdgeItrItr itV;
+    itU = Uedges.begin();
+    while(!found && itU != Uedges.end() && itV != Uedges.end())
+    {
+        if((**itU).end() == (**itV).start())
+        {
+            found = true;
+            distance = (**itU).weight();
+        }
+        else
+        {
+            itU++;
+            itV++;
+        }
+    }
+
+    return distance;
+}
+
+template <typename E>
+typename Graph<E>::VertexList Graph<E>::Vertex::adjacentVertex()
+{
+
+    VertexList nextVertices;
+
+    for(EdgeItrItr it = incident_.begin(); it != incident_.end(); it++)
+    {
+        nextVertices.push_back((*it)->start());
+    }
+
+    return nextVertices;
 }
 
 /**
