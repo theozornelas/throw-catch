@@ -526,14 +526,14 @@ QString Graph<E>::MSTPrim() {
             // remove edge from unused list and add to edge list
             usedEdges.push_back(*itr);
             VertexCount++;
-            unusedEdges.erase(itr);
+            itr = unusedEdges.erase(itr);
             // reset itr to the front of the unused list
             itr = unusedEdges.begin();
         }
         // If the edge is double visited remove that edge from possible edges and move on
         else if( itr->start().visited() && itr->end().visited() ){
             EdgeItr tempItr = itr;
-            unusedEdges.erase(tempItr);
+            tempItr = unusedEdges.erase(tempItr);
             itr++;
         }
         else if ( !itr->start().visited() && !itr->end().visited() ) {
@@ -686,14 +686,14 @@ void Graph<E>::eraseVertex(const E &e) {
             #if VERBOSE_DEBUG
             qDebug() << "ERASING EDGE:" << **j;
             #endif
-            edges_.erase(*j);
+            *j = edges_.erase(*j);
         }
 
         // remove vertex from master vertex list
         #if VERBOSE_DEBUG
         qDebug() << "ERASING:" << *itr;
         #endif
-        vertices_.erase(itr);
+        itr = vertices_.erase(itr);
     }
 }
 
@@ -725,7 +725,7 @@ void Graph<E>::eraseEdge(const E &v, const E &w, const int &x) {
         #if VERBOSE_DEBUG
         qDebug() << "ERASING:" << *edge2remove;
         #endif
-        edges_.erase(edge2remove);
+        edge2remove = edges_.erase(edge2remove);
     }
 }
 
@@ -762,7 +762,7 @@ void Graph<E>::Vertex::removeEdge(EdgeItr edge) {
     // find edge to remove if it exists, and remove it
     while(itr != incident_.end() && !found){
         if(*itr == edge){
-            incident_.erase(itr);
+            itr = incident_.erase(itr);
             found = true;
         }
         else{
