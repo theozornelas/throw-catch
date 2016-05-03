@@ -9,7 +9,7 @@
 #ifndef DATA_STRUCTURES_GRAPH_H
 #define DATA_STRUCTURES_GRAPH_H
 
-#define VERBOSE_DEBUG 1
+#define VERBOSE_DEBUG 0
 #define EXTRA_VERBOSE_DEBUG 0
 
 #include <vector>
@@ -91,6 +91,11 @@ public:
             output << "[" << obj.data_ << "]";
             return output;
         }
+        // overload for text stream
+        friend QTextStream &operator <<(QTextStream &output, const Vertex &obj){
+            output << "[" << obj.data_ << "]";
+            return output;
+        }
         // Overload for the * Operator
         E& operator*() { return data_; }
         // Overload all the comparison operators
@@ -130,7 +135,7 @@ public:
         // Returns vertex at the beginning of this edge
         Vertex& end() { return *end_; }
         // Returns the weight of the edge
-        int weight() { return weight_; }
+        int weight() const { return weight_; }
         // Return the end vertex of this edge distinct from vertex v
         // an error occurs if this edge is not incident on v
         VertexItr opposite(Vertex v);
@@ -153,11 +158,17 @@ public:
             output << *(obj.start_) << "<-->" << *(obj.end_);
             return output;
         }
+        // overload for text stream
+        friend QTextStream &operator <<(QTextStream &output, const Edge &obj){
+           output << *(obj.start_) << "<-" << obj.weight() << "->" << *(obj.end_);
+           return output;
+        }
+
         // Overload all the comparison operators
         bool operator==(const Edge &other) const { return this->weight_ == other.weight_; }
         bool operator!=(const Edge &other) const { return this->weight_ != other.weight_; }
-        bool operator>(const Edge &other)  const { return this->weight_ >  other.weight_; }
-        bool operator<(const Edge &other)  const { return this->weight_ <  other.weight_; }
+        bool operator>(const Edge &other) { return this->weight_ >  other.weight_; }
+        bool operator<(const Edge &other) { return this->weight_ <  other.weight_; }
         bool operator>=(const Edge &other) const { return this->weight_ >= other.weight_; }
         bool operator<=(const Edge &other) const { return this->weight_ <= other.weight_; }
 
@@ -204,7 +215,8 @@ public:
     void Dijkstra(const E &e);
 
     void MSTPrimJarnik(const E &e);
-    void MSTPrim();
+    // Outputs the MST graph edges using the basic prim algortihm
+    QString MSTPrim();
 
     int Distace(Vertex u, Vertex v);
 
@@ -485,14 +497,16 @@ std::cin.get();
  * @brief Graph<E>::MSTPrim
  */
 template <typename E>
-void Graph<E>::MSTPrim() {
+QString Graph<E>::MSTPrim() {
     unvisitAll();           // ensure all edges and vertices are unvisited
-    EdgeList usedEdges();   // List of edges to use in MST
+    EdgeList usedEdges;   // List of edges to use in MST
     EdgeList unusedEdges(edges_.begin(), edges_.end()); // list of unused edges
-    int VertexCount = 0;        // Count of vertecies visited
+    unsigned int VertexCount = 0;        // Count of vertecies visited
+    QString output;                      // QString for output
+    QTextStream outputStream(&output);   // Qstring stream for output
 
     // sort the list of unused edges
-    std::sort(unusedEdges.begin(), unusedEdges.end() );
+    unusedEdges.sort();
 
     // add first vertex to the list and set it to visited
     vertices_.begin()->visit();
@@ -510,7 +524,7 @@ void Graph<E>::MSTPrim() {
             itr->end().visit();
 
             // remove edge from unused list and add to edge list
-            usedEdges().push_back(*itr);
+            usedEdges.push_back(*itr);
             VertexCount++;
             unusedEdges.erase(itr);
             // reset itr to the front of the unused list
@@ -527,9 +541,11 @@ void Graph<E>::MSTPrim() {
         }
     } // END OF MST WHILE LOOP
 
-    for(EdgeList::iterator j = usedEdges().begin(); j != usedEdges().end(); j++){
-        qDebug() << *j;
+    for(EdgeItr j = usedEdges.begin(); j != usedEdges.end(); j++){
+       outputStream << *j << "\n";
     }
+
+    return outputStream.readAll();
 }
 
 /**
