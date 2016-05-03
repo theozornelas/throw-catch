@@ -41,7 +41,7 @@ public:
     bool deleted() const { return state_ == DELETED; }
 
     /*** OVERLOADS ***/
-    friend std::ostream &operator<<(std::ostream &output, const Entry &obj){
+    friend QDebug operator<<(QDebug output, const Entry &obj){
         output << "[" << obj.key_ << ", " << obj.value_ << "]";
         return output;
     }
