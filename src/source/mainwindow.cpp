@@ -14,19 +14,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     stadiums = db.getStadiums();
 
-    ui->viewStadiumsList->setRowCount(stadiums.length() + 1);
+    keys = db.getAllStadiumsKeys();
+    ui->viewStadiumsList->setRowCount(keys.length() + 1);
 
-    for(int row = 0; row < stadiums.length(); row++) {
-        Stadium s = stadiums[row];
+    for(int row = 0; row < keys.length(); row++) {
+        Stadium *s = stadiums.get(keys[row]);
 
         ui->viewStadiumsList->setRowHeight(row, 45);
-        ui->viewStadiumsList->setItem(row, 0, new QTableWidgetItem(s.getStadiumName()));
-        ui->viewStadiumsList->setItem(row, 1, new QTableWidgetItem(s.getTeamName()));
-        ui->viewStadiumsList->setItem(row, 2, new QTableWidgetItem(QString::number(s.getSeatingCapacity())));
-        ui->viewStadiumsList->setItem(row, 3, new QTableWidgetItem(s.getAddress()));
-        ui->viewStadiumsList->setItem(row, 4, new QTableWidgetItem(s.getSurface()));
-        ui->viewStadiumsList->setItem(row, 5, new QTableWidgetItem(s.getDateOpened()));
-        ui->viewStadiumsList->setItem(row, 6, new QTableWidgetItem(s.getTypology()));
+        ui->viewStadiumsList->setItem(row, 0, new QTableWidgetItem(s->getStadiumName()));
+        ui->viewStadiumsList->setItem(row, 1, new QTableWidgetItem(s->getTeamName()));
+        ui->viewStadiumsList->setItem(row, 2, new QTableWidgetItem(QString::number(s->getSeatingCapacity())));
+        ui->viewStadiumsList->setItem(row, 3, new QTableWidgetItem(s->getAddress()));
+        ui->viewStadiumsList->setItem(row, 4, new QTableWidgetItem(s->getSurface()));
+        ui->viewStadiumsList->setItem(row, 5, new QTableWidgetItem(s->getDateOpened()));
+        ui->viewStadiumsList->setItem(row, 6, new QTableWidgetItem(s->getTypology()));
     }
 
 
@@ -123,10 +124,10 @@ void MainWindow::on_adminModifyButton_clicked()
 
     ui->listOfModifyStadiums->clear();
 
-    for(int i = 0; i < stadiums.size(); i++) {
-        Stadium s = stadiums[i];
+    for(int i = 0; i < keys.size(); i++) {
+        Stadium *s = stadiums.get(keys[i]);
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiums);
-        currentItem->setText(0, s.getStadiumName());
+        currentItem->setText(0, s->getStadiumName());
     }
 
     ui->display->setCurrentIndex(MODIFY_INFO);
@@ -134,53 +135,37 @@ void MainWindow::on_adminModifyButton_clicked()
 
 void MainWindow::on_modifyInformationNextButton_clicked()
 {
-    if(!stadiums.empty())
-    {
-       QTreeWidgetItem* cStadium = ui->listOfModifyStadiums->currentItem();
+        QTreeWidgetItem* selectedStadium = ui->listOfModifyStadiums->currentItem();
 
-       if(cStadium != NULL) {
+       if(selectedStadium != NULL) {
 
-       QString stadiumName = cStadium->data(0, 0).toString();
-       bool found = false;
+           QString stadiumName = selectedStadium->data(0, 0).toString();
+           currentStadium = stadiums.get(db.getStadiumID(stadiumName));
 
-       int i = 0;
+           if(currentStadium != NULL) {
 
-       while(!found && i < stadiums.size() ) {
+               ui->listOfModifyStadiumsSouvenirs->clear();
 
-           if(stadiumName == stadiums[i].getStadiumName()) {
-               found = true;
-               currentStadium = &stadiums[i];
-           }
-           else {
-               i++;
-           }
-       }
+               QVector<Souvenir> stadiumsSouvenirs = currentStadium->getSouvenirs();
 
-       if(currentStadium != NULL) {
+               for(int i = 0; i < stadiumsSouvenirs.size(); i++) {
+                   Souvenir *s = &stadiumsSouvenirs[i];
+                   QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiumsSouvenirs);
+                   currentItem->setText(0, s->getName());
+                   currentItem->setText(1, "$" + QString::number(s->getPrice()));
+               }
 
-           ui->listOfModifyStadiumsSouvenirs->clear();
-
-           QVector<Souvenir> stadiumsSouvenirs = currentStadium->getSouvenirs();
-
-
-           for(int i = 0; i < stadiumsSouvenirs.size(); i++) {
-               Souvenir s = stadiumsSouvenirs[i];
-               QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiumsSouvenirs);
-               currentItem->setText(0, s.getName());
-               currentItem->setText(1, "$" + QString::number(s.getPrice()));
+               ui->display->setCurrentIndex(MODIFY_SOUVENIRS);
            }
 
-           ui->display->setCurrentIndex(MODIFY_SOUVENIRS);
-       }
+        }
+        else {
+               QMessageBox::warning(this, "Warning!", "Uh-oh, please select a stadium to modify.");
 
-       }
-       else {
-           QMessageBox::warning(this, "Warning!", "Uh-oh, please select a stadium to modify.");
-
-       }
-    }
+           }
 
 }
+
 
 void MainWindow::on_removeSelectedSouvenir_clicked()
 {

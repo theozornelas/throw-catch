@@ -22,8 +22,8 @@ public:
     /****************
      *   ACCESSORS
      ****************/
-    QVector<Stadium> getStadiums();
-    // ---- getSouvenirs();
+    skiplist<int, Stadium*> getStadiums();
+    // ---- getSouvenirs(Stadium *s);
 
     /****************
      *   MUTATORS
@@ -39,8 +39,11 @@ public:
     bool ChangeSouvenirPrice(int stadiumKey, QString souvenirName, double newPrice);
     bool ChangeSouvenirQuantity(int stadiumKey, QString souvenirName, int newQuantity);
 
+
     int getStadiumID(QString stadiumName);
     QVector<int> getAllStadiumsKeys();
+
+    void createGraph();
 
 
 private:

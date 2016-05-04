@@ -69,9 +69,9 @@ private:
     Ui::MainWindow *ui;
     DBManager db;
 
-    skiplist<int, Stadium>* _stadiums;
+    QVector<int> keys;
+    skiplist<int, Stadium*> stadiums;
     Stadium *currentStadium = NULL;
-    QVector<Stadium> stadiums;
     bool adminPrivilege = false;
 
 };

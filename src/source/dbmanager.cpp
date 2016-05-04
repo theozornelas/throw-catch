@@ -101,7 +101,7 @@ bool DBManager::RemoveSouvenir(int stadiumKey, QString name) {
  * A C C E S S O R S
  */
 
-QVector<Stadium> DBManager::getStadiums() {
+skiplist<int, Stadium*> DBManager::getStadiums() {
     skiplist<int, Stadium*> listOfStadiums;
     QVector<Stadium> stadiums;
 
@@ -147,7 +147,7 @@ QVector<Stadium> DBManager::getStadiums() {
         }
     }
     
-    return stadiums;
+    return listOfStadiums;
 
 }
 
@@ -156,15 +156,31 @@ int DBManager::getStadiumID(QString stadiumName) {
 
     QSqlQuery query;
 
-    query.prepare("SELECT * FROM Stadiums WHERE stadium_name = '" + stadiumName + "'");
+    query.prepare("SELECT id FROM Stadiums WHERE stadium_name = '" + stadiumName + "'");
 
     int id = -1;
 
     if(query.exec()) {
-        id = query.value("stadium_id").toInt();
+        if(query.first()) {
+            id = query.value("id").toInt();
+        }
     }
 
     return id;
 
 }
 
+QVector<int> DBManager::getAllStadiumsKeys() {
+    QVector<int> keys;
+    QSqlQuery query;
+
+    query.prepare("SELECT id FROM Stadiums");
+
+    if(query.exec()) {
+        while(query.next()) {
+            keys.push_back(query.value("id").toInt());
+        }
+    }
+
+    return keys;
+}
