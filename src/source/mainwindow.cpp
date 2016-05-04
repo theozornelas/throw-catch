@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->viewStadiumsList->setRowCount(keys.length() + 1);
 
     for(int row = 0; row < keys.length(); row++) {
-        Stadium *s = stadiums.get(keys[row]);
+        Stadium *s = *stadiums.get(keys[row]);
 
         ui->viewStadiumsList->setRowHeight(row, 45);
         ui->viewStadiumsList->setItem(row, 0, new QTableWidgetItem(s->getStadiumName()));
@@ -125,7 +125,7 @@ void MainWindow::on_adminModifyButton_clicked()
     ui->listOfModifyStadiums->clear();
 
     for(int i = 0; i < keys.size(); i++) {
-        Stadium *s = stadiums.get(keys[i]);
+        Stadium *s = *stadiums.get(keys[i]);
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiums);
         currentItem->setText(0, s->getStadiumName());
     }
@@ -140,7 +140,7 @@ void MainWindow::on_modifyInformationNextButton_clicked()
        if(selectedStadium != NULL) {
 
            QString stadiumName = selectedStadium->data(0, 0).toString();
-           currentStadium = stadiums.get(db.getStadiumID(stadiumName));
+           currentStadium = *stadiums.get(db.getStadiumID(stadiumName));
 
            if(currentStadium != NULL) {
 
