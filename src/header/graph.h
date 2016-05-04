@@ -85,7 +85,7 @@ public:
         // Test whether this vertex and vertex 'v' are adjacent
         bool isAdjacentTo(const E& v);
 
-        /*** OPERATOR OVERLOADS ***/
+        /*** DISPLAY METHODS OVERLOADS ***/
         // Overload the output stream operator
         friend QDebug operator<<(QDebug output, const Vertex &obj) {
             output << "[" << obj.data_ << "]";
@@ -96,6 +96,8 @@ public:
             output << "[" << obj.data_ << "]";
             return output;
         }
+
+        /*** OPERATOR OVERLOADS ***/
         // Overload for the * Operator
         E& operator*() { return data_; }
         // Overload all the comparison operators
@@ -151,6 +153,8 @@ public:
         bool sortComp(Edge i,Edge j) { return (i<j); }
 
         /*** OPERATOR OVERLOADS ***/
+        // Print Method
+        QString print();
         // Overload for the * Operator
         int& operator*() { return weight_; }
         // Overload the output stream operator
@@ -160,7 +164,7 @@ public:
         }
         // overload for text stream
         friend QTextStream &operator <<(QTextStream &output, const Edge &obj){
-           output << *(obj.start_) << "<-" << obj.weight() << "->" << *(obj.end_);
+           output << *(obj.start_) << "<-->" << *(obj.end_);
            return output;
         }
 
@@ -216,7 +220,7 @@ public:
 
     void MSTPrimJarnik(const E &e);
     // Outputs the MST graph edges using the basic prim algortihm
-    QString MSTPrim();
+    EdgeList MSTPrim();
 
     int Distace(Vertex u, Vertex v);
 
@@ -495,15 +499,14 @@ std::cin.get();
 
 /**
  * @brief Graph<E>::MSTPrim
+ * @returns A list of edge objects
  */
 template <typename E>
-QString Graph<E>::MSTPrim() {
-    unvisitAll();           // ensure all edges and vertices are unvisited
-    EdgeList usedEdges;   // List of edges to use in MST
-    EdgeList unusedEdges(edges_.begin(), edges_.end()); // list of unused edges
-    unsigned int VertexCount = 0;        // Count of vertecies visited
-    QString output;                      // QString for output
-    QTextStream outputStream(&output);   // Qstring stream for output
+EdgeList Graph<E>::MSTPrim() {
+    unvisitAll();          // ensure all edges and vertices are unvisited
+    EdgeList usedEdges;    // List of edges to use in MST
+    EdgeList unusedEdges(edges_.begin(), edges_.end());  // list of unused edges
+    unsigned int VertexCount = 0;  // Count of vertecies visited
 
     // sort the list of unused edges
     unusedEdges.sort();
@@ -541,11 +544,7 @@ QString Graph<E>::MSTPrim() {
         }
     } // END OF MST WHILE LOOP
 
-    for(EdgeItr j = usedEdges.begin(); j != usedEdges.end(); j++){
-       outputStream << *j << "\n";
-    }
-
-    return outputStream.readAll();
+    return usedEdges;
 }
 
 /**
@@ -813,5 +812,17 @@ bool  Graph<E>::Edge::isIncidentOn(Vertex v) {
     return *start_== v || *end_==v;
 }
 
-#endif //DATA_STRUCTURES_GRAPH_H
+/**
+ * @brief Graph::Vertex::print
+ * @return
+ */
+template <typename E>
+QString Graph<E>::Edge::print() {
+    QString output;                      // QString for output
+    QTextStream outputStream(&output);   // Qstring stream for output
 
+    outputStream << *start_ << "<-->" << *end_;
+    return outputStream.readAll();
+}
+
+#endif //DATA_STRUCTURES_GRAPH_H
