@@ -8,6 +8,7 @@
 #include <QDebug>
 
 #include "skiplist.h"
+#include "graph.h"
 #include "stadium.h"
 
 class DBManager
@@ -43,7 +44,7 @@ public:
     int getStadiumID(QString stadiumName);
     QVector<int> getAllStadiumsKeys();
 
-    void createGraph();
+    Graph<Stadium*>* createGraph(skiplist<int, Stadium*> stadiumList);
 
 
 private:

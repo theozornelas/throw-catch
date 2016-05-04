@@ -13,8 +13,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     stadiums = db.getStadiums();
+    stadiumsGraph = db.createGraph(stadiums);
 
     keys = db.getAllStadiumsKeys();
+
     ui->viewStadiumsList->setRowCount(keys.length() + 1);
 
     for(int row = 0; row < keys.length(); row++) {
@@ -65,6 +67,9 @@ void MainWindow::on_customTripButton_clicked()
 void MainWindow::on_minimumSpanningTreeButton_clicked()
 {
     ui->display->setCurrentIndex(MST_TRIP);
+
+    // Comment this section out, or does not compile.
+  //  stadiumsGraph->MSTPrim();
 }
 
 void MainWindow::on_shortestTripToAllButton_clicked()

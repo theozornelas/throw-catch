@@ -6,6 +6,7 @@
 #include "dbmanager.h"
 #include "stadium.h"
 #include "skiplist.h"
+#include "graph.h"
 
 
 enum display {
@@ -70,6 +71,7 @@ private:
     DBManager db;
 
     QVector<int> keys;
+    Graph<Stadium*>* stadiumsGraph;
     skiplist<int, Stadium*> stadiums;
     Stadium *currentStadium = NULL;
     bool adminPrivilege = false;

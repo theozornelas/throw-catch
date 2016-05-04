@@ -271,3 +271,7 @@ void Stadium::removeSouvenir(QString name) {
 QVector<Souvenir> Stadium::getSouvenirs() const {
     return souvenirs;
 }
+
+void createGraph() {
+
+}
