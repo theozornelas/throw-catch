@@ -201,7 +201,11 @@ void GraphTests::test_MSTPrim(){
     stringGraph_->insertEdge("Atlanta","New York", 888);
     stringGraph_->insertEdge("New York","Boston", 214);
 
-    qDebug().noquote() << endl << stringGraph_->MSTPrim();
+    Graph<QString>::EdgeList output = stringGraph_->MSTPrim();
+
+    for(Graph<QString>::EdgeItr i = output.begin(); i != output.end(); i++) {
+        qDebug() << i->print() << i->weight();
+    }
 }
 
 //void GraphTests::test_Dijkstra(){
