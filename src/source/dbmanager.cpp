@@ -1,5 +1,5 @@
 #include "dbmanager.h"
-
+#include <QDebug>
 /*
  * C O N S T R U C T O R
  */
@@ -102,48 +102,69 @@ bool DBManager::RemoveSouvenir(int stadiumKey, QString name) {
  */
 
 QVector<Stadium> DBManager::getStadiums() {
-  // skiplist<int, Stadium> *listOfStadiums = new skiplist<int, Stadium>;
-QVector<Stadium> stadiums;
+    skiplist<int, Stadium*> listOfStadiums;
+    QVector<Stadium> stadiums;
 
     QSqlQuery query;
-    
+    QSqlQuery souvenirQuery;
+
     query.prepare("SELECT * FROM Stadiums");
     
     if(query.exec()) {
         while(query.next()) {
 
-//            // Can't get skiplist to work, deafulted to qvectors for now.
-//            listOfStadiums->insert(query.value("id").toInt(),
-//                                  *(new Stadium(query.value("id").toInt(),
-//                                              query.value("stradium_name").toString(),
-//                                              query.value("team_name").toString(),
-//                                              query.value("street address").toString(),
-//                                              query.value("city").toString(),
-//                                              query.value("state").toString(),
-//                                              query.value("zipcode").toString(),
-//                                              query.value("box_office_number").toString(),
-//                                              query.value("date_opened").toString(),
-//                                              query.value("seating_capacity").toInt(),
-//                                              query.value("surface").toString(),
-//                                              query.value("league_type").toString())));
+            Stadium *s = (new Stadium(query.value("id").toInt(),
+                                      query.value("stadium_name").toString(),
+                                      query.value("team_name").toString(),
+                                      query.value("street_address").toString(),
+                                      query.value("city").toString(),
+                                      query.value("state").toString(),
+                                      query.value("zipcode").toString(),
+                                      query.value("box_office_number").toString(),
+                                      query.value("date_opened").toString(),
+                                      query.value("seating_capacity").toInt(),
+                                      query.value("surface").toString(),
+                                      query.value("league_type").toString(),
+                                      query.value("typology").toString()));
 
-            stadiums.push_back( *(new Stadium(query.value("id").toInt(),
-                                query.value("stadium_name").toString(),
-                                query.value("team_name").toString(),
-                                query.value("street_address").toString(),
-                                query.value("city").toString(),
-                                query.value("state").toString(),
-                                query.value("zipcode").toString(),
-                                query.value("box_office_number").toString(),
-                                query.value("date_opened").toString(),
-                                query.value("seating_capacity").toInt(),
-                                query.value("surface").toString(),
-                                query.value("league_type").toString(),
-                                query.value("typology").toString())));
-            
+            souvenirQuery.prepare("SELECT * FROM Souvenirs");
+
+            if(souvenirQuery.exec()) {
+                while(souvenirQuery.next()) {
+                    if(souvenirQuery.value("stadium_id").toInt() == s->getStadiumID()) {
+                    s->addSouvenir(new Souvenir(souvenirQuery.value("stadium_id").toInt(),
+                                                souvenirQuery.value("souvenir_name").toString(),
+                                                souvenirQuery.value("price").toDouble(),
+                                                souvenirQuery.value("quantity").toInt()));
+                    }
+                }
+            }
+
+            stadiums.push_back(*s);
+            listOfStadiums.insert(query.value("id").toInt(), s);
+
+
         }
     }
     
     return stadiums;
 
 }
+
+
+int DBManager::getStadiumID(QString stadiumName) {
+
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM Stadiums WHERE stadium_name = '" + stadiumName + "'");
+
+    int id = -1;
+
+    if(query.exec()) {
+        id = query.value("stadium_id").toInt();
+    }
+
+    return id;
+
+}
+

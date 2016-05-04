@@ -2,6 +2,7 @@
 #define STADIUM
 
 #include <QString>
+#include <QVector>
 #include <QDebug>
 #include "souvenir.h"
 using namespace std;
@@ -44,7 +45,7 @@ public:
      *  CONSTRUCTOR & DESTRUCTOR
      *****************************/
     // Empty constructor needed for Data Structure uses
-    Stadium() { }
+    Stadium();
     // Fully featured constructor filling all private members
     Stadium(int id, QString name,
             QString team, QString street, QString city,
@@ -71,6 +72,7 @@ public:
     QString      getSurface() const;
     QString      getLeagueType() const;
     QString      getTypology() const;
+    QVector<Souvenir> getSouvenirs() const;
 
 
     /***************
@@ -89,7 +91,7 @@ public:
 
 
     // Mutators for Stadium's souvenir list.
-    void addSouvenir(QString name, double price, int quantity);
+    void addSouvenir(Souvenir *newSouvenir);
     void removeSouvenir(QString name);
 
     /************************
@@ -119,6 +121,8 @@ private:
     QString surface;
     QString leagueType;
     QString typology;
+
+    QVector<Souvenir> souvenirs;
 };
 
 #endif // STADIUM

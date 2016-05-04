@@ -1,5 +1,6 @@
 #include "stadium.h"
 #include <iostream>
+#include <QDebug>
 /**
  * C O N S T R U C T O R & D E S T R U C T O R
  */
@@ -15,6 +16,11 @@
  * @param surf
  * @param league
  */
+
+Stadium::Stadium() {
+
+}
+
 Stadium::Stadium(int id, QString name,
                      QString team, QString street, QString city,
                      QString state, QString zipCode,
@@ -233,8 +239,8 @@ void Stadium::setTypology(QString typo) {
  * @param price
  * @param quantity
  */
-void Stadium::addSouvenir(QString name, double price, int quantity) {
-
+void Stadium::addSouvenir(Souvenir *newSouvenir) {
+    souvenirs.push_back(*newSouvenir);
 }
 
 /**
@@ -243,4 +249,25 @@ void Stadium::addSouvenir(QString name, double price, int quantity) {
  */
 void Stadium::removeSouvenir(QString name) {
 
+    bool found = false;
+    int i = 0;
+
+    while(!found && i < souvenirs.size()) {
+
+        if(name == souvenirs[i].getName()) {
+            souvenirs.remove(i);
+            found = true;
+        }
+        else {
+            i++;
+        }
+    }
+
+    if(i >= souvenirs.size()) {
+        qDebug() << "Souvenir item was not found.";
+    }
+}
+
+QVector<Souvenir> Stadium::getSouvenirs() const {
+    return souvenirs;
 }
