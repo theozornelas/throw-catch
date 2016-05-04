@@ -18,7 +18,8 @@ TEMPLATE = lib
 
 SOURCES  += source/mainwindow.cpp \
     source/dbmanager.cpp \
-    source/stadium.cpp
+    source/stadium.cpp \
+    source/souvenir.cpp
 
 HEADERS  += header/mainwindow.h \
     header/dbmanager.h \

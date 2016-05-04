@@ -12,7 +12,7 @@ using namespace std;
  */
 class Souvenir {
 public:
-    Souvenir() : stadiumID(), souvenirName(), souvenirPrice(), quantity() {}
+    Souvenir();
     Souvenir(unsigned int id, QString name,
              double price, unsigned int qty);
     ~Souvenir();

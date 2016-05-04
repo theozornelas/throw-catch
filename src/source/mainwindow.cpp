@@ -3,6 +3,8 @@
 #include <QDebug>
 
 #include <QTableWidgetItem>
+#include <QMessageBox>
+#include <QRegExp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,11 +29,16 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->viewStadiumsList->setItem(row, 6, new QTableWidgetItem(s.getTypology()));
     }
 
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+bool MainWindow::isBlank(QString text) {
+    return text.trimmed() == "";
 }
 
 void MainWindow::on_homePageButton_clicked()
@@ -42,4 +49,178 @@ void MainWindow::on_homePageButton_clicked()
 void MainWindow::on_viewStadiumsPageButton_clicked()
 {
     ui->display->setCurrentIndex(VIEW_STADIUMS);
+}
+
+void MainWindow::on_planATripButton_clicked()
+{
+    ui->display->setCurrentIndex(PLAN_A_TRIP);
+}
+
+void MainWindow::on_customTripButton_clicked()
+{
+    ui->display->setCurrentIndex(CUSTOM_TRIP);
+}
+
+void MainWindow::on_minimumSpanningTreeButton_clicked()
+{
+    ui->display->setCurrentIndex(MST_TRIP);
+}
+
+void MainWindow::on_shortestTripToAllButton_clicked()
+{
+    ui->display->setCurrentIndex(SHORTEST_TO_ALL);
+}
+
+void MainWindow::on_adminLoginButton_clicked()
+{
+    if(!adminPrivilege) {
+        ui->adminLoginErrorMessage->setVisible(false);
+        ui->password->clear();
+        ui->username->clear();
+
+        ui->display->setCurrentIndex(ADMIN_LOGIN);
+    }
+    else {
+        ui->adminLoginButton->setText("SIGN IN");
+        adminPrivilege = false;
+        ui->display->setCurrentIndex(HOME);
+        ui->options->setCurrentIndex(CUSTOMER);
+    }
+}
+
+void MainWindow::on_loginButton_clicked()
+{
+    ui->adminLoginErrorMessage->setVisible(false);
+
+    bool valid = true;
+    QString username = ui->username->text();
+    QString password = ui->password->text();
+
+    if(isBlank(username) || isBlank(password)) {
+        valid = false;
+    }
+    else if(username != "admin" || password != "password") {
+        valid = false;
+    }
+
+    if(valid) {
+        adminPrivilege = true;
+        ui->options->setCurrentIndex(ADMIN);
+        ui->display->setCurrentIndex(ADMIN_HOME);
+        ui->adminLoginButton->setText("SIGN OUT");
+        ui->password->clear();
+        ui->username->clear();
+    }
+    else {
+        ui->adminLoginErrorMessage->setVisible(true);
+    }
+
+
+}
+
+void MainWindow::on_adminModifyButton_clicked()
+{
+
+    ui->listOfModifyStadiums->clear();
+
+    for(int i = 0; i < stadiums.size(); i++) {
+        Stadium s = stadiums[i];
+        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiums);
+        currentItem->setText(0, s.getStadiumName());
+    }
+
+    ui->display->setCurrentIndex(MODIFY_INFO);
+}
+
+void MainWindow::on_modifyInformationNextButton_clicked()
+{
+    if(!stadiums.empty())
+    {
+       QTreeWidgetItem* cStadium = ui->listOfModifyStadiums->currentItem();
+
+       if(cStadium != NULL) {
+
+       QString stadiumName = cStadium->data(0, 0).toString();
+       bool found = false;
+
+       int i = 0;
+
+       while(!found && i < stadiums.size() ) {
+
+           if(stadiumName == stadiums[i].getStadiumName()) {
+               found = true;
+               currentStadium = &stadiums[i];
+           }
+           else {
+               i++;
+           }
+       }
+
+       if(currentStadium != NULL) {
+
+           ui->listOfModifyStadiumsSouvenirs->clear();
+
+           QVector<Souvenir> stadiumsSouvenirs = currentStadium->getSouvenirs();
+
+
+           for(int i = 0; i < stadiumsSouvenirs.size(); i++) {
+               Souvenir s = stadiumsSouvenirs[i];
+               QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiumsSouvenirs);
+               currentItem->setText(0, s.getName());
+               currentItem->setText(1, "$" + QString::number(s.getPrice()));
+           }
+
+           ui->display->setCurrentIndex(MODIFY_SOUVENIRS);
+       }
+
+       }
+       else {
+           QMessageBox::warning(this, "Warning!", "Uh-oh, please select a stadium to modify.");
+
+       }
+    }
+
+}
+
+void MainWindow::on_removeSelectedSouvenir_clicked()
+{
+    QTreeWidgetItem* currentSouvenir = ui->listOfModifyStadiumsSouvenirs->currentItem();
+
+    if(currentSouvenir != NULL) {
+
+        QString removeSouvenirName = currentSouvenir->data(0, 0).toString();
+        currentStadium->removeSouvenir(removeSouvenirName);
+    }
+    else {
+        QMessageBox::warning(this, "Warning!", "Uh-oh, please select a souvenir to delete.");
+
+    }
+
+    on_modifyInformationNextButton_clicked();
+}
+
+void MainWindow::on_addSelectedSouvenir_clicked()
+{
+    bool valid = true;
+
+    QString souvenirName = ui->newSouvenirName->text();
+    QString souvenirPrice = ui->newSouvenirPrice->text();
+
+    QRegExp re("(\\d+)");
+
+    if(isBlank(souvenirName) || isBlank(souvenirPrice)) {
+        valid = false;
+    }
+    else if(!re.exactMatch(souvenirPrice)) {
+        valid = false;
+    }
+
+    if(valid) {
+        currentStadium->addSouvenir(new Souvenir(currentStadium->getStadiumID(), souvenirName, souvenirPrice.toDouble(), 0));
+    }
+    else {
+
+    }
+
+
 }

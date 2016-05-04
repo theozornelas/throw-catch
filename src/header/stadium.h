@@ -2,6 +2,7 @@
 #define STADIUM
 
 #include <QString>
+#include <QVector>
 #include "souvenir.h"
 using namespace std;
 
@@ -42,7 +43,7 @@ public:
     /*****************************
      *  CONSTRUCTOR & DESTRUCTOR
      *****************************/
-    Stadium() { }
+    Stadium();
     Stadium(int id, QString name,
             QString team, QString street, QString city,
             QString state, QString zipCode,
@@ -64,6 +65,7 @@ public:
     QString      getSurface() const;
     QString      getLeagueType() const;
     QString      getTypology() const;
+    QVector<Souvenir> getSouvenirs() const;
 
 
     /***************
@@ -82,7 +84,7 @@ public:
 
 
     // Mutators for Stadium's souvenir list.
-    void addSouvenir(QString name, double price, int quantity);
+    void addSouvenir(Souvenir *newSouvenir);
     void removeSouvenir(QString name);
 
 private:
@@ -98,6 +100,8 @@ private:
     QString surface;
     QString leagueType;
     QString typology;
+
+    QVector<Souvenir> souvenirs;
 };
 
 #endif // STADIUM

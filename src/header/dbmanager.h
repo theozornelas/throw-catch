@@ -39,6 +39,8 @@ public:
     bool ChangeSouvenirPrice(int stadiumKey, QString souvenirName, double newPrice);
     bool ChangeSouvenirQuantity(int stadiumKey, QString souvenirName, int newQuantity);
 
+    int getStadiumID(QString stadiumName);
+
 
 private:
     QSqlDatabase _db;
