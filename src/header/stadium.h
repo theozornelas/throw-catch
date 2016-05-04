@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QVector>
+#include <QDebug>
 #include "souvenir.h"
 using namespace std;
 
@@ -43,12 +44,18 @@ public:
     /*****************************
      *  CONSTRUCTOR & DESTRUCTOR
      *****************************/
+    // Empty constructor needed for Data Structure uses
     Stadium();
+    // Fully featured constructor filling all private members
     Stadium(int id, QString name,
             QString team, QString street, QString city,
             QString state, QString zipCode,
             QString number, QString date, unsigned int capacity,
             QString surf, QString league, QString typo);
+    // Constructor of testing, provides everything needed for text output
+    Stadium(int id, QString name) : stadiumID(id), stadiumName(name) { }
+    // Constructor for stadium with only an id, for comparisons and searches
+    Stadium(int id) : stadiumID(id) {}
 
     ~Stadium();
 
@@ -86,6 +93,20 @@ public:
     // Mutators for Stadium's souvenir list.
     void addSouvenir(Souvenir *newSouvenir);
     void removeSouvenir(QString name);
+
+    /************************
+     *  OPERATOR OVERLOADS
+     ************************/
+    friend QDebug operator<<(QDebug output, const Stadium &obj){
+        output << "[" << obj.stadiumID << ", " << obj.stadiumName << "]";
+        return output;
+    }
+    bool operator==(const Stadium& that) const { return this->stadiumID == that.stadiumID; }
+    bool operator!=(const Stadium& that) const { return this->stadiumID != that.stadiumID; }
+    bool operator <(const Stadium& that) const { return this->stadiumID < that.stadiumID; }
+    bool operator<=(const Stadium& that) const { return this->stadiumID <= that.stadiumID; }
+    bool operator >(const Stadium& that) const { return this->stadiumID > that.stadiumID; }
+    bool operator>=(const Stadium& that) const { return this->stadiumID >= that.stadiumID; }
 
 private:
     Souvenir* findSouvenir(QString name);
