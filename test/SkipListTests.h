@@ -104,12 +104,12 @@ void SkipListTests::test_erase() {
 
 // Test the get method by getting multiple key and checking the values
 void SkipListTests::test_get(){
-    QCOMPARE(QString("5"), list_->get(5));
-    QCOMPARE(QString("4"), list_->get(4));
-    QCOMPARE(QString("6"), list_->get(6));
-    QCOMPARE(QString("1"), list_->get(1));
-    QCOMPARE(QString("2"), list_->get(2));
-    QCOMPARE(QString("3"), list_->get(3));
+    QCOMPARE(QString("5"), *(list_->get(5)) );
+    QCOMPARE(QString("4"), *(list_->get(4)) );
+    QCOMPARE(QString("6"), *(list_->get(6)) );
+    QCOMPARE(QString("1"), *(list_->get(1)) );
+    QCOMPARE(QString("2"), *(list_->get(2)) );
+    QCOMPARE(QString("3"), *(list_->get(3)) );
 }
 
 // Tests the size mehtod by checking the size of the list

@@ -34,8 +34,7 @@ public:
     // Removes a key and associated values from the list
     void erase(const K &k);
     // Gets the value with the specified key
-    V get(const K &k);
-
+    Iterator get(const K &k) { return Iterator(search(k)); }
 
     /*** CONSTANT UTILITY FUNCTIONS ***/
     /// Returns the size of the list
@@ -312,15 +311,15 @@ void skiplist<K,V>::insert(const item &e) {
   }//END OF NEW NODE INSERT
 }//END OF INSERT METHOD
 
-/**
- * @brief Returns an iterator to the beginning of the vector of Entry objects
- * @param k [IN] The key of the item to get
- */
-template <typename K, typename V>
-V skiplist<K,V>::get(const K &k) {
-  node* item = search(k);
-  return item->value();
-}
+///**
+// * @brief Returns an iterator to the beginning of the vector of Entry objects
+// * @param k [IN] The key of the item to get
+// */
+//template <typename K, typename V>
+//V skiplist<K,V>::get(const K &k) {
+//  node* item = search(k);
+//  return item->value();
+//}
 
 /**
  * @brief Adds a new empty level above all the current levels in the list
