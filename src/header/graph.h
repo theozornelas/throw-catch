@@ -502,7 +502,7 @@ std::cin.get();
  * @returns A list of edge objects
  */
 template <typename E>
-EdgeList Graph<E>::MSTPrim() {
+typename Graph<E>::EdgeList Graph<E>::MSTPrim() {
     unvisitAll();          // ensure all edges and vertices are unvisited
     EdgeList usedEdges;    // List of edges to use in MST
     EdgeList unusedEdges(edges_.begin(), edges_.end());  // list of unused edges
