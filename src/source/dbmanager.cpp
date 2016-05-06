@@ -185,21 +185,21 @@ QVector<int> DBManager::getAllStadiumsKeys() {
     return keys;
 }
 
-Graph<Stadium*>* DBManager::createGraph(skiplist<int, Stadium*> stadiumList) {
+Graph<Stadium>* DBManager::createGraph(skiplist<int, Stadium*> stadiumList) {
     QSqlQuery query;
-    Graph<Stadium*>* graph = new Graph<Stadium*>;
+    Graph<Stadium>* graph = new Graph<Stadium>;
 
     query.prepare("SELECT * FROM Graph");
 
     QVector<int> stadiumKeys = getAllStadiumsKeys();
     for(int i = 0; i < stadiumKeys.size(); i++) {
-        graph->insertVertex(*stadiumList.get(stadiumKeys[i]));
+        graph->insertVertex(**stadiumList.get(stadiumKeys[i]));
     }
 
     if(query.exec()) {
         while(query.next()) {
-            Stadium *origin = *stadiumList.get(query.value("origin_id").toInt());
-            Stadium *destination = *stadiumList.get(query.value("destination_id").toInt());
+            Stadium origin = **stadiumList.get(query.value("origin_id").toInt());
+            Stadium destination = **stadiumList.get(query.value("destination_id").toInt());
 
            graph->insertEdge(origin, destination, query.value("weight").toInt());
 

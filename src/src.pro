@@ -32,4 +32,9 @@ HEADERS  += header/mainwindow.h \
 
 FORMS    += form/mainwindow.ui
 
+RESOURCES += \
+    images.qrc
+
+
+
 QTPLUGIN += qsqlmysql

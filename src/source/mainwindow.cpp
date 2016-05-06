@@ -68,8 +68,22 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
 {
     ui->display->setCurrentIndex(MST_TRIP);
 
-    // Comment this section out, or does not compile.
-  //  stadiumsGraph->MSTPrim();
+
+    Graph<Stadium>::EdgeList edges = stadiumsGraph->MSTPrim();
+
+    for(Graph<Stadium>::EdgeItr i = edges.begin(); i != edges.end(); i++) {
+        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->MSTList);
+        currentItem->setText(0, i->print());
+        currentItem->setText(2, QString::number(i->weight()));
+    }
+
+    ui->MSTList->resizeColumnToContents(0);
+    ui->MSTList->resizeColumnToContents(1);
+    ui->MSTList->resizeColumnToContents(2);
+
+
+
+
 }
 
 void MainWindow::on_shortestTripToAllButton_clicked()
@@ -213,4 +227,18 @@ void MainWindow::on_addSelectedSouvenir_clicked()
     }
 
 
+}
+
+void MainWindow::on_confirmCustomTripButton_clicked()
+{
+    ui->display->setCurrentIndex(TRIP_PROCESS);
+}
+
+void MainWindow::on_shoppingCartButton_clicked()
+{
+//    ShoppingCart *currentShoppingCart = new ShoppingCart();
+
+//    currentShoppingCart->SetList(currentCustomer->getShoppingCart());
+//    currentShoppingCart->show();
+//    currentShoppingCart->setVisible(true);
 }

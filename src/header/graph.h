@@ -171,8 +171,9 @@ public:
         // Overload all the comparison operators
         bool operator==(const Edge &other) const { return this->weight_ == other.weight_; }
         bool operator!=(const Edge &other) const { return this->weight_ != other.weight_; }
-        bool operator>(const Edge &other) { return this->weight_ >  other.weight_; }
-        bool operator<(const Edge &other) { return this->weight_ <  other.weight_; }
+        bool operator>(const Edge &other) const { return this->weight_ >  other.weight_; }
+        bool operator<(const Edge &other) const { return this->weight_ <  other.weight_; }
+        //bool operator<(const Edge &current, const Edge &other) { return current.weight_ < other.weight_; }
         bool operator>=(const Edge &other) const { return this->weight_ >= other.weight_; }
         bool operator<=(const Edge &other) const { return this->weight_ <= other.weight_; }
 

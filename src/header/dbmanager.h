@@ -44,7 +44,7 @@ public:
     int getStadiumID(QString stadiumName);
     QVector<int> getAllStadiumsKeys();
 
-    Graph<Stadium*>* createGraph(skiplist<int, Stadium*> stadiumList);
+    Graph<Stadium>* createGraph(skiplist<int, Stadium*> stadiumList);
 
 
 private:

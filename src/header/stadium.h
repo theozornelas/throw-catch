@@ -101,6 +101,11 @@ public:
         output << "[" << obj.stadiumID << ", " << obj.stadiumName << "]";
         return output;
     }
+
+    friend QTextStream &operator <<(QTextStream &output, const Stadium &obj){
+        output << obj.getStadiumName();
+        return output;
+    }
     bool operator==(const Stadium& that) const { return this->stadiumID == that.stadiumID; }
     bool operator!=(const Stadium& that) const { return this->stadiumID != that.stadiumID; }
     bool operator <(const Stadium& that) const { return this->stadiumID < that.stadiumID; }

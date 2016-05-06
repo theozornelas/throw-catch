@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
 #include "dbmanager.h"
 #include "stadium.h"
 #include "skiplist.h"
@@ -16,6 +15,7 @@ enum display {
     SHORTEST_TO_ALL,
     CUSTOM_TRIP,
     MST_TRIP,
+    TRIP_PROCESS,
     ADMIN_LOGIN,
     ADMIN_HOME,
     ADMIN_STADIUMS,
@@ -66,12 +66,16 @@ private slots:
 
     void on_addSelectedSouvenir_clicked();
 
+    void on_confirmCustomTripButton_clicked();
+
+    void on_shoppingCartButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     DBManager db;
 
     QVector<int> keys;
-    Graph<Stadium*>* stadiumsGraph;
+    Graph<Stadium>* stadiumsGraph;
     skiplist<int, Stadium*> stadiums;
     Stadium *currentStadium = NULL;
     bool adminPrivilege = false;
