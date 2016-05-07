@@ -103,7 +103,6 @@ bool DBManager::RemoveSouvenir(int stadiumKey, QString name) {
 
 skiplist<int, Stadium*> DBManager::getStadiums() {
     skiplist<int, Stadium*> listOfStadiums;
-    QVector<Stadium> stadiums;
 
     QSqlQuery query;
     QSqlQuery souvenirQuery;
@@ -113,7 +112,8 @@ skiplist<int, Stadium*> DBManager::getStadiums() {
     if(query.exec()) {
         while(query.next()) {
 
-            Stadium *s = (new Stadium(query.value("id").toInt(),
+
+            Stadium *s = new Stadium(query.value("id").toInt(),
                                       query.value("stadium_name").toString(),
                                       query.value("team_name").toString(),
                                       query.value("street_address").toString(),
@@ -125,7 +125,8 @@ skiplist<int, Stadium*> DBManager::getStadiums() {
                                       query.value("seating_capacity").toInt(),
                                       query.value("surface").toString(),
                                       query.value("league_type").toString(),
-                                      query.value("typology").toString()));
+                                      query.value("typology").toString(),
+                                      query.value("total_revenue").toDouble());
 
             souvenirQuery.prepare("SELECT * FROM Souvenirs");
 
@@ -140,7 +141,6 @@ skiplist<int, Stadium*> DBManager::getStadiums() {
                 }
             }
 
-            stadiums.push_back(*s);
             listOfStadiums.insert(query.value("id").toInt(), s);
 
 

@@ -333,6 +333,220 @@ background-color: #EAEAE9
       </item>
      </widget>
     </widget>
+    <widget class="QWidget" name="viewSingleStadiumPage">
+     <widget class="QLabel" name="singleStadiumNameLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>661</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>STADIUM_NAME</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="singleStadiumInfo">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>70</y>
+        <width>451</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>131</width>
+         <height>351</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="singleStadiumLayoutLabels">
+        <item>
+         <widget class="QLabel" name="label_9">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Team name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_12">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Type of League:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Address:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Box office number:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Date opened:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_10">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Seating capacity:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_11">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Surface:</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="verticalLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>271</width>
+         <height>351</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="singleStadiumLayoutInfo">
+        <item>
+         <widget class="QLabel" name="singleStadiumTeamName">
+          <property name="text">
+           <string>team_name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="singleStadiumType">
+          <property name="text">
+           <string>type_of_league</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="singleStadiumAddress">
+          <property name="font">
+           <font>
+            <pointsize>13</pointsize>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>address</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="singleStadiumBoxOfficeNum">
+          <property name="text">
+           <string>box_office_number</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="singleStadiumDateOpened">
+          <property name="text">
+           <string>date_opened</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="singleStadiumSeatingCapacity">
+          <property name="text">
+           <string>seating_capacity</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="singleStadiumSurface">
+          <property name="text">
+           <string>surface</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
     <widget class="QWidget" name="planATripPage">
      <property name="styleSheet">
       <string notr="true">QPushButton {
@@ -506,11 +720,11 @@ border:none;
        <string>PLAN CUSTOM TRIP</string>
       </property>
      </widget>
-     <widget class="QTreeWidget" name="treeWidget_2">
+     <widget class="QTreeWidget" name="stadiumsToSelectFromList">
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>120</y>
+        <y>160</y>
         <width>256</width>
         <height>261</height>
        </rect>
@@ -521,11 +735,11 @@ border:none;
        </property>
       </column>
      </widget>
-     <widget class="QTreeWidget" name="treeWidget_3">
+     <widget class="QTreeWidget" name="selectedStadiumsList">
       <property name="geometry">
        <rect>
         <x>410</x>
-        <y>120</y>
+        <y>160</y>
         <width>256</width>
         <height>251</height>
        </rect>
@@ -557,11 +771,11 @@ border:none;
        <string>TAKE TRIP</string>
       </property>
      </widget>
-     <widget class="QLabel" name="customTripLabel_2">
+     <widget class="QLabel" name="arrows">
       <property name="geometry">
        <rect>
         <x>350</x>
-        <y>190</y>
+        <y>230</y>
         <width>51</width>
         <height>71</height>
        </rect>
@@ -581,6 +795,71 @@ border:none;
       <property name="text">
        <string>--&gt;
 &lt;--</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="startingStadiumLabel">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>100</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Please select your starting stadium:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="startingStadiumComboBox">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>95</y>
+        <width>201</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::DefaultContextMenu</enum>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QComboBox::down-arrow {
+		image: url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png&quot;);
+}
+
+QComboBox{
+ border: 0px solid   rgb(53, 53, 53);
+ background-color: rgb(255, 255, 255);
+ color:                      rgb(53, 53, 53); 
+ padding:                    5px 
+
+}
+
+QComboBox::drop-down{
+        border: 1px solid #5A5A5A;
+        background: #353535;
+    color:                      white;
+    font-weight:            bold;
+    padding:                    0px;
+}
+
+
+</string>
+      </property>
+      <property name="maxVisibleItems">
+       <number>5</number>
+      </property>
+      <property name="insertPolicy">
+       <enum>QComboBox::InsertAtBottom</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -672,8 +951,8 @@ border:none;
        <rect>
         <x>20</x>
         <y>10</y>
-        <width>241</width>
-        <height>31</height>
+        <width>431</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -684,7 +963,7 @@ border:none;
        <string>STADIUM_NAME</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="addSouvenirsToList">
+     <widget class="QPushButton" name="addSouvenirToShoppingCart">
       <property name="geometry">
        <rect>
         <x>280</x>
@@ -705,11 +984,11 @@ border:none;
        <string>+ Add to cart</string>
       </property>
      </widget>
-     <widget class="QLabel" name="currentTripDescr_1">
+     <widget class="QLabel" name="currentTripWelcomeDescription">
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>40</y>
+        <y>60</y>
         <width>331</width>
         <height>31</height>
        </rect>
@@ -757,7 +1036,7 @@ border:none;
        </property>
       </column>
      </widget>
-     <widget class="QLabel" name="currentTripDescr_2">
+     <widget class="QLabel" name="currentTripNextButtonLabel">
       <property name="geometry">
        <rect>
         <x>430</x>
@@ -833,13 +1112,246 @@ border:none;
        <string notr="true">background-color: none;
 color: rgb(255, 255, 255);
 border: none;
-border-image:url(:/icons/shopping-cart-full-sign.png);</string>
+border-image:url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/shopping-cart-full-sign.png&quot;);</string>
       </property>
       <property name="text">
        <string/>
       </property>
       <property name="autoDefault">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="currentTripProgressBar">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>480</y>
+        <width>371</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QProgressBar {
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+QProgressBar::chunk {
+    background-color: #01CDE6;
+    width: 20px;
+}</string>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+      <property name="textDirection">
+       <enum>QProgressBar::TopToBottom</enum>
+      </property>
+      <property name="format">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="currentTripProgressLabel">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>450</y>
+        <width>161</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Gill Sans</family>
+        <pointsize>20</pointsize>
+        <weight>9</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 20pt &quot;Gill Sans&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>TRIP PROGRESS</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="currentTripStadiumCount">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>503</y>
+        <width>331</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>_/_ stadiums have been visited.</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="confrimPurchasesPage">
+     <widget class="QLabel" name="confirmPurchasesLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>431</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 30pt &quot;Gill Sans&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>CONFIRM YOUR PURCHASES</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="grandTotalLabel">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>446</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 20pt &quot;Gill Sans&quot;;
+color: rgb(32, 32, 32)
+</string>
+      </property>
+      <property name="text">
+       <string>GRAND TOTAL:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="grandTotalAmount">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>450</y>
+        <width>121</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>23</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>$0.00</string>
+      </property>
+     </widget>
+     <widget class="QTreeWidget" name="shoppingCart">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>110</y>
+        <width>611</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <attribute name="headerDefaultSectionSize">
+       <number>133</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Remove</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Subtotal</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Quantity</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Total</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="shoppingCartLabel">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>70</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 25pt &quot;Gill Sans&quot;;
+color: rgb(68, 68, 68);
+</string>
+      </property>
+      <property name="text">
+       <string>SHOPPING CART</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="confirmPurchasesButton">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>530</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #01CDE6;
+color: white;
+border:none;
+	font: 75 15pt &quot;Helvetica&quot;;
+}</string>
+      </property>
+      <property name="text">
+       <string>CONFIRM</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="updateShoppingCart">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>80</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #01CDE6;
+color: white;
+border:none;
+	font: 75 15pt &quot;Helvetica&quot;;
+}</string>
+      </property>
+      <property name="text">
+       <string>update</string>
       </property>
      </widget>
     </widget>
@@ -967,7 +1479,72 @@ border:none;
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="viewAdminStadiumsPage"/>
+    <widget class="QWidget" name="viewAdminStadiumsPage">
+     <widget class="QTreeWidget" name="adminStadiumList">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>90</y>
+        <width>371</width>
+        <height>361</height>
+       </rect>
+      </property>
+      <attribute name="headerCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="headerDefaultSectionSize">
+       <number>200</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Stadium</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Total Revenue</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="adminHomePageLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>20</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>STADIUMS</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="confirmPurchasesButton_2">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>60</y>
+        <width>161</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #01CDE6;
+color: white;
+border:none;
+	font: 75 15pt &quot;Helvetica&quot;;
+}</string>
+      </property>
+      <property name="text">
+       <string>VIEW MORE INFO</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="adminModifyPage">
      <widget class="QLabel" name="modifyInformationLabel">
       <property name="geometry">
@@ -1187,6 +1764,7 @@ border:none;
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="adminViewStadiumsPage"/>
    </widget>
    <widget class="QFrame" name="headerFrame">
     <property name="geometry">
@@ -1225,41 +1803,97 @@ color: white;
 }</string>
      </property>
      <property name="text">
-      <string>throw-catch</string>
+      <string>thr  w-catch</string>
      </property>
     </widget>
     <widget class="QPushButton" name="adminLoginButton">
      <property name="geometry">
       <rect>
-       <x>840</x>
-       <y>10</y>
+       <x>638</x>
+       <y>11</y>
        <width>91</width>
        <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-background-color: #293539;
 color: white;
-border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+background-color: none;
+border: none;
+font: 75 15pt &quot;Helvetica&quot;;
 }</string>
      </property>
      <property name="text">
       <string>SIGN IN</string>
      </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="searchBar">
      <property name="geometry">
       <rect>
-       <x>540</x>
+       <x>730</x>
        <y>10</y>
        <width>181</width>
        <height>21</height>
       </rect>
      </property>
+     <property name="inputMask">
+      <string extracomment="hello"/>
+     </property>
      <property name="text">
-      <string>Search for a stadium</string>
+      <string/>
+     </property>
+     <property name="maxLength">
+      <number>40</number>
+     </property>
+     <property name="placeholderText">
+      <string>Search for a stadium...</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="searchButton">
+     <property name="geometry">
+      <rect>
+       <x>920</x>
+       <y>12</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: none;
+color: rgb(255, 255, 255);
+border: none;
+border-image:url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/magnifying-glass.png&quot;);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="secretAdminLoginButton">
+     <property name="geometry">
+      <rect>
+       <x>44</x>
+       <y>15</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: none;
+color: rgb(255, 255, 255);
+border: none;
+border-image:url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/baseball.png&quot;);</string>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>

@@ -21,96 +21,95 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Form
+class Ui_ShoppingCart
 {
 public:
-    QTreeWidget *shoppingCartList;
-    QFrame *header;
+    QFrame *headerFrame;
     QLabel *teamNameLabel;
+    QTreeWidget *shoppingCart;
     QLabel *shoppingCartLabel;
     QLabel *grandTotalLabel;
-    QLabel *grandTotalAmountLabel;
-    QLabel *emptyShoppingCartLabel;
+    QLabel *grandTotalAmount;
+    QLabel *label;
 
-    void setupUi(QWidget *Form)
+    void setupUi(QWidget *ShoppingCart)
     {
-        if (Form->objectName().isEmpty())
-            Form->setObjectName(QStringLiteral("Form"));
-        Form->resize(593, 492);
-        shoppingCartList = new QTreeWidget(Form);
-        shoppingCartList->setObjectName(QStringLiteral("shoppingCartList"));
-        shoppingCartList->setGeometry(QRect(40, 100, 511, 291));
-        shoppingCartList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        shoppingCartList->setAlternatingRowColors(true);
-        shoppingCartList->header()->setDefaultSectionSize(130);
-        header = new QFrame(Form);
-        header->setObjectName(QStringLiteral("header"));
-        header->setGeometry(QRect(0, 0, 601, 41));
-        header->setStyleSheet(QLatin1String("#headerFrame {\n"
+        if (ShoppingCart->objectName().isEmpty())
+            ShoppingCart->setObjectName(QStringLiteral("ShoppingCart"));
+        ShoppingCart->resize(570, 470);
+        headerFrame = new QFrame(ShoppingCart);
+        headerFrame->setObjectName(QStringLiteral("headerFrame"));
+        headerFrame->setGeometry(QRect(0, 0, 571, 41));
+        headerFrame->setStyleSheet(QLatin1String("#headerFrame {\n"
 "background: #01CDE6;\n"
 "border: none;\n"
 "}"));
-        header->setFrameShape(QFrame::StyledPanel);
-        header->setFrameShadow(QFrame::Raised);
-        teamNameLabel = new QLabel(header);
+        headerFrame->setFrameShape(QFrame::StyledPanel);
+        headerFrame->setFrameShadow(QFrame::Raised);
+        teamNameLabel = new QLabel(headerFrame);
         teamNameLabel->setObjectName(QStringLiteral("teamNameLabel"));
         teamNameLabel->setGeometry(QRect(10, 10, 161, 21));
         teamNameLabel->setStyleSheet(QLatin1String("#teamNameLabel {\n"
 "color: white;\n"
 "	font: 75 20pt \"Gill Sans\";\n"
 "}"));
-        shoppingCartLabel = new QLabel(Form);
+        shoppingCart = new QTreeWidget(ShoppingCart);
+        shoppingCart->setObjectName(QStringLiteral("shoppingCart"));
+        shoppingCart->setGeometry(QRect(40, 100, 471, 311));
+        shoppingCart->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        shoppingCart->header()->setDefaultSectionSize(133);
+        shoppingCartLabel = new QLabel(ShoppingCart);
         shoppingCartLabel->setObjectName(QStringLiteral("shoppingCartLabel"));
-        shoppingCartLabel->setGeometry(QRect(40, 60, 241, 31));
-        shoppingCartLabel->setStyleSheet(QLatin1String("font: 75 30pt \"Gill Sans\";\n"
-"color: rgb(61, 61, 61);\n"
+        shoppingCartLabel->setGeometry(QRect(170, 60, 191, 31));
+        shoppingCartLabel->setStyleSheet(QLatin1String("font: 75 25pt \"Gill Sans\";\n"
+"color: rgb(68, 68, 68);\n"
 ""));
-        grandTotalLabel = new QLabel(Form);
+        grandTotalLabel = new QLabel(ShoppingCart);
         grandTotalLabel->setObjectName(QStringLiteral("grandTotalLabel"));
-        grandTotalLabel->setGeometry(QRect(290, 400, 141, 31));
-        grandTotalLabel->setStyleSheet(QLatin1String("font: 75 30pt \"Gill Sans\";\n"
-"color: rgb(61, 61, 61);\n"
+        grandTotalLabel->setGeometry(QRect(210, 420, 151, 31));
+        grandTotalLabel->setStyleSheet(QLatin1String("font: 75 20pt \"Gill Sans\";\n"
+"color: rgb(32, 32, 32)\n"
 ""));
-        grandTotalAmountLabel = new QLabel(Form);
-        grandTotalAmountLabel->setObjectName(QStringLiteral("grandTotalAmountLabel"));
-        grandTotalAmountLabel->setGeometry(QRect(440, 408, 91, 21));
+        grandTotalAmount = new QLabel(ShoppingCart);
+        grandTotalAmount->setObjectName(QStringLiteral("grandTotalAmount"));
+        grandTotalAmount->setGeometry(QRect(350, 424, 121, 21));
         QFont font;
-        font.setPointSize(22);
-        grandTotalAmountLabel->setFont(font);
-        emptyShoppingCartLabel = new QLabel(Form);
-        emptyShoppingCartLabel->setObjectName(QStringLiteral("emptyShoppingCartLabel"));
-        emptyShoppingCartLabel->setGeometry(QRect(60, 100, 391, 16));
-        header->raise();
+        font.setPointSize(23);
+        grandTotalAmount->setFont(font);
+        label = new QLabel(ShoppingCart);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(50, 110, 261, 16));
+        label->raise();
+        headerFrame->raise();
+        shoppingCart->raise();
         shoppingCartLabel->raise();
         grandTotalLabel->raise();
-        grandTotalAmountLabel->raise();
-        emptyShoppingCartLabel->raise();
-        shoppingCartList->raise();
+        grandTotalAmount->raise();
 
-        retranslateUi(Form);
+        retranslateUi(ShoppingCart);
 
-        QMetaObject::connectSlotsByName(Form);
+        QMetaObject::connectSlotsByName(ShoppingCart);
     } // setupUi
 
-    void retranslateUi(QWidget *Form)
+    void retranslateUi(QWidget *ShoppingCart)
     {
-        Form->setWindowTitle(QApplication::translate("Form", "Form", 0));
-        QTreeWidgetItem *___qtreewidgetitem = shoppingCartList->headerItem();
-        ___qtreewidgetitem->setText(3, QApplication::translate("Form", "Total", 0));
-        ___qtreewidgetitem->setText(2, QApplication::translate("Form", "Qty", 0));
-        ___qtreewidgetitem->setText(1, QApplication::translate("Form", "Sub-total", 0));
-        ___qtreewidgetitem->setText(0, QApplication::translate("Form", "Stadium", 0));
-        teamNameLabel->setText(QApplication::translate("Form", "throw-catch", 0));
-        shoppingCartLabel->setText(QApplication::translate("Form", "SHOPPING CART", 0));
-        grandTotalLabel->setText(QApplication::translate("Form", "Grand total:", 0));
-        grandTotalAmountLabel->setText(QApplication::translate("Form", "$0.00", 0));
-        emptyShoppingCartLabel->setText(QApplication::translate("Form", "Your shopping cart is currently empty! ", 0));
+        ShoppingCart->setWindowTitle(QApplication::translate("ShoppingCart", "Form", 0));
+        teamNameLabel->setText(QApplication::translate("ShoppingCart", "throw-catch", 0));
+        QTreeWidgetItem *___qtreewidgetitem = shoppingCart->headerItem();
+        ___qtreewidgetitem->setText(3, QApplication::translate("ShoppingCart", "Total", 0));
+        ___qtreewidgetitem->setText(2, QApplication::translate("ShoppingCart", "Quantity", 0));
+        ___qtreewidgetitem->setText(1, QApplication::translate("ShoppingCart", "Subtotal", 0));
+        ___qtreewidgetitem->setText(0, QApplication::translate("ShoppingCart", "Name", 0));
+        shoppingCartLabel->setText(QApplication::translate("ShoppingCart", "SHOPPING CART", 0));
+        grandTotalLabel->setText(QApplication::translate("ShoppingCart", "GRAND TOTAL:", 0));
+        grandTotalAmount->setText(QApplication::translate("ShoppingCart", "$0.00", 0));
+        label->setText(QApplication::translate("ShoppingCart", "Your shopping cart is currently empty!", 0));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Form: public Ui_Form {};
+    class ShoppingCart: public Ui_ShoppingCart {};
 } // namespace Ui
 
 QT_END_NAMESPACE
