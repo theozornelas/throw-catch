@@ -4,7 +4,8 @@
 #include <QSpinBox>
 #include <QCompleter>
 #include <QCheckBox>
-
+#include <QFile>
+#include <QFontDatabase>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -13,6 +14,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    int fontID = QFontDatabase::addApplicationFont(":/font/icons/GilSansMT.TTF");
+    if(fontID == -1) {
+        qDebug() << "ERROR LOADING FONT!";
+    }
+    else {
+        QString fontFamily = QFontDatabase::applicationFontFamilies(fontID).at(0);
+        qDebug() << "FONT LOADED: " << fontFamily;
+    }
+
+    // get the stadiums and greate a graph of them
     stadiums = db.getStadiums();
     stadiumsGraph = db.createGraph(stadiums);
 
