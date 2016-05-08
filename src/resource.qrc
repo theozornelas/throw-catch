@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>icons/baseball.png</file>
+        <file>icons/big-baseball-ball.png</file>
+        <file>icons/down_arrow.png</file>
+        <file>icons/dropdown_arrow.png</file>
+        <file>icons/magnifying-glass.png</file>
+        <file>icons/shopping-cart-full-sign.png</file>
+    </qresource>
+    <qresource prefix="/font">
+        <file>icons/GilSansMT.TTF</file>
+        <file>icons/GilSansMT_B.TTF</file>
+        <file>icons/GilSansMT_BI.TTF</file>
+        <file>icons/GilSansMT_Cond.TTF</file>
+        <file>icons/GilSansMT_I.TTF</file>
+    </qresource>
+</RCC>

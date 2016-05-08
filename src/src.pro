@@ -42,4 +42,5 @@ QTPLUGIN += qsqlmysql
 
 DISTFILES +=
 
-RESOURCES +=
+RESOURCES += \
+    resource.qrc
