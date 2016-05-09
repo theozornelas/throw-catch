@@ -84,6 +84,8 @@ public:
         bool visited() { return visited_; }
         // Test whether this vertex and vertex 'v' are adjacent
         bool isAdjacentTo(const E& v);
+        // Get the shortest edge connecting this vertex to adjacent vertex 'v'
+        EdgeItr edgeTo(const E& v);
 
         /*** OPERATOR OVERLOADS ***/
         // Overload the output stream operator
@@ -466,7 +468,7 @@ void Graph<E>:: Dijkstra(const E &e)
 
 //*********************************************************************************
 
-   // (*startPos).setValue(0);
+    // (*startPos).setValue(0);
 
     //list to store all verticed in the graph
     PriorityQueue<Vertex> graphVertices;
@@ -786,10 +788,37 @@ bool Graph<E>::Vertex::isAdjacentTo(const E &v) {
     bool found = false;
     EdgeItrItr itr = incident_.begin();
     while(itr != incident_.end() && !found){
-        found = found || (**itr).isIncidentOn(Vertex(v));
+        found = (**itr).isIncidentOn(Vertex(v));
         itr++;
     }
     return found;
+}
+
+/**
+ * @brief Get the edge connecting this to 'v'
+ * @param v [IN] The adjacent vertex
+ * @return the shortest edge connecting this vertex to adjacent vertex 'v'. returns end() if nto incident.
+ */
+template <typename E>
+typename Graph<E>::EdgeItr Graph<E>::Vertex::edgeTo(const E& v) {
+    EdgeItr output = incident_.end();
+
+    for(EdgeItrItr itr = incident_.begin(); itr != incident_.end(); itr++){
+        // if the edge is incident to this AND 'v' then it is a candidate
+        if( (**itr).isIncidentOn(Vertex(v)) ){
+            //if ouput has not be set yet just set it
+            if( output == incident_.end() ){
+                output = *itr;
+            }
+            //if output has been set then make sure the distance is shorter before setting
+            else{
+                if( *output > **itr ){
+                    output = *itr;
+                }
+            }
+        }
+    }
+    return *itr;
 }
 
 /**
