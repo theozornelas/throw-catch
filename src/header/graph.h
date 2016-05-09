@@ -275,23 +275,30 @@ int Graph<E>:: Distace(Vertex u, Vertex v)
 
 
     EdgeItrList Uedges = u.incidentEdges();
-    EdgeItrList Vedges = (v.incidentEdges());
+    EdgeItrList Vedges = v.incidentEdges();
 
     bool found=false;
     EdgeItrItr itU;
     EdgeItrItr itV;
     itU = Uedges.begin();
+    itV = Vedges.begin();
+    qDebug() << "before distance while";
+
+
     while(!found && itU != Uedges.end() && itV != Uedges.end())
     {
+        qDebug() << "inside distance while";
         if((**itU).end() == (**itV).start())
         {
             found = true;
             distance = (**itU).weight();
+            qDebug() << "inside distance if";
         }
         else
         {
             itU++;
             itV++;
+             qDebug() << "inside distance else";
         }
     }
 
@@ -306,7 +313,7 @@ typename Graph<E>::VertexList Graph<E>::Vertex::adjacentVertex()
 
     for(EdgeItrItr it = incident_.begin(); it != incident_.end(); it++)
     {
-        nextVertices.push_back((*it)->start());
+        nextVertices.push_back((*it)->end());
     }
 
     return nextVertices;
@@ -459,14 +466,25 @@ void Graph<E>:: Dijkstra(const E &e)
     //initialize all vertices as infinite
     for(VertexItr i = nearVertices.begin(); i != nearVertices.end(); i++)
     {
-        (*i).setValue(INT_MAX);
-
+        if(*i != *startPos)
+        {
+            (*i).setValue(INT_MAX);
+        }
+        else
+        {
+            (*i).setValue(0);
+        }
         graphVertices.insert(*i);
 
     }
 
 
     //
+    for(VertexItr index = vertices_.begin(); index != vertices_.end(); index++)
+    {
+        qDebug() << "checking list before insert k"<< *index;
+    }
+
 
 
     for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
@@ -478,6 +496,10 @@ void Graph<E>:: Dijkstra(const E &e)
 
     while(!graphVertices.empty())
     {
+
+
+        qDebug() << u;
+
 qDebug() << "inside while";
         //crashes at this line
         graphVertices.removeMin();
@@ -485,8 +507,10 @@ qDebug() << "inside while";
         for(VertexItr j = u.adjacentVertex().begin(); j != u.adjacentVertex().end(); j++)
         {
 
+             qDebug() << "u inside for "<< u;
+
              qDebug() << "inside for";
-//            if((u.getValue() + Distace(*u,*j)) < (*j).getValue())
+//            if((u.getValue() + Distace(u,*j)) < (*j).getValue())
 //            {
 
 //                qDebug() << "inside if of for";
