@@ -50,6 +50,10 @@ void PriorityQueue<T> :: insert(T element)
 template <class T>
 T PriorityQueue<T> :: min()
 {
+
+    T minVal = myQueue.top();
+
+    return minVal;
 }
 
 template <class T>

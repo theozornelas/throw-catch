@@ -442,56 +442,63 @@ std::cin.get();
 }
 
 
-//template <typename E>
-//void Graph<E>:: Dijkstra(const E &e)
-//{
+template <typename E>
+void Graph<E>:: Dijkstra(const E &e)
+{
 
-//    VertexItr startPos = findVertex(e);
+    VertexItr startPos = findVertex(e);
 
-//    //get all adjacent vertices from the starting position
-//    VertexList nearVertices = (*startPos).adjacentVertex();
+    //get all adjacent vertices from the starting position
+    VertexList nearVertices = (*startPos).adjacentVertex();
 
-//    (*startPos).setValue(0);
-//    Heap graphVertices;
+    (*startPos).setValue(0);
+    PriorityQueue<Vertex> graphVertices;
 
-//    graphVertices.push(*startPos);
+    graphVertices.insert(*startPos);
 
-//    //initialize all vertices as infinite
-//    for(VertexItr i = nearVertices.begin(); i != nearVertices.end(); i++)
-//    {
-//        (*i).setValue(INT_MAX);
+    //initialize all vertices as infinite
+    for(VertexItr i = nearVertices.begin(); i != nearVertices.end(); i++)
+    {
+        (*i).setValue(INT_MAX);
 
-//        graphVertices.push(*i);
+        graphVertices.insert(*i);
 
-//    }
-
-
-//    //
+    }
 
 
-//    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
-//    {
-//        graphVertices.push((*k));
-//    }
+    //
 
-//    Vertex u = graphVertices.top();
 
-//    while(!graphVertices.empty())
-//    {
+    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
+    {
+        graphVertices.insert((*k));
+    }
 
-//        //crashes at this line
+    Vertex u = graphVertices.min();
 
-//        for(VertexItr j = (*u).adjacentVertex().begin(); j != (*u).adjacentVertex().end(); j++)
-//        {
-//            if(((*u).getValue() + Distace(*u,*j)) < (*j).getValue())
+    while(!graphVertices.empty())
+    {
+qDebug() << "inside while";
+        //crashes at this line
+        graphVertices.removeMin();
+
+        for(VertexItr j = u.adjacentVertex().begin(); j != u.adjacentVertex().end(); j++)
+        {
+
+             qDebug() << "inside for";
+//            if((u.getValue() + Distace(*u,*j)) < (*j).getValue())
 //            {
-//                (*j).setValue((*u).getValue() + Distace(*u,*j));
-//                (*j).setValue((*u).getValue());
+
+//                qDebug() << "inside if of for";
+//                (*j).setValue(u.getValue() + Distace(u,*j));
+//                (*j).setValue(u.getValue());
 //            }
-//        }
-//    u = graphVertices.top();
-//    }
-//}
+        }
+    //graphVertices.min();
+     u =graphVertices.removeMin();
+     qDebug() << "after removing min";
+    }
+}
 
 /**
  * @brief Graph<E>::MSTPrim
