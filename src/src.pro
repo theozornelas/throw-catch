@@ -28,7 +28,9 @@ HEADERS  += header/mainwindow.h \
     header/skiplist.h \
     header/entry.h \
     header/graph.h \
-    header/priorityqueue.h
+    header/priorityqueue.h \
+    header/heap.h \
+    header/completebinarytree.h
 
 FORMS    += form/mainwindow.ui
 
