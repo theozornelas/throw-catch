@@ -453,24 +453,34 @@ template <typename E>
 void Graph<E>:: Dijkstra(const E &e)
 {
 
+    //find starting position
     VertexItr startPos = findVertex(e);
-
+//*********************************************************************************
     //get all adjacent vertices from the starting position
     VertexList nearVertices = (*startPos).adjacentVertex();
+    //
+    for(VertexItr index = nearVertices.begin(); index != nearVertices.end(); index++)
+    {
+        qDebug() << "checking list before insert k"<< *index;
+    }
 
-    (*startPos).setValue(0);
+//*********************************************************************************
+
+   // (*startPos).setValue(0);
+
+    //list to store all verticed in the graph
     PriorityQueue<Vertex> graphVertices;
 
-    graphVertices.insert(*startPos);
+    //graphVertices.insert(*startPos);
 
     //initialize all vertices as infinite
-    for(VertexItr i = nearVertices.begin(); i != nearVertices.end(); i++)
+    for(VertexItr i = vertices_.begin(); i != vertices_.end(); i++)
     {
         if(*i != *startPos)
         {
             (*i).setValue(INT_MAX);
         }
-        else
+        else if(*i == *startPos)
         {
             (*i).setValue(0);
         }
@@ -479,30 +489,29 @@ void Graph<E>:: Dijkstra(const E &e)
     }
 
 
-    //
-    for(VertexItr index = vertices_.begin(); index != vertices_.end(); index++)
-    {
-        qDebug() << "checking list before insert k"<< *index;
-    }
 
 
+//    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
+//    {
+//        graphVertices.insert((*k));
+//    }
 
-    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
-    {
-        graphVertices.insert((*k));
-    }
-
-    Vertex u = graphVertices.min();
-
+Vertex u = graphVertices.min();
+//while the list is not empty
     while(!graphVertices.empty())
     {
 
+        //u is the smallest value in the list
 
         qDebug() << u;
 
 qDebug() << "inside while";
-        //crashes at this line
+
+
+        //pop u
         graphVertices.removeMin();
+
+        qDebug() << graphVertices.size();
 
         for(VertexItr j = u.adjacentVertex().begin(); j != u.adjacentVertex().end(); j++)
         {
@@ -510,7 +519,7 @@ qDebug() << "inside while";
              qDebug() << "u inside for "<< u;
 
              qDebug() << "inside for";
-//            if((u.getValue() + Distace(u,*j)) < (*j).getValue())
+            if((u.getValue() + Distace(u,*j)) < (*j).getValue())
 //            {
 
 //                qDebug() << "inside if of for";
@@ -518,8 +527,10 @@ qDebug() << "inside while";
 //                (*j).setValue(u.getValue());
 //            }
         }
-    //graphVertices.min();
-     u =graphVertices.removeMin();
+
+        u = graphVertices.min();
+        graphVertices.removeMin();
+
      qDebug() << "after removing min";
     }
 }
