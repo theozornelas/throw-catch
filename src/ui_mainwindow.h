@@ -152,6 +152,7 @@ public:
     QLineEdit *newSouvenirName;
     QLabel *newSouvenirPriceLabel;
     QLineEdit *newSouvenirPrice;
+    QLabel *adminAddSouvenirErrorMessage;
     QWidget *adminModifyStadiums;
     QPushButton *removeSelectedSouvenir_2;
     QPushButton *removeSelectedSouvenir_3;
@@ -266,10 +267,10 @@ public:
         label_3->setGeometry(QRect(20, 60, 59, 16));
         label_4 = new QLabel(viewStadiumsPage);
         label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setGeometry(QRect(20, 100, 59, 16));
+        label_4->setGeometry(QRect(20, 90, 59, 16));
         viewStadiumByComboBox = new QComboBox(viewStadiumsPage);
         viewStadiumByComboBox->setObjectName(QStringLiteral("viewStadiumByComboBox"));
-        viewStadiumByComboBox->setGeometry(QRect(80, 56, 171, 26));
+        viewStadiumByComboBox->setGeometry(QRect(80, 56, 171, 21));
         viewStadiumByComboBox->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
 "		image: url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png\");\n"
 "}\n"
@@ -294,7 +295,7 @@ public:
 ""));
         comboBox_2 = new QComboBox(viewStadiumsPage);
         comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
-        comboBox_2->setGeometry(QRect(80, 95, 171, 26));
+        comboBox_2->setGeometry(QRect(80, 90, 171, 21));
         comboBox_2->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
 "		image: url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png\");\n"
 "}\n"
@@ -319,7 +320,8 @@ public:
 ""));
         viewStadiumsList = new QTreeWidget(viewStadiumsPage);
         viewStadiumsList->setObjectName(QStringLiteral("viewStadiumsList"));
-        viewStadiumsList->setGeometry(QRect(20, 140, 711, 411));
+        viewStadiumsList->setGeometry(QRect(20, 130, 711, 451));
+        viewStadiumsList->setSortingEnabled(true);
         viewStadiumsList->header()->setDefaultSectionSize(100);
         display->addWidget(viewStadiumsPage);
         viewSingleStadiumPage = new QWidget();
@@ -864,6 +866,10 @@ public:
         newSouvenirPrice = new QLineEdit(modifySouvenirItemPage);
         newSouvenirPrice->setObjectName(QStringLiteral("newSouvenirPrice"));
         newSouvenirPrice->setGeometry(QRect(300, 380, 151, 21));
+        adminAddSouvenirErrorMessage = new QLabel(modifySouvenirItemPage);
+        adminAddSouvenirErrorMessage->setObjectName(QStringLiteral("adminAddSouvenirErrorMessage"));
+        adminAddSouvenirErrorMessage->setGeometry(QRect(30, 410, 241, 20));
+        adminAddSouvenirErrorMessage->setStyleSheet(QStringLiteral("color: #01CDE6"));
         display->addWidget(modifySouvenirItemPage);
         adminModifyStadiums = new QWidget();
         adminModifyStadiums->setObjectName(QStringLiteral("adminModifyStadiums"));
@@ -967,9 +973,13 @@ public:
         );
         comboBox_2->clear();
         comboBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "test", 0)
-         << QApplication::translate("MainWindow", "test", 0)
-         << QApplication::translate("MainWindow", "test", 0)
+         << QApplication::translate("MainWindow", "Stadium", 0)
+         << QApplication::translate("MainWindow", "Name", 0)
+         << QApplication::translate("MainWindow", "Seating Capacity", 0)
+         << QApplication::translate("MainWindow", "Location", 0)
+         << QApplication::translate("MainWindow", "Surface", 0)
+         << QApplication::translate("MainWindow", "Date opened", 0)
+         << QApplication::translate("MainWindow", "Typology", 0)
         );
         QTreeWidgetItem *___qtreewidgetitem = viewStadiumsList->headerItem();
         ___qtreewidgetitem->setText(6, QApplication::translate("MainWindow", "Typology", 0));
@@ -1075,6 +1085,7 @@ public:
         addSelectedSouvenir->setText(QApplication::translate("MainWindow", "ADD", 0));
         newSouvenirNameLabel->setText(QApplication::translate("MainWindow", "Name:", 0));
         newSouvenirPriceLabel->setText(QApplication::translate("MainWindow", "Price", 0));
+        adminAddSouvenirErrorMessage->setText(QApplication::translate("MainWindow", "*** Invalid name or price.", 0));
         removeSelectedSouvenir_2->setText(QApplication::translate("MainWindow", "ADD STADIUMS FROM FILE", 0));
         removeSelectedSouvenir_3->setText(QApplication::translate("MainWindow", "UPDATE A STADIUM", 0));
         modifySouvenirsListLabel_2->setText(QApplication::translate("MainWindow", "MODIFY STADIUMS", 0));

@@ -262,6 +262,7 @@ void MainWindow::on_adminModifyButton_clicked()
 
     ui->listOfModifyStadiums->clear();
 
+
     for(int i = 0; i < keys.size(); i++) {
         Stadium *s = *stadiums.get(keys[i]);
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiums);
@@ -273,7 +274,12 @@ void MainWindow::on_adminModifyButton_clicked()
 
 void MainWindow::on_modifyInformationNextButton_clicked()
 {
-        QTreeWidgetItem* selectedStadium = ui->listOfModifyStadiums->currentItem();
+   ui->newSouvenirName->clear();
+   ui->newSouvenirPrice->clear();
+   ui->adminAddSouvenirErrorMessage->setVisible(false);
+
+
+   QTreeWidgetItem* selectedStadium = ui->listOfModifyStadiums->currentItem();
 
        if(selectedStadium != NULL) {
 
@@ -286,11 +292,12 @@ void MainWindow::on_modifyInformationNextButton_clicked()
 
                QVector<Souvenir> stadiumsSouvenirs = currentStadium->getSouvenirs();
 
+               ui->listOfModifyStadiumsSouvenirs->setColumnWidth(0, 300);
                for(int i = 0; i < stadiumsSouvenirs.size(); i++) {
                    Souvenir *s = &stadiumsSouvenirs[i];
                    QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiumsSouvenirs);
                    currentItem->setText(0, s->getName());
-                   currentItem->setText(1, "$" + QString::number(s->getPrice()));
+                   currentItem->setText(1, "$" + QString::number(s->getPrice(), 'f', 2));
                }
 
                ui->display->setCurrentIndex(MODIFY_SOUVENIRS);
@@ -326,10 +333,12 @@ void MainWindow::on_addSelectedSouvenir_clicked()
 {
     bool valid = true;
 
+    ui->adminAddSouvenirErrorMessage->setVisible(false);
+
     QString souvenirName = ui->newSouvenirName->text();
     QString souvenirPrice = ui->newSouvenirPrice->text();
 
-    QRegExp re("(\\d+)");
+    QRegExp re("\\$?[0-9]+\\.?[0-9]*");
 
     if(isBlank(souvenirName) || isBlank(souvenirPrice)) {
         valid = false;
@@ -338,11 +347,17 @@ void MainWindow::on_addSelectedSouvenir_clicked()
         valid = false;
     }
 
+
     if(valid) {
+        if(souvenirPrice.at(0) == '$') {
+            souvenirPrice = souvenirPrice.mid(1,souvenirPrice.size());
+        }
+
         currentStadium->addSouvenir(new Souvenir(currentStadium->getStadiumID(), souvenirName, souvenirPrice.toDouble(), 0));
+        on_modifyInformationNextButton_clicked();
     }
     else {
-
+        ui->adminAddSouvenirErrorMessage->setVisible(true);
     }
 
 
