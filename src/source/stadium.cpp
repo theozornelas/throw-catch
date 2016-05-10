@@ -232,6 +232,32 @@ void Stadium::setTypology(QString typo) {
     typology = typo;
 }
 
+/**
+ * @brief returns this stadium as a JSON object
+ */
+QJsonObject Stadium::toJSON() {
+    // Create the stadium JSON object with nested Address Object
+    QJsonObject stadiumJSON;
+    stadiumJSON["ObjType"] = "stadium";
+    stadiumJSON["stadiumName"] = this->stadiumName;
+    stadiumJSON["teamName"] = this->teamName;
+
+    // Address Information
+    stadiumJSON["streetAddress"] = this->stadiumAddress.streetAddress;
+    stadiumJSON["city"] = this->stadiumAddress.city;
+    stadiumJSON["state"] = this->stadiumAddress.state;
+    stadiumJSON["zipCode"] = this->stadiumAddress.zipCode;
+
+    stadiumJSON["boxOfficeNumber"] = this->boxOfficeNumber;
+    stadiumJSON["dateOpened"] = this->dateOpened;
+    stadiumJSON["seatingCapacity"] = int(this->seatingCapacity);
+    stadiumJSON["surface"] = this->surface;
+    stadiumJSON["leagueType"] = this->leagueType;
+    stadiumJSON["typology"] = this->typology;
+
+    return stadiumJSON;
+}
+
 // Mutators for Stadium's souvenir list.
 /**
  * @brief Stadium::addSouvenir Adds a souvenir to the current stadium's list of souvenirs.

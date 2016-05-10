@@ -4,6 +4,9 @@
 #include <QString>
 #include <QVector>
 #include <QDebug>
+#include <QFile>
+#include <QJsonObject>
+#include <QJsonDocument>
 #include "souvenir.h"
 using namespace std;
 
@@ -89,6 +92,8 @@ public:
     void setLeagueType(QString newLeagueType);
     void setTypology(QString typo);
 
+    // Save and load with JSON files
+    QJsonObject toJSON(const QString &filename);
 
     // Mutators for Stadium's souvenir list.
     void addSouvenir(Souvenir *newSouvenir);
