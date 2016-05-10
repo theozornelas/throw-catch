@@ -61,7 +61,6 @@ public:
         //returns a list of vertices to the appointed vertex
         VertexList adjacentVertex();
 
-
         void setValue(const int &newValue){ value_ = newValue;}
 
         int getValue(){return value_;}
@@ -84,8 +83,10 @@ public:
         bool visited() { return visited_; }
         // Test whether this vertex and vertex 'v' are adjacent
         bool isAdjacentTo(const E& v);
-        // Get the shortest edge connecting this vertex to adjacent vertex 'v'
+        // Get an iterator to the shortest edge connecting this vertex to adjacent vertex 'v'
         EdgeItr edgeTo(const E& v);
+        // Get the WEIGHT of the shortest edge connecting this vertex to adjacent vertex 'v'
+        int weightTo(const E& v);
 
         /*** OPERATOR OVERLOADS ***/
         // Overload the output stream operator
@@ -822,6 +823,24 @@ typename Graph<E>::EdgeItr Graph<E>::Vertex::edgeTo(const E& v) {
         }
     }
     return output;
+
+}
+
+/**
+ * @brief Get the WEIGHT of the edge connecting this to 'v'
+ * @param v [IN] The adjacent vertex
+ * @return the weight of the shortest edge connecting this vertex to adjacent vertex 'v'. returns -1 if not adjacent.
+ */
+template <typename E>
+int Graph<E>::Vertex::weightTo(const E& v) {
+    EdgeItr output = edgeTo(v);
+    if(output != incident_.end()){
+        return output->weight();
+    }
+    else{
+        return -1;
+    }
+
 }
 
 /**
