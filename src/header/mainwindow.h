@@ -83,7 +83,6 @@ private slots:
 
     void on_addSouvenirToShoppingCart_clicked();
 
-    
     void on_currentTripNextStadium_clicked();
 
     void on_searchButton_clicked();
@@ -95,6 +94,19 @@ private slots:
     void on_confirmPurchasesButton_clicked();
 
     void on_viewAdminStadiumsButton_clicked();
+
+    void on_startingStadiumComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_adminHomeButton_clicked();
+    
+    void on_viewMoreInfoAboutStadiumButton_clicked();
+
+    void viewSingleStadium(QString stadiumName);
+
+    void viewStadiumBy(QString sortByType);
+    
+
+    void on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

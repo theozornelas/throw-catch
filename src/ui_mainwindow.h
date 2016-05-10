@@ -22,7 +22,6 @@
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
-#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -45,15 +44,17 @@ public:
     QPushButton *adminHomeButton;
     QPushButton *adminModifyButton;
     QPushButton *viewAdminStadiumsButton;
+    QPushButton *viewAdminStadiumsButton_2;
     QStackedWidget *display;
     QWidget *homePage;
-    QLabel *homeHeading;
+    QLabel *viewStadiumHeading_2;
     QWidget *viewStadiumsPage;
     QLabel *viewStadiumHeading;
-    QTableWidget *viewStadiumsList;
     QLabel *label_3;
     QLabel *label_4;
-    QComboBox *comboBox;
+    QComboBox *viewStadiumByComboBox;
+    QComboBox *comboBox_2;
+    QTreeWidget *viewStadiumsList;
     QWidget *viewSingleStadiumPage;
     QLabel *singleStadiumNameLabel;
     QFrame *singleStadiumInfo;
@@ -66,6 +67,7 @@ public:
     QLabel *label_6;
     QLabel *label_10;
     QLabel *label_11;
+    QLabel *totalRevenueLabel;
     QWidget *verticalLayoutWidget_2;
     QVBoxLayout *singleStadiumLayoutInfo;
     QLabel *singleStadiumTeamName;
@@ -75,6 +77,7 @@ public:
     QLabel *singleStadiumDateOpened;
     QLabel *singleStadiumSeatingCapacity;
     QLabel *singleStadiumSurface;
+    QLabel *singleStadiumTotalRevenue;
     QWidget *planATripPage;
     QPushButton *shortestTripToAllButton;
     QPushButton *customTripButton;
@@ -131,7 +134,10 @@ public:
     QWidget *viewAdminStadiumsPage;
     QTreeWidget *adminStadiumList;
     QLabel *adminHomePageLabel_2;
-    QPushButton *confirmPurchasesButton_2;
+    QPushButton *viewMoreInfoAboutStadiumButton;
+    QLabel *label_7;
+    QLabel *stadiumTotalRevenue;
+    QLabel *stadiumTotalRevenueLabel;
     QWidget *adminModifyPage;
     QLabel *modifyInformationLabel;
     QLabel *modifyDescription;
@@ -146,7 +152,10 @@ public:
     QLineEdit *newSouvenirName;
     QLabel *newSouvenirPriceLabel;
     QLineEdit *newSouvenirPrice;
-    QWidget *adminViewStadiumsPage;
+    QWidget *adminModifyStadiums;
+    QPushButton *removeSelectedSouvenir_2;
+    QPushButton *removeSelectedSouvenir_3;
+    QLabel *modifySouvenirsListLabel_2;
     QFrame *headerFrame;
     QLabel *teamNameLabel;
     QPushButton *adminLoginButton;
@@ -228,6 +237,9 @@ public:
         viewAdminStadiumsButton = new QPushButton(adminSidebarFrame);
         viewAdminStadiumsButton->setObjectName(QStringLiteral("viewAdminStadiumsButton"));
         viewAdminStadiumsButton->setGeometry(QRect(0, 277, 201, 61));
+        viewAdminStadiumsButton_2 = new QPushButton(adminSidebarFrame);
+        viewAdminStadiumsButton_2->setObjectName(QStringLiteral("viewAdminStadiumsButton_2"));
+        viewAdminStadiumsButton_2->setGeometry(QRect(0, 400, 201, 61));
         options->addWidget(adminOptions);
         display = new QStackedWidget(centralWidget);
         display->setObjectName(QStringLiteral("display"));
@@ -237,10 +249,10 @@ public:
 ""));
         homePage = new QWidget();
         homePage->setObjectName(QStringLiteral("homePage"));
-        homeHeading = new QLabel(homePage);
-        homeHeading->setObjectName(QStringLiteral("homeHeading"));
-        homeHeading->setGeometry(QRect(20, 20, 201, 31));
-        homeHeading->setStyleSheet(QLatin1String("font: 75 30pt \"Gill Sans\";\n"
+        viewStadiumHeading_2 = new QLabel(homePage);
+        viewStadiumHeading_2->setObjectName(QStringLiteral("viewStadiumHeading_2"));
+        viewStadiumHeading_2->setGeometry(QRect(20, 10, 311, 41));
+        viewStadiumHeading_2->setStyleSheet(QLatin1String("font: 25 30pt \"Helvetica\";\n"
 ""));
         display->addWidget(homePage);
         viewStadiumsPage = new QWidget();
@@ -248,55 +260,83 @@ public:
         viewStadiumHeading = new QLabel(viewStadiumsPage);
         viewStadiumHeading->setObjectName(QStringLiteral("viewStadiumHeading"));
         viewStadiumHeading->setGeometry(QRect(20, 10, 311, 41));
-        viewStadiumHeading->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
-        viewStadiumsList = new QTableWidget(viewStadiumsPage);
-        if (viewStadiumsList->columnCount() < 7)
-            viewStadiumsList->setColumnCount(7);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        viewStadiumsList->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        viewStadiumsList->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        viewStadiumsList->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        viewStadiumsList->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        viewStadiumsList->setHorizontalHeaderItem(4, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        viewStadiumsList->setHorizontalHeaderItem(5, __qtablewidgetitem5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        viewStadiumsList->setHorizontalHeaderItem(6, __qtablewidgetitem6);
-        viewStadiumsList->setObjectName(QStringLiteral("viewStadiumsList"));
-        viewStadiumsList->setGeometry(QRect(20, 160, 702, 421));
-        viewStadiumsList->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        viewStadiumsList->setSortingEnabled(true);
+        viewStadiumHeading->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         label_3 = new QLabel(viewStadiumsPage);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(20, 60, 59, 16));
         label_4 = new QLabel(viewStadiumsPage);
         label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setGeometry(QRect(20, 100, 59, 16));
-        comboBox = new QComboBox(viewStadiumsPage);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setGeometry(QRect(80, 56, 171, 26));
+        viewStadiumByComboBox = new QComboBox(viewStadiumsPage);
+        viewStadiumByComboBox->setObjectName(QStringLiteral("viewStadiumByComboBox"));
+        viewStadiumByComboBox->setGeometry(QRect(80, 56, 171, 26));
+        viewStadiumByComboBox->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
+"		image: url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png\");\n"
+"}\n"
+"\n"
+"QComboBox{\n"
+" border: 0px solid   rgb(53, 53, 53);\n"
+" background-color: rgb(255, 255, 255);\n"
+" color:                      rgb(53, 53, 53); \n"
+" padding:                    5px \n"
+"\n"
+"}\n"
+"\n"
+"QComboBox::drop-down{\n"
+"        border: 1px solid #5A5A5A;\n"
+"        background: #353535;\n"
+"    color:                      white;\n"
+"    font-weight:            bold;\n"
+"    padding:                    0px;\n"
+"}\n"
+"\n"
+"\n"
+""));
+        comboBox_2 = new QComboBox(viewStadiumsPage);
+        comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
+        comboBox_2->setGeometry(QRect(80, 95, 171, 26));
+        comboBox_2->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
+"		image: url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png\");\n"
+"}\n"
+"\n"
+"QComboBox{\n"
+" border: 0px solid   rgb(53, 53, 53);\n"
+" background-color: rgb(255, 255, 255);\n"
+" color:                      rgb(53, 53, 53); \n"
+" padding:                    5px \n"
+"\n"
+"}\n"
+"\n"
+"QComboBox::drop-down{\n"
+"        border: 1px solid #5A5A5A;\n"
+"        background: #353535;\n"
+"    color:                      white;\n"
+"    font-weight:            bold;\n"
+"    padding:                    0px;\n"
+"}\n"
+"\n"
+"\n"
+""));
+        viewStadiumsList = new QTreeWidget(viewStadiumsPage);
+        viewStadiumsList->setObjectName(QStringLiteral("viewStadiumsList"));
+        viewStadiumsList->setGeometry(QRect(20, 140, 711, 411));
+        viewStadiumsList->header()->setDefaultSectionSize(100);
         display->addWidget(viewStadiumsPage);
         viewSingleStadiumPage = new QWidget();
         viewSingleStadiumPage->setObjectName(QStringLiteral("viewSingleStadiumPage"));
         singleStadiumNameLabel = new QLabel(viewSingleStadiumPage);
         singleStadiumNameLabel->setObjectName(QStringLiteral("singleStadiumNameLabel"));
         singleStadiumNameLabel->setGeometry(QRect(20, 10, 661, 41));
-        singleStadiumNameLabel->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
+        singleStadiumNameLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         singleStadiumInfo = new QFrame(viewSingleStadiumPage);
         singleStadiumInfo->setObjectName(QStringLiteral("singleStadiumInfo"));
-        singleStadiumInfo->setGeometry(QRect(20, 70, 451, 381));
+        singleStadiumInfo->setGeometry(QRect(20, 70, 451, 431));
         singleStadiumInfo->setStyleSheet(QStringLiteral("border: none;"));
         singleStadiumInfo->setFrameShape(QFrame::StyledPanel);
         singleStadiumInfo->setFrameShadow(QFrame::Raised);
         verticalLayoutWidget = new QWidget(singleStadiumInfo);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(20, 10, 131, 351));
+        verticalLayoutWidget->setGeometry(QRect(20, 10, 131, 401));
         singleStadiumLayoutLabels = new QVBoxLayout(verticalLayoutWidget);
         singleStadiumLayoutLabels->setSpacing(6);
         singleStadiumLayoutLabels->setContentsMargins(11, 11, 11, 11);
@@ -347,9 +387,15 @@ public:
 
         singleStadiumLayoutLabels->addWidget(label_11);
 
+        totalRevenueLabel = new QLabel(verticalLayoutWidget);
+        totalRevenueLabel->setObjectName(QStringLiteral("totalRevenueLabel"));
+        totalRevenueLabel->setFont(font);
+
+        singleStadiumLayoutLabels->addWidget(totalRevenueLabel);
+
         verticalLayoutWidget_2 = new QWidget(singleStadiumInfo);
         verticalLayoutWidget_2->setObjectName(QStringLiteral("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(160, 10, 271, 351));
+        verticalLayoutWidget_2->setGeometry(QRect(160, 10, 271, 401));
         singleStadiumLayoutInfo = new QVBoxLayout(verticalLayoutWidget_2);
         singleStadiumLayoutInfo->setSpacing(6);
         singleStadiumLayoutInfo->setContentsMargins(11, 11, 11, 11);
@@ -396,6 +442,11 @@ public:
 
         singleStadiumLayoutInfo->addWidget(singleStadiumSurface);
 
+        singleStadiumTotalRevenue = new QLabel(verticalLayoutWidget_2);
+        singleStadiumTotalRevenue->setObjectName(QStringLiteral("singleStadiumTotalRevenue"));
+
+        singleStadiumLayoutInfo->addWidget(singleStadiumTotalRevenue);
+
         display->addWidget(viewSingleStadiumPage);
         planATripPage = new QWidget();
         planATripPage->setObjectName(QStringLiteral("planATripPage"));
@@ -417,15 +468,14 @@ public:
         planATripLabel = new QLabel(planATripPage);
         planATripLabel->setObjectName(QStringLiteral("planATripLabel"));
         planATripLabel->setGeometry(QRect(20, 10, 311, 41));
-        planATripLabel->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
+        planATripLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         display->addWidget(planATripPage);
         shortestTripToAllPage = new QWidget();
         shortestTripToAllPage->setObjectName(QStringLiteral("shortestTripToAllPage"));
         shortestTripToAllLabel = new QLabel(shortestTripToAllPage);
         shortestTripToAllLabel->setObjectName(QStringLiteral("shortestTripToAllLabel"));
-        shortestTripToAllLabel->setGeometry(QRect(20, 10, 311, 41));
-        shortestTripToAllLabel->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
+        shortestTripToAllLabel->setGeometry(QRect(20, 10, 371, 41));
+        shortestTripToAllLabel->setStyleSheet(QLatin1String("font: 25 30pt \"Helvetica\";\n"
 ""));
         shortestTripList = new QTreeWidget(shortestTripToAllPage);
         shortestTripList->setObjectName(QStringLiteral("shortestTripList"));
@@ -452,8 +502,7 @@ public:
         customTripLabel = new QLabel(customTripPage);
         customTripLabel->setObjectName(QStringLiteral("customTripLabel"));
         customTripLabel->setGeometry(QRect(20, 10, 311, 41));
-        customTripLabel->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
+        customTripLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         stadiumsToSelectFromList = new QTreeWidget(customTripPage);
         stadiumsToSelectFromList->setObjectName(QStringLiteral("stadiumsToSelectFromList"));
         stadiumsToSelectFromList->setGeometry(QRect(80, 160, 256, 261));
@@ -519,21 +568,19 @@ public:
         minimumSpanningTreePage->setObjectName(QStringLiteral("minimumSpanningTreePage"));
         planATripLabel_2 = new QLabel(minimumSpanningTreePage);
         planATripLabel_2->setObjectName(QStringLiteral("planATripLabel_2"));
-        planATripLabel_2->setGeometry(QRect(20, 20, 371, 41));
-        planATripLabel_2->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
+        planATripLabel_2->setGeometry(QRect(20, 20, 411, 41));
+        planATripLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         MSTList = new QTreeWidget(minimumSpanningTreePage);
         MSTList->setObjectName(QStringLiteral("MSTList"));
         MSTList->setGeometry(QRect(50, 80, 621, 291));
         MSTList->header()->setDefaultSectionSize(120);
         planATripLabel_3 = new QLabel(minimumSpanningTreePage);
         planATripLabel_3->setObjectName(QStringLiteral("planATripLabel_3"));
-        planATripLabel_3->setGeometry(QRect(200, 370, 101, 41));
-        planATripLabel_3->setStyleSheet(QLatin1String("	font: 75 20pt \"Gill Sans\";\n"
-""));
+        planATripLabel_3->setGeometry(QRect(200, 380, 101, 41));
+        planATripLabel_3->setStyleSheet(QStringLiteral("font: 25 20pt \"Helvetica\";"));
         label = new QLabel(minimumSpanningTreePage);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(310, 381, 81, 20));
+        label->setGeometry(QRect(310, 390, 81, 20));
         label->setFont(font2);
         display->addWidget(minimumSpanningTreePage);
         tripProcessPage = new QWidget();
@@ -541,8 +588,7 @@ public:
         currentTripStadiumNameLabel = new QLabel(tripProcessPage);
         currentTripStadiumNameLabel->setObjectName(QStringLiteral("currentTripStadiumNameLabel"));
         currentTripStadiumNameLabel->setGeometry(QRect(20, 10, 431, 61));
-        currentTripStadiumNameLabel->setStyleSheet(QLatin1String("font: 75 30pt \"Gill Sans\";\n"
-""));
+        currentTripStadiumNameLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         addSouvenirToShoppingCart = new QPushButton(tripProcessPage);
         addSouvenirToShoppingCart->setObjectName(QStringLiteral("addSouvenirToShoppingCart"));
         addSouvenirToShoppingCart->setGeometry(QRect(280, 390, 121, 31));
@@ -568,16 +614,15 @@ public:
         currentTripNextButtonLabel->setWordWrap(true);
         currentTripSouvenirLabel = new QLabel(tripProcessPage);
         currentTripSouvenirLabel->setObjectName(QStringLiteral("currentTripSouvenirLabel"));
-        currentTripSouvenirLabel->setGeometry(QRect(40, 130, 111, 21));
+        currentTripSouvenirLabel->setGeometry(QRect(40, 130, 121, 21));
         QFont font4;
-        font4.setFamily(QStringLiteral("Gill Sans"));
+        font4.setFamily(QStringLiteral("Helvetica"));
         font4.setPointSize(20);
         font4.setBold(false);
         font4.setItalic(false);
-        font4.setWeight(9);
+        font4.setWeight(3);
         currentTripSouvenirLabel->setFont(font4);
-        currentTripSouvenirLabel->setStyleSheet(QLatin1String("font: 75 20pt \"Gill Sans\";\n"
-""));
+        currentTripSouvenirLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Helvetica\";"));
         currentTripNextStadium = new QPushButton(tripProcessPage);
         currentTripNextStadium->setObjectName(QStringLiteral("currentTripNextStadium"));
         currentTripNextStadium->setGeometry(QRect(580, 530, 121, 31));
@@ -613,8 +658,7 @@ public:
         currentTripProgressLabel->setObjectName(QStringLiteral("currentTripProgressLabel"));
         currentTripProgressLabel->setGeometry(QRect(30, 450, 161, 21));
         currentTripProgressLabel->setFont(font4);
-        currentTripProgressLabel->setStyleSheet(QLatin1String("font: 75 20pt \"Gill Sans\";\n"
-""));
+        currentTripProgressLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Helvetica\";"));
         currentTripStadiumCount = new QLabel(tripProcessPage);
         currentTripStadiumCount->setObjectName(QStringLiteral("currentTripStadiumCount"));
         currentTripStadiumCount->setGeometry(QRect(30, 503, 331, 31));
@@ -626,8 +670,7 @@ public:
         confirmPurchasesLabel = new QLabel(confrimPurchasesPage);
         confirmPurchasesLabel->setObjectName(QStringLiteral("confirmPurchasesLabel"));
         confirmPurchasesLabel->setGeometry(QRect(20, 0, 431, 61));
-        confirmPurchasesLabel->setStyleSheet(QLatin1String("font: 75 30pt \"Gill Sans\";\n"
-""));
+        confirmPurchasesLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         grandTotalLabel = new QLabel(confrimPurchasesPage);
         grandTotalLabel->setObjectName(QStringLiteral("grandTotalLabel"));
         grandTotalLabel->setGeometry(QRect(450, 446, 151, 31));
@@ -647,8 +690,8 @@ public:
         shoppingCart->header()->setDefaultSectionSize(133);
         shoppingCartLabel = new QLabel(confrimPurchasesPage);
         shoppingCartLabel->setObjectName(QStringLiteral("shoppingCartLabel"));
-        shoppingCartLabel->setGeometry(QRect(230, 70, 191, 31));
-        shoppingCartLabel->setStyleSheet(QLatin1String("font: 75 25pt \"Gill Sans\";\n"
+        shoppingCartLabel->setGeometry(QRect(230, 70, 221, 31));
+        shoppingCartLabel->setStyleSheet(QLatin1String("font: 25 25pt \"Helvetica\";\n"
 "color: rgb(68, 68, 68);\n"
 ""));
         confirmPurchasesButton = new QPushButton(confrimPurchasesPage);
@@ -701,46 +744,63 @@ public:
         adminLoginLabel = new QLabel(adminLoginPage);
         adminLoginLabel->setObjectName(QStringLiteral("adminLoginLabel"));
         adminLoginLabel->setGeometry(QRect(20, 20, 311, 41));
-        adminLoginLabel->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
+        adminLoginLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         display->addWidget(adminLoginPage);
         adminHomePage = new QWidget();
         adminHomePage->setObjectName(QStringLiteral("adminHomePage"));
         adminHomePageLabel = new QLabel(adminHomePage);
         adminHomePageLabel->setObjectName(QStringLiteral("adminHomePageLabel"));
         adminHomePageLabel->setGeometry(QRect(20, 10, 311, 41));
-        adminHomePageLabel->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
+        adminHomePageLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         display->addWidget(adminHomePage);
         viewAdminStadiumsPage = new QWidget();
         viewAdminStadiumsPage->setObjectName(QStringLiteral("viewAdminStadiumsPage"));
         adminStadiumList = new QTreeWidget(viewAdminStadiumsPage);
         adminStadiumList->setObjectName(QStringLiteral("adminStadiumList"));
-        adminStadiumList->setGeometry(QRect(60, 90, 371, 361));
+        adminStadiumList->setGeometry(QRect(220, 140, 371, 361));
         adminStadiumList->header()->setCascadingSectionResizes(false);
         adminStadiumList->header()->setDefaultSectionSize(200);
         adminHomePageLabel_2 = new QLabel(viewAdminStadiumsPage);
         adminHomePageLabel_2->setObjectName(QStringLiteral("adminHomePageLabel_2"));
         adminHomePageLabel_2->setGeometry(QRect(60, 20, 311, 41));
-        adminHomePageLabel_2->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
-        confirmPurchasesButton_2 = new QPushButton(viewAdminStadiumsPage);
-        confirmPurchasesButton_2->setObjectName(QStringLiteral("confirmPurchasesButton_2"));
-        confirmPurchasesButton_2->setGeometry(QRect(270, 60, 161, 21));
-        confirmPurchasesButton_2->setStyleSheet(QLatin1String("QPushButton {\n"
+        QFont font6;
+        font6.setFamily(QStringLiteral("Helvetica"));
+        font6.setPointSize(30);
+        font6.setBold(false);
+        font6.setItalic(false);
+        font6.setWeight(3);
+        adminHomePageLabel_2->setFont(font6);
+        adminHomePageLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        viewMoreInfoAboutStadiumButton = new QPushButton(viewAdminStadiumsPage);
+        viewMoreInfoAboutStadiumButton->setObjectName(QStringLiteral("viewMoreInfoAboutStadiumButton"));
+        viewMoreInfoAboutStadiumButton->setGeometry(QRect(430, 110, 161, 21));
+        viewMoreInfoAboutStadiumButton->setStyleSheet(QLatin1String("QPushButton {\n"
 "background-color: #01CDE6;\n"
 "color: white;\n"
 "border:none;\n"
 "	font: 75 15pt \"Helvetica\";\n"
 "}"));
+        label_7 = new QLabel(viewAdminStadiumsPage);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(70, 60, 451, 31));
+        label_7->setWordWrap(true);
+        stadiumTotalRevenue = new QLabel(viewAdminStadiumsPage);
+        stadiumTotalRevenue->setObjectName(QStringLiteral("stadiumTotalRevenue"));
+        stadiumTotalRevenue->setGeometry(QRect(490, 524, 71, 21));
+        stadiumTotalRevenue->setFont(font5);
+        stadiumTotalRevenueLabel = new QLabel(viewAdminStadiumsPage);
+        stadiumTotalRevenueLabel->setObjectName(QStringLiteral("stadiumTotalRevenueLabel"));
+        stadiumTotalRevenueLabel->setGeometry(QRect(220, 520, 241, 31));
+        stadiumTotalRevenueLabel->setStyleSheet(QLatin1String("font: 25 20pt \"Helvetica\";\n"
+"color: rgb(32, 32, 32)\n"
+""));
         display->addWidget(viewAdminStadiumsPage);
         adminModifyPage = new QWidget();
         adminModifyPage->setObjectName(QStringLiteral("adminModifyPage"));
         modifyInformationLabel = new QLabel(adminModifyPage);
         modifyInformationLabel->setObjectName(QStringLiteral("modifyInformationLabel"));
-        modifyInformationLabel->setGeometry(QRect(10, 10, 311, 41));
-        modifyInformationLabel->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
+        modifyInformationLabel->setGeometry(QRect(10, 10, 391, 41));
+        modifyInformationLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         modifyDescription = new QLabel(adminModifyPage);
         modifyDescription->setObjectName(QStringLiteral("modifyDescription"));
         modifyDescription->setGeometry(QRect(70, 50, 441, 21));
@@ -767,8 +827,7 @@ public:
         modifySouvenirsListLabel = new QLabel(modifySouvenirItemPage);
         modifySouvenirsListLabel->setObjectName(QStringLiteral("modifySouvenirsListLabel"));
         modifySouvenirsListLabel->setGeometry(QRect(20, 10, 311, 41));
-        modifySouvenirsListLabel->setStyleSheet(QLatin1String("	font: 75 30pt \"Gill Sans\";\n"
-""));
+        modifySouvenirsListLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
         listOfModifyStadiumsSouvenirs = new QTreeWidget(modifySouvenirItemPage);
         listOfModifyStadiumsSouvenirs->setObjectName(QStringLiteral("listOfModifyStadiumsSouvenirs"));
         listOfModifyStadiumsSouvenirs->setGeometry(QRect(30, 60, 521, 311));
@@ -806,9 +865,31 @@ public:
         newSouvenirPrice->setObjectName(QStringLiteral("newSouvenirPrice"));
         newSouvenirPrice->setGeometry(QRect(300, 380, 151, 21));
         display->addWidget(modifySouvenirItemPage);
-        adminViewStadiumsPage = new QWidget();
-        adminViewStadiumsPage->setObjectName(QStringLiteral("adminViewStadiumsPage"));
-        display->addWidget(adminViewStadiumsPage);
+        adminModifyStadiums = new QWidget();
+        adminModifyStadiums->setObjectName(QStringLiteral("adminModifyStadiums"));
+        removeSelectedSouvenir_2 = new QPushButton(adminModifyStadiums);
+        removeSelectedSouvenir_2->setObjectName(QStringLiteral("removeSelectedSouvenir_2"));
+        removeSelectedSouvenir_2->setGeometry(QRect(270, 180, 231, 41));
+        removeSelectedSouvenir_2->setStyleSheet(QLatin1String("QPushButton {\n"
+"background-color: #293539;\n"
+"color: white;\n"
+"border:none;\n"
+"	font: 75 15pt \"Helvetica\";\n"
+"}"));
+        removeSelectedSouvenir_3 = new QPushButton(adminModifyStadiums);
+        removeSelectedSouvenir_3->setObjectName(QStringLiteral("removeSelectedSouvenir_3"));
+        removeSelectedSouvenir_3->setGeometry(QRect(270, 230, 231, 41));
+        removeSelectedSouvenir_3->setStyleSheet(QLatin1String("QPushButton {\n"
+"background-color: #293539;\n"
+"color: white;\n"
+"border:none;\n"
+"	font: 75 15pt \"Helvetica\";\n"
+"}"));
+        modifySouvenirsListLabel_2 = new QLabel(adminModifyStadiums);
+        modifySouvenirsListLabel_2->setObjectName(QStringLiteral("modifySouvenirsListLabel_2"));
+        modifySouvenirsListLabel_2->setGeometry(QRect(30, 10, 311, 41));
+        modifySouvenirsListLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        display->addWidget(adminModifyStadiums);
         headerFrame = new QFrame(centralWidget);
         headerFrame->setObjectName(QStringLiteral("headerFrame"));
         headerFrame->setGeometry(QRect(0, 0, 951, 41));
@@ -823,7 +904,7 @@ public:
         teamNameLabel->setGeometry(QRect(10, 10, 161, 21));
         teamNameLabel->setStyleSheet(QLatin1String("#teamNameLabel {\n"
 "color: white;\n"
-"	font: 75 30pt \"Gill Sans\";\n"
+"	font: 75 30pt \"Helvetica\";\n"
 "}"));
         adminLoginButton = new QPushButton(headerFrame);
         adminLoginButton->setObjectName(QStringLiteral("adminLoginButton"));
@@ -849,7 +930,7 @@ public:
 "border-image:url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/magnifying-glass.png\");"));
         secretAdminLoginButton = new QToolButton(headerFrame);
         secretAdminLoginButton->setObjectName(QStringLiteral("secretAdminLoginButton"));
-        secretAdminLoginButton->setGeometry(QRect(44, 15, 16, 16));
+        secretAdminLoginButton->setGeometry(QRect(44, 13, 16, 16));
         secretAdminLoginButton->setStyleSheet(QLatin1String("background-color: none;\n"
 "color: rgb(255, 255, 255);\n"
 "border: none;\n"
@@ -873,30 +954,31 @@ public:
         adminHomeButton->setText(QApplication::translate("MainWindow", "HOME", 0));
         adminModifyButton->setText(QApplication::translate("MainWindow", "MODIFY SOUVENIRS", 0));
         viewAdminStadiumsButton->setText(QApplication::translate("MainWindow", "VIEW STADIUMS", 0));
-        homeHeading->setText(QApplication::translate("MainWindow", "HOME", 0));
+        viewAdminStadiumsButton_2->setText(QApplication::translate("MainWindow", "MODIFY STADIUMS", 0));
+        viewStadiumHeading_2->setText(QApplication::translate("MainWindow", "HOME", 0));
         viewStadiumHeading->setText(QApplication::translate("MainWindow", "VIEW STADIUMS", 0));
-        QTableWidgetItem *___qtablewidgetitem = viewStadiumsList->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Stadium", 0));
-        QTableWidgetItem *___qtablewidgetitem1 = viewStadiumsList->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Name", 0));
-        QTableWidgetItem *___qtablewidgetitem2 = viewStadiumsList->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Seating Capacity", 0));
-        QTableWidgetItem *___qtablewidgetitem3 = viewStadiumsList->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Location", 0));
-        QTableWidgetItem *___qtablewidgetitem4 = viewStadiumsList->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Surface", 0));
-        QTableWidgetItem *___qtablewidgetitem5 = viewStadiumsList->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "Date Opened", 0));
-        QTableWidgetItem *___qtablewidgetitem6 = viewStadiumsList->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "Typology", 0));
         label_3->setText(QApplication::translate("MainWindow", "View by:", 0));
         label_4->setText(QApplication::translate("MainWindow", "Sort by:", 0));
-        comboBox->clear();
-        comboBox->insertItems(0, QStringList()
+        viewStadiumByComboBox->clear();
+        viewStadiumByComboBox->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "All", 0)
          << QApplication::translate("MainWindow", "American", 0)
          << QApplication::translate("MainWindow", "National", 0)
         );
+        comboBox_2->clear();
+        comboBox_2->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "test", 0)
+         << QApplication::translate("MainWindow", "test", 0)
+         << QApplication::translate("MainWindow", "test", 0)
+        );
+        QTreeWidgetItem *___qtreewidgetitem = viewStadiumsList->headerItem();
+        ___qtreewidgetitem->setText(6, QApplication::translate("MainWindow", "Typology", 0));
+        ___qtreewidgetitem->setText(5, QApplication::translate("MainWindow", "Date Opened", 0));
+        ___qtreewidgetitem->setText(4, QApplication::translate("MainWindow", "Surface", 0));
+        ___qtreewidgetitem->setText(3, QApplication::translate("MainWindow", "Location", 0));
+        ___qtreewidgetitem->setText(2, QApplication::translate("MainWindow", "Seating Capacity", 0));
+        ___qtreewidgetitem->setText(1, QApplication::translate("MainWindow", "Name", 0));
+        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "Stadium", 0));
         singleStadiumNameLabel->setText(QApplication::translate("MainWindow", "STADIUM_NAME", 0));
         label_9->setText(QApplication::translate("MainWindow", "Team name:", 0));
         label_12->setText(QApplication::translate("MainWindow", "Type of League:", 0));
@@ -905,6 +987,7 @@ public:
         label_6->setText(QApplication::translate("MainWindow", "Date opened:", 0));
         label_10->setText(QApplication::translate("MainWindow", "Seating capacity:", 0));
         label_11->setText(QApplication::translate("MainWindow", "Surface:", 0));
+        totalRevenueLabel->setText(QApplication::translate("MainWindow", "Total revenue:", 0));
         singleStadiumTeamName->setText(QApplication::translate("MainWindow", "team_name", 0));
         singleStadiumType->setText(QApplication::translate("MainWindow", "type_of_league", 0));
         singleStadiumAddress->setText(QApplication::translate("MainWindow", "address", 0));
@@ -912,39 +995,40 @@ public:
         singleStadiumDateOpened->setText(QApplication::translate("MainWindow", "date_opened", 0));
         singleStadiumSeatingCapacity->setText(QApplication::translate("MainWindow", "seating_capacity", 0));
         singleStadiumSurface->setText(QApplication::translate("MainWindow", "surface", 0));
+        singleStadiumTotalRevenue->setText(QApplication::translate("MainWindow", "total_revenue", 0));
         shortestTripToAllButton->setText(QApplication::translate("MainWindow", "SHORTEST TRIP TO ALL", 0));
         customTripButton->setText(QApplication::translate("MainWindow", "CUSTOM TRIP", 0));
         minimumSpanningTreeButton->setText(QApplication::translate("MainWindow", "GENERATE MINIMUM SPANNING TREE", 0));
         planATripLabel->setText(QApplication::translate("MainWindow", "PLAN A TRIP", 0));
         shortestTripToAllLabel->setText(QApplication::translate("MainWindow", "SHORTEST TRIP TO ALL", 0));
-        QTreeWidgetItem *___qtreewidgetitem = shortestTripList->headerItem();
-        ___qtreewidgetitem->setText(1, QApplication::translate("MainWindow", "Distance to next", 0));
-        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "Stadium", 0));
+        QTreeWidgetItem *___qtreewidgetitem1 = shortestTripList->headerItem();
+        ___qtreewidgetitem1->setText(1, QApplication::translate("MainWindow", "Distance to next", 0));
+        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Stadium", 0));
         planATripLabel_4->setText(QApplication::translate("MainWindow", "total distance:", 0));
         label_2->setText(QApplication::translate("MainWindow", "--- miles", 0));
         customTripLabel->setText(QApplication::translate("MainWindow", "PLAN CUSTOM TRIP", 0));
-        QTreeWidgetItem *___qtreewidgetitem1 = stadiumsToSelectFromList->headerItem();
-        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Stadiums", 0));
-        QTreeWidgetItem *___qtreewidgetitem2 = selectedStadiumsList->headerItem();
-        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Stadiums to travel to", 0));
+        QTreeWidgetItem *___qtreewidgetitem2 = stadiumsToSelectFromList->headerItem();
+        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Stadiums", 0));
+        QTreeWidgetItem *___qtreewidgetitem3 = selectedStadiumsList->headerItem();
+        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Stadiums to travel to", 0));
         confirmCustomTripButton->setText(QApplication::translate("MainWindow", "TAKE TRIP", 0));
         arrows->setText(QApplication::translate("MainWindow", "-->\n"
 "<--", 0));
         startingStadiumLabel->setText(QApplication::translate("MainWindow", "Please select your starting stadium:", 0));
         planATripLabel_2->setText(QApplication::translate("MainWindow", "MINIMUM SPANNING TREE", 0));
-        QTreeWidgetItem *___qtreewidgetitem3 = MSTList->headerItem();
-        ___qtreewidgetitem3->setText(2, QApplication::translate("MainWindow", "weight", 0));
-        ___qtreewidgetitem3->setText(1, QApplication::translate("MainWindow", "destination", 0));
-        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "origin", 0));
+        QTreeWidgetItem *___qtreewidgetitem4 = MSTList->headerItem();
+        ___qtreewidgetitem4->setText(2, QApplication::translate("MainWindow", "weight", 0));
+        ___qtreewidgetitem4->setText(1, QApplication::translate("MainWindow", "destination", 0));
+        ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "origin", 0));
         planATripLabel_3->setText(QApplication::translate("MainWindow", "total weight:", 0));
         label->setText(QApplication::translate("MainWindow", "---- miles", 0));
         currentTripStadiumNameLabel->setText(QApplication::translate("MainWindow", "STADIUM_NAME", 0));
         addSouvenirToShoppingCart->setText(QApplication::translate("MainWindow", "+ Add to cart", 0));
         currentTripWelcomeDescription->setText(QApplication::translate("MainWindow", "Welcome, you have arrived at your destination. ", 0));
-        QTreeWidgetItem *___qtreewidgetitem4 = listOfCurrentStadiumSouvenirs->headerItem();
-        ___qtreewidgetitem4->setText(2, QApplication::translate("MainWindow", "Quantity", 0));
-        ___qtreewidgetitem4->setText(1, QApplication::translate("MainWindow", "Price", 0));
-        ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "Name", 0));
+        QTreeWidgetItem *___qtreewidgetitem5 = listOfCurrentStadiumSouvenirs->headerItem();
+        ___qtreewidgetitem5->setText(2, QApplication::translate("MainWindow", "Quantity", 0));
+        ___qtreewidgetitem5->setText(1, QApplication::translate("MainWindow", "Price", 0));
+        ___qtreewidgetitem5->setText(0, QApplication::translate("MainWindow", "Name", 0));
         currentTripNextButtonLabel->setText(QApplication::translate("MainWindow", "Click 'NEXT' to travel to your next stadium.", 0));
         currentTripSouvenirLabel->setText(QApplication::translate("MainWindow", "SOUVENIRS", 0));
         currentTripNextStadium->setText(QApplication::translate("MainWindow", "NEXT", 0));
@@ -955,12 +1039,12 @@ public:
         confirmPurchasesLabel->setText(QApplication::translate("MainWindow", "CONFIRM YOUR PURCHASES", 0));
         grandTotalLabel->setText(QApplication::translate("MainWindow", "GRAND TOTAL:", 0));
         grandTotalAmount->setText(QApplication::translate("MainWindow", "$0.00", 0));
-        QTreeWidgetItem *___qtreewidgetitem5 = shoppingCart->headerItem();
-        ___qtreewidgetitem5->setText(4, QApplication::translate("MainWindow", "Total", 0));
-        ___qtreewidgetitem5->setText(3, QApplication::translate("MainWindow", "Quantity", 0));
-        ___qtreewidgetitem5->setText(2, QApplication::translate("MainWindow", "Subtotal", 0));
-        ___qtreewidgetitem5->setText(1, QApplication::translate("MainWindow", "Name", 0));
-        ___qtreewidgetitem5->setText(0, QApplication::translate("MainWindow", "Remove", 0));
+        QTreeWidgetItem *___qtreewidgetitem6 = shoppingCart->headerItem();
+        ___qtreewidgetitem6->setText(4, QApplication::translate("MainWindow", "Total", 0));
+        ___qtreewidgetitem6->setText(3, QApplication::translate("MainWindow", "Quantity", 0));
+        ___qtreewidgetitem6->setText(2, QApplication::translate("MainWindow", "Subtotal", 0));
+        ___qtreewidgetitem6->setText(1, QApplication::translate("MainWindow", "Name", 0));
+        ___qtreewidgetitem6->setText(0, QApplication::translate("MainWindow", "Remove", 0));
         shoppingCartLabel->setText(QApplication::translate("MainWindow", "SHOPPING CART", 0));
         confirmPurchasesButton->setText(QApplication::translate("MainWindow", "CONFIRM", 0));
         updateShoppingCart->setText(QApplication::translate("MainWindow", "update", 0));
@@ -970,24 +1054,30 @@ public:
         adminLoginErrorMessage->setText(QApplication::translate("MainWindow", "Invalid username or password.", 0));
         adminLoginLabel->setText(QApplication::translate("MainWindow", "ADMIN LOGIN", 0));
         adminHomePageLabel->setText(QApplication::translate("MainWindow", "ADMIN HOME PAGE", 0));
-        QTreeWidgetItem *___qtreewidgetitem6 = adminStadiumList->headerItem();
-        ___qtreewidgetitem6->setText(1, QApplication::translate("MainWindow", "Total Revenue", 0));
-        ___qtreewidgetitem6->setText(0, QApplication::translate("MainWindow", "Stadium", 0));
-        adminHomePageLabel_2->setText(QApplication::translate("MainWindow", "STADIUMS", 0));
-        confirmPurchasesButton_2->setText(QApplication::translate("MainWindow", "VIEW MORE INFO", 0));
-        modifyInformationLabel->setText(QApplication::translate("MainWindow", "MODIFY INFORMATION", 0));
-        modifyDescription->setText(QApplication::translate("MainWindow", "Select a stadium you would like to modify it's list of souvenirs", 0));
-        QTreeWidgetItem *___qtreewidgetitem7 = listOfModifyStadiums->headerItem();
+        QTreeWidgetItem *___qtreewidgetitem7 = adminStadiumList->headerItem();
+        ___qtreewidgetitem7->setText(1, QApplication::translate("MainWindow", "Total Revenue", 0));
         ___qtreewidgetitem7->setText(0, QApplication::translate("MainWindow", "Stadium", 0));
+        adminHomePageLabel_2->setText(QApplication::translate("MainWindow", "STADIUMS", 0));
+        viewMoreInfoAboutStadiumButton->setText(QApplication::translate("MainWindow", "VIEW MORE INFO", 0));
+        label_7->setText(QApplication::translate("MainWindow", "If you would like to view more information about the stadium, please select one of the following stadiums and click the 'VIEW MORE INFO' button.", 0));
+        stadiumTotalRevenue->setText(QApplication::translate("MainWindow", "$0.00", 0));
+        stadiumTotalRevenueLabel->setText(QApplication::translate("MainWindow", "GRAND TOTAL REVENUE:", 0));
+        modifyInformationLabel->setText(QApplication::translate("MainWindow", "MODIFY INFORMATION", 0));
+        modifyDescription->setText(QApplication::translate("MainWindow", "Select a stadium you would like to modify one or more of its souvenirs.", 0));
+        QTreeWidgetItem *___qtreewidgetitem8 = listOfModifyStadiums->headerItem();
+        ___qtreewidgetitem8->setText(0, QApplication::translate("MainWindow", "Stadium", 0));
         modifyInformationNextButton->setText(QApplication::translate("MainWindow", "NEXT", 0));
         modifySouvenirsListLabel->setText(QApplication::translate("MainWindow", "SOUVENIRS", 0));
-        QTreeWidgetItem *___qtreewidgetitem8 = listOfModifyStadiumsSouvenirs->headerItem();
-        ___qtreewidgetitem8->setText(1, QApplication::translate("MainWindow", "Price", 0));
-        ___qtreewidgetitem8->setText(0, QApplication::translate("MainWindow", "Name", 0));
+        QTreeWidgetItem *___qtreewidgetitem9 = listOfModifyStadiumsSouvenirs->headerItem();
+        ___qtreewidgetitem9->setText(1, QApplication::translate("MainWindow", "Price", 0));
+        ___qtreewidgetitem9->setText(0, QApplication::translate("MainWindow", "Name", 0));
         removeSelectedSouvenir->setText(QApplication::translate("MainWindow", "DELETE", 0));
         addSelectedSouvenir->setText(QApplication::translate("MainWindow", "ADD", 0));
         newSouvenirNameLabel->setText(QApplication::translate("MainWindow", "Name:", 0));
         newSouvenirPriceLabel->setText(QApplication::translate("MainWindow", "Price", 0));
+        removeSelectedSouvenir_2->setText(QApplication::translate("MainWindow", "ADD STADIUMS FROM FILE", 0));
+        removeSelectedSouvenir_3->setText(QApplication::translate("MainWindow", "UPDATE A STADIUM", 0));
+        modifySouvenirsListLabel_2->setText(QApplication::translate("MainWindow", "MODIFY STADIUMS", 0));
         teamNameLabel->setText(QApplication::translate("MainWindow", "thr  w-catch", 0));
         adminLoginButton->setText(QApplication::translate("MainWindow", "SIGN IN", 0));
         searchBar->setInputMask(QString());

@@ -176,6 +176,19 @@ border: none;
         <string>VIEW STADIUMS</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="viewAdminStadiumsButton_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>400</y>
+         <width>201</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>MODIFY STADIUMS</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
@@ -194,17 +207,17 @@ background-color: #EAEAE9
 </string>
     </property>
     <widget class="QWidget" name="homePage">
-     <widget class="QLabel" name="homeHeading">
+     <widget class="QLabel" name="viewStadiumHeading_2">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>20</y>
-        <width>201</width>
-        <height>31</height>
+        <y>10</y>
+        <width>311</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 75 30pt &quot;Gill Sans&quot;;
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;
 </string>
       </property>
       <property name="text">
@@ -223,28 +236,148 @@ background-color: #EAEAE9
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>VIEW STADIUMS</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="viewStadiumsList">
+     <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>160</y>
-        <width>702</width>
-        <height>421</height>
+        <y>60</y>
+        <width>59</width>
+        <height>16</height>
        </rect>
       </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
+      <property name="text">
+       <string>View by:</string>
       </property>
-      <property name="sortingEnabled">
-       <bool>true</bool>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>59</width>
+        <height>16</height>
+       </rect>
       </property>
+      <property name="text">
+       <string>Sort by:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="viewStadiumByComboBox">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>56</y>
+        <width>171</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QComboBox::down-arrow {
+		image: url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png&quot;);
+}
+
+QComboBox{
+ border: 0px solid   rgb(53, 53, 53);
+ background-color: rgb(255, 255, 255);
+ color:                      rgb(53, 53, 53); 
+ padding:                    5px 
+
+}
+
+QComboBox::drop-down{
+        border: 1px solid #5A5A5A;
+        background: #353535;
+    color:                      white;
+    font-weight:            bold;
+    padding:                    0px;
+}
+
+
+</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>All</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>American</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>National</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comboBox_2">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>95</y>
+        <width>171</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QComboBox::down-arrow {
+		image: url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png&quot;);
+}
+
+QComboBox{
+ border: 0px solid   rgb(53, 53, 53);
+ background-color: rgb(255, 255, 255);
+ color:                      rgb(53, 53, 53); 
+ padding:                    5px 
+
+}
+
+QComboBox::drop-down{
+        border: 1px solid #5A5A5A;
+        background: #353535;
+    color:                      white;
+    font-weight:            bold;
+    padding:                    0px;
+}
+
+
+</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>test</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>test</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>test</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QTreeWidget" name="viewStadiumsList">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>711</width>
+        <height>411</height>
+       </rect>
+      </property>
+      <attribute name="headerDefaultSectionSize">
+       <number>100</number>
+      </attribute>
       <column>
        <property name="text">
         <string>Stadium</string>
@@ -281,57 +414,6 @@ background-color: #EAEAE9
        </property>
       </column>
      </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>59</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>View by:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>100</y>
-        <width>59</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Sort by:</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>56</y>
-        <width>171</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>All</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>American</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>National</string>
-       </property>
-      </item>
-     </widget>
     </widget>
     <widget class="QWidget" name="viewSingleStadiumPage">
      <widget class="QLabel" name="singleStadiumNameLabel">
@@ -344,8 +426,7 @@ background-color: #EAEAE9
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>STADIUM_NAME</string>
@@ -357,7 +438,7 @@ background-color: #EAEAE9
         <x>20</x>
         <y>70</y>
         <width>451</width>
-        <height>381</height>
+        <height>431</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -375,7 +456,7 @@ background-color: #EAEAE9
          <x>20</x>
          <y>10</y>
          <width>131</width>
-         <height>351</height>
+         <height>401</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="singleStadiumLayoutLabels">
@@ -470,6 +551,19 @@ background-color: #EAEAE9
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="totalRevenueLabel">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Total revenue:</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -478,7 +572,7 @@ background-color: #EAEAE9
          <x>160</x>
          <y>10</y>
          <width>271</width>
-         <height>351</height>
+         <height>401</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="singleStadiumLayoutInfo">
@@ -540,6 +634,13 @@ background-color: #EAEAE9
          <widget class="QLabel" name="singleStadiumSurface">
           <property name="text">
            <string>surface</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="singleStadiumTotalRevenue">
+          <property name="text">
+           <string>total_revenue</string>
           </property>
          </widget>
         </item>
@@ -605,8 +706,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>PLAN A TRIP</string>
@@ -619,12 +719,12 @@ border:none;
        <rect>
         <x>20</x>
         <y>10</y>
-        <width>311</width>
+        <width>371</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;
 </string>
       </property>
       <property name="text">
@@ -713,8 +813,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>PLAN CUSTOM TRIP</string>
@@ -869,13 +968,12 @@ QComboBox::drop-down{
        <rect>
         <x>20</x>
         <y>20</y>
-        <width>371</width>
+        <width>411</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>MINIMUM SPANNING TREE</string>
@@ -913,14 +1011,13 @@ QComboBox::drop-down{
       <property name="geometry">
        <rect>
         <x>200</x>
-        <y>370</y>
+        <y>380</y>
         <width>101</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 20pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 20pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>total weight:</string>
@@ -930,7 +1027,7 @@ QComboBox::drop-down{
       <property name="geometry">
        <rect>
         <x>310</x>
-        <y>381</y>
+        <y>390</y>
         <width>81</width>
         <height>20</height>
        </rect>
@@ -956,8 +1053,7 @@ QComboBox::drop-down{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>STADIUM_NAME</string>
@@ -1057,22 +1153,21 @@ border:none;
        <rect>
         <x>40</x>
         <y>130</y>
-        <width>111</width>
+        <width>121</width>
         <height>21</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Gill Sans</family>
+        <family>Helvetica</family>
         <pointsize>20</pointsize>
-        <weight>9</weight>
+        <weight>3</weight>
         <italic>false</italic>
         <bold>false</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 75 20pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 20pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>SOUVENIRS</string>
@@ -1162,16 +1257,15 @@ QProgressBar::chunk {
       </property>
       <property name="font">
        <font>
-        <family>Gill Sans</family>
+        <family>Helvetica</family>
         <pointsize>20</pointsize>
-        <weight>9</weight>
+        <weight>3</weight>
         <italic>false</italic>
         <bold>false</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 75 20pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 20pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>TRIP PROGRESS</string>
@@ -1210,8 +1304,7 @@ QProgressBar::chunk {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>CONFIRM YOUR PURCHASES</string>
@@ -1299,12 +1392,12 @@ color: rgb(32, 32, 32)
        <rect>
         <x>230</x>
         <y>70</y>
-        <width>191</width>
+        <width>221</width>
         <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 75 25pt &quot;Gill Sans&quot;;
+       <string notr="true">font: 25 25pt &quot;Helvetica&quot;;
 color: rgb(68, 68, 68);
 </string>
       </property>
@@ -1452,8 +1545,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>ADMIN LOGIN</string>
@@ -1471,8 +1563,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>ADMIN HOME PAGE</string>
@@ -1483,8 +1574,8 @@ border:none;
      <widget class="QTreeWidget" name="adminStadiumList">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>90</y>
+        <x>220</x>
+        <y>140</y>
         <width>371</width>
         <height>361</height>
        </rect>
@@ -1515,19 +1606,27 @@ border:none;
         <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Helvetica</family>
+        <pointsize>30</pointsize>
+        <weight>3</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>STADIUMS</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="confirmPurchasesButton_2">
+     <widget class="QPushButton" name="viewMoreInfoAboutStadiumButton">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>60</y>
+        <x>430</x>
+        <y>110</y>
         <width>161</width>
         <height>21</height>
        </rect>
@@ -1544,6 +1643,58 @@ border:none;
        <string>VIEW MORE INFO</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>60</y>
+        <width>451</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>If you would like to view more information about the stadium, please select one of the following stadiums and click the 'VIEW MORE INFO' button.</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="stadiumTotalRevenue">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>524</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>23</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>$0.00</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="stadiumTotalRevenueLabel">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>520</y>
+        <width>241</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 25 20pt &quot;Helvetica&quot;;
+color: rgb(32, 32, 32)
+</string>
+      </property>
+      <property name="text">
+       <string>GRAND TOTAL REVENUE:</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="adminModifyPage">
      <widget class="QLabel" name="modifyInformationLabel">
@@ -1551,13 +1702,12 @@ border:none;
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>311</width>
+        <width>391</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>MODIFY INFORMATION</string>
@@ -1573,7 +1723,7 @@ border:none;
        </rect>
       </property>
       <property name="text">
-       <string>Select a stadium you would like to modify it's list of souvenirs</string>
+       <string>Select a stadium you would like to modify one or more of its souvenirs.</string>
       </property>
      </widget>
      <widget class="QTreeWidget" name="listOfModifyStadiums">
@@ -1639,8 +1789,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 30pt &quot;Gill Sans&quot;;
-</string>
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
       </property>
       <property name="text">
        <string>SOUVENIRS</string>
@@ -1764,7 +1913,66 @@ border:none;
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="adminViewStadiumsPage"/>
+    <widget class="QWidget" name="adminModifyStadiums">
+     <widget class="QPushButton" name="removeSelectedSouvenir_2">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>180</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #293539;
+color: white;
+border:none;
+	font: 75 15pt &quot;Helvetica&quot;;
+}</string>
+      </property>
+      <property name="text">
+       <string>ADD STADIUMS FROM FILE</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="removeSelectedSouvenir_3">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>230</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #293539;
+color: white;
+border:none;
+	font: 75 15pt &quot;Helvetica&quot;;
+}</string>
+      </property>
+      <property name="text">
+       <string>UPDATE A STADIUM</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="modifySouvenirsListLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+      </property>
+      <property name="text">
+       <string>MODIFY STADIUMS</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QFrame" name="headerFrame">
     <property name="geometry">
@@ -1799,7 +2007,7 @@ border: none;
      <property name="styleSheet">
       <string notr="true">#teamNameLabel {
 color: white;
-	font: 75 30pt &quot;Gill Sans&quot;;
+	font: 75 30pt &quot;Helvetica&quot;;
 }</string>
      </property>
      <property name="text">
@@ -1881,7 +2089,7 @@ border-image:url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/ma
      <property name="geometry">
       <rect>
        <x>44</x>
-       <y>15</y>
+       <y>13</y>
        <width>16</width>
        <height>16</height>
       </rect>

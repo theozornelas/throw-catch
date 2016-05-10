@@ -14,22 +14,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    int fontID = QFontDatabase::addApplicationFont(":/font/icons/GilSansMT.TTF");
-    if(fontID == -1) {
-        qDebug() << "ERROR LOADING FONT!";
-    }
-    else {
-        QString fontFamily = QFontDatabase::applicationFontFamilies(fontID).at(0);
-        qDebug() << "FONT LOADED: " << fontFamily;
-    }
-
     // get the stadiums and greate a graph of them
     stadiums = db.getStadiums();
     stadiumsGraph = db.createGraph(stadiums);
 
     keys = db.getAllStadiumsKeys();
 
-    ui->viewStadiumsList->setRowCount(keys.length() + 1);
 
     QStringList searchNames;
     QCompleter *stadiumSearch;
@@ -41,21 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     stadiumSearch = new QCompleter(searchNames,this);
     stadiumSearch->setCaseSensitivity(Qt::CaseInsensitive);
     ui->searchBar->setCompleter(stadiumSearch);
-
-    for(int row = 0; row < keys.length(); row++) {
-        Stadium *s = *stadiums.get(keys[row]);
-
-        ui->viewStadiumsList->setRowHeight(row, 45);
-        ui->viewStadiumsList->setItem(row, 0, new QTableWidgetItem(s->getStadiumName()));
-        ui->viewStadiumsList->setItem(row, 1, new QTableWidgetItem(s->getTeamName()));
-        ui->viewStadiumsList->setItem(row, 2, new QTableWidgetItem(QString::number(s->getSeatingCapacity())));
-        ui->viewStadiumsList->setItem(row, 3, new QTableWidgetItem(s->getAddress()));
-        ui->viewStadiumsList->setItem(row, 4, new QTableWidgetItem(s->getSurface()));
-        ui->viewStadiumsList->setItem(row, 5, new QTableWidgetItem(s->getDateOpened()));
-        ui->viewStadiumsList->setItem(row, 6, new QTableWidgetItem(s->getTypology()));
-
-
-    }
 
 
 }
@@ -74,10 +49,67 @@ void MainWindow::on_homePageButton_clicked()
     ui->display->setCurrentIndex(HOME);
 }
 
+void MainWindow::on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1)
+{
+    viewStadiumBy(arg1);
+}
+
+
 void MainWindow::on_viewStadiumsPageButton_clicked()
 {
     ui->display->setCurrentIndex(VIEW_STADIUMS);
+    viewStadiumBy(ui->viewStadiumByComboBox->currentText());
 }
+
+
+void MainWindow::viewStadiumBy(QString sortByType) {
+
+    ui->viewStadiumsList->clear();
+
+    ui->viewStadiumsList->setColumnWidth(0, 200);
+    ui->viewStadiumsList->setColumnWidth(1, 90);
+    ui->viewStadiumsList->setColumnWidth(2, 70);
+    ui->viewStadiumsList->setColumnWidth(3, 100);
+    ui->viewStadiumsList->setColumnWidth(4, 100);
+    ui->viewStadiumsList->setColumnWidth(5, 90);
+    ui->viewStadiumsList->setColumnWidth(6, 90);
+
+
+    if(sortByType != "All") {
+        for(int row = 0; row < keys.length(); row++) {
+            Stadium *s = *stadiums.get(keys[row]);
+
+            if(s->getLeagueType() == sortByType) {
+                QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->viewStadiumsList);
+                currentItem->setText(0, s->getStadiumName());
+                currentItem->setText(1, s->getTeamName());
+                currentItem->setText(2, QString::number(s->getSeatingCapacity()));
+                currentItem->setText(3, s->getAddress());
+                currentItem->setText(4, s->getSurface());
+                currentItem->setText(5, s->getDateOpened());
+                currentItem->setText(6, s->getTypology());
+            }
+
+        }
+    }
+    else {
+
+
+        for(int row = 0; row < keys.length(); row++) {
+            Stadium *s = *stadiums.get(keys[row]);
+            QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->viewStadiumsList);
+            currentItem->setText(0, s->getStadiumName());
+            currentItem->setText(1, s->getTeamName());
+            currentItem->setText(2, QString::number(s->getSeatingCapacity()));
+            currentItem->setText(3, s->getAddress());
+            currentItem->setText(4, s->getSurface());
+            currentItem->setText(5, s->getDateOpened());
+            currentItem->setText(6, s->getTypology());
+
+        }
+    }
+}
+
 
 void MainWindow::on_planATripButton_clicked()
 {
@@ -94,12 +126,40 @@ void MainWindow::on_customTripButton_clicked()
     for(int i = 0; i < keys.size(); i++) {
         Stadium *s = *stadiums.get(keys[i]);
         ui->startingStadiumComboBox->addItem(s->getStadiumName());
-        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->stadiumsToSelectFromList);
-        currentItem->setText(0, s->getStadiumName());
+    }
+}
+
+void MainWindow::on_startingStadiumComboBox_currentIndexChanged(const QString &arg1)
+{
+
+    ui->stadiumsToSelectFromList->clear();
+    for(int i = 0; i < keys.size(); i++) {
+        Stadium *s = *stadiums.get(keys[i]);
+        if(s->getStadiumName() != arg1) {
+            QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->stadiumsToSelectFromList);
+            currentItem->setText(0, s->getStadiumName());
+        }
+    }
+
+    QTreeWidgetItemIterator it(ui->selectedStadiumsList);
+    bool found = false;
+    while (*it && !found) {
+
+        QString currentStadiumName = (*it)->text(0);
+
+
+        if(currentStadiumName == arg1) {
+            found = true;
+            delete *it;
+        }
+        else {
+            it++;
+        }
     }
 
 
 }
+
 
 void MainWindow::on_stadiumsToSelectFromList_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
@@ -530,7 +590,15 @@ void MainWindow::on_currentTripNextStadium_clicked()
 
 void MainWindow::on_searchButton_clicked()
 {
-    int stadiumID = db.getStadiumID(ui->searchBar->text());
+    viewSingleStadium(ui->searchBar->text());
+
+    ui->searchBar->clear();
+
+
+}
+
+void MainWindow::viewSingleStadium(QString stadiumName) {
+    int stadiumID = db.getStadiumID(stadiumName);
 
     /** If stadium id is -1, the stadium does not exist */
     if(stadiumID != -1) {
@@ -546,10 +614,19 @@ void MainWindow::on_searchButton_clicked()
         ui->singleStadiumDateOpened->setText(s->getDateOpened());
         ui->singleStadiumType->setText(s->getLeagueType());
 
-        ui->searchBar->clear();
+        if(adminPrivilege) {
+            ui->singleStadiumTotalRevenue->setVisible(true);
+            ui->totalRevenueLabel->setVisible(true);
+            ui->singleStadiumTotalRevenue->setText("$" + QString::number(s->getTotalRevenue(),'f',2));
+        }
+        else {
+            ui->singleStadiumTotalRevenue->setVisible(false);
+            ui->totalRevenueLabel->setVisible(false);
+        }
+
     }
     else if(!isBlank(ui->searchBar->text())) {
-        ui->singleStadiumNameLabel->setText(ui->searchBar->text() + " was not found.");
+        ui->singleStadiumNameLabel->setText(stadiumName + " was not found.");
         ui->singleStadiumInfo->hide();
     }
 
@@ -567,11 +644,12 @@ void MainWindow::on_confirmPurchasesButton_clicked()
     while (*it) {
 
         stadiumName = (*it)->text(1);
-        totalSpentAtStadium = (*it)->text(4).right((*it)->text(4).size() - 1).toDouble();
+        totalSpentAtStadium = (*it)->text(4).toDouble();
         Stadium *s = *stadiums.get(db.getStadiumID(stadiumName));
 
         if(s != NULL) {
             s->addToTotalRevenue(totalSpentAtStadium);
+            db.updateTotalRevenue(s->getStadiumID(), s->getTotalRevenue());
         }
 
       it++;
@@ -592,12 +670,41 @@ void MainWindow::on_viewAdminStadiumsButton_clicked()
     ui->adminStadiumList->setColumnWidth(0, 200);
     ui->adminStadiumList->setColumnWidth(1, 70);
 
+    double grandTotalRevenue = 0;
+
     for(int i = 0; i < keys.size(); i++) {
         Stadium *s = *stadiums.get(keys[i]);
 
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->adminStadiumList);
         currentItem->setText(0, s->getStadiumName());
         currentItem->setText(1, "$" + QString::number(s->getTotalRevenue(), 'f', 2));
+        grandTotalRevenue += s->getTotalRevenue();
+    }
+
+    ui->stadiumTotalRevenue->setText("$" + QString::number(grandTotalRevenue, 'f', 2));
+
+}
+
+void MainWindow::on_adminHomeButton_clicked()
+{
+    ui->display->setCurrentIndex(ADMIN_HOME);
+}
+
+
+void MainWindow::on_viewMoreInfoAboutStadiumButton_clicked()
+{
+    QTreeWidgetItem* selectedStadium = ui->adminStadiumList->currentItem();
+
+    if(selectedStadium != NULL) {
+
+        viewSingleStadium(selectedStadium->data(0, 0).toString());
+    }
+    else {
+        QMessageBox::warning(this, "Warning!", "Uh-oh, please select a stadium to view.");
+
     }
 
 }
+
+
+

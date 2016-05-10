@@ -51,7 +51,7 @@ public:
         teamNameLabel->setGeometry(QRect(10, 10, 161, 21));
         teamNameLabel->setStyleSheet(QLatin1String("#teamNameLabel {\n"
 "color: white;\n"
-"	font: 75 20pt \"Gill Sans\";\n"
+"	font: 75 20pt \"Helvetica\";\n"
 "}"));
         shoppingCart = new QTreeWidget(ShoppingCart);
         shoppingCart->setObjectName(QStringLiteral("shoppingCart"));
@@ -60,14 +60,14 @@ public:
         shoppingCart->header()->setDefaultSectionSize(133);
         shoppingCartLabel = new QLabel(ShoppingCart);
         shoppingCartLabel->setObjectName(QStringLiteral("shoppingCartLabel"));
-        shoppingCartLabel->setGeometry(QRect(170, 60, 191, 31));
-        shoppingCartLabel->setStyleSheet(QLatin1String("font: 75 25pt \"Gill Sans\";\n"
+        shoppingCartLabel->setGeometry(QRect(170, 60, 201, 31));
+        shoppingCartLabel->setStyleSheet(QLatin1String("font: 25 25pt \"Helvetica\";\n"
 "color: rgb(68, 68, 68);\n"
 ""));
         grandTotalLabel = new QLabel(ShoppingCart);
         grandTotalLabel->setObjectName(QStringLiteral("grandTotalLabel"));
-        grandTotalLabel->setGeometry(QRect(210, 420, 151, 31));
-        grandTotalLabel->setStyleSheet(QLatin1String("font: 75 20pt \"Gill Sans\";\n"
+        grandTotalLabel->setGeometry(QRect(200, 420, 151, 31));
+        grandTotalLabel->setStyleSheet(QLatin1String("font: 75 20pt \"Helvetica\";\n"
 "color: rgb(32, 32, 32)\n"
 ""));
         grandTotalAmount = new QLabel(ShoppingCart);
