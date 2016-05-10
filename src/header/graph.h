@@ -315,7 +315,7 @@ typename Graph<E>::VertexList Graph<E>::Vertex::adjacentVertex()
 
     for(EdgeItrItr it = incident_.begin(); it != incident_.end(); it++)
     {
-        nextVertices.push_back((*it)->end());
+        nextVertices.push_back((*it)->start());
     }
 
     return nextVertices;
@@ -455,6 +455,15 @@ template <typename E>
 void Graph<E>:: Dijkstra(const E &e)
 {
 
+    //make parallel list for vertex and distance
+
+    //stores previous vertex
+    VertexList prev;
+
+    //store the total distance to that path
+    std::list<int> distanceList;
+
+
     //find starting position
     VertexItr startPos = findVertex(e);
 //*********************************************************************************
@@ -521,13 +530,16 @@ qDebug() << "inside while";
              qDebug() << "u inside for "<< u;
 
              qDebug() << "inside for";
-            if((u.getValue() + Distace(u,*j)) < (*j).getValue())
-//            {
+            if((u.getValue() + (u.edgeTo(**j))->weight()) < (*j).getValue())
+            {
 
-//                qDebug() << "inside if of for";
-//                (*j).setValue(u.getValue() + Distace(u,*j));
-//                (*j).setValue(u.getValue());
-//            }
+                qDebug() << "inside if of for";
+                (*j).setValue(u.getValue() + (u.edgeTo(**j))->weight());
+                //(*j).setValue(u.getValue());
+
+//                distanceList.push_back(u.getValue() + (u.edgeTo(**j))->weight());
+//                prev.push_back(u);
+            }
         }
 
         u = graphVertices.min();
@@ -801,24 +813,15 @@ bool Graph<E>::Vertex::isAdjacentTo(const E &v) {
  */
 template <typename E>
 typename Graph<E>::EdgeItr Graph<E>::Vertex::edgeTo(const E& v) {
-    EdgeItr output = incident_.end();
+    EdgeItr output;
 
     for(EdgeItrItr itr = incident_.begin(); itr != incident_.end(); itr++){
         // if the edge is incident to this AND 'v' then it is a candidate
         if( (**itr).isIncidentOn(Vertex(v)) ){
-            //if ouput has not be set yet just set it
-            if( output == incident_.end() ){
-                output = *itr;
-            }
-            //if output has been set then make sure the distance is shorter before setting
-            else{
-                if( *output > **itr ){
-                    output = *itr;
-                }
-            }
+            output = *itr;
         }
     }
-    return *itr;
+    return output;
 }
 
 /**
