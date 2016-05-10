@@ -525,21 +525,26 @@ qDebug() << "inside while";
 
         qDebug() << graphVertices.size();
 
+        int distanceTotal = 0;
+
         for(VertexItr j = u.adjacentVertex().begin(); j != u.adjacentVertex().end(); j++)
         {
 
              qDebug() << "u inside for "<< u;
 
              qDebug() << "inside for";
-            if((u.getValue() + (u.edgeTo(**j))->weight()) < (*j).getValue())
+
+             distanceTotal = (u.getValue() + (u.edgeTo(**j))->weight());
+
+            if(distanceTotal < (*j).getValue())
             {
 
                 qDebug() << "inside if of for";
-                (*j).setValue(u.getValue() + (u.edgeTo(**j))->weight());
+                (*j).setValue(distanceTotal);
                 //(*j).setValue(u.getValue());
 
-//                distanceList.push_back(u.getValue() + (u.edgeTo(**j))->weight());
-//                prev.push_back(u);
+               distanceList.push_back(distanceTotal);
+//                prev.push_back(*j);
             }
         }
 
