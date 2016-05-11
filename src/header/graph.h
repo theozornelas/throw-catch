@@ -509,7 +509,7 @@ void Graph<E>:: Dijkstra(const E &e)
 
     //list to store all verticed in the graph
     PriorityQueue<Vertex> graphVertices;
-    //PriorityQueue<Vertex> testing;
+    PriorityQueue<Vertex> testing;
 
     //graphVertices.insert(*startPos);
 
@@ -522,15 +522,29 @@ void Graph<E>:: Dijkstra(const E &e)
         }
         else if(*i == *startPos)
         {
+
+            qDebug() << "Inside the else if to set = 0 ";
             (*i).setValue(0);
         }
         graphVertices.insert(*i);
-       // testing.insert(*i);
+        testing.insert(*i);
 
     }
 
+    qDebug() << "Testing the queue after assigning values";
+    while(!testing.empty())
+    {
+        qDebug() << testing.min().getValue();
+        testing.removeMin();
+    }
+
+
     //get the smallest vertex in the list
 Vertex u = graphVertices.min();
+
+
+qDebug()<<"Value of the first Value: " << u.getValue();
+
 
 //while the list is not empty
     while(!graphVertices.empty())
@@ -552,12 +566,18 @@ Vertex u = graphVertices.min();
         for(VertexItr j = adjacentVertices.begin(); j !=adjacentVertices.end(); j++)
         {
 
-          qDebug() << "distance Value :  "<<(u.edgeTo(**j))->weight();
+          //qDebug() << "distance Value :  "<<(u.edgeTo(**j))->weight();
 
           //the total cost to vistit that place
              distanceTotal = (u.getValue() + (u.edgeTo(**j))->weight());
 
              //this is the realxation part - this is double fisting my arse.
+
+
+            qDebug() << "distance Value :  "<<distanceTotal;
+            qDebug() << "j getValue Value :  "<<(*j).getValue();
+
+
             if(distanceTotal < (*j).getValue())
             {
 
@@ -570,21 +590,21 @@ Vertex u = graphVertices.min();
             }
         }
 
-        u = graphVertices.min();
-        //graphVertices.removeMin();
-
-     //qDebug() << "after removing min";
+        if(!graphVertices.empty())
+        {
+             u = graphVertices.min();
+        }
     }
 
 
-//    qDebug() << "List of distances";
+    qDebug() << "List of distances";
 
-//    for(std::list<int>::iterator it = distanceList.begin(); it != distanceList.end(); it++)
-//    {
-//        qDebug() << "Distance: "<< *it;
-//    }
+    for(std::list<int>::iterator it = distanceList.begin(); it != distanceList.end(); it++)
+    {
+        qDebug() << "Distance: "<< *it;
+    }
 
-//    qDebug() << "After For loop";
+    qDebug() << "After For loop";
 }
 
 /**
