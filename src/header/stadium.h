@@ -54,7 +54,7 @@ public:
             QString team, QString street, QString city,
             QString state, QString zipCode,
             QString number, QString date, unsigned int capacity,
-            QString surf, QString league, QString typo);
+            QString surf, QString league, QString typo, double revenue);
     // Constructor of testing, provides everything needed for text output
     Stadium(int id, QString name) : stadiumID(id), stadiumName(name) { }
     // Constructor for stadium with only an id, for comparisons and searches
@@ -76,6 +76,7 @@ public:
     QString      getLeagueType() const;
     QString      getTypology() const;
     QVector<Souvenir> getSouvenirs() const;
+    double       getTotalRevenue() const;
 
 
     /***************
@@ -91,6 +92,8 @@ public:
     void setSurface(QString newSurface);
     void setLeagueType(QString newLeagueType);
     void setTypology(QString typo);
+    void setTotalRevenue(double revenue);
+    void addToTotalRevenue(double addToRevenue);
 
     // Save and load with JSON files
     QJsonObject toJSON();
@@ -131,6 +134,7 @@ private:
     QString surface;
     QString leagueType;
     QString typology;
+    double totalRevenue;
 
     QVector<Souvenir> souvenirs;
 };

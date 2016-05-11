@@ -1,5 +1,6 @@
 #include "dbmanager.h"
 #include <QDebug>
+#include <QFileInfo>
 /*
  * C O N S T R U C T O R
  */
@@ -12,7 +13,8 @@ DBManager::DBManager()
     _db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Remember to change path, will find a more generic way soon.
-    QString path = "/Users/sarahsingletary/Documents/throw-catch/sqlite/throw-catch.db";
+    QString path = "/Users/sarahsingletary/Documents/throw-catch/sqlite/throw-catch.db";    // Sarah MacbookPro
+//    QString path = "D:/Ethan/Desktop/Working/2_Projects/!saddleback_CS/CS1D_Projects/throw-catch/sqlite/throw-catch.db";    // Ethan Win10 Workstation
     _db.setDatabaseName(path);
     _qry = QSqlQuery(_db);
 
@@ -103,7 +105,6 @@ bool DBManager::RemoveSouvenir(int stadiumKey, QString name) {
 
 skiplist<int, Stadium*> DBManager::getStadiums() {
     skiplist<int, Stadium*> listOfStadiums;
-    QVector<Stadium> stadiums;
 
     QSqlQuery query;
     QSqlQuery souvenirQuery;
@@ -113,7 +114,8 @@ skiplist<int, Stadium*> DBManager::getStadiums() {
     if(query.exec()) {
         while(query.next()) {
 
-            Stadium *s = (new Stadium(query.value("id").toInt(),
+
+            Stadium *s = new Stadium(query.value("id").toInt(),
                                       query.value("stadium_name").toString(),
                                       query.value("team_name").toString(),
                                       query.value("street_address").toString(),
@@ -125,7 +127,8 @@ skiplist<int, Stadium*> DBManager::getStadiums() {
                                       query.value("seating_capacity").toInt(),
                                       query.value("surface").toString(),
                                       query.value("league_type").toString(),
-                                      query.value("typology").toString()));
+                                      query.value("typology").toString(),
+                                      query.value("total_revenue").toDouble());
 
             souvenirQuery.prepare("SELECT * FROM Souvenirs");
 
@@ -140,7 +143,6 @@ skiplist<int, Stadium*> DBManager::getStadiums() {
                 }
             }
 
-            stadiums.push_back(*s);
             listOfStadiums.insert(query.value("id").toInt(), s);
 
 
@@ -207,4 +209,16 @@ Graph<Stadium>* DBManager::createGraph(skiplist<int, Stadium*> stadiumList) {
     }
 
   return graph;
+}
+
+bool DBManager::updateTotalRevenue(int stadiumKey, double newRevenue) {
+    QSqlQuery query;
+
+    query.prepare("UPDATE Stadiums SET total_revenue = :new_revenue WHERE id = :key");
+
+    qDebug() << newRevenue;
+    query.bindValue(":new_revenue", newRevenue);
+    query.bindValue(":key", stadiumKey);
+
+    return query.exec();
 }
