@@ -529,59 +529,35 @@ void Graph<E>:: Dijkstra(const E &e)
 
     }
 
-//qDebug() << "vertices in list: ";
-//    while(!testing.empty())
-//    {
-//        qDebug() << testing.min();
-//        testing.removeMin();
-//    }
-
+    //get the smallest vertex in the list
 Vertex u = graphVertices.min();
+
 //while the list is not empty
     while(!graphVertices.empty())
     {
 
-        //u is the smallest value in the list
-
-
-
-//qDebug() << "inside while";
-
-
         //pop u
         graphVertices.removeMin();
 
-        //qDebug() << graphVertices.size();
-
+        //set the distance to 0 (t avoid null data)
         int distanceTotal = 0;
 
 
+        //vertices near the current smallest one
         VertexList adjacentVertices = nearVertices(u);
-qDebug()<< "The vertex next to " << u << " are: ";
-
-        for(VertexItr check = adjacentVertices.begin(); check!=adjacentVertices.end(); check++)
-        {
-            qDebug() << *check;
-        }
 
 
+
+        //for all the vertex adjacent to the current one
         for(VertexItr j = adjacentVertices.begin(); j !=adjacentVertices.end(); j++)
         {
 
-            // qDebug() << "u inside for "<< u;
+          qDebug() << "distance Value :  "<<(u.edgeTo(**j))->weight();
 
-             //qDebug() << "inside for";
-
-//            qDebug() << "u.getValue():  "<< u.getValue();
-//            qDebug() << "distance Value :  "<<(u.edgeTo(**j))->weight();
-
+          //the total cost to vistit that place
              distanceTotal = (u.getValue() + (u.edgeTo(**j))->weight());
 
-            // qDebug() << distanceTotal;
-
-//            qDebug() << "j.getValue():  "<< (*j).getValue();
-//             qDebug() << "distancetotal: "<<distanceTotal;
-
+             //this is the realxation part - this is double fisting my arse.
             if(distanceTotal <(*j).getValue())
             {
 
@@ -595,20 +571,20 @@ qDebug()<< "The vertex next to " << u << " are: ";
         }
 
         u = graphVertices.min();
-        graphVertices.removeMin();
+        //graphVertices.removeMin();
 
-     qDebug() << "after removing min";
+     //qDebug() << "after removing min";
     }
 
 
-    qDebug() << "List of distances";
+//    qDebug() << "List of distances";
 
-    for(std::list<int>::iterator it = distanceList.begin(); it != distanceList.end(); it++)
-    {
-        qDebug() << "Distance: "<< *it;
-    }
+//    for(std::list<int>::iterator it = distanceList.begin(); it != distanceList.end(); it++)
+//    {
+//        qDebug() << "Distance: "<< *it;
+//    }
 
-    qDebug() << "After For loop";
+//    qDebug() << "After For loop";
 }
 
 /**
