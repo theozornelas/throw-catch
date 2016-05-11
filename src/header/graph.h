@@ -21,6 +21,7 @@
 #include <climits>
 #include <functional>
 #include "priorityqueue.h"
+#define INF INT_MAX
 
 
 /**
@@ -43,6 +44,7 @@ public:
     typedef typename EdgeItrList::iterator EdgeItrItr;
     typedef std::priority_queue<Vertex> Heap;
     typedef std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge> > EdgePQueue;
+//    typedef std::priority_queue<Vertex, std::vector<Vertex>, Vertex::distanceCompare > VertexPQueue;
 
     /**
      * @brief The Vertex class
@@ -50,7 +52,7 @@ public:
     class Vertex {
     public:
         // Basic Constructor
-        Vertex(const E& data) : data_(data), visited_(false), distance_(-1) { parent_ = vertices_.end(); }
+        Vertex(const E& data) : data_(data), visited_(false), distance_(INF) {  }
         // Sets the data stored in this vertex to a new value
         void setData(const E& data) { data_ = data; }
         // Sets the state of this vertex to visited
@@ -79,8 +81,9 @@ public:
         //void addEdge(EdgeItr newEdge) { incident_.push_back(newEdge); }
         void addEdge(EdgeItr newEdge) {
             EdgeItrItr insertPoint = incident_.begin();
-            while( insertPoint != incident_.end()
-                   && **insertPoint < *newEdge){ insertPoint++; }
+            while( insertPoint != incident_.end() && **insertPoint < *newEdge){
+                insertPoint++;
+            }
             incident_.insert(insertPoint, newEdge);
         }
 
@@ -103,6 +106,13 @@ public:
             output << "[" << obj.data_ << "]";
             return output;
         }
+
+        /*** COMPARATOR FOR P-QUEUE ***/
+        class distanceCompare {
+            bool operator()(const Vertex &lhs, const Vertex &rhs) {
+                return (lhs.getDistance() > rhs.getDistance());
+            }
+        };
 
         /*** OPERATOR OVERLOADS ***/
         // Overload for the * Operator
@@ -422,8 +432,16 @@ typename Graph<E>::VertexList Graph<E>::dft(const E &e) {
  * @param e
  */
 template<typename E>
-void Graph::Dijkstra(const E &e)
+void Graph<E>::Dijkstra(const E &e)
 {
+    // Reset the weight and parent of all vertex
+    resetDijkstra();
+    // find the vertex to use as a starting point
+    VertexItr eItr = findVertex(e);
+
+    // set source distance to 0
+    sItr->setDistance(0);
+
 
 }
 
