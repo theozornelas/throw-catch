@@ -1715,9 +1715,9 @@ border:none;
      <widget class="QLabel" name="stadiumTotalRevenue">
       <property name="geometry">
        <rect>
-        <x>490</x>
+        <x>470</x>
         <y>520</y>
-        <width>81</width>
+        <width>131</width>
         <height>31</height>
        </rect>
       </property>
@@ -2076,7 +2076,7 @@ border: none;
      <property name="styleSheet">
       <string notr="true">#teamNameLabel {
 color: white;
-	font: 75 30pt &quot;Helvetica&quot;, &quot;Gill Sans MT Condensed&quot;;
+font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
      </property>
      <property name="text">
@@ -2158,7 +2158,7 @@ border-image:url(:/icon/icons/magnifying-glass.png);</string>
      <property name="geometry">
       <rect>
        <x>44</x>
-       <y>13</y>
+       <y>15</y>
        <width>16</width>
        <height>16</height>
       </rect>

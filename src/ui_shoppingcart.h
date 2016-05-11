@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'shoppingcart.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.0
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -51,7 +51,7 @@ public:
         teamNameLabel->setGeometry(QRect(10, 10, 161, 21));
         teamNameLabel->setStyleSheet(QLatin1String("#teamNameLabel {\n"
 "color: white;\n"
-"	font: 75 20pt \"Helvetica\";\n"
+"font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         shoppingCart = new QTreeWidget(ShoppingCart);
         shoppingCart->setObjectName(QStringLiteral("shoppingCart"));
@@ -61,7 +61,7 @@ public:
         shoppingCartLabel = new QLabel(ShoppingCart);
         shoppingCartLabel->setObjectName(QStringLiteral("shoppingCartLabel"));
         shoppingCartLabel->setGeometry(QRect(170, 60, 201, 31));
-        shoppingCartLabel->setStyleSheet(QLatin1String("font: 25 25pt \"Helvetica\";\n"
+        shoppingCartLabel->setStyleSheet(QLatin1String("font: 25 25pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "color: rgb(68, 68, 68);\n"
 ""));
         grandTotalLabel = new QLabel(ShoppingCart);

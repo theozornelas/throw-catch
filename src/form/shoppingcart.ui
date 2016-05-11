@@ -46,7 +46,7 @@ border: none;
     <property name="styleSheet">
      <string notr="true">#teamNameLabel {
 color: white;
-	font: 75 20pt &quot;Helvetica&quot;;
+font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
     </property>
     <property name="text">
@@ -100,7 +100,7 @@ color: white;
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 25 25pt &quot;Helvetica&quot;;
+    <string notr="true">font: 25 25pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 color: rgb(68, 68, 68);
 </string>
    </property>

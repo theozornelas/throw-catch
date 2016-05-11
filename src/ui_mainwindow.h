@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.0
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -798,7 +798,7 @@ public:
         label_7->setWordWrap(true);
         stadiumTotalRevenue = new QLabel(viewAdminStadiumsPage);
         stadiumTotalRevenue->setObjectName(QStringLiteral("stadiumTotalRevenue"));
-        stadiumTotalRevenue->setGeometry(QRect(490, 520, 81, 31));
+        stadiumTotalRevenue->setGeometry(QRect(470, 520, 131, 31));
         QFont font7;
         font7.setPointSize(23);
         stadiumTotalRevenue->setFont(font7);
@@ -922,7 +922,7 @@ public:
         teamNameLabel->setGeometry(QRect(10, 0, 151, 41));
         teamNameLabel->setStyleSheet(QLatin1String("#teamNameLabel {\n"
 "color: white;\n"
-"	font: 75 30pt \"Helvetica\", \"Gill Sans MT Condensed\";\n"
+"font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         adminLoginButton = new QPushButton(headerFrame);
         adminLoginButton->setObjectName(QStringLiteral("adminLoginButton"));
@@ -948,7 +948,7 @@ public:
 "border-image:url(:/icon/icons/magnifying-glass.png);"));
         secretAdminLoginButton = new QToolButton(headerFrame);
         secretAdminLoginButton->setObjectName(QStringLiteral("secretAdminLoginButton"));
-        secretAdminLoginButton->setGeometry(QRect(44, 13, 16, 16));
+        secretAdminLoginButton->setGeometry(QRect(44, 15, 16, 16));
         secretAdminLoginButton->setStyleSheet(QLatin1String("background-color: none;\n"
 "color: rgb(255, 255, 255);\n"
 "border: none;\n"
