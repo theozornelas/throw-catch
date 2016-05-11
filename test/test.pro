@@ -23,4 +23,4 @@ HEADERS += \
     testrunner.h \
     graphtests.h \
     SkipListTests.h \
-    heaptests.h
+    sortingtests.h

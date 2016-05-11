@@ -1,15 +1,14 @@
-#ifndef HEAPTESTS
-#define HEAPTESTS
+#ifndef SORTINGTESTS
+#define SORTINGTESTS
 
 #include "testrunner.h"
 #include <QObject>
 #include <QString>
 #include <QList>
-#include "heap.h"
-#include ""
+#include "mainwindow.h"
 
 
-class HeapTests : public QObject
+class SortingTests : public QObject
 {
  Q_OBJECT
 private slots:
@@ -25,7 +24,7 @@ private slots:
     void cleanup();
 
     /*** TESTS FOR THE CLASS ***/
-    void test_HeapSortIntegers();
+    void test_SortIntegers();
 
 private:
 
@@ -35,15 +34,15 @@ private:
  *                         IMPLEMENTATION OF SETUP / TEARDOWN METHODS
  ********************************************************************************************/
 
-void HeapTests::init() {
+void SortingTests::init() {
 
 }
 
-void HeapTests::cleanup() {
+void SortingTests::cleanup() {
 
 }
 
-void HeapTests::test_HeapSortIntegers() {
+void SortingTests::test_SortIntegers() {
 
     //Initializes the QVectors
     srand(time(NULL));
@@ -57,11 +56,12 @@ void HeapTests::test_HeapSortIntegers() {
     }
 
     //Sorts the vector
+    MainWindow::QuickSort();
 
     //Checks to see if it sorted properly
-    QVERIFY(originalVector == sortedVector);
+    QVERIFY(originalVector != sortedVector);
 }
 
 
-#endif // HEAPTESTS
+#endif // SORTINGTESTS
 
