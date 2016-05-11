@@ -93,7 +93,7 @@ public:
     void setTypology(QString typo);
 
     // Save and load with JSON files
-    QJsonObject toJSON(const QString &filename);
+    QJsonObject toJSON();
 
     // Mutators for Stadium's souvenir list.
     void addSouvenir(Souvenir *newSouvenir);
