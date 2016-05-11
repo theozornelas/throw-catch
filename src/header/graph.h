@@ -518,7 +518,7 @@ void Graph<E>:: Dijkstra(const E &e)
     {
         if(*i != *startPos)
         {
-            (*i).setValue(9999999);
+            (*i).setValue(INT_MAX);
         }
         else if(*i == *startPos)
         {
@@ -558,7 +558,7 @@ Vertex u = graphVertices.min();
              distanceTotal = (u.getValue() + (u.edgeTo(**j))->weight());
 
              //this is the realxation part - this is double fisting my arse.
-            if(distanceTotal <(*j).getValue())
+            if(distanceTotal < (*j).getValue())
             {
 
                 qDebug() << "inside if of for";
@@ -566,7 +566,7 @@ Vertex u = graphVertices.min();
                 //(*j).setValue(u.getValue());
 
                distanceList.push_back(distanceTotal);
-                prev.push_back(*j);
+               prev.push_back(*j);
             }
         }
 
