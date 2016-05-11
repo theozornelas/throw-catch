@@ -50,7 +50,7 @@ public:
     class Vertex {
     public:
         // Basic Constructor
-        Vertex(const E& data) : data_(data), visited_(false) {}
+        Vertex(const E& data) : data_(data), visited_(false), distance_(-1) { parent_ = vertices_.end(); }
         // Sets the data stored in this vertex to a new value
         void setData(const E& data) { data_ = data; }
         // Sets the state of this vertex to visited
@@ -61,10 +61,17 @@ public:
         //returns a list of vertices to the appointed vertex
         VertexList adjacentVertex();
 
-
-        void setValue(const int &newValue){ value_ = newValue;}
-
-        int getValue(){return value_;}
+        /*** Dijkstra Methods ***/
+        // Sets the distance from this vertex to the starting point
+        void setDistance(const int &newValue){ distance_ = newValue;}
+        // Gets the distance from the starting vertex
+        int getDistance() { return distance_; }
+        // Sets the parent vertex to this vertex
+        void setParent(VertexItr &parent) { parent_ = parent; }
+        // Gets the parent of this vertex in the dijkstra routing
+        VertexItr getParent() { return parent_; }
+        // Resets the dijkstra variables to default values
+        void resetDijkstra() { distance_ = -1; parent_ = vertices_.end(); }
 
         // Return an edge list of the edges incident on 'u'
         EdgeItrList incidentEdges() { return incident_; }
@@ -109,10 +116,10 @@ public:
         bool operator<=(const Vertex &other) const { return this->data_ <= other.data_ ; }
 
     private:
-
-        int  value_;
         E    data_;            // Data stored at this node
         bool visited_;         // Has this vertex been visited?
+        int  distance_;        // total distance for dijkstra
+        VertexItr   parent_;   // parent vertex for dijkstra
         EdgeItrList incident_; // Adjacency list of edges
     };  // END OF VERTEX CLASS
 
@@ -217,9 +224,8 @@ public:
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
     VertexList dft(const E &e);
 
+    // Runs the dijkstra algorithm starting from vertex with data e
     void Dijkstra(const E &e);
-
-    void MSTPrimJarnik(const E &e);
     // Outputs the MST graph edges using the basic prim algortihm
     EdgeList MSTPrim();
 
@@ -228,6 +234,8 @@ public:
 protected:
     // Resets all the verticies and edges to un-visited
     void unvisitAll();
+    // Resets the parent and distance of all vertecies for dijkstra
+    void resetDijkstra();
     // Finds the vertex containing 'e' and returns an iterator to that vertex
     VertexItr findVertex(const E &e);
     // Finds the edge connecting 'v' to 'w' with weight 'x'
@@ -410,6 +418,16 @@ typename Graph<E>::VertexList Graph<E>::dft(const E &e) {
 }
 
 /**
+ * @brief Graph::Dijkstra
+ * @param e
+ */
+template<typename E>
+void Graph::Dijkstra(const E &e)
+{
+
+}
+
+/**
  *
  */
 template <typename E>
@@ -445,58 +463,6 @@ std::cin.get();
     	}
     }
 }
-
-
-//template <typename E>
-//void Graph<E>:: Dijkstra(const E &e)
-//{
-
-//    VertexItr startPos = findVertex(e);
-
-//    //get all adjacent vertices from the starting position
-//    VertexList nearVertices = (*startPos).adjacentVertex();
-
-//    (*startPos).setValue(0);
-//    Heap graphVertices;
-
-//    graphVertices.push(*startPos);
-
-//    //initialize all vertices as infinite
-//    for(VertexItr i = nearVertices.begin(); i != nearVertices.end(); i++)
-//    {
-//        (*i).setValue(INT_MAX);
-
-//        graphVertices.push(*i);
-
-//    }
-
-
-//    //
-
-
-//    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
-//    {
-//        graphVertices.push((*k));
-//    }
-
-//    Vertex u = graphVertices.top();
-
-//    while(!graphVertices.empty())
-//    {
-
-//        //crashes at this line
-
-//        for(VertexItr j = (*u).adjacentVertex().begin(); j != (*u).adjacentVertex().end(); j++)
-//        {
-//            if(((*u).getValue() + Distace(*u,*j)) < (*j).getValue())
-//            {
-//                (*j).setValue((*u).getValue() + Distace(*u,*j));
-//                (*j).setValue((*u).getValue());
-//            }
-//        }
-//    u = graphVertices.top();
-//    }
-//}
 
 /**
  * @brief Graph<E>::MSTPrim
@@ -546,60 +512,6 @@ typename Graph<E>::EdgeList Graph<E>::MSTPrim() {
     } // END OF MST WHILE LOOP
 
     return usedEdges;
-}
-
-/**
- * @brief Graph<E>::MSTPrim
- * @param e
- */
-template <typename E>
-void Graph<E>::MSTPrimJarnik(const E &e)
-{
-    VertexItr startPos = findVertex(e);
-    (*startPos)->setValue(0);
-
-    const int INFINITY_VAL = INT_MAX;
-
-    VertexList startList = (*startPos)->adjacentVertex();
-
-    PriorityQueue<Vertex> v;
-    std::vector<Vertex> mstList;
-
-    for(VertexItr i = startList.begin(); i != startList.end(); i++)
-    {
-        if(i != startPos)
-        {
-            (*i)->setValue(INFINITY_VAL);
-        }
-        else
-        {
-            (*i)->setValue(0);
-        }
-
-        //v.insert(*i);
-    }
-
-
-    //h is supposed to be equals something, IDKWTF it is.
-    PriorityQueue<Vertex> Q;
-
-    VertexItr crawl;
-    crawl = startList.begin();
-
-    while(!Q.empty())
-    {
-        Vertex ue = Q.removeMin();
-
-        v.push_back(ue);
-
-        while(crawl != startList.end())
-        {
-
-        }
-
-
-
-    }
 }
 
 /**
@@ -665,6 +577,18 @@ void Graph<E>::unvisitAll() {
     // Reset the vertices
     for(VertexItr j = vertices_.begin(); j != vertices_.end(); j++){
         j->resetVisited();
+    }
+}
+
+/**
+ * @brief Graph::resetDijkstra
+ */
+template <typename E>
+void Graph<E>::resetDijkstra()
+{
+    // Reset the vertices
+    for(VertexItr j = vertices_.begin(); j != vertices_.end(); j++){
+        j->resetDijkstra();
     }
 }
 
