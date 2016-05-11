@@ -20,6 +20,7 @@
 #include <queue>
 #include <climits>
 #include <functional>
+#include <QJsonObject>
 #include "priorityqueue.h"
 
 
@@ -61,6 +62,8 @@ public:
         //returns a list of vertices to the appointed vertex
         VertexList adjacentVertex();
 
+        // Outputs the vertex to a JSON object
+        QJsonObject toJSON();
 
         void setValue(const int &newValue){ value_ = newValue;}
 
@@ -824,6 +827,22 @@ QString Graph<E>::Edge::print() {
 
     outputStream << *start_ << "<-->" << *end_;
     return outputStream.readAll();
+}
+
+/**
+ * @brief  exports the vertex as JSON object
+ * @return the vertex as a JSON object
+ */
+template <typename E>
+QJsonObject Graph<E>::Vertex::toJSON()
+{
+    // Create the stadium JSON object with nested Address Object
+    QJsonObject vertexJSON;
+    vertexJSON["ObjType"] = "Vertex";
+    vertexJSON["stadium"] = this->data_.toJSON();
+    vertexJSON["edges"]   = (this->incident_.front())->print();
+
+    return vertexJSON;
 }
 
 #endif //DATA_STRUCTURES_GRAPH_H
