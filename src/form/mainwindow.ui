@@ -83,6 +83,9 @@ border: none;
          <height>61</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
+       </property>
        <property name="text">
         <string>HOME</string>
        </property>
@@ -96,6 +99,9 @@ border: none;
          <height>61</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
+       </property>
        <property name="text">
         <string>TRIP</string>
        </property>
@@ -108,6 +114,9 @@ border: none;
          <width>201</width>
          <height>61</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
        </property>
        <property name="text">
         <string>VIEW STADIUMS</string>
@@ -146,6 +155,9 @@ border: none;
          <height>61</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
+       </property>
        <property name="text">
         <string>HOME</string>
        </property>
@@ -158,6 +170,9 @@ border: none;
          <width>201</width>
          <height>61</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
        </property>
        <property name="text">
         <string>MODIFY SOUVENIRS</string>
@@ -172,6 +187,9 @@ border: none;
          <height>61</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
+       </property>
        <property name="text">
         <string>VIEW STADIUMS</string>
        </property>
@@ -184,6 +202,9 @@ border: none;
          <width>201</width>
          <height>61</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
        </property>
        <property name="text">
         <string>MODIFY STADIUMS</string>
@@ -217,7 +238,7 @@ background-color: #EAEAE9
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 </string>
       </property>
       <property name="text">
@@ -236,7 +257,7 @@ background-color: #EAEAE9
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>VIEW STADIUMS</string>
@@ -279,7 +300,7 @@ background-color: #EAEAE9
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox::down-arrow {
-		image: url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png&quot;);
+		image:url(:/icon/icons/down_arrow.png);
 }
 
 QComboBox{
@@ -328,7 +349,7 @@ QComboBox::drop-down{
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox::down-arrow {
-		image: url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png&quot;);
+		image: url(:/icon/icons/down_arrow.png);
 }
 
 QComboBox{
@@ -449,7 +470,7 @@ QComboBox::drop-down{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>STADIUM_NAME</string>
@@ -689,6 +710,9 @@ border:none;
         <height>61</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
+      </property>
       <property name="text">
        <string>SHORTEST TRIP TO ALL</string>
       </property>
@@ -702,6 +726,9 @@ border:none;
         <height>61</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
+      </property>
       <property name="text">
        <string>CUSTOM TRIP</string>
       </property>
@@ -714,6 +741,9 @@ border:none;
         <width>411</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>GENERATE MINIMUM SPANNING TREE</string>
@@ -729,7 +759,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>PLAN A TRIP</string>
@@ -747,7 +777,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 </string>
       </property>
       <property name="text">
@@ -799,7 +829,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">	font: 75 20pt &quot;Gill Sans&quot;;
+       <string notr="true">	font: 75 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 </string>
       </property>
       <property name="text">
@@ -836,7 +866,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>PLAN CUSTOM TRIP</string>
@@ -886,7 +916,7 @@ border:none;
 background-color: #293539;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -905,7 +935,7 @@ border:none;
       <property name="font">
        <font>
         <family>Geneva</family>
-        <pointsize>30</pointsize>
+        <pointsize>24</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -949,7 +979,7 @@ border:none;
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox::down-arrow {
-		image: url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png&quot;);
+		image: url(:/icon/icons/down_arrow.png);
 }
 
 QComboBox{
@@ -996,7 +1026,7 @@ QComboBox::drop-down{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>MINIMUM SPANNING TREE</string>
@@ -1040,7 +1070,7 @@ QComboBox::drop-down{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 20pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>total weight:</string>
@@ -1076,7 +1106,7 @@ QComboBox::drop-down{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>STADIUM_NAME</string>
@@ -1096,7 +1126,7 @@ QComboBox::drop-down{
 background-color: #293539;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1109,7 +1139,7 @@ border:none;
         <x>60</x>
         <y>60</y>
         <width>331</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -1182,7 +1212,7 @@ border:none;
       </property>
       <property name="font">
        <font>
-        <family>Helvetica</family>
+        <family>Gill Sans,Gill Sans MT Condensed</family>
         <pointsize>20</pointsize>
         <weight>3</weight>
         <italic>false</italic>
@@ -1190,7 +1220,7 @@ border:none;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 20pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>SOUVENIRS</string>
@@ -1210,7 +1240,7 @@ border:none;
 background-color: #01CDE6;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1280,7 +1310,7 @@ QProgressBar::chunk {
       </property>
       <property name="font">
        <font>
-        <family>Helvetica</family>
+        <family>Gill Sans,Gill Sans MT Condensed</family>
         <pointsize>20</pointsize>
         <weight>3</weight>
         <italic>false</italic>
@@ -1288,7 +1318,7 @@ QProgressBar::chunk {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 20pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>TRIP PROGRESS</string>
@@ -1327,7 +1357,7 @@ QProgressBar::chunk {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>CONFIRM YOUR PURCHASES</string>
@@ -1343,7 +1373,7 @@ QProgressBar::chunk {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 75 20pt &quot;Gill Sans&quot;;
+       <string notr="true">font: 75 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 color: rgb(32, 32, 32)
 </string>
       </property>
@@ -1362,7 +1392,7 @@ color: rgb(32, 32, 32)
       </property>
       <property name="font">
        <font>
-        <pointsize>23</pointsize>
+        <pointsize>20</pointsize>
        </font>
       </property>
       <property name="text">
@@ -1420,7 +1450,7 @@ color: rgb(32, 32, 32)
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 25pt &quot;Helvetica&quot;;
+       <string notr="true">font: 25 25pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 color: rgb(68, 68, 68);
 </string>
       </property>
@@ -1442,7 +1472,7 @@ color: rgb(68, 68, 68);
 background-color: #01CDE6;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1463,7 +1493,7 @@ border:none;
 background-color: #01CDE6;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1512,7 +1542,7 @@ border:none;
 background-color: #293539;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1568,7 +1598,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>ADMIN LOGIN</string>
@@ -1586,7 +1616,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>ADMIN HOME PAGE</string>
@@ -1631,7 +1661,7 @@ border:none;
       </property>
       <property name="font">
        <font>
-        <family>Helvetica</family>
+        <family>Gill Sans,Gill Sans MT Condensed</family>
         <pointsize>30</pointsize>
         <weight>3</weight>
         <italic>false</italic>
@@ -1639,7 +1669,7 @@ border:none;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>STADIUMS</string>
@@ -1659,7 +1689,7 @@ border:none;
 background-color: #01CDE6;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1686,9 +1716,9 @@ border:none;
       <property name="geometry">
        <rect>
         <x>490</x>
-        <y>524</y>
-        <width>71</width>
-        <height>21</height>
+        <y>520</y>
+        <width>81</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
@@ -1710,7 +1740,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 20pt &quot;Helvetica&quot;;
+       <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 color: rgb(32, 32, 32)
 </string>
       </property>
@@ -1730,7 +1760,7 @@ color: rgb(32, 32, 32)
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>MODIFY INFORMATION</string>
@@ -1793,7 +1823,7 @@ color: rgb(32, 32, 32)
 background-color: #293539;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1812,7 +1842,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>SOUVENIRS</string>
@@ -1861,7 +1891,7 @@ border:none;
 background-color: #293539;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1882,7 +1912,7 @@ border:none;
 background-color: #293539;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1967,7 +1997,7 @@ border:none;
 background-color: #293539;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -1988,7 +2018,7 @@ border:none;
 background-color: #293539;
 color: white;
 border:none;
-	font: 75 15pt &quot;Helvetica&quot;;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
       </property>
       <property name="text">
@@ -2005,7 +2035,7 @@ border:none;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 25 30pt &quot;Helvetica&quot;;</string>
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
       </property>
       <property name="text">
        <string>MODIFY STADIUMS</string>
@@ -2038,15 +2068,15 @@ border: none;
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
-       <width>161</width>
-       <height>21</height>
+       <y>0</y>
+       <width>151</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">#teamNameLabel {
 color: white;
-	font: 75 30pt &quot;Helvetica&quot;;
+	font: 75 30pt &quot;Helvetica&quot;, &quot;Gill Sans MT Condensed&quot;;
 }</string>
      </property>
      <property name="text">
@@ -2118,7 +2148,7 @@ font: 75 15pt &quot;Helvetica&quot;;
       <string notr="true">background-color: none;
 color: rgb(255, 255, 255);
 border: none;
-border-image:url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/magnifying-glass.png&quot;);</string>
+border-image:url(:/icon/icons/magnifying-glass.png);</string>
      </property>
      <property name="text">
       <string/>
@@ -2137,7 +2167,7 @@ border-image:url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/ma
       <string notr="true">background-color: none;
 color: rgb(255, 255, 255);
 border: none;
-border-image:url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/baseball.png&quot;);</string>
+border-image:url(:/icon/icons/baseball.png);</string>
      </property>
      <property name="text">
       <string/>

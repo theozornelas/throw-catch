@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -211,12 +211,15 @@ public:
         homePageButton = new QPushButton(sidebarFrame);
         homePageButton->setObjectName(QStringLiteral("homePageButton"));
         homePageButton->setGeometry(QRect(0, 214, 201, 61));
+        homePageButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         planATripButton = new QPushButton(sidebarFrame);
         planATripButton->setObjectName(QStringLiteral("planATripButton"));
         planATripButton->setGeometry(QRect(0, 340, 201, 61));
+        planATripButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         viewStadiumsPageButton = new QPushButton(sidebarFrame);
         viewStadiumsPageButton->setObjectName(QStringLiteral("viewStadiumsPageButton"));
         viewStadiumsPageButton->setGeometry(QRect(0, 277, 201, 61));
+        viewStadiumsPageButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         options->addWidget(customerOptions);
         adminOptions = new QWidget();
         adminOptions->setObjectName(QStringLiteral("adminOptions"));
@@ -232,15 +235,19 @@ public:
         adminHomeButton = new QPushButton(adminSidebarFrame);
         adminHomeButton->setObjectName(QStringLiteral("adminHomeButton"));
         adminHomeButton->setGeometry(QRect(0, 214, 201, 61));
+        adminHomeButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         adminModifyButton = new QPushButton(adminSidebarFrame);
         adminModifyButton->setObjectName(QStringLiteral("adminModifyButton"));
         adminModifyButton->setGeometry(QRect(0, 340, 201, 61));
+        adminModifyButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         viewAdminStadiumsButton = new QPushButton(adminSidebarFrame);
         viewAdminStadiumsButton->setObjectName(QStringLiteral("viewAdminStadiumsButton"));
         viewAdminStadiumsButton->setGeometry(QRect(0, 277, 201, 61));
+        viewAdminStadiumsButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         viewAdminStadiumsButton_2 = new QPushButton(adminSidebarFrame);
         viewAdminStadiumsButton_2->setObjectName(QStringLiteral("viewAdminStadiumsButton_2"));
         viewAdminStadiumsButton_2->setGeometry(QRect(0, 400, 201, 61));
+        viewAdminStadiumsButton_2->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         options->addWidget(adminOptions);
         display = new QStackedWidget(centralWidget);
         display->setObjectName(QStringLiteral("display"));
@@ -253,7 +260,7 @@ public:
         viewStadiumHeading_2 = new QLabel(homePage);
         viewStadiumHeading_2->setObjectName(QStringLiteral("viewStadiumHeading_2"));
         viewStadiumHeading_2->setGeometry(QRect(20, 10, 311, 41));
-        viewStadiumHeading_2->setStyleSheet(QLatin1String("font: 25 30pt \"Helvetica\";\n"
+        viewStadiumHeading_2->setStyleSheet(QLatin1String("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 ""));
         display->addWidget(homePage);
         viewStadiumsPage = new QWidget();
@@ -261,7 +268,7 @@ public:
         viewStadiumHeading = new QLabel(viewStadiumsPage);
         viewStadiumHeading->setObjectName(QStringLiteral("viewStadiumHeading"));
         viewStadiumHeading->setGeometry(QRect(20, 10, 311, 41));
-        viewStadiumHeading->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        viewStadiumHeading->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         label_3 = new QLabel(viewStadiumsPage);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(20, 60, 59, 16));
@@ -272,7 +279,7 @@ public:
         viewStadiumByComboBox->setObjectName(QStringLiteral("viewStadiumByComboBox"));
         viewStadiumByComboBox->setGeometry(QRect(80, 56, 171, 21));
         viewStadiumByComboBox->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
-"		image: url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png\");\n"
+"		image:url(:/icon/icons/down_arrow.png);\n"
 "}\n"
 "\n"
 "QComboBox{\n"
@@ -297,7 +304,7 @@ public:
         comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
         comboBox_2->setGeometry(QRect(80, 90, 171, 21));
         comboBox_2->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
-"		image: url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png\");\n"
+"		image: url(:/icon/icons/down_arrow.png);\n"
 "}\n"
 "\n"
 "QComboBox{\n"
@@ -329,7 +336,7 @@ public:
         singleStadiumNameLabel = new QLabel(viewSingleStadiumPage);
         singleStadiumNameLabel->setObjectName(QStringLiteral("singleStadiumNameLabel"));
         singleStadiumNameLabel->setGeometry(QRect(20, 10, 661, 41));
-        singleStadiumNameLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        singleStadiumNameLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         singleStadiumInfo = new QFrame(viewSingleStadiumPage);
         singleStadiumInfo->setObjectName(QStringLiteral("singleStadiumInfo"));
         singleStadiumInfo->setGeometry(QRect(20, 70, 451, 431));
@@ -461,23 +468,26 @@ public:
         shortestTripToAllButton = new QPushButton(planATripPage);
         shortestTripToAllButton->setObjectName(QStringLiteral("shortestTripToAllButton"));
         shortestTripToAllButton->setGeometry(QRect(180, 160, 411, 61));
+        shortestTripToAllButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         customTripButton = new QPushButton(planATripPage);
         customTripButton->setObjectName(QStringLiteral("customTripButton"));
         customTripButton->setGeometry(QRect(180, 230, 411, 61));
+        customTripButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         minimumSpanningTreeButton = new QPushButton(planATripPage);
         minimumSpanningTreeButton->setObjectName(QStringLiteral("minimumSpanningTreeButton"));
         minimumSpanningTreeButton->setGeometry(QRect(180, 300, 411, 61));
+        minimumSpanningTreeButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         planATripLabel = new QLabel(planATripPage);
         planATripLabel->setObjectName(QStringLiteral("planATripLabel"));
         planATripLabel->setGeometry(QRect(20, 10, 311, 41));
-        planATripLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        planATripLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         display->addWidget(planATripPage);
         shortestTripToAllPage = new QWidget();
         shortestTripToAllPage->setObjectName(QStringLiteral("shortestTripToAllPage"));
         shortestTripToAllLabel = new QLabel(shortestTripToAllPage);
         shortestTripToAllLabel->setObjectName(QStringLiteral("shortestTripToAllLabel"));
         shortestTripToAllLabel->setGeometry(QRect(20, 10, 371, 41));
-        shortestTripToAllLabel->setStyleSheet(QLatin1String("font: 25 30pt \"Helvetica\";\n"
+        shortestTripToAllLabel->setStyleSheet(QLatin1String("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 ""));
         shortestTripList = new QTreeWidget(shortestTripToAllPage);
         shortestTripList->setObjectName(QStringLiteral("shortestTripList"));
@@ -490,7 +500,7 @@ public:
         planATripLabel_4 = new QLabel(shortestTripToAllPage);
         planATripLabel_4->setObjectName(QStringLiteral("planATripLabel_4"));
         planATripLabel_4->setGeometry(QRect(230, 360, 111, 41));
-        planATripLabel_4->setStyleSheet(QLatin1String("	font: 75 20pt \"Gill Sans\";\n"
+        planATripLabel_4->setStyleSheet(QLatin1String("	font: 75 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 ""));
         label_2 = new QLabel(shortestTripToAllPage);
         label_2->setObjectName(QStringLiteral("label_2"));
@@ -504,7 +514,7 @@ public:
         customTripLabel = new QLabel(customTripPage);
         customTripLabel->setObjectName(QStringLiteral("customTripLabel"));
         customTripLabel->setGeometry(QRect(20, 10, 311, 41));
-        customTripLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        customTripLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         stadiumsToSelectFromList = new QTreeWidget(customTripPage);
         stadiumsToSelectFromList->setObjectName(QStringLiteral("stadiumsToSelectFromList"));
         stadiumsToSelectFromList->setGeometry(QRect(80, 160, 256, 261));
@@ -518,14 +528,14 @@ public:
 "background-color: #293539;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         arrows = new QLabel(customTripPage);
         arrows->setObjectName(QStringLiteral("arrows"));
         arrows->setGeometry(QRect(350, 230, 51, 71));
         QFont font3;
         font3.setFamily(QStringLiteral("Geneva"));
-        font3.setPointSize(30);
+        font3.setPointSize(24);
         font3.setBold(false);
         font3.setItalic(false);
         font3.setWeight(50);
@@ -540,7 +550,7 @@ public:
         startingStadiumComboBox->setContextMenuPolicy(Qt::DefaultContextMenu);
         startingStadiumComboBox->setLayoutDirection(Qt::LeftToRight);
         startingStadiumComboBox->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
-"		image: url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/down_arrow.png\");\n"
+"		image: url(:/icon/icons/down_arrow.png);\n"
 "}\n"
 "\n"
 "QComboBox{\n"
@@ -571,7 +581,7 @@ public:
         planATripLabel_2 = new QLabel(minimumSpanningTreePage);
         planATripLabel_2->setObjectName(QStringLiteral("planATripLabel_2"));
         planATripLabel_2->setGeometry(QRect(20, 20, 411, 41));
-        planATripLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        planATripLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         MSTList = new QTreeWidget(minimumSpanningTreePage);
         MSTList->setObjectName(QStringLiteral("MSTList"));
         MSTList->setGeometry(QRect(50, 80, 621, 291));
@@ -579,7 +589,7 @@ public:
         planATripLabel_3 = new QLabel(minimumSpanningTreePage);
         planATripLabel_3->setObjectName(QStringLiteral("planATripLabel_3"));
         planATripLabel_3->setGeometry(QRect(200, 380, 101, 41));
-        planATripLabel_3->setStyleSheet(QStringLiteral("font: 25 20pt \"Helvetica\";"));
+        planATripLabel_3->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         label = new QLabel(minimumSpanningTreePage);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(310, 390, 81, 20));
@@ -590,7 +600,7 @@ public:
         currentTripStadiumNameLabel = new QLabel(tripProcessPage);
         currentTripStadiumNameLabel->setObjectName(QStringLiteral("currentTripStadiumNameLabel"));
         currentTripStadiumNameLabel->setGeometry(QRect(20, 10, 431, 61));
-        currentTripStadiumNameLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        currentTripStadiumNameLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         addSouvenirToShoppingCart = new QPushButton(tripProcessPage);
         addSouvenirToShoppingCart->setObjectName(QStringLiteral("addSouvenirToShoppingCart"));
         addSouvenirToShoppingCart->setGeometry(QRect(280, 390, 121, 31));
@@ -598,11 +608,11 @@ public:
 "background-color: #293539;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         currentTripWelcomeDescription = new QLabel(tripProcessPage);
         currentTripWelcomeDescription->setObjectName(QStringLiteral("currentTripWelcomeDescription"));
-        currentTripWelcomeDescription->setGeometry(QRect(60, 60, 331, 31));
+        currentTripWelcomeDescription->setGeometry(QRect(60, 60, 331, 41));
         currentTripWelcomeDescription->setFont(font2);
         currentTripWelcomeDescription->setWordWrap(true);
         listOfCurrentStadiumSouvenirs = new QTreeWidget(tripProcessPage);
@@ -618,13 +628,13 @@ public:
         currentTripSouvenirLabel->setObjectName(QStringLiteral("currentTripSouvenirLabel"));
         currentTripSouvenirLabel->setGeometry(QRect(40, 130, 121, 21));
         QFont font4;
-        font4.setFamily(QStringLiteral("Helvetica"));
+        font4.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
         font4.setPointSize(20);
         font4.setBold(false);
         font4.setItalic(false);
         font4.setWeight(3);
         currentTripSouvenirLabel->setFont(font4);
-        currentTripSouvenirLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Helvetica\";"));
+        currentTripSouvenirLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         currentTripNextStadium = new QPushButton(tripProcessPage);
         currentTripNextStadium->setObjectName(QStringLiteral("currentTripNextStadium"));
         currentTripNextStadium->setGeometry(QRect(580, 530, 121, 31));
@@ -632,7 +642,7 @@ public:
 "background-color: #01CDE6;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         shoppingCartButton = new QPushButton(tripProcessPage);
         shoppingCartButton->setObjectName(QStringLiteral("shoppingCartButton"));
@@ -660,7 +670,7 @@ public:
         currentTripProgressLabel->setObjectName(QStringLiteral("currentTripProgressLabel"));
         currentTripProgressLabel->setGeometry(QRect(30, 450, 161, 21));
         currentTripProgressLabel->setFont(font4);
-        currentTripProgressLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Helvetica\";"));
+        currentTripProgressLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         currentTripStadiumCount = new QLabel(tripProcessPage);
         currentTripStadiumCount->setObjectName(QStringLiteral("currentTripStadiumCount"));
         currentTripStadiumCount->setGeometry(QRect(30, 503, 331, 31));
@@ -672,18 +682,18 @@ public:
         confirmPurchasesLabel = new QLabel(confrimPurchasesPage);
         confirmPurchasesLabel->setObjectName(QStringLiteral("confirmPurchasesLabel"));
         confirmPurchasesLabel->setGeometry(QRect(20, 0, 431, 61));
-        confirmPurchasesLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        confirmPurchasesLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         grandTotalLabel = new QLabel(confrimPurchasesPage);
         grandTotalLabel->setObjectName(QStringLiteral("grandTotalLabel"));
         grandTotalLabel->setGeometry(QRect(450, 446, 151, 31));
-        grandTotalLabel->setStyleSheet(QLatin1String("font: 75 20pt \"Gill Sans\";\n"
+        grandTotalLabel->setStyleSheet(QLatin1String("font: 75 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "color: rgb(32, 32, 32)\n"
 ""));
         grandTotalAmount = new QLabel(confrimPurchasesPage);
         grandTotalAmount->setObjectName(QStringLiteral("grandTotalAmount"));
         grandTotalAmount->setGeometry(QRect(590, 450, 121, 21));
         QFont font5;
-        font5.setPointSize(23);
+        font5.setPointSize(20);
         grandTotalAmount->setFont(font5);
         shoppingCart = new QTreeWidget(confrimPurchasesPage);
         shoppingCart->setObjectName(QStringLiteral("shoppingCart"));
@@ -693,7 +703,7 @@ public:
         shoppingCartLabel = new QLabel(confrimPurchasesPage);
         shoppingCartLabel->setObjectName(QStringLiteral("shoppingCartLabel"));
         shoppingCartLabel->setGeometry(QRect(230, 70, 221, 31));
-        shoppingCartLabel->setStyleSheet(QLatin1String("font: 25 25pt \"Helvetica\";\n"
+        shoppingCartLabel->setStyleSheet(QLatin1String("font: 25 25pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "color: rgb(68, 68, 68);\n"
 ""));
         confirmPurchasesButton = new QPushButton(confrimPurchasesPage);
@@ -703,7 +713,7 @@ public:
 "background-color: #01CDE6;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         updateShoppingCart = new QPushButton(confrimPurchasesPage);
         updateShoppingCart->setObjectName(QStringLiteral("updateShoppingCart"));
@@ -712,7 +722,7 @@ public:
 "background-color: #01CDE6;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         display->addWidget(confrimPurchasesPage);
         adminLoginPage = new QWidget();
@@ -730,7 +740,7 @@ public:
 "background-color: #293539;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         username = new QLineEdit(adminLoginPage);
         username->setObjectName(QStringLiteral("username"));
@@ -746,14 +756,14 @@ public:
         adminLoginLabel = new QLabel(adminLoginPage);
         adminLoginLabel->setObjectName(QStringLiteral("adminLoginLabel"));
         adminLoginLabel->setGeometry(QRect(20, 20, 311, 41));
-        adminLoginLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        adminLoginLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         display->addWidget(adminLoginPage);
         adminHomePage = new QWidget();
         adminHomePage->setObjectName(QStringLiteral("adminHomePage"));
         adminHomePageLabel = new QLabel(adminHomePage);
         adminHomePageLabel->setObjectName(QStringLiteral("adminHomePageLabel"));
         adminHomePageLabel->setGeometry(QRect(20, 10, 311, 41));
-        adminHomePageLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        adminHomePageLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         display->addWidget(adminHomePage);
         viewAdminStadiumsPage = new QWidget();
         viewAdminStadiumsPage->setObjectName(QStringLiteral("viewAdminStadiumsPage"));
@@ -766,13 +776,13 @@ public:
         adminHomePageLabel_2->setObjectName(QStringLiteral("adminHomePageLabel_2"));
         adminHomePageLabel_2->setGeometry(QRect(60, 20, 311, 41));
         QFont font6;
-        font6.setFamily(QStringLiteral("Helvetica"));
+        font6.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
         font6.setPointSize(30);
         font6.setBold(false);
         font6.setItalic(false);
         font6.setWeight(3);
         adminHomePageLabel_2->setFont(font6);
-        adminHomePageLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        adminHomePageLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         viewMoreInfoAboutStadiumButton = new QPushButton(viewAdminStadiumsPage);
         viewMoreInfoAboutStadiumButton->setObjectName(QStringLiteral("viewMoreInfoAboutStadiumButton"));
         viewMoreInfoAboutStadiumButton->setGeometry(QRect(430, 110, 161, 21));
@@ -780,7 +790,7 @@ public:
 "background-color: #01CDE6;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         label_7 = new QLabel(viewAdminStadiumsPage);
         label_7->setObjectName(QStringLiteral("label_7"));
@@ -788,12 +798,14 @@ public:
         label_7->setWordWrap(true);
         stadiumTotalRevenue = new QLabel(viewAdminStadiumsPage);
         stadiumTotalRevenue->setObjectName(QStringLiteral("stadiumTotalRevenue"));
-        stadiumTotalRevenue->setGeometry(QRect(490, 524, 71, 21));
-        stadiumTotalRevenue->setFont(font5);
+        stadiumTotalRevenue->setGeometry(QRect(490, 520, 81, 31));
+        QFont font7;
+        font7.setPointSize(23);
+        stadiumTotalRevenue->setFont(font7);
         stadiumTotalRevenueLabel = new QLabel(viewAdminStadiumsPage);
         stadiumTotalRevenueLabel->setObjectName(QStringLiteral("stadiumTotalRevenueLabel"));
         stadiumTotalRevenueLabel->setGeometry(QRect(220, 520, 241, 31));
-        stadiumTotalRevenueLabel->setStyleSheet(QLatin1String("font: 25 20pt \"Helvetica\";\n"
+        stadiumTotalRevenueLabel->setStyleSheet(QLatin1String("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "color: rgb(32, 32, 32)\n"
 ""));
         display->addWidget(viewAdminStadiumsPage);
@@ -802,7 +814,7 @@ public:
         modifyInformationLabel = new QLabel(adminModifyPage);
         modifyInformationLabel->setObjectName(QStringLiteral("modifyInformationLabel"));
         modifyInformationLabel->setGeometry(QRect(10, 10, 391, 41));
-        modifyInformationLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        modifyInformationLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         modifyDescription = new QLabel(adminModifyPage);
         modifyDescription->setObjectName(QStringLiteral("modifyDescription"));
         modifyDescription->setGeometry(QRect(70, 50, 441, 21));
@@ -821,7 +833,7 @@ public:
 "background-color: #293539;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         display->addWidget(adminModifyPage);
         modifySouvenirItemPage = new QWidget();
@@ -829,7 +841,7 @@ public:
         modifySouvenirsListLabel = new QLabel(modifySouvenirItemPage);
         modifySouvenirsListLabel->setObjectName(QStringLiteral("modifySouvenirsListLabel"));
         modifySouvenirsListLabel->setGeometry(QRect(20, 10, 311, 41));
-        modifySouvenirsListLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        modifySouvenirsListLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         listOfModifyStadiumsSouvenirs = new QTreeWidget(modifySouvenirItemPage);
         listOfModifyStadiumsSouvenirs->setObjectName(QStringLiteral("listOfModifyStadiumsSouvenirs"));
         listOfModifyStadiumsSouvenirs->setGeometry(QRect(30, 60, 521, 311));
@@ -843,7 +855,7 @@ public:
 "background-color: #293539;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         addSelectedSouvenir = new QPushButton(modifySouvenirItemPage);
         addSelectedSouvenir->setObjectName(QStringLiteral("addSelectedSouvenir"));
@@ -852,7 +864,7 @@ public:
 "background-color: #293539;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         newSouvenirNameLabel = new QLabel(modifySouvenirItemPage);
         newSouvenirNameLabel->setObjectName(QStringLiteral("newSouvenirNameLabel"));
@@ -880,7 +892,7 @@ public:
 "background-color: #293539;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         removeSelectedSouvenir_3 = new QPushButton(adminModifyStadiums);
         removeSelectedSouvenir_3->setObjectName(QStringLiteral("removeSelectedSouvenir_3"));
@@ -889,12 +901,12 @@ public:
 "background-color: #293539;\n"
 "color: white;\n"
 "border:none;\n"
-"	font: 75 15pt \"Helvetica\";\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
         modifySouvenirsListLabel_2 = new QLabel(adminModifyStadiums);
         modifySouvenirsListLabel_2->setObjectName(QStringLiteral("modifySouvenirsListLabel_2"));
         modifySouvenirsListLabel_2->setGeometry(QRect(30, 10, 311, 41));
-        modifySouvenirsListLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Helvetica\";"));
+        modifySouvenirsListLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         display->addWidget(adminModifyStadiums);
         headerFrame = new QFrame(centralWidget);
         headerFrame->setObjectName(QStringLiteral("headerFrame"));
@@ -907,10 +919,10 @@ public:
         headerFrame->setFrameShadow(QFrame::Raised);
         teamNameLabel = new QLabel(headerFrame);
         teamNameLabel->setObjectName(QStringLiteral("teamNameLabel"));
-        teamNameLabel->setGeometry(QRect(10, 10, 161, 21));
+        teamNameLabel->setGeometry(QRect(10, 0, 151, 41));
         teamNameLabel->setStyleSheet(QLatin1String("#teamNameLabel {\n"
 "color: white;\n"
-"	font: 75 30pt \"Helvetica\";\n"
+"	font: 75 30pt \"Helvetica\", \"Gill Sans MT Condensed\";\n"
 "}"));
         adminLoginButton = new QPushButton(headerFrame);
         adminLoginButton->setObjectName(QStringLiteral("adminLoginButton"));
@@ -933,14 +945,14 @@ public:
         searchButton->setStyleSheet(QLatin1String("background-color: none;\n"
 "color: rgb(255, 255, 255);\n"
 "border: none;\n"
-"border-image:url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/magnifying-glass.png\");"));
+"border-image:url(:/icon/icons/magnifying-glass.png);"));
         secretAdminLoginButton = new QToolButton(headerFrame);
         secretAdminLoginButton->setObjectName(QStringLiteral("secretAdminLoginButton"));
         secretAdminLoginButton->setGeometry(QRect(44, 13, 16, 16));
         secretAdminLoginButton->setStyleSheet(QLatin1String("background-color: none;\n"
 "color: rgb(255, 255, 255);\n"
 "border: none;\n"
-"border-image:url(\"/Users/sarahsingletary/Documents/throw-catch/src/icons/baseball.png\");"));
+"border-image:url(:/icon/icons/baseball.png);"));
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
