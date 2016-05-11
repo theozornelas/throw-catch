@@ -244,45 +244,41 @@ void MainWindow::on_shoppingCartButton_clicked()
 }
 
 
+//Quick Sort
+template <typename E>
+void MainWindow::QuickSort(QVector<E> &vecToSort, int left, int right)
+{
+    int i = left;
+    int j = right;
+    E temp;
 
-//template <typename E, typename It, typename Comparator>
-//void MainWindow::QuickSort(QVector<E> &vecToSort, It left, It right, Comparator compare)
-//{
-//    It i = left;
-//    It j = right;
-//    E temp;
+    //Chooses the pivot
+    E pivot = vecToSort[(left + right) / 2];
 
-//    //Finds the pivot
-//    It pivot = (left + right) / 2;
+    //Sorts the vector
+    while(i <= j)
+    {
+        while(vecToSort[i] < pivot)
+        {
+            ++i;
+        }
+        while(vecToSort[j] > pivot)
+        {
+            --j;
+        }
+        if(i <= j)
+        {
+            temp = vecToSort[i];
+            vecToSort[i] = vecToSort[j];
+            vecToSort[j] = temp;
+            ++i;
+            --j;
+        }
+    }
 
-//    //Sorts the vector
-//    while(i <= j)
-//    {
-//        while(compare(vecToSort[i], vecToSort[pivot]))
-//        {
-//            ++i;
-//        }
-//        while(!compare(vecToSort[j], vecToSort[pivot]))
-//        {
-//            --j;
-//        }
-//        if(i <= j)
-//        {
-//            temp = vecToSort[i];
-//            vecToSort[i] = vecToSort[j];
-//            vecToSort[j] = temp;
-//            ++i;
-//            --j;
-//        }
-//    }
-
-//    if(left < j)
-//    {
-//        QuickSort(vecToSort, left, j, compare);
-//    }
-//    if(right > i)
-//    {
-//        QuickSort(vecToSort, i, right, compare);
-//    }
-//}
+    if(left < j)
+        QuickSort(vecToSort, left, j);
+    if(i < right)
+        QuickSort(vecToSort, i, right);
+}
 

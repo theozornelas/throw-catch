@@ -44,7 +44,7 @@ void SortingTests::QuickSort(QVector<E> &vecToSort, int left, int right)
     int j = right;
     E temp;
 
-    //Finds the pivot
+    //Chooses the pivot
     E pivot = vecToSort[(left + right) / 2];
 
     //Sorts the vector
@@ -69,13 +69,9 @@ void SortingTests::QuickSort(QVector<E> &vecToSort, int left, int right)
     }
 
     if(left < j)
-    {
         QuickSort(vecToSort, left, j);
-    }
     if(i < right)
-    {
         QuickSort(vecToSort, i, right);
-    }
 }
 
 /********************************************************************************************
