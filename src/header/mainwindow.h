@@ -41,8 +41,10 @@ public:
     ~MainWindow();
     bool isBlank(QString text);
 
-    template <typename E, typename It, typename Comparator>
-    static void QuickSort(QVector<E> &vecToSort, It left, It right, Comparator compare);
+
+
+//    template <typename E, typename It, typename Comparator>
+//    static void QuickSort(QVector<E> &vecToSort, It left, It right, Comparator compare);
 
 private slots:
     void on_homePageButton_clicked();
