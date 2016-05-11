@@ -1,0 +1,15 @@
+{
+	"ObjType":"stadium",
+	"boxOfficeNumber":"Number",
+	"city":"Los Angeles",
+	"dateOpened":"24-AUG-1980",
+	"leagueType":"American",
+	"seatingCapacity":501234,
+	"stadiumName":"Dodgers Stadium",
+	"state":"CA",
+	"streetAddress":"1st Ave\n",
+	"surface":"Astroturf",
+	"teamName":"Dodgers",
+	"typology":"Retro",
+	"zipCode":"92671"
+}

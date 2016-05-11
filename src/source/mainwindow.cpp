@@ -721,5 +721,35 @@ void MainWindow::on_viewMoreInfoAboutStadiumButton_clicked()
 
 }
 
+/**
+ * @brief The slot for modifying the stadiums in admin mode
+ */
+void MainWindow::on_viewAdminStadiumsButton_2_clicked()
+{
+    ui->display->setCurrentIndex(MODIFY_STADIUMS);
+}
 
+void MainWindow::on_removeSelectedSouvenir_2_clicked()
+{
+        QString filename = QFileDialog::getOpenFileName(
+                                       this,                                    // The parent of this popup
+                                       "Select New Stadium JSON",               // The caption on the file picker
+                                       QDir::homePath(),                        // The default directory to show
+                                       "JSON File (*.json);;Text File (*.txt);;All Files (*.*)");
 
+        qDebug() << "FILE SELECTED: " << filename;
+
+        // Create the input file object
+        QFile inFile(filename);
+
+        // Open the input file object
+        if (!inFile.open(QIODevice::ReadOnly)) {
+                qWarning("Couldn't open save file.");
+            }
+
+        // open data into a JSON Object
+        QJsonDocument newStadium(QJsonDocument::fromJson(inFile.readAll()));
+
+        qDebug() << "JSON Obj: " << newStadium;
+
+}
