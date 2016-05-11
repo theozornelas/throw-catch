@@ -233,6 +233,8 @@ protected:
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
     void dftHelper(Vertex &location, VertexList &outList);
 
+    VertexList nearVertices(Vertex v);
+
 private:
     VertexList vertices_;   // List of vertex
     EdgeList   edges_;      // List of Edges
@@ -306,6 +308,30 @@ int Graph<E>:: Distace(Vertex u, Vertex v)
     }
 
     return distance;
+}
+
+template <typename E>
+typename Graph<E>::VertexList Graph<E>::nearVertices(Vertex v)
+{
+    VertexList nearOnes;
+
+    EdgeItrList testing = v.incidentEdges();
+
+
+    for(EdgeItrItr it = testing.begin(); it != testing.end(); it++)
+    {
+        if(v == (**it).end())
+        {
+            nearOnes.push_back((**it).start());
+
+        }
+        else
+        {
+            nearOnes.push_back((**it).end());
+        }
+    }
+
+    return nearOnes;
 }
 
 template <typename E>
@@ -469,9 +495,10 @@ void Graph<E>:: Dijkstra(const E &e)
     VertexItr startPos = findVertex(e);
 //*********************************************************************************
     //get all adjacent vertices from the starting position
-    VertexList nearVertices = (*startPos).adjacentVertex();
-    //
-    for(VertexItr index = nearVertices.begin(); index != nearVertices.end(); index++)
+    //VertexList nearVertices = (*startPos).adjacentVertex();
+    VertexList nextVertices =nearVertices((*startPos));
+
+    for(VertexItr index = nextVertices.begin(); index != nextVertices.end(); index++)
     {
         qDebug() << "checking list before insert k"<< *index;
     }
@@ -482,6 +509,7 @@ void Graph<E>:: Dijkstra(const E &e)
 
     //list to store all verticed in the graph
     PriorityQueue<Vertex> graphVertices;
+    //PriorityQueue<Vertex> testing;
 
     //graphVertices.insert(*startPos);
 
@@ -490,22 +518,22 @@ void Graph<E>:: Dijkstra(const E &e)
     {
         if(*i != *startPos)
         {
-            (*i).setValue(INT_MAX);
+            (*i).setValue(9999999);
         }
         else if(*i == *startPos)
         {
             (*i).setValue(0);
         }
         graphVertices.insert(*i);
+       // testing.insert(*i);
 
     }
 
-
-
-
-//    for(VertexItr k = vertices_.begin(); k != vertices_.end(); k++)
+//qDebug() << "vertices in list: ";
+//    while(!testing.empty())
 //    {
-//        graphVertices.insert((*k));
+//        qDebug() << testing.min();
+//        testing.removeMin();
 //    }
 
 Vertex u = graphVertices.min();
@@ -515,28 +543,46 @@ Vertex u = graphVertices.min();
 
         //u is the smallest value in the list
 
-        qDebug() << u;
 
-qDebug() << "inside while";
+
+//qDebug() << "inside while";
 
 
         //pop u
         graphVertices.removeMin();
 
-        qDebug() << graphVertices.size();
+        //qDebug() << graphVertices.size();
 
         int distanceTotal = 0;
 
-        for(VertexItr j = u.adjacentVertex().begin(); j != u.adjacentVertex().end(); j++)
+
+        VertexList adjacentVertices = nearVertices(u);
+qDebug()<< "The vertex next to " << u << " are: ";
+
+        for(VertexItr check = adjacentVertices.begin(); check!=adjacentVertices.end(); check++)
+        {
+            qDebug() << *check;
+        }
+
+
+        for(VertexItr j = adjacentVertices.begin(); j !=adjacentVertices.end(); j++)
         {
 
-             qDebug() << "u inside for "<< u;
+            // qDebug() << "u inside for "<< u;
 
-             qDebug() << "inside for";
+             //qDebug() << "inside for";
+
+//            qDebug() << "u.getValue():  "<< u.getValue();
+//            qDebug() << "distance Value :  "<<(u.edgeTo(**j))->weight();
 
              distanceTotal = (u.getValue() + (u.edgeTo(**j))->weight());
 
-            if(distanceTotal < (*j).getValue())
+            // qDebug() << distanceTotal;
+
+//            qDebug() << "j.getValue():  "<< (*j).getValue();
+//             qDebug() << "distancetotal: "<<distanceTotal;
+
+            if(distanceTotal <(*j).getValue())
             {
 
                 qDebug() << "inside if of for";
@@ -544,7 +590,7 @@ qDebug() << "inside while";
                 //(*j).setValue(u.getValue());
 
                distanceList.push_back(distanceTotal);
-//                prev.push_back(*j);
+                prev.push_back(*j);
             }
         }
 
@@ -553,6 +599,16 @@ qDebug() << "inside while";
 
      qDebug() << "after removing min";
     }
+
+
+    qDebug() << "List of distances";
+
+    for(std::list<int>::iterator it = distanceList.begin(); it != distanceList.end(); it++)
+    {
+        qDebug() << "Distance: "<< *it;
+    }
+
+    qDebug() << "After For loop";
 }
 
 /**

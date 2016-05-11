@@ -24,6 +24,8 @@ public:
 
     bool empty();
 
+
+
 private:
 
     std::priority_queue<T> myQueue;
