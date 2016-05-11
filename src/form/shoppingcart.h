@@ -2,11 +2,6 @@
 #define SHOPPINGCART_H
 
 #include <QWidget>
-#include <list>
-#include <iterator>
-#include "souvenir.h"
-#include "stadium.h"
-#include "skiplist.h"
 
 namespace Ui {
 class ShoppingCart;
@@ -19,8 +14,6 @@ class ShoppingCart : public QWidget
 public:
     explicit ShoppingCart(QWidget *parent = 0);
     ~ShoppingCart();
-    void setList(QVector<Souvenir*> shoppingCart, skiplist<int, Stadium*> stadiums);
-
 
 private:
     Ui::ShoppingCart *ui;
