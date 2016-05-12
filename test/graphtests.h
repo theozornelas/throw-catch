@@ -231,7 +231,7 @@ void GraphTests::test_Dijkstra(){
 
    qDebug() << "Djikstra Test initializes";
 
-    stringGraph_->Dijkstra("Atlanta");
+    stringGraph_->Dijkstra("Atlanta","Boston");
 
     qDebug() << "Djikstra Test ends";
 }

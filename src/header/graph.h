@@ -21,6 +21,7 @@
 #include <climits>
 #include <functional>
 #include "priorityqueue.h"
+#include <algorithm>
 
 
 /**
@@ -225,7 +226,7 @@ public:
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
     VertexList dft(const E &e);
 
-    void Dijkstra(const E &e);
+    void Dijkstra(const E &e, const E &f);
 
     void MSTPrimJarnik(const E &e);
     // Outputs the MST graph edges using the basic prim algortihm
@@ -489,7 +490,7 @@ std::cin.get();
 
 
 template <typename E>
-void Graph<E>:: Dijkstra(const E &e)
+void Graph<E>:: Dijkstra(const E &e, const E &f)
 {
 
     //make parallel list for vertex and distance
@@ -503,6 +504,8 @@ void Graph<E>:: Dijkstra(const E &e)
 
     //find starting position
     VertexItr startPos = findVertex(e);
+
+    VertexItr endPos = findVertex(f);
 //*********************************************************************************
     //get all adjacent vertices from the starting position
     //VertexList nearVertices = (*startPos).adjacentVertex();
@@ -592,11 +595,18 @@ qDebug()<<"Value of the first Value: " << u.getValue();
             {
 
                 qDebug() << "inside if of for";
-                (*j).setValue(distanceTotal);
-                //(*j).setValue(u.getValue());
+                //(*j).setValue(distanceTotal);
 
-               distanceList.push_back(distanceTotal);
-               prev.push_back(*j);
+                //u.setValue(distanceTotal);
+                (*j).setValue(distanceTotal);
+                (*j).setValue(u.edgeTo((**j))->weight());
+
+
+
+                //std::make_heap(graphVertices);
+
+                distanceList.push_back(distanceTotal);
+//               prev.push_back(*j);
             }
         }
 
