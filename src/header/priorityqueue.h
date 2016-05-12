@@ -4,8 +4,19 @@
 
 #include <queue>
 #include <iterator>
+#include <vector>
 
-template <class T>
+
+//template <class T>
+//struct LessThanByAge
+//{
+//  bool operator()(const Vertex<T>& first, const Vertex<T>& second) const
+//  {
+//    return first.getValue() < second.getValue();
+//  }
+//};
+
+template <class T, class FU>
 class PriorityQueue
 {
 public:
@@ -28,29 +39,30 @@ public:
 
 private:
 
-    std::priority_queue<T> myQueue;
+    FU comparator;
+    std::priority_queue<T,std::vector<T>, FU> myQueue;
 };
 
-template <class T>
-PriorityQueue<T> :: PriorityQueue()
+template <class T,class FU>
+PriorityQueue<T,FU> :: PriorityQueue()
 {
 
 }
 
-template <class T>
-PriorityQueue<T> :: ~PriorityQueue()
+template <class T,class FU>
+PriorityQueue<T,FU> :: ~PriorityQueue()
 {
 
 }
 
-template <class T>
-void PriorityQueue<T> :: insert(T element)
+template <class T,class FU>
+void PriorityQueue<T,FU> :: insert(T element)
 {
     myQueue.push(element);
 }
 
-template <class T>
-T PriorityQueue<T> :: min()
+template <class T,class FU>
+T PriorityQueue<T,FU> :: min()
 {
 
     T minVal = myQueue.top();
@@ -58,8 +70,8 @@ T PriorityQueue<T> :: min()
     return minVal;
 }
 
-template <class T>
-T PriorityQueue<T> :: removeMin()
+template <class T,class FU>
+T PriorityQueue<T,FU> :: removeMin()
 {
 
     T temp = myQueue.top();
@@ -68,14 +80,14 @@ T PriorityQueue<T> :: removeMin()
     return temp;
 }
 
-template <class T>
-int PriorityQueue<T> :: size()
+template <class T,class FU>
+int PriorityQueue<T,FU> :: size()
 {
     return myQueue.size();
 }
 
-template <class T>
-bool PriorityQueue<T> ::  empty()
+template <class T,class FU>
+bool PriorityQueue<T,FU> ::  empty()
 {
     return myQueue.empty();
 }

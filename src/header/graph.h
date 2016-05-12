@@ -63,7 +63,7 @@ public:
 
         void setValue(const int &newValue){ value_ = newValue;}
 
-        int getValue(){return value_;}
+        int getValue()const{return value_;}
 
         // Return an edge list of the edges incident on 'u'
         EdgeItrList incidentEdges() { return incident_; }
@@ -108,6 +108,16 @@ public:
         bool operator<(const Vertex &other)  const { return this->data_ < other.data_ ; }
         bool operator>=(const Vertex &other) const { return this->data_ >= other.data_ ; }
         bool operator<=(const Vertex &other) const { return this->data_ <= other.data_ ; }
+
+
+        class VertexLessThan
+        {
+        public:
+            bool operator()(const Vertex& first, const Vertex& second) const
+              {
+                return first.getValue() > second.getValue();
+              }
+        };
 
     private:
 
@@ -508,8 +518,8 @@ void Graph<E>:: Dijkstra(const E &e)
     // (*startPos).setValue(0);
 
     //list to store all verticed in the graph
-    PriorityQueue<Vertex> graphVertices;
-    PriorityQueue<Vertex> testing;
+    PriorityQueue<Vertex,typename Vertex::VertexLessThan> graphVertices;
+    PriorityQueue<Vertex,typename Vertex::VertexLessThan> testing;
 
     //graphVertices.insert(*startPos);
 
@@ -676,7 +686,7 @@ void Graph<E>::MSTPrimJarnik(const E &e)
 
     VertexList startList = (*startPos)->adjacentVertex();
 
-    PriorityQueue<Vertex> v;
+    PriorityQueue<Vertex, typename Vertex::VertexLessThan> v;
     std::vector<Vertex> mstList;
 
     for(VertexItr i = startList.begin(); i != startList.end(); i++)
@@ -695,7 +705,7 @@ void Graph<E>::MSTPrimJarnik(const E &e)
 
 
     //h is supposed to be equals something, IDKWTF it is.
-    PriorityQueue<Vertex> Q;
+    PriorityQueue<Vertex, typename Vertex::VertexLessThan> Q;
 
     VertexItr crawl;
     crawl = startList.begin();
