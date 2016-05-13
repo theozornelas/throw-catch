@@ -1,7 +1,6 @@
 #ifndef HEAPPQUEUE_TESTS
 #define HEAPPQUEUE_TESTS
 
-
 #include "testrunner.h"
 #include <QObject>
 #include <QString>
@@ -11,9 +10,9 @@
 
 class HeapPQ_tests : public QObject
 {
-    typedef HeapPriorityQueue<int, std::greater<int> >     intPQueue;
-    typedef HeapPriorityQueue<QString, std::greater<QString> > stringPQueue;
-    typedef HeapPriorityQueue<Stadium, std::greater<Stadium> > stadiumPQueue;
+    typedef HeapPriorityQueue<int, std::less<int> >     intPQueue;
+    typedef HeapPriorityQueue<QString, std::less<QString> > stringPQueue;
+    typedef HeapPriorityQueue<Stadium, std::less<Stadium> > stadiumPQueue;
  Q_OBJECT
 private slots:
     /*** SPECIAL TEST SETUP AND TEARDOWN METHODS ***/
@@ -22,9 +21,9 @@ private slots:
     // Called after the last test function was executed.
     //void cleanupTestCase();
     // Called before every test, if it fails then the NEXT test does not run
-    void init();
+    //void init();
     // Called after every test function
-    void cleanup();
+    //void cleanup();
 
     /*** TESTS FOR THE CLASS ***/
     void test_constructor(); // tests the creation of the tree
