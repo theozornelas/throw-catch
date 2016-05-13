@@ -22,4 +22,5 @@ LIBS += -L../src -l$${APP_NAME}
 HEADERS += \
     testrunner.h \
     graphtests.h \
-    SkipListTests.h
+    SkipListTests.h \
+    HeapPQ_tests.h
