@@ -53,8 +53,14 @@ void HeapPQ_tests::test_insert()
     int testExpe[]    = { -1, 0, 1, 1024, 65536 };
     const int AR_SIZE = 5;
 
+    //test size
+    Q_ASSERT(queue.size() == 0);
+
     // fill the queue
     for(int i=0; i<AR_SIZE; i++) { queue.push(testData[i]); }
+
+    // test the size
+    Q_ASSERT(queue.size() == 5);
 
     // run tests to make sure in proper order and they are all there
     for(int i=0; i<AR_SIZE; i++) {
@@ -62,6 +68,8 @@ void HeapPQ_tests::test_insert()
       queue.pop();
     }
 }
+
+
 
 /*** THIS ADDS THE TEST TO THE LIST OF CLASSES TO RUN ***/
 DECLARE_TEST(HeapPQ_tests)

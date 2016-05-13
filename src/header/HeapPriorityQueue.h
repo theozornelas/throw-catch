@@ -33,8 +33,6 @@ public:
   void push(const E &e);
   // Removes the minimum element from the queue
   void pop();
-  // Displays the heap as a tree-graph in the DOT language
-  void HeapOut(std::string title, std::ostream &oFile) { tree_.GraphTree(title, oFile); }
 
 private:
   CompleteTree<E> tree_;    //< The contents of the PQueue
