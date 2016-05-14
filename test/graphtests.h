@@ -32,6 +32,7 @@ private slots:
     void test_removeEdge1();    // Test the removal of an edge
     void test_AddStadium();     // Tests the basic creation of a graph of stadiums and adding a few stadiums
     void test_MSTPrim();        // Tests the basic prim MST algortihm with ass12 data
+    void test_MSTRealPrim();        // Tests the basic prim MST algortihm with ass12 data
     //void test_Dijkstra();
 
 
@@ -202,6 +203,38 @@ void GraphTests::test_MSTPrim(){
     stringGraph_->insertEdge("New York","Boston", 214);
 
     Graph<QString>::EdgeList output = stringGraph_->MSTPrim();
+
+    for(Graph<QString>::EdgeItr i = output.begin(); i != output.end(); i++) {
+        qDebug() << i->print() << i->weight();
+    }
+}
+
+void GraphTests::test_MSTRealPrim(){
+    stringGraph_->insertEdge("Seattle","Chicago", 2097);
+    stringGraph_->insertEdge("Seattle","Denver", 1331);
+    stringGraph_->insertEdge("Seattle","San Francisco", 807);
+    stringGraph_->insertEdge("San Francisco","Los Angeles", 381);
+    stringGraph_->insertEdge("San Francisco","Denver", 1267);
+    stringGraph_->insertEdge("Los Angeles","Denver", 1015);
+    stringGraph_->insertEdge("Los Angeles","Kansas City", 1663);
+    stringGraph_->insertEdge("Los Angeles","Dallas", 1435);
+    stringGraph_->insertEdge("Denver","Chicago", 1003);
+    stringGraph_->insertEdge("Denver","Kansas City", 599);
+    stringGraph_->insertEdge("Chicago","Kansas City", 533);
+    stringGraph_->insertEdge("Chicago","Boston", 983);
+    stringGraph_->insertEdge("Chicago","New York", 787);
+    stringGraph_->insertEdge("Kansas City","Dallas", 496);
+    stringGraph_->insertEdge("Kansas City","New York", 1260);
+    stringGraph_->insertEdge("Kansas City","Atlanta", 864);
+    stringGraph_->insertEdge("Dallas","Houston", 239);
+    stringGraph_->insertEdge("Dallas","Atlanta", 781);
+    stringGraph_->insertEdge("Houston","Atlanta", 810);
+    stringGraph_->insertEdge("Houston","Miami", 1187);
+    stringGraph_->insertEdge("Atlanta","Miami", 661);
+    stringGraph_->insertEdge("Atlanta","New York", 888);
+    stringGraph_->insertEdge("New York","Boston", 214);
+
+    Graph<QString>::EdgeList output = stringGraph_->MSTRealPrim();
 
     for(Graph<QString>::EdgeItr i = output.begin(); i != output.end(); i++) {
         qDebug() << i->print() << i->weight();
