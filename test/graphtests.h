@@ -234,7 +234,7 @@ void GraphTests::test_MSTRealPrim(){
     stringGraph_->insertEdge("Atlanta","New York", 888);
     stringGraph_->insertEdge("New York","Boston", 214);
 
-    Graph<QString>::EdgeList output = stringGraph_->MSTRealPrim();
+    Graph<QString>::EdgeList output = stringGraph_->PrimJarnek();
 
     for(Graph<QString>::EdgeItr i = output.begin(); i != output.end(); i++) {
         qDebug() << i->print() << i->weight();
