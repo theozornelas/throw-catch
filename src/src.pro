@@ -28,7 +28,8 @@ HEADERS  += header/mainwindow.h \
     header/skiplist.h \
     header/entry.h \
     header/graph.h \
-    header/priorityqueue.h
+    header/priorityqueue.h \
+    header/quicksort.h
 
 FORMS    += form/mainwindow.ui
 

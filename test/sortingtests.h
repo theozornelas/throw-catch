@@ -6,6 +6,7 @@
 #include <QString>
 #include <QList>
 #include "mainwindow.h"
+#include "quicksort.h"
 
 
 class SortingTests : public QObject
@@ -24,55 +25,16 @@ private slots:
     void cleanup();
 
     /*** TESTS FOR THE CLASS ***/
+//    void test_SortEmptyVector();
     void test_SortIntegers();
     void test_SortDates();
+//    void test_SortStadiums();
 
 
 
 private:
-    template <typename E>
-    static void QuickSort(QVector<E> &vecToSort, int left, int right);
 
 };
-
-
-
-template <typename E>
-void SortingTests::QuickSort(QVector<E> &vecToSort, int left, int right)
-{
-    int i = left;
-    int j = right;
-    E temp;
-
-    //Chooses the pivot
-    E pivot = vecToSort[(left + right) / 2];
-
-    //Sorts the vector
-    while(i <= j)
-    {
-        while(vecToSort[i] < pivot)
-        {
-            ++i;
-        }
-        while(vecToSort[j] > pivot)
-        {
-            --j;
-        }
-        if(i <= j)
-        {
-            temp = vecToSort[i];
-            vecToSort[i] = vecToSort[j];
-            vecToSort[j] = temp;
-            ++i;
-            --j;
-        }
-    }
-
-    if(left < j)
-        QuickSort(vecToSort, left, j);
-    if(i < right)
-        QuickSort(vecToSort, i, right);
-}
 
 /********************************************************************************************
  *                         IMPLEMENTATION OF SETUP / TEARDOWN METHODS
@@ -86,9 +48,18 @@ void SortingTests::cleanup() {
 
 }
 
+/********************************************************************************************
+ *                                  IMPLEMENTATION OF TESTS
+ ********************************************************************************************/
+
+/*********************************************************************
+ * Tests sorting a QVector of integers using the QuickSort function.
+ *
+ * FAILS IF: - The QVector is not sorted from least to greatest
+ *********************************************************************/
 void SortingTests::test_SortIntegers() {
 
-    //Initializes the QVectors
+    //Initializes the QVector
     srand(time(NULL));
     QVector<int> originalVector;
     QVector<int> testVector;
@@ -108,9 +79,14 @@ void SortingTests::test_SortIntegers() {
     }
 }
 
+/*********************************************************************
+ * Tests sorting a QVector of QDates using the QuickSort function.
+ *
+ * FAILS IF: - The QVector is not sorted from least to greatest
+ *********************************************************************/
 void SortingTests::test_SortDates() {
 
-    //Initializes the QVectors
+    //Initializes the QVector
     QVector<QDate> testVector;
 
     testVector.push_back(QDate(2015, 10, 5));
@@ -126,7 +102,6 @@ void SortingTests::test_SortDates() {
 
     //Checks to see if it sorted properly
     for(int i = 0; i < testVector.size()-1; ++i) {
-        qDebug() << testVector[i];
         QVERIFY(testVector[i] <= testVector[i+1]);
     }
 }

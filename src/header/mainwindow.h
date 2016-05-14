@@ -41,11 +41,6 @@ public:
     ~MainWindow();
     bool isBlank(QString text);
 
-
-
-    template <typename E>
-    static void QuickSort(QVector<E> &vecToSort, int left, int right);
-
 private slots:
     void on_homePageButton_clicked();
 
