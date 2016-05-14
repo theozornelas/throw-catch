@@ -28,7 +28,7 @@ private slots:
 //    void test_SortEmptyVector();
     void test_SortIntegers();
     void test_SortDates();
-//    void test_SortStadiums();
+    void test_SortStadiums();
 
 
 
@@ -53,6 +53,26 @@ void SortingTests::cleanup() {
  ********************************************************************************************/
 
 /*********************************************************************
+ * Tests sorting an empty QVector
+ *
+ * FAILS IF: - Any exceptions are thrown
+ *
+ * NOTE: This fails every time, and Qt uses asserts instead of
+ *       exceptions... Sooo hopefully we don't ever try to sort an
+ *       empty QVector.
+ *********************************************************************/
+//void SortingTests::test_SortEmptyVector() {
+//    QVector<int> testVector;
+
+//    try {
+//        QuickSort(testVector, 0, 0);
+//    }
+//    catch(...) {
+//        QFAIL("Cannot perform the QuickSort on an empty vector");
+//    }
+//}
+
+/*********************************************************************
  * Tests sorting a QVector of integers using the QuickSort function.
  *
  * FAILS IF: - The QVector is not sorted from least to greatest
@@ -61,12 +81,10 @@ void SortingTests::test_SortIntegers() {
 
     //Initializes the QVector
     srand(time(NULL));
-    QVector<int> originalVector;
     QVector<int> testVector;
     int temp;
     for(int i = 0; i < 100; ++i) {
         temp = rand() % 100;
-        originalVector.push_back(temp);
         testVector.push_back(temp);
     }
 
@@ -96,6 +114,35 @@ void SortingTests::test_SortDates() {
     testVector.push_back(QDate(2007, 2, 5));
     testVector.push_back(QDate(2007, 6, 20));
     testVector.push_back(QDate(2007, 1, 1));
+
+    //Sorts the vector
+    QuickSort(testVector, 0, testVector.size()-1);
+
+    //Checks to see if it sorted properly
+    for(int i = 0; i < testVector.size()-1; ++i) {
+        QVERIFY(testVector[i] <= testVector[i+1]);
+    }
+}
+
+/*********************************************************************
+ * Tests sorting a QVector of Stadiums using the QuickSort function.
+ *
+ * FAILS IF: - The QVector is not sorted from least to greatest
+ *********************************************************************/
+void SortingTests::test_SortStadiums() {
+
+    //Initializes the QVector
+    QVector<Stadium> testVector;
+
+    testVector.push_back(Stadium(11));
+    testVector.push_back(Stadium(22));
+    testVector.push_back(Stadium(33));
+    testVector.push_back(Stadium(44));
+    testVector.push_back(Stadium(55));
+    testVector.push_back(Stadium(66));
+    testVector.push_back(Stadium(77));
+    testVector.push_back(Stadium(88));
+    testVector.push_back(Stadium(99));
 
     //Sorts the vector
     QuickSort(testVector, 0, testVector.size()-1);
