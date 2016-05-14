@@ -20,7 +20,7 @@
 #include <queue>
 #include <climits>
 #include <functional>
-#include "priorityqueue.h"
+#include "HeapPriorityQueue.h"
 
 
 /**
@@ -41,8 +41,7 @@ public:
     typedef typename EdgeList::iterator EdgeItr;
     typedef std::list<EdgeItr> EdgeItrList;
     typedef typename EdgeItrList::iterator EdgeItrItr;
-    typedef std::priority_queue<Vertex> Heap;
-    typedef std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge> > EdgePQueue;
+    typedef HeapPriorityQueue<Edge, std::less<Edge> > EdgePQueue;
 
     /**
      * @brief The Vertex class
@@ -67,7 +66,7 @@ public:
         int getValue(){return value_;}
 
         // Return an edge list of the edges incident on 'u'
-        EdgeItrList incidentEdges() { return incident_; }
+        EdgeItrList  incidentEdges() { return incident_; }
         // Adds an edge connecting this vertex to vertex 'v'
         //void addEdge(EdgeItr newEdge) { incident_.push_back(newEdge); }
         void addEdge(EdgeItr newEdge) {
@@ -88,12 +87,12 @@ public:
         /*** DISPLAY METHODS OVERLOADS ***/
         // Overload the output stream operator
         friend QDebug operator<<(QDebug output, const Vertex &obj) {
-            output << "[" << obj.data_ << "]";
+            output << obj.data_;
             return output;
         }
         // overload for text stream
         friend QTextStream &operator <<(QTextStream &output, const Vertex &obj){
-            output << "[" << obj.data_ << "]";
+            output << obj.data_;
             return output;
         }
 
@@ -219,9 +218,10 @@ public:
 
     void Dijkstra(const E &e);
 
-    void MSTPrimJarnik(const E &e);
     // Outputs the MST graph edges using the basic prim algortihm
     EdgeList MSTPrim();
+    // Outputs the MST using a PQueue and PrimJarnek
+    EdgeList PrimJarnek();
 
     int Distace(Vertex u, Vertex v);
 
@@ -499,6 +499,64 @@ std::cin.get();
 //}
 
 /**
+ * @brief creates the Minimum Spannin Tree using Prim-Jarnek and PQueue
+ * @returns A list of edge objects that make up the MST
+ */
+template <typename E>
+typename Graph<E>::EdgeList Graph<E>::PrimJarnek() {
+    unvisitAll();          // ensure all edges and vertices are unvisited
+    EdgeList usedEdges;    // List of edges to use in MST, for return
+    EdgePQueue edgePQ;     // Priority Queue of unused edges
+    unsigned int VertexCount = 0;  // Count of vertecies visited
+
+    // add first vertex to the list and set it to visited
+    vertices_.begin()->visit();
+    VertexCount++;
+    // add incident edges to PQueue
+    EdgeItrList incident = vertices_.begin()->incidentEdges();
+    for(EdgeItrItr i = incident.begin(); i != incident.end(); i++){
+        edgePQ.push(**i);
+    }
+
+    // loop while vertecies in the done cloud is less than total
+    while( VertexCount < vertices_.size() ) {
+        // Get Rid of any edges that are incident to two visited vertex
+        while(edgePQ.top().start().visited() && edgePQ.top().end().visited()){
+            edgePQ.pop();
+        }
+
+        // add shortest edge to the list and visit, then pop.
+        usedEdges.push_back(edgePQ.top());
+        edgePQ.top().start().visit();
+        edgePQ.top().end().visit();
+
+        // Get incident lists from the end vertices
+        EdgeItrList endIncident = edgePQ.top().end().incidentEdges();
+        EdgeItrList startIncident = edgePQ.top().start().incidentEdges();
+
+        // pop the smallest and increment vertexcount
+        edgePQ.pop();
+        VertexCount++;
+
+        // add unvisted edges from start to PQueue
+        for(EdgeItrItr i = endIncident.begin(); i != endIncident.end(); i++){
+            if( !(**i).start().visited() || !(**i).end().visited() ){
+                edgePQ.push(**i);
+            }
+        }
+
+        // add unvisted edges from end to PQueue
+        for(EdgeItrItr i = startIncident.begin(); i != startIncident.end(); i++){
+            if( !(**i).start().visited() || !(**i).end().visited() ){
+                edgePQ.push(**i);
+            }
+        }
+    } // END OF MST WHILE LOOP
+
+    return usedEdges;
+}
+
+/**
  * @brief Graph<E>::MSTPrim
  * @returns A list of edge objects
  */
@@ -546,60 +604,6 @@ typename Graph<E>::EdgeList Graph<E>::MSTPrim() {
     } // END OF MST WHILE LOOP
 
     return usedEdges;
-}
-
-/**
- * @brief Graph<E>::MSTPrim
- * @param e
- */
-template <typename E>
-void Graph<E>::MSTPrimJarnik(const E &e)
-{
-    VertexItr startPos = findVertex(e);
-    (*startPos)->setValue(0);
-
-    const int INFINITY_VAL = INT_MAX;
-
-    VertexList startList = (*startPos)->adjacentVertex();
-
-    PriorityQueue<Vertex> v;
-    std::vector<Vertex> mstList;
-
-    for(VertexItr i = startList.begin(); i != startList.end(); i++)
-    {
-        if(i != startPos)
-        {
-            (*i)->setValue(INFINITY_VAL);
-        }
-        else
-        {
-            (*i)->setValue(0);
-        }
-
-        //v.insert(*i);
-    }
-
-
-    //h is supposed to be equals something, IDKWTF it is.
-    PriorityQueue<Vertex> Q;
-
-    VertexItr crawl;
-    crawl = startList.begin();
-
-    while(!Q.empty())
-    {
-        Vertex ue = Q.removeMin();
-
-        v.push_back(ue);
-
-        while(crawl != startList.end())
-        {
-
-        }
-
-
-
-    }
 }
 
 /**

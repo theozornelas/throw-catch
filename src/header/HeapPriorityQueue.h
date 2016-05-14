@@ -28,7 +28,7 @@ public:
 
   /*** NON-CONSTANT UTILITY METHODS ***/
   // Returns the min element in the queue
-  const E& top() { return *(tree_.root());}
+  E& top() { return *(tree_.root());}
   // Inserts an element into the queue
   void push(const E &e);
   // Removes the minimum element from the queue
