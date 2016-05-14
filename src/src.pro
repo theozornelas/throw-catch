@@ -19,7 +19,8 @@ TEMPLATE = lib
 SOURCES  += source/mainwindow.cpp \
     source/dbmanager.cpp \
     source/stadium.cpp \
-    source/souvenir.cpp
+    source/souvenir.cpp \
+    source/shoppingcart.cpp
 
 HEADERS  += header/mainwindow.h \
     header/dbmanager.h \
@@ -28,13 +29,21 @@ HEADERS  += header/mainwindow.h \
     header/skiplist.h \
     header/entry.h \
     header/graph.h \
-    header/priorityqueue.h
+    header/priorityqueue.h \
+    header/shoppingcart.h \
+    header/CompleteTree.h \
+    header/HeapPriorityQueue.h
 
-FORMS    += form/mainwindow.ui
 
-RESOURCES += \
-    images.qrc
+FORMS    += form/mainwindow.ui \
+            form/shoppingcart.ui
+
 
 
 
 QTPLUGIN += qsqlmysql
+
+DISTFILES +=
+
+RESOURCES += \
+    resource.qrc

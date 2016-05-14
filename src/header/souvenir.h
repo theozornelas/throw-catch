@@ -30,6 +30,7 @@ public:
      **************/
     void setName(QString newName);
     void setPrice(double newPrice);
+    void setStadiumID(int id);
     void setQuantity(unsigned int newQty);
     void addToQuantity(unsigned int addQty);
 

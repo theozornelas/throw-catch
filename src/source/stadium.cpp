@@ -25,7 +25,7 @@ Stadium::Stadium(int id, QString name,
                      QString team, QString street, QString city,
                      QString state, QString zipCode,
                      QString number, QString date, unsigned int capacity,
-                     QString surf, QString league,  QString typo)
+                     QString surf, QString league,  QString typo, double revenue)
 {
 
     stadiumID                    = id;
@@ -44,6 +44,7 @@ Stadium::Stadium(int id, QString name,
     surface                      = surf;
     leagueType                   = league;
     typology                     = typo;
+    totalRevenue                 = revenue;
 }
 
 /**
@@ -95,7 +96,7 @@ QString Stadium::getTeamName() const {
 QString Stadium::getAddress() const {
 
 
-    QString str = stadiumAddress.streetAddress + "\n" +stadiumAddress.city + ", " +
+    QString str = stadiumAddress.streetAddress + stadiumAddress.city + ", " +
     stadiumAddress.state + " " + stadiumAddress.zipCode;
 
     return str;
@@ -147,6 +148,14 @@ QString Stadium::getLeagueType() const {
  */
 QString Stadium::getTypology() const {
     return typology;
+}
+
+/**
+ * @brief Stadium::getTotalRevenue
+ * @return a double totalRevenue
+ */
+double Stadium::getTotalRevenue() const {
+    return totalRevenue;
 }
 
 /**
@@ -232,6 +241,18 @@ void Stadium::setTypology(QString typo) {
     typology = typo;
 }
 
+/**
+ * @brief Stadium::setTotalRevenue Changes totalRevenue to revenue
+ * @param revenue
+ */
+void Stadium::setTotalRevenue(double revenue) {
+    totalRevenue = revenue;
+}
+
+void Stadium::addToTotalRevenue(double addToRevenue) {
+    totalRevenue += addToRevenue;
+}
+
 // Mutators for Stadium's souvenir list.
 /**
  * @brief Stadium::addSouvenir Adds a souvenir to the current stadium's list of souvenirs.
@@ -272,6 +293,3 @@ QVector<Souvenir> Stadium::getSouvenirs() const {
     return souvenirs;
 }
 
-void createGraph() {
-
-}
