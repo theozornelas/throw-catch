@@ -187,6 +187,7 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
 {
     ui->display->setCurrentIndex(MST_TRIP);
 
+    double totalWeight = 0;
 
     Graph<Stadium>::EdgeList edges = stadiumsGraph->MSTPrim();
 
@@ -194,7 +195,10 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->MSTList);
         currentItem->setText(0, i->print());
         currentItem->setText(2, QString::number(i->weight()));
+        totalWeight += i->weight();
     }
+
+    ui->mstTotalWeight->setText(QString::number(totalWeight));
 
     ui->MSTList->resizeColumnToContents(0);
     ui->MSTList->resizeColumnToContents(1);
