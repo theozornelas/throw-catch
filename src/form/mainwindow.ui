@@ -1076,7 +1076,7 @@ QComboBox::drop-down{
        <string>total weight:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="mstTotalWeight">
       <property name="geometry">
        <rect>
         <x>310</x>

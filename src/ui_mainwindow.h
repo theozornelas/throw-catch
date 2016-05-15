@@ -100,7 +100,7 @@ public:
     QLabel *planATripLabel_2;
     QTreeWidget *MSTList;
     QLabel *planATripLabel_3;
-    QLabel *label;
+    QLabel *mstTotalWeight;
     QWidget *tripProcessPage;
     QLabel *currentTripStadiumNameLabel;
     QPushButton *addSouvenirToShoppingCart;
@@ -590,10 +590,10 @@ public:
         planATripLabel_3->setObjectName(QStringLiteral("planATripLabel_3"));
         planATripLabel_3->setGeometry(QRect(200, 380, 101, 41));
         planATripLabel_3->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
-        label = new QLabel(minimumSpanningTreePage);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(310, 390, 81, 20));
-        label->setFont(font2);
+        mstTotalWeight = new QLabel(minimumSpanningTreePage);
+        mstTotalWeight->setObjectName(QStringLiteral("mstTotalWeight"));
+        mstTotalWeight->setGeometry(QRect(310, 390, 81, 20));
+        mstTotalWeight->setFont(font2);
         display->addWidget(minimumSpanningTreePage);
         tripProcessPage = new QWidget();
         tripProcessPage->setObjectName(QStringLiteral("tripProcessPage"));
@@ -1043,7 +1043,7 @@ public:
         ___qtreewidgetitem4->setText(1, QApplication::translate("MainWindow", "destination", 0));
         ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "origin", 0));
         planATripLabel_3->setText(QApplication::translate("MainWindow", "total weight:", 0));
-        label->setText(QApplication::translate("MainWindow", "---- miles", 0));
+        mstTotalWeight->setText(QApplication::translate("MainWindow", "---- miles", 0));
         currentTripStadiumNameLabel->setText(QApplication::translate("MainWindow", "STADIUM_NAME", 0));
         addSouvenirToShoppingCart->setText(QApplication::translate("MainWindow", "+ Add to cart", 0));
         currentTripWelcomeDescription->setText(QApplication::translate("MainWindow", "Welcome, you have arrived at your destination. ", 0));
