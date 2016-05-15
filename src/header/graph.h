@@ -154,6 +154,8 @@ public:
         /*** OPERATOR OVERLOADS ***/
         // Print Method
         QString print();
+
+
         // Overload for the * Operator
         int& operator*() { return weight_; }
         // Overload the output stream operator
@@ -829,5 +831,6 @@ QString Graph<E>::Edge::print() {
     outputStream << *start_ << "<-->" << *end_;
     return outputStream.readAll();
 }
+
 
 #endif //DATA_STRUCTURES_GRAPH_H
