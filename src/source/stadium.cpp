@@ -93,13 +93,10 @@ QString Stadium::getTeamName() const {
  *                     cityName, ST zipCode
  * @return a QString address
  */
-QString Stadium::getAddress() const {
+Address Stadium::getAddress() const {
 
 
-    QString str = stadiumAddress.streetAddress + stadiumAddress.city + ", " +
-    stadiumAddress.state + " " + stadiumAddress.zipCode;
-
-    return str;
+    return stadiumAddress;
 }
 
 /**

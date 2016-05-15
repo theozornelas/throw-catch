@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent) :
     stadiumSearch->setCaseSensitivity(Qt::CaseInsensitive);
     ui->searchBar->setCompleter(stadiumSearch);
 
+    //Testing
+    Stadium *s = new Stadium(300, "Testing");
+    db.AddNewStadium(s);
+
 
 }
 
@@ -84,7 +88,8 @@ void MainWindow::viewStadiumBy(QString sortByType) {
                 currentItem->setText(0, s->getStadiumName());
                 currentItem->setText(1, s->getTeamName());
                 currentItem->setText(2, QString::number(s->getSeatingCapacity()));
-                currentItem->setText(3, s->getAddress());
+                currentItem->setText(3, s->getAddress().streetAddress + " " + s->getAddress().city
+                                     + "\n" + s->getAddress().state + " " + s->getAddress().zipCode);
                 currentItem->setText(4, s->getSurface());
                 currentItem->setText(5, s->getDateOpened());
                 currentItem->setText(6, s->getTypology());
@@ -101,7 +106,8 @@ void MainWindow::viewStadiumBy(QString sortByType) {
             currentItem->setText(0, s->getStadiumName());
             currentItem->setText(1, s->getTeamName());
             currentItem->setText(2, QString::number(s->getSeatingCapacity()));
-            currentItem->setText(3, s->getAddress());
+            currentItem->setText(3, s->getAddress().streetAddress + " " + s->getAddress().city
+                                 + "\n" + s->getAddress().state + " " + s->getAddress().zipCode);
             currentItem->setText(4, s->getSurface());
             currentItem->setText(5, s->getDateOpened());
             currentItem->setText(6, s->getTypology());
@@ -193,15 +199,17 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
 
     for(Graph<Stadium>::EdgeItr i = edges.begin(); i != edges.end(); i++) {
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->MSTList);
-        currentItem->setText(0, i->print());
+        currentItem->setText(0, i->start().print());
+        currentItem->setText(1, i->end().print());
         currentItem->setText(2, QString::number(i->weight()));
+        currentItem->setTextAlignment(2, Qt::AlignHCenter);
         totalWeight += i->weight();
     }
 
     ui->mstTotalWeight->setText(QString::number(totalWeight) + " miles");
 
-    ui->MSTList->resizeColumnToContents(0);
-    ui->MSTList->resizeColumnToContents(1);
+    ui->MSTList->setColumnWidth(0, 230);
+    ui->MSTList->setColumnWidth(1, 230);
     ui->MSTList->resizeColumnToContents(2);
 
 
@@ -212,6 +220,37 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
 void MainWindow::on_shortestTripToAllButton_clicked()
 {
     ui->display->setCurrentIndex(SHORTEST_TO_ALL);
+
+    const QString startingStadiumName = "Dodger Stadium";
+    Stadium s = **stadiums.get(db.getStadiumID(startingStadiumName));
+    stadiumsGraph->Dijkstra(s);
+
+
+//    Graph<Stadium>::VertexList path = stadiumsGraph->shortestPathTo(**stadiums.get(db.getStadiumID("Wrigley Field")));
+//    Graph<Stadium>::VertexItr itr = path.begin();
+//    while(itr != path.end()){
+//        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->shortestTripList);
+//        Stadium s = **itr;
+//        currentItem->setText(0, s.getStadiumName());
+//        currentItem->setText(1, QString::number((itr)->getDistance(), 'f', 2));
+//        totalWeight += (itr)->getDistance();
+
+//        itr++;
+
+//    }
+
+    ui->shortestTripList->clear();
+
+     for(int i = 0; i < keys.size(); i++) {
+        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->shortestTripList);
+        Stadium *s = *stadiums.get(keys[i]);
+        currentItem->setText(0, s->getStadiumName());
+        currentItem->setText(1, QString::number(stadiumsGraph->GetDistanceTo(*s)));
+    }
+
+     ui->shortestTripList->setColumnWidth(0, 250);
+
+
 }
 
 void MainWindow::on_adminLoginButton_clicked()
@@ -625,7 +664,8 @@ void MainWindow::viewSingleStadium(QString stadiumName) {
         ui->singleStadiumNameLabel->setText(s->getStadiumName());
         ui->singleStadiumInfo->setVisible(true);
 
-        ui->singleStadiumAddress->setText(s->getAddress());
+        ui->singleStadiumAddress->setText(s->getAddress().streetAddress + " " + s->getAddress().city
+                                          + "\n" + s->getAddress().state + " " + s->getAddress().zipCode);
         ui->singleStadiumBoxOfficeNum->setText(s->getBoxOfficeNumber());
         ui->singleStadiumSeatingCapacity->setText(QString::number(s->getSeatingCapacity()));
         ui->singleStadiumSurface->setText(s->getSurface());

@@ -217,9 +217,41 @@ bool DBManager::updateTotalRevenue(int stadiumKey, double newRevenue) {
 
     query.prepare("UPDATE Stadiums SET total_revenue = :new_revenue WHERE id = :key");
 
-    qDebug() << newRevenue;
     query.bindValue(":new_revenue", newRevenue);
     query.bindValue(":key", stadiumKey);
 
     return query.exec();
+}
+
+bool DBManager::AddNewStadium(Stadium *s) {
+    QSqlQuery query;
+
+    query.prepare("INSERT into Stadiums (id, stadium_name, team_name, "
+                  "street_address, city, state, zipcode, box_office_number, "
+                  "date_opened, seating_capacity, surface, league_type, "
+                  "typology, total_revenue) "
+                  "VALUES (:id, :stadium_name, :team_name, "
+                  ":street_address, :city, :state, :zipcode, :box_office_number, "
+                  ":date_opened, :seating_capacity, :surface, :league_type, :typology, :total_revenue)");
+
+    query.bindValue(":id", s->getStadiumID());
+    query.bindValue(":stadium_name", s->getStadiumName());
+    query.bindValue(":team_name", s->getTeamName());
+    query.bindValue(":street_address", s->getAddress().streetAddress);
+    query.bindValue(":city", s->getAddress().city);
+    query.bindValue(":state", s->getAddress().state);
+    query.bindValue(":zipcode", s->getAddress().zipCode);
+    query.bindValue(":box_office_number", s->getBoxOfficeNumber());
+    query.bindValue(":date_opened", s->getDateOpened());
+    query.bindValue(":seating_capacity", s->getSeatingCapacity());
+    query.bindValue(":surface", s->getSurface());
+    query.bindValue(":league_type", s->getLeagueType());
+    query.bindValue(":typology", s->getTypology());
+    // All new stadiums should have the starting revenue of 0.
+    query.bindValue(":total_revenue", s->getTotalRevenue());
+
+
+    return query.exec();
+
+
 }

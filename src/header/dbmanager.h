@@ -30,7 +30,7 @@ public:
      *   MUTATORS
      ****************/
     // Adding or updating information of a stadium.
-    // void AddNewStadium(int stadiumKey, QString name...);
+     bool AddNewStadium(Stadium *s);
     // void UpdateStadium(int stadiumKey, QString name...);
 
     // Adding, removing or changing information for souvenir.

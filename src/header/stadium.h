@@ -65,7 +65,7 @@ public:
     unsigned int getStadiumID() const;
     QString      getStadiumName() const;
     QString      getTeamName() const;
-    QString      getAddress() const;
+    Address      getAddress() const;
     QString      getBoxOfficeNumber() const;
     QString      getDateOpened() const;
     unsigned int getSeatingCapacity() const;

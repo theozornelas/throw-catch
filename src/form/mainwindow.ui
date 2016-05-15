@@ -787,10 +787,10 @@ border:none;
      <widget class="QTreeWidget" name="shortestTripList">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>100</y>
-        <width>261</width>
-        <height>251</height>
+        <x>130</x>
+        <y>70</y>
+        <width>371</width>
+        <height>421</height>
        </rect>
       </property>
       <property name="horizontalScrollBarPolicy">
@@ -815,44 +815,9 @@ border:none;
       </column>
       <column>
        <property name="text">
-        <string>Distance to next</string>
+        <string>Distance from Dodger Stadium</string>
        </property>
       </column>
-     </widget>
-     <widget class="QLabel" name="planATripLabel_4">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>360</y>
-        <width>111</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">	font: 75 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
-</string>
-      </property>
-      <property name="text">
-       <string>total distance:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>372</y>
-        <width>81</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>--- miles</string>
-      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="customTripPage">
@@ -890,10 +855,10 @@ border:none;
      <widget class="QTreeWidget" name="selectedStadiumsList">
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>420</x>
         <y>160</y>
         <width>256</width>
-        <height>251</height>
+        <height>261</height>
        </rect>
       </property>
       <column>
@@ -921,32 +886,6 @@ border:none;
       </property>
       <property name="text">
        <string>TAKE TRIP</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="arrows">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>230</y>
-        <width>51</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Geneva</family>
-        <pointsize>24</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>--&gt;
-&lt;--</string>
       </property>
      </widget>
      <widget class="QLabel" name="startingStadiumLabel">
@@ -1012,6 +951,38 @@ QComboBox::drop-down{
       </property>
       <property name="frame">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>230</y>
+        <width>71</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">image:url(:/icon/icons/right-arrow.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>280</y>
+        <width>71</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">image:url(:/icon/icons/left-arrow.png);</string>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
