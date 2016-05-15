@@ -42,6 +42,7 @@ public:
     typedef std::list<EdgeItr> EdgeItrList;
     typedef typename EdgeItrList::iterator EdgeItrItr;
     typedef HeapPriorityQueue<Edge, std::less<Edge> > EdgePQueue;
+    typedef std::vector<VertexItr> VertexItrVector;
 
     /**
      * @brief The Vertex class
@@ -49,7 +50,7 @@ public:
     class Vertex {
     public:
         // Basic Constructor
-        Vertex(const E& data) : data_(data), visited_(false), distance_(INF) {  }
+        Vertex(const E& data) : data_(data), visited_(false), distance_(INF) {}
         // Sets the data stored in this vertex to a new value
         void setData(const E& data) { data_ = data; }
         // Sets the state of this vertex to visited
@@ -57,8 +58,8 @@ public:
         // Sets the state of this vertex to unvisited
         void resetVisited() { visited_ = false; }
 
-        //returns a list of vertices to the appointed vertex
-        VertexList adjacentVertex();
+        // returns a vector of vertices adjacent top this vertex
+        VertexItrVector adjacentVertex();
 
         /*** Dijkstra Methods ***/
         // Sets the distance from this vertex to the starting point
@@ -66,11 +67,11 @@ public:
         // Gets the distance from the starting vertex
         int getDistance() { return distance_; }
         // Sets the parent vertex to this vertex
-        void setParent(VertexItr &parent) { parent_ = parent; }
+        void setParent(const VertexItr &parent) { parent_ = parent; }
         // Gets the parent of this vertex in the dijkstra routing
         VertexItr getParent() { return parent_; }
         // Resets the dijkstra variables to default values
-        void resetDijkstra() { distance_ = -1; parent_ = vertices_.end(); }
+        void resetDijkstra() { distance_ = INF; }
 
         // Return an edge list of the edges incident on 'u'
         EdgeItrList  incidentEdges() { return incident_; }
@@ -91,6 +92,8 @@ public:
         bool visited() { return visited_; }
         // Test whether this vertex and vertex 'v' are adjacent
         bool isAdjacentTo(const E& v);
+        // Gets the distance from this vertex to vertex 'v'
+        int distanceTo(const VertexItr &v);
 
         /*** DISPLAY METHODS OVERLOADS ***/
         // Overload the output stream operator
@@ -103,13 +106,6 @@ public:
             output << obj.data_;
             return output;
         }
-
-        /*** COMPARATOR FOR P-QUEUE ***/
-        class distanceCompare {
-            bool operator()(const Vertex &lhs, const Vertex &rhs) {
-                return (lhs.getDistance() > rhs.getDistance());
-            }
-        };
 
         /*** OPERATOR OVERLOADS ***/
         // Overload for the * Operator
@@ -187,7 +183,6 @@ public:
         bool operator!=(const Edge &other) const { return this->weight_ != other.weight_; }
         bool operator>(const Edge &other) const { return this->weight_ >  other.weight_; }
         bool operator<(const Edge &other) const { return this->weight_ <  other.weight_; }
-        //bool operator<(const Edge &current, const Edge &other) { return current.weight_ < other.weight_; }
         bool operator>=(const Edge &other) const { return this->weight_ >= other.weight_; }
         bool operator<=(const Edge &other) const { return this->weight_ <= other.weight_; }
 
@@ -239,8 +234,6 @@ public:
     // Outputs the MST using a PQueue and PrimJarnek
     EdgeList PrimJarnek();
 
-    int Distace(Vertex u, Vertex v);
-
 protected:
     // Resets all the verticies and edges to un-visited
     void unvisitAll();
@@ -289,50 +282,22 @@ void Graph<E>::print(std::ofstream &output, std::string title) {
     output << "}\n";
 }
 
-
+/**
+ * @brief Get all the neightbors of this vertex
+ * @return A vector of iterators pointing to vertex adjacent to this one
+ */
 template <typename E>
-int Graph<E>:: Distace(Vertex u, Vertex v)
-{
-    int distance;
-
-
-
-    EdgeItrList Uedges = u.incidentEdges();
-    EdgeItrList Vedges = (v.incidentEdges());
-
-    bool found=false;
-    EdgeItrItr itU;
-    EdgeItrItr itV;
-    itU = Uedges.begin();
-    while(!found && itU != Uedges.end() && itV != Uedges.end())
-    {
-        if((**itU).end() == (**itV).start())
-        {
-            found = true;
-            distance = (**itU).weight();
-        }
-        else
-        {
-            itU++;
-            itV++;
-        }
-    }
-
-    return distance;
-}
-
-template <typename E>
-typename Graph<E>::VertexList Graph<E>::Vertex::adjacentVertex()
+typename Graph<E>::VertexItrVector Graph<E>::Vertex::adjacentVertex()
 {
 
-    VertexList nextVertices;
+    VertexItrVector neighbors;
 
     for(EdgeItrItr it = incident_.begin(); it != incident_.end(); it++)
     {
-        nextVertices.push_back((*it)->start());
+        neighbors.push_back( (**it).opposite(*this) );
     }
 
-    return nextVertices;
+    return neighbors;
 }
 
 /**
@@ -428,22 +393,59 @@ typename Graph<E>::VertexList Graph<E>::dft(const E &e) {
 }
 
 /**
- * @brief Graph::Dijkstra
- * @param e
+ * @brief creates shortest path tree starting at specified vertex
+ * @param e [IN] the starting vertex
  */
 template<typename E>
 void Graph<E>::Dijkstra(const E &e)
 {
+    // Comparitor class for vertexItr, pushes smallest weights to the bottom
+    struct distanceCompare {
+        bool operator()(const VertexItr &lhs, const VertexItr &rhs) {
+            return (lhs->getDistance() > rhs->getDistance());
+        }
+    } compareDist;
+
     // Reset the weight and parent of all vertex
     resetDijkstra();
     // find the vertex to use as a starting point
     VertexItr eItr = findVertex(e);
 
     // set source distance to 0
-    sItr->setDistance(0);
+    eItr->setDistance(0);
 
+    // Load iterators to vertices into a psudo PQueue
+    VertexItrVector unusedVertex;
+    for(VertexItr i = vertices_.begin(); i != vertices_.end(); i++){
+        unusedVertex.push_back(i);
+    }
 
-}
+    // actual algorithm
+    while(!unusedVertex.empty()){
+        // re-sort every time since weights have changed
+        std::sort(unusedVertex.begin(), unusedVertex.end(), compareDist);
+
+        // grab the next vertex with the smallest distance, and then pop it
+        VertexItr currentVertex = unusedVertex.back();
+        qDebug() << "smallest distance is to: " << *(unusedVertex.back());
+        unusedVertex.pop_back();
+
+        // IF the smallest vertex has weight infintiy then it is unconnected, skip
+        if( currentVertex->getDistance() != INF ){
+            // get iterators to all the neightbors of current vertex
+            VertexItrVector neighbors = currentVertex->adjacentVertex();
+            for(typename VertexItrVector::iterator j = neighbors.begin(); j != neighbors.end(); j++){
+                // relaxation algorithm
+                int sumDistance = currentVertex->getDistance() + currentVertex->distanceTo(*j);
+                if( sumDistance < (**j).getDistance() ){
+                    (**j).setDistance(sumDistance);
+                    (**j).setParent(currentVertex);
+                }
+            }//END FOR LOOP
+        }//END INF IF STATEMENT
+    }//END WHILE
+
+}//END DIJKSTRA
 
 /**
  *
@@ -748,6 +750,22 @@ bool Graph<E>::Vertex::isAdjacentTo(const E &v) {
         itr++;
     }
     return found;
+}
+
+/**
+ * @brief get the distance from this vertec to 'v'
+ * @param v [IN] the vertex to get the distance to
+ * @return distance between this vertex and 'v' (INF if not adjacent)
+ */
+template <typename E>
+int Graph<E>::Vertex::distanceTo(const VertexItr &v) {
+    bool found = false;
+    EdgeItrItr itr = incident_.begin();
+    while(itr != incident_.end() && !found){
+        found = (**itr).isIncidentOn(*v);
+        if(!found) { itr++; }
+    }
+    return (**itr).weight();
 }
 
 /**

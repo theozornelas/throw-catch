@@ -32,8 +32,8 @@ private slots:
     void test_removeEdge1();    // Test the removal of an edge
     void test_AddStadium();     // Tests the basic creation of a graph of stadiums and adding a few stadiums
     void test_MSTPrim();        // Tests the basic prim MST algortihm with ass12 data
-    void test_MSTRealPrim();        // Tests the basic prim MST algortihm with ass12 data
-    //void test_Dijkstra();
+    void test_MSTRealPrim();    // Tests the basic prim MST algortihm with ass12 data
+    void test_Dijkstra();       // Test the dijkstra algorithm
 
 
 private:
@@ -241,33 +241,117 @@ void GraphTests::test_MSTRealPrim(){
     }
 }
 
-//void GraphTests::test_Dijkstra(){
-//    stringGraph_->insertEdge("Seattle","Chicago", 2097);
-//    stringGraph_->insertEdge("Seattle","Denver", 1331);
-//    stringGraph_->insertEdge("Seattle","San Francisco", 807);
-//    stringGraph_->insertEdge("San Francisco","Los Angeles", 381);
-//    stringGraph_->insertEdge("San Francisco","Denver", 1267);
-//    stringGraph_->insertEdge("Los Angeles","Denver", 1015);
-//    stringGraph_->insertEdge("Los Angeles","Kansas City", 1663);
-//    stringGraph_->insertEdge("Los Angeles","Dallas", 1435);
-//    stringGraph_->insertEdge("Denver","Chicago", 1003);
-//    stringGraph_->insertEdge("Denver","Kansas City", 599);
-//    stringGraph_->insertEdge("Chicago","Kansas City", 533);
-//    stringGraph_->insertEdge("Chicago","Boston", 983);
-//    stringGraph_->insertEdge("Chicago","New York", 787);
-//    stringGraph_->insertEdge("Kansas City","Dallas", 496);
-//    stringGraph_->insertEdge("Kansas City","New York", 1260);
-//    stringGraph_->insertEdge("Kansas City","Atlanta", 864);
-//    stringGraph_->insertEdge("Dallas","Houston", 239);
-//    stringGraph_->insertEdge("Dallas","Atlanta", 781);
-//    stringGraph_->insertEdge("Houston","Atlanta", 810);
-//    stringGraph_->insertEdge("Houston","Miami", 1187);
-//    stringGraph_->insertEdge("Atlanta","Miami", 661);
-//    stringGraph_->insertEdge("Atlanta","New York", 888);
-//    stringGraph_->insertEdge("New York","Boston", 214);
+void GraphTests::test_Dijkstra(){
+    StadiumGraph_ = new Graph<Stadium>;
+    Stadium safeco(1, "safeco field");
+    Stadium rogers(2, "rogers centre");
+    Stadium fenway(3, "fenway park");
+    Stadium target(4, "Target Field");
+    Stadium miller(5, "Miller Park");
+    Stadium commerce(6, "Commerce Park");
+    Stadium progressive(7, "Progressive Field");
+    Stadium pnc(8, "PNC Park");
+    Stadium yankee(9, "Yankee Stadium");
+    Stadium citi(10, "Citi Field");
+    Stadium wrigley(11, "Wrigley Field");
+    Stadium usCell(12, "US Cellular Field");
+    Stadium greatAmer(13, "Great American Ballfield");
+    Stadium oriole(14, "Oriole Park");
+    Stadium citizens(15, "Citizens Bank");
+    Stadium nationals(16, "Nationals Park");
+    Stadium turner(17, "Turner Field");
+    Stadium busch(18, "Busch Stadium");
+    Stadium kauffman(19, "Kauffman Stadium");
+    Stadium coors(20, "Coors Field");
+    Stadium att(21, "AT&T Park");
+    Stadium dodgers(22, "Dodger Stadium");
+    Stadium angels(23, "Angel Stadium");
+    Stadium petco(24, "Petco Park");
+    Stadium chase(25, "Chase Field");
+    Stadium globeLife(26, "Globe Life Park");
+    Stadium minMaid(27, "Minute Maid Park");
+    Stadium tropicana(28, "Tropicana Field");
+    Stadium marlins(29, "Marlins Park");
+    Stadium oco(30, "O.co Coliseum");
+    Stadium lasVegas(31, "Las Begas Stadium");
 
-//    stringGraph_->Dijkstra("Atlanta");
-//}
+    StadiumGraph_->insertEdge(safeco, rogers, 2070);
+    StadiumGraph_->insertEdge(safeco, target, 1390);
+    StadiumGraph_->insertEdge(safeco, att, 680);
+
+    StadiumGraph_->insertEdge(att, oco, 50);
+
+    StadiumGraph_->insertEdge(oco, dodgers, 340);
+    StadiumGraph_->insertEdge(oco, chase, 650);
+
+    StadiumGraph_->insertEdge(dodgers, angels, 50);
+    StadiumGraph_->insertEdge(dodgers, target, 1500);
+
+    StadiumGraph_->insertEdge(angels, petco, 110);
+
+    StadiumGraph_->insertEdge(petco, coors, 830);
+    StadiumGraph_->insertEdge(petco, chase, 300);
+
+    StadiumGraph_->insertEdge(chase, coors, 580);
+    StadiumGraph_->insertEdge(chase, globeLife, 870);
+    StadiumGraph_->insertEdge(chase, minMaid, 1115);
+
+    StadiumGraph_->insertEdge(minMaid, marlins, 965);
+    StadiumGraph_->insertEdge(minMaid, tropicana, 790);
+    StadiumGraph_->insertEdge(minMaid, busch, 680);
+    StadiumGraph_->insertEdge(minMaid, globeLife, 230);
+
+    StadiumGraph_->insertEdge(marlins, tropicana, 210);
+    StadiumGraph_->insertEdge(marlins, turner, 600);
+    StadiumGraph_->insertEdge(marlins, nationals, 930);
+    StadiumGraph_->insertEdge(marlins, fenway, 1255);
+
+    StadiumGraph_->insertEdge(tropicana, greatAmer, 790);
+
+    StadiumGraph_->insertEdge(globeLife, coors, 650);
+    StadiumGraph_->insertEdge(globeLife, kauffman, 460);
+    StadiumGraph_->insertEdge(globeLife, turner, 740);
+
+    StadiumGraph_->insertEdge(coors, kauffman, 560);
+
+    StadiumGraph_->insertEdge(kauffman, busch, 235);
+    StadiumGraph_->insertEdge(kauffman, wrigley, 415);
+
+    StadiumGraph_->insertEdge(target, busch, 465);
+    StadiumGraph_->insertEdge(target, miller, 300);
+
+    StadiumGraph_->insertEdge(miller, wrigley, 80);
+    StadiumGraph_->insertEdge(miller, rogers, 430);
+
+    StadiumGraph_->insertEdge(wrigley, usCell, 50);
+
+    StadiumGraph_->insertEdge(busch, greatAmer, 310);
+
+    StadiumGraph_->insertEdge(turner, greatAmer, 375);
+    StadiumGraph_->insertEdge(turner, nationals, 560);
+
+    StadiumGraph_->insertEdge(pnc, rogers, 225);
+    StadiumGraph_->insertEdge(pnc, progressive, 115);
+    StadiumGraph_->insertEdge(pnc, greatAmer, 260);
+    StadiumGraph_->insertEdge(pnc, yankee, 315);
+    StadiumGraph_->insertEdge(pnc, nationals, 195);
+
+    StadiumGraph_->insertEdge(nationals, oriole, 50);
+    StadiumGraph_->insertEdge(oriole, citizens, 90);
+    StadiumGraph_->insertEdge(citizens, yankee, 80);
+    StadiumGraph_->insertEdge(yankee, citi, 50);
+    StadiumGraph_->insertEdge(citi, fenway, 195);
+    StadiumGraph_->insertEdge(fenway, rogers, 430);
+
+    StadiumGraph_->insertEdge(commerce, usCell, 240);
+    StadiumGraph_->insertEdge(commerce, rogers, 210);
+    StadiumGraph_->insertEdge(commerce, progressive, 90);
+
+    StadiumGraph_->insertEdge(greatAmer, usCell, 250);
+    StadiumGraph_->insertEdge(greatAmer, progressive, 225);
+
+    StadiumGraph_->Dijkstra(dodgers);
+}
 
 /*** THIS ADDS THE TEST TO THE LIST OF CLASSES TO RUN ***/
 DECLARE_TEST(GraphTests)
