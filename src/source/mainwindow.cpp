@@ -796,25 +796,49 @@ void MainWindow::on_removeSelectedSouvenir_2_clicked()
             // extract object and make sure it's a stadium
             QJsonObject JsonStadium = jsonFile.object();
             if(JsonStadium["ObjType"].toString() == "stadium"){
+                int newStadiumID = stadiums.size()+1;
+                Stadium* newStadium = new Stadium(newStadiumID, // ID should be 1 more than size
+                                                   JsonStadium["stadiumName"].toString(),
+                                                   JsonStadium["teamName"].toString(),
+                                                   JsonStadium["streetAddress"].toString(),
+                                                   JsonStadium["city"].toString(),
+                                                   JsonStadium["state"].toString(),
+                                                   JsonStadium["zipCode"].toString(),
+                                                   JsonStadium["boxOfficeNumber"].toString(),
+                                                   JsonStadium["dateOpened"].toString(),
+                                                   JsonStadium["seatingCapacity"].toInt(),
+                                                   JsonStadium["surface"].toString(),
+                                                   JsonStadium["leagueType"].toString(),
+                                                   JsonStadium["typology"].toString(),
+                                                   0);  // initial revenue is 0
 
-                stadiumsGraph->insertEdge();
-                qDebug() << JsonStadium["boxOfficeNumber"].toString();
-                qDebug() << JsonStadium["city"].toString();
-                qDebug() << JsonStadium["dateOpened"].toString();
-                qDebug() << JsonStadium["leagueType"].toString();
-                qDebug() << JsonStadium["seatingCapacity"].toInt();
                 qDebug() << JsonStadium["stadiumName"].toString();
-                qDebug() << JsonStadium["state"].toString();
                 qDebug() << JsonStadium["streetAddress"].toString();
-                qDebug() << JsonStadium["surface"].toString();
-                qDebug() << JsonStadium["teamName"].toString();
-                qDebug() << JsonStadium["typology"].toString();
-                qDebug() << JsonStadium["zipCode"].toString();
+                qDebug() << JsonStadium["city"].toString() << ", "
+                         << JsonStadium["state"].toString() << JsonStadium["zipCode"].toString();
+                qDebug() << "PHONE NUM: " << JsonStadium["boxOfficeNumber"].toString();
+                qDebug() << "Team: " << JsonStadium["teamName"].toString();
+                qDebug() << "League: " << JsonStadium["leagueType"].toString();
+                qDebug() << "Date opened: " << JsonStadium["dateOpened"].toString();
+                qDebug() << "Seating Capactiy: " << JsonStadium["seatingCapacity"].toInt();
+                qDebug() << "Surface Type: " << JsonStadium["surface"].toString();
+                qDebug() << "Stadium Type: " << JsonStadium["typology"].toString();
+
+                // insert stadium to skiplist
+                stadiums.insert(newStadiumID, newStadium);
+
+                // insert stadium and edges into graph
                 QJsonArray adjAR = JsonStadium["adjacent"].toArray();
                 for(int i = 0; i < adjAR.size(); i++){
                     QJsonObject edge = adjAR.at(i).toObject();
-                    qDebug() << edge["stadium"].toString();
-                    qDebug() << edge["distance"].toInt();
+                    int destID   = db.getStadiumID(edge["stadium"].toString());
+                    Stadium destination = **stadiums.get(destID);
+                    int distance = edge["distance"].toInt();
+
+                    qDebug() << "(ID-" << destID << ") Stadium: " << edge["stadium"].toString()
+                             << "Distance: " << edge["distance"].toInt();
+
+                    stadiumsGraph->insertEdge(*newStadium, destination, distance);
                 }
             }
             else{ qDebug() << "File contains no valid Stadium Object";}
