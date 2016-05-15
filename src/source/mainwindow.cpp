@@ -1,12 +1,5 @@
 #include "../header/mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDebug>
-#include <QSpinBox>
-#include <QCompleter>
-#include <QCheckBox>
-#include <QFile>
-#include <QFontDatabase>
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -738,7 +731,7 @@ void MainWindow::on_removeSelectedSouvenir_2_clicked()
         QString filename = QFileDialog::getOpenFileName(
                                        this,                                    // The parent of this popup
                                        "Select New Stadium JSON",               // The caption on the file picker
-                                       QDir::homePath(),                        // The default directory to show
+                                       QDir::currentPath(),                     // The default directory to show
                                        "JSON File (*.json);;Text File (*.txt);;All Files (*.*)");
 
         qDebug() << "FILE SELECTED: " << filename;
@@ -748,12 +741,45 @@ void MainWindow::on_removeSelectedSouvenir_2_clicked()
 
         // Open the input file object
         if (!inFile.open(QIODevice::ReadOnly)) {
-                qWarning("Couldn't open save file.");
+                qWarning("Couldn't open file.");
             }
 
-        // open data into a JSON Object
-        QJsonDocument newStadium(QJsonDocument::fromJson(inFile.readAll()));
+        // read the file into a string
+        QString stringFile = inFile.readAll();
+        inFile.close();
 
-        qDebug() << "JSON Obj: " << newStadium;
+        // open data into a JSON Object
+        QJsonDocument jsonFile = QJsonDocument::fromJson(stringFile.toUtf8());
+
+        // check to make sure file contains JSON object
+        if(jsonFile.isObject()){
+            // extract object and make sure it's a stadium
+            QJsonObject JsonStadium = jsonFile.object();
+            if(JsonStadium["ObjType"].toString() == "stadium"){
+
+                stadiumsGraph->insertEdge();
+                qDebug() << JsonStadium["boxOfficeNumber"].toString();
+                qDebug() << JsonStadium["city"].toString();
+                qDebug() << JsonStadium["dateOpened"].toString();
+                qDebug() << JsonStadium["leagueType"].toString();
+                qDebug() << JsonStadium["seatingCapacity"].toInt();
+                qDebug() << JsonStadium["stadiumName"].toString();
+                qDebug() << JsonStadium["state"].toString();
+                qDebug() << JsonStadium["streetAddress"].toString();
+                qDebug() << JsonStadium["surface"].toString();
+                qDebug() << JsonStadium["teamName"].toString();
+                qDebug() << JsonStadium["typology"].toString();
+                qDebug() << JsonStadium["zipCode"].toString();
+                QJsonArray adjAR = JsonStadium["adjacent"].toArray();
+                for(int i = 0; i < adjAR.size(); i++){
+                    QJsonObject edge = adjAR.at(i).toObject();
+                    qDebug() << edge["stadium"].toString();
+                    qDebug() << edge["distance"].toInt();
+                }
+            }
+            else{ qDebug() << "File contains no valid Stadium Object";}
+        }
+        else{ qDebug() << "File contains no valid JSON object!";}
+
 
 }

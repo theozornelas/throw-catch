@@ -20,7 +20,6 @@
 #include <queue>
 #include <climits>
 #include <functional>
-#include <QJsonObject>
 #include "HeapPriorityQueue.h"
 #define INF INT_MAX
 
@@ -59,8 +58,6 @@ public:
         // Sets the state of this vertex to unvisited
         void resetVisited() { visited_ = false; }
 
-        // Outputs the vertex to a JSON object
-        QJsonObject toJSON();
         // returns a vector of vertices adjacent top this vertex
         VertexItrVector adjacentVertex();
 
@@ -237,7 +234,7 @@ public:
     int GetDistanceTo(const E &e) { return findVertex(e)->getDistance(); }
     // Get Distance from vertex 'u' to vertex 'v' using dijkstra
     int GetDistance(const E &start, const E &end) { Dijkstra(start); return GetDistanceTo(end); }
-    // Returns an ordered vertex list of the path from the last dijkstra run and the given vertex 'e'
+    // Returns an ordered vertex list of the path from the last dijkstra origin to the given vertex 'e'
     VertexList shortestPathTo(const E &end);
 
     // Outputs the MST graph edges using the basic prim algortihm
@@ -457,9 +454,9 @@ void Graph<E>::Dijkstra(const E &e)
 }//END DIJKSTRA
 
 /**
- * @brief Gets the distance from u to v using greedy dijkstra
- * @param e [IN] The starting vertex
- * @return The distance from u to v as integer
+ * @brief Gets the distance from last dijkstra origin to end
+ * @param end [IN] The ending vertex
+ * @return ordered vector if vertices represeting path from last dijkstra origin to end
  */
 template <typename E>
 typename Graph<E>::VertexList Graph<E>::shortestPathTo(const E &end) {
@@ -890,22 +887,6 @@ QString Graph<E>::Edge::print() {
 
     outputStream << *start_ << "<-->" << *end_;
     return outputStream.readAll();
-}
-
-/**
- * @brief  exports the vertex as JSON object
- * @return the vertex as a JSON object
- */
-template <typename E>
-QJsonObject Graph<E>::Vertex::toJSON()
-{
-    // Create the stadium JSON object with nested Address Object
-    QJsonObject vertexJSON;
-    vertexJSON["ObjType"] = "Vertex";
-    vertexJSON["stadium"] = this->data_.toJSON();
-    vertexJSON["edges"]   = (this->incident_.front())->print();
-
-    return vertexJSON;
 }
 
 #endif //DATA_STRUCTURES_GRAPH_H

@@ -14,6 +14,16 @@
 #include <QRegExp>
 #include <QFileDialog>
 
+#include <QDebug>
+#include <QSpinBox>
+#include <QCompleter>
+#include <QCheckBox>
+#include <QFile>
+#include <QFontDatabase>
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 enum display {
     HOME,
