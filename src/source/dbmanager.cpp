@@ -202,10 +202,17 @@ Graph<Stadium>* DBManager::createGraph(skiplist<int, Stadium*> stadiumList) {
         while(query.next()) {
             Stadium origin = **stadiumList.get(query.value("origin_id").toInt());
             Stadium destination = **stadiumList.get(query.value("destination_id").toInt());
+            int weight = query.value("weight").toInt();
 
-           graph->insertEdge(origin, destination, query.value("weight").toInt());
+           graph->insertEdge(origin, destination, weight);
 
         }
+    }
+
+    Graph<Stadium>::EdgeList edges = graph->edges();
+
+    for(Graph<Stadium>::EdgeItr i = edges.begin(); i != edges.end(); i++) {
+        qDebug() <<  i->print() << "    " << i->weight();
     }
 
   return graph;

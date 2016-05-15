@@ -30,7 +30,10 @@ HEADERS  += header/mainwindow.h \
     header/entry.h \
     header/graph.h \
     header/priorityqueue.h \
-    header/shoppingcart.h
+    header/shoppingcart.h \
+    header/CompleteTree.h \
+    header/HeapPriorityQueue.h
+
 
 FORMS    += form/mainwindow.ui \
             form/shoppingcart.ui
