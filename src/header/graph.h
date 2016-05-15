@@ -20,8 +20,8 @@
 #include <queue>
 #include <climits>
 #include <functional>
-#define INF INT_MAX
 #include "HeapPriorityQueue.h"
+#define INF INT_MAX
 
 /**
  *  @brief Undirected Graph
