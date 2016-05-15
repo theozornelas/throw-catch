@@ -32,9 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
     stadiumSearch->setCaseSensitivity(Qt::CaseInsensitive);
     ui->searchBar->setCompleter(stadiumSearch);
 
-    //Testing
-    Stadium *s = new Stadium(300, "Testing");
-    db.AddNewStadium(s);
 
 
 }
