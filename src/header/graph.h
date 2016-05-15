@@ -64,7 +64,7 @@ public:
         /*** Dijkstra Methods ***/
         // Sets the distance from this vertex to the starting point
         void setDistance(const int &newValue){ distance_ = newValue;}
-        // Gets the distance from the starting vertex
+        // Gets the distance from the starting vertex for last dijkstra executed
         int getDistance() { return distance_; }
         // Sets the parent vertex to this vertex
         void setParent(const VertexItr &parent) { parent_ = parent; }
@@ -224,14 +224,18 @@ public:
     // Print the graph as a dot text file
     void print(std::ofstream &output, std::string title = "Graph Output");
 
-    /*** ALGORITHMS ***/
+    /***   A L G O R I T H M S   ***/
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
     VertexList dft(const E &e);
 
     // Runs the dijkstra algorithm starting from vertex with data e
     void Dijkstra(const E &e);
+    // Gets the distance to 'e' from the starting point of the last Dijkstra run
+    int GetDistanceTo(const E &e) { return findVertex(e)->getDistance(); }
     // Get Distance from vertex 'u' to vertex 'v' using dijkstra
-    int GetDistance(const E &start, const E &end);
+    int GetDistance(const E &start, const E &end) { Dijkstra(start); return GetDistanceTo(end); }
+    // Returns an ordered vertex list of the path from the last dijkstra run and the given vertex 'e'
+    VertexList shortestPathTo(const E &end);
 
     // Outputs the MST graph edges using the basic prim algortihm
     EdgeList MSTPrim();
@@ -451,25 +455,26 @@ void Graph<E>::Dijkstra(const E &e)
 
 /**
  * @brief Gets the distance from u to v using greedy dijkstra
- * @param u [IN] The starting vertex
- * @param v [IN] The ending vertex
+ * @param e [IN] The starting vertex
  * @return The distance from u to v as integer
  */
 template <typename E>
-int Graph<E>::GetDistance(const E &start, const E &end) {
-    Dijkstra(start);
-    VertexItr startItr = findVertex(start);
+typename Graph<E>::VertexList Graph<E>::shortestPathTo(const E &end) {
     VertexItr itr      = findVertex(end);
-    int distance = 0;
+    VertexList outList;
+    bool done = false;
 
-    qDebug() << *itr;
-    while(itr != startItr){
-        distance += itr->distanceTo(itr->getParent());
-        itr = itr->getParent();
-        qDebug() << *itr;
+    while(!done){
+        outList.push_front(*itr);
+        if(itr->getDistance() == 0){
+            done = true;
+        }
+        else{
+            itr = itr->getParent();
+        }
     }
 
-    return distance;
+    return outList;
 }
 
 /**

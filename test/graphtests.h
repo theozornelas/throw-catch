@@ -275,6 +275,16 @@ void GraphTests::test_Dijkstra(){
     Stadium oco(30, "O.co Coliseum");
     Stadium lasVegas(31, "Las Begas Stadium");
 
+    // expected result from shortest path method
+    Graph<Stadium>::VertexList expectedpath;
+    expectedpath.push_back(dodgers);
+    expectedpath.push_back(target);
+    expectedpath.push_back(miller);
+    expectedpath.push_back(wrigley);
+    expectedpath.push_back(usCell);
+    expectedpath.push_back(commerce);
+    expectedpath.push_back(progressive);
+
     StadiumGraph_->insertEdge(safeco, rogers, 2070);
     StadiumGraph_->insertEdge(safeco, target, 1390);
     StadiumGraph_->insertEdge(safeco, att, 680);
@@ -352,32 +362,50 @@ void GraphTests::test_Dijkstra(){
 
     QCOMPARE(StadiumGraph_->GetDistance(dodgers, dodgers), 0);
     QCOMPARE(StadiumGraph_->GetDistance(dodgers, angels), 50);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, commerce), 2170);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, fenway), 2660);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, globeLife), 1330);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, kauffman), 1550);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, petco), 160);
+
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, chase), 460);
     QCOMPARE(StadiumGraph_->GetDistance(dodgers, minMaid), 1560);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, oco), 340);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, oriole), 2600);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, progressive), 2260);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, rogers), 2230);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, safeco), 1070);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, target), 1500);
     QCOMPARE(StadiumGraph_->GetDistance(dodgers, tropicana), 2350);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, usCell), 1930);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, yankee), 2620);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, att), 340);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, busch), 1735);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, chase), 410);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, citi), 2620);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, citizens), 2590);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, coors), 940);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, greatAmer), 2045);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, marlins), 2475);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, petco), 110);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, pnc), 2305);
-    QCOMPARE(StadiumGraph_->GetDistance(dodgers, turner), 2020);
+
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, marlins), 2525);
+
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, globeLife), 1330);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, turner), 2070);
+
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, coors), 990);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, kauffman), 1550);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, busch), 1785);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, greatAmer), 2095);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, pnc), 2355);
+
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, nationals), 2550);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, oriole), 2600);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, citizens), 2690);
+
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, yankee), 2670);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, citi), 2720);
+
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, target), 1500);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, miller), 1800);
     QCOMPARE(StadiumGraph_->GetDistance(dodgers, wrigley), 1880);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, usCell), 1930);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, commerce), 2170);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, progressive), 2260);
+
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, safeco), 1070);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, rogers), 2230);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, fenway), 2660);
+
+    Graph<Stadium>::VertexList path = StadiumGraph_->shortestPathTo(progressive);
+    Graph<Stadium>::VertexItr itr1 = path.begin();
+    Graph<Stadium>::VertexItr itr2 = expectedpath.begin();
+    while(itr1 != path.end() && itr2 != expectedpath.end()){
+        QCOMPARE(*itr1, *itr2);
+        itr1++;
+        itr2++;
+    }
+
 }
 
 /*** THIS ADDS THE TEST TO THE LIST OF CLASSES TO RUN ***/
