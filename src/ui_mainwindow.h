@@ -83,9 +83,13 @@ public:
     QPushButton *customTripButton;
     QPushButton *minimumSpanningTreeButton;
     QLabel *planATripLabel;
-    QWidget *shortestTripToAllPage;
-    QLabel *shortestTripToAllLabel;
-    QTreeWidget *shortestTripList;
+    QWidget *quickTripToAllPage;
+    QLabel *quickTripLabel;
+    QTreeWidget *quickTripList;
+    QLabel *quickTripStartingStadiumLabel;
+    QLabel *quickTripStartingStadium;
+    QLabel *quickTripDescription;
+    QPushButton *quickTripTakeTripButton;
     QWidget *customTripPage;
     QLabel *customTripLabel;
     QTreeWidget *stadiumsToSelectFromList;
@@ -481,22 +485,45 @@ public:
         planATripLabel->setGeometry(QRect(20, 10, 311, 41));
         planATripLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         display->addWidget(planATripPage);
-        shortestTripToAllPage = new QWidget();
-        shortestTripToAllPage->setObjectName(QStringLiteral("shortestTripToAllPage"));
-        shortestTripToAllLabel = new QLabel(shortestTripToAllPage);
-        shortestTripToAllLabel->setObjectName(QStringLiteral("shortestTripToAllLabel"));
-        shortestTripToAllLabel->setGeometry(QRect(20, 10, 371, 41));
-        shortestTripToAllLabel->setStyleSheet(QLatin1String("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
+        quickTripToAllPage = new QWidget();
+        quickTripToAllPage->setObjectName(QStringLiteral("quickTripToAllPage"));
+        quickTripLabel = new QLabel(quickTripToAllPage);
+        quickTripLabel->setObjectName(QStringLiteral("quickTripLabel"));
+        quickTripLabel->setGeometry(QRect(20, 10, 371, 51));
+        quickTripLabel->setStyleSheet(QLatin1String("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 ""));
-        shortestTripList = new QTreeWidget(shortestTripToAllPage);
-        shortestTripList->setObjectName(QStringLiteral("shortestTripList"));
-        shortestTripList->setGeometry(QRect(130, 70, 371, 421));
-        shortestTripList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        shortestTripList->setAlternatingRowColors(true);
-        shortestTripList->header()->setCascadingSectionResizes(false);
-        shortestTripList->header()->setDefaultSectionSize(150);
-        shortestTripList->header()->setStretchLastSection(false);
-        display->addWidget(shortestTripToAllPage);
+        quickTripList = new QTreeWidget(quickTripToAllPage);
+        quickTripList->setObjectName(QStringLiteral("quickTripList"));
+        quickTripList->setGeometry(QRect(130, 150, 431, 341));
+        quickTripList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        quickTripList->setAlternatingRowColors(true);
+        quickTripList->header()->setCascadingSectionResizes(false);
+        quickTripList->header()->setDefaultSectionSize(150);
+        quickTripList->header()->setHighlightSections(false);
+        quickTripList->header()->setStretchLastSection(true);
+        quickTripStartingStadiumLabel = new QLabel(quickTripToAllPage);
+        quickTripStartingStadiumLabel->setObjectName(QStringLiteral("quickTripStartingStadiumLabel"));
+        quickTripStartingStadiumLabel->setGeometry(QRect(130, 110, 141, 31));
+        quickTripStartingStadiumLabel->setStyleSheet(QLatin1String("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
+""));
+        quickTripStartingStadium = new QLabel(quickTripToAllPage);
+        quickTripStartingStadium->setObjectName(QStringLiteral("quickTripStartingStadium"));
+        quickTripStartingStadium->setGeometry(QRect(280, 116, 211, 16));
+        quickTripStartingStadium->setFont(font);
+        quickTripDescription = new QLabel(quickTripToAllPage);
+        quickTripDescription->setObjectName(QStringLiteral("quickTripDescription"));
+        quickTripDescription->setGeometry(QRect(40, 50, 611, 43));
+        quickTripDescription->setWordWrap(true);
+        quickTripTakeTripButton = new QPushButton(quickTripToAllPage);
+        quickTripTakeTripButton->setObjectName(QStringLiteral("quickTripTakeTripButton"));
+        quickTripTakeTripButton->setGeometry(QRect(400, 500, 161, 41));
+        quickTripTakeTripButton->setStyleSheet(QLatin1String("QPushButton {\n"
+"background-color: #01CDE6;\n"
+"color: white;\n"
+"border:none;\n"
+"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
+"}"));
+        display->addWidget(quickTripToAllPage);
         customTripPage = new QWidget();
         customTripPage->setObjectName(QStringLiteral("customTripPage"));
         customTripLabel = new QLabel(customTripPage);
@@ -1005,14 +1032,18 @@ public:
         singleStadiumSeatingCapacity->setText(QApplication::translate("MainWindow", "seating_capacity", 0));
         singleStadiumSurface->setText(QApplication::translate("MainWindow", "surface", 0));
         singleStadiumTotalRevenue->setText(QApplication::translate("MainWindow", "total_revenue", 0));
-        shortestTripToAllButton->setText(QApplication::translate("MainWindow", "SHORTEST TRIP TO ALL", 0));
+        shortestTripToAllButton->setText(QApplication::translate("MainWindow", "QUICK TRIP", 0));
         customTripButton->setText(QApplication::translate("MainWindow", "CUSTOM TRIP", 0));
         minimumSpanningTreeButton->setText(QApplication::translate("MainWindow", "GENERATE MINIMUM SPANNING TREE", 0));
         planATripLabel->setText(QApplication::translate("MainWindow", "PLAN A TRIP", 0));
-        shortestTripToAllLabel->setText(QApplication::translate("MainWindow", "SHORTEST TRIP TO ALL", 0));
-        QTreeWidgetItem *___qtreewidgetitem1 = shortestTripList->headerItem();
-        ___qtreewidgetitem1->setText(1, QApplication::translate("MainWindow", "Distance from Dodger Stadium", 0));
+        quickTripLabel->setText(QApplication::translate("MainWindow", "QUICK TRIP", 0));
+        QTreeWidgetItem *___qtreewidgetitem1 = quickTripList->headerItem();
+        ___qtreewidgetitem1->setText(1, QApplication::translate("MainWindow", "Distance from Starting Stadium", 0));
         ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "Stadium", 0));
+        quickTripStartingStadiumLabel->setText(QApplication::translate("MainWindow", "Starting stadium:", 0));
+        quickTripStartingStadium->setText(QApplication::translate("MainWindow", "starting_stadium", 0));
+        quickTripDescription->setText(QApplication::translate("MainWindow", "Please select a stadium you would like to quickly visit to from the starting stadium, Dodger Stadium. Once the stadium is selected, press the button 'Take Trip'. Happy traveling!", 0));
+        quickTripTakeTripButton->setText(QApplication::translate("MainWindow", "TAKE TRIP", 0));
         customTripLabel->setText(QApplication::translate("MainWindow", "PLAN CUSTOM TRIP", 0));
         QTreeWidgetItem *___qtreewidgetitem2 = stadiumsToSelectFromList->headerItem();
         ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Stadiums", 0));

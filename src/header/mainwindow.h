@@ -19,7 +19,7 @@ enum display {
     VIEW_STADIUMS,
     VIEW_SINGLE_STADIUM,
     PLAN_A_TRIP,
-    SHORTEST_TO_ALL,
+    QUICK_TRIP,
     CUSTOM_TRIP,
     MST_TRIP,
     TRIP_PROCESS,

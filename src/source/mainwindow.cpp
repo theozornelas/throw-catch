@@ -32,11 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
     stadiumSearch->setCaseSensitivity(Qt::CaseInsensitive);
     ui->searchBar->setCompleter(stadiumSearch);
 
-    //Testing
-    Stadium *s = new Stadium(300, "Testing");
-    db.AddNewStadium(s);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -219,11 +214,13 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
 
 void MainWindow::on_shortestTripToAllButton_clicked()
 {
-    ui->display->setCurrentIndex(SHORTEST_TO_ALL);
+    ui->display->setCurrentIndex(QUICK_TRIP);
 
     const QString startingStadiumName = "Dodger Stadium";
     Stadium s = **stadiums.get(db.getStadiumID(startingStadiumName));
     stadiumsGraph->Dijkstra(s);
+
+    ui->quickTripStartingStadium->setText(startingStadiumName);
 
 
 //    Graph<Stadium>::VertexList path = stadiumsGraph->shortestPathTo(**stadiums.get(db.getStadiumID("Wrigley Field")));
@@ -239,16 +236,16 @@ void MainWindow::on_shortestTripToAllButton_clicked()
 
 //    }
 
-    ui->shortestTripList->clear();
+    ui->quickTripList->clear();
 
      for(int i = 0; i < keys.size(); i++) {
-        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->shortestTripList);
+        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->quickTripList);
         Stadium *s = *stadiums.get(keys[i]);
         currentItem->setText(0, s->getStadiumName());
         currentItem->setText(1, QString::number(stadiumsGraph->GetDistanceTo(*s)));
     }
 
-     ui->shortestTripList->setColumnWidth(0, 250);
+     ui->quickTripList->setColumnWidth(0, 250);
 
 
 }
