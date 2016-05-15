@@ -350,7 +350,34 @@ void GraphTests::test_Dijkstra(){
     StadiumGraph_->insertEdge(greatAmer, usCell, 250);
     StadiumGraph_->insertEdge(greatAmer, progressive, 225);
 
-    StadiumGraph_->Dijkstra(dodgers);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, dodgers), 0);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, angels), 50);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, commerce), 2170);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, fenway), 2660);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, globeLife), 1330);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, kauffman), 1550);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, minMaid), 1560);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, oco), 340);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, oriole), 2600);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, progressive), 2260);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, rogers), 2230);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, safeco), 1070);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, target), 1500);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, tropicana), 2350);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, usCell), 1930);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, yankee), 2620);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, att), 340);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, busch), 1735);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, chase), 410);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, citi), 2620);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, citizens), 2590);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, coors), 940);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, greatAmer), 2045);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, marlins), 2475);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, petco), 110);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, pnc), 2305);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, turner), 2020);
+    QCOMPARE(StadiumGraph_->GetDistance(dodgers, wrigley), 1880);
 }
 
 /*** THIS ADDS THE TEST TO THE LIST OF CLASSES TO RUN ***/

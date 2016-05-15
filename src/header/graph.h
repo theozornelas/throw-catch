@@ -228,6 +228,8 @@ public:
 
     // Runs the dijkstra algorithm starting from vertex with data e
     void Dijkstra(const E &e);
+    // Get Distance from vertex 'u' to vertex 'v' using dijkstra
+    int GetDistance(const E &start, const E &end);
 
     // Outputs the MST graph edges using the basic prim algortihm
     EdgeList MSTPrim();
@@ -427,7 +429,6 @@ void Graph<E>::Dijkstra(const E &e)
 
         // grab the next vertex with the smallest distance, and then pop it
         VertexItr currentVertex = unusedVertex.back();
-        qDebug() << "smallest distance is to: " << *(unusedVertex.back());
         unusedVertex.pop_back();
 
         // IF the smallest vertex has weight infintiy then it is unconnected, skip
@@ -444,11 +445,35 @@ void Graph<E>::Dijkstra(const E &e)
             }//END FOR LOOP
         }//END INF IF STATEMENT
     }//END WHILE
-
 }//END DIJKSTRA
 
 /**
- *
+ * @brief Gets the distance from u to v using greedy dijkstra
+ * @param u [IN] The starting vertex
+ * @param v [IN] The ending vertex
+ * @return The distance from u to v as integer
+ */
+template <typename E>
+int Graph<E>::GetDistance(const E &start, const E &end) {
+    Dijkstra(start);
+    VertexItr startItr = findVertex(start);
+    VertexItr itr      = findVertex(end);
+    int distance = 0;
+
+    qDebug() << *itr;
+    while(itr != startItr){
+        distance += itr->distanceTo(itr->getParent());
+        itr = itr->getParent();
+        qDebug() << *itr;
+    }
+
+    return distance;
+}
+
+/**
+ * @brief Depth frist traversal of the graph
+ * @param location [IN] the location to begin at
+ * @param outList [OUT] the list of vertex in depth first order
  */
 template <typename E>
 void Graph<E>::dftHelper(Vertex &location, VertexList &outList) {
