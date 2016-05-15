@@ -209,12 +209,6 @@ Graph<Stadium>* DBManager::createGraph(skiplist<int, Stadium*> stadiumList) {
         }
     }
 
-    Graph<Stadium>::EdgeList edges = graph->edges();
-
-    for(Graph<Stadium>::EdgeItr i = edges.begin(); i != edges.end(); i++) {
-        qDebug() <<  i->print() << "    " << i->weight();
-    }
-
   return graph;
 }
 

@@ -191,7 +191,7 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
         totalWeight += i->weight();
     }
 
-    ui->mstTotalWeight->setText(QString::number(totalWeight));
+    ui->mstTotalWeight->setText(QString::number(totalWeight) + " miles");
 
     ui->MSTList->resizeColumnToContents(0);
     ui->MSTList->resizeColumnToContents(1);
