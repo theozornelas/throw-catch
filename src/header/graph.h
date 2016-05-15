@@ -96,6 +96,8 @@ public:
         int distanceTo(const VertexItr &v);
 
         /*** DISPLAY METHODS OVERLOADS ***/
+        // return the vertex as a string
+        QString print();
         // Overload the output stream operator
         friend QDebug operator<<(QDebug output, const Vertex &obj) {
             output << obj.data_;
@@ -814,6 +816,19 @@ void Graph<E>::Vertex::removeEdge(EdgeItr edge) {
     }
 }
 
+/**
+ * @brief prints the Vertex
+ * @return A string representation of the vertex
+ */
+template <typename E>
+QString Graph<E>::Vertex::print() {
+    QString output;                      // QString for output
+    QTextStream outputStream(&output);   // Qstring stream for output
+
+    outputStream << data_;
+    return outputStream.readAll();
+}
+
 /**************************************************************************
  *                          IMPLEMENTATION OF EDGE METHODS                *
  **************************************************************************/
@@ -857,8 +872,8 @@ bool  Graph<E>::Edge::isIncidentOn(Vertex v) {
 }
 
 /**
- * @brief Graph::Vertex::print
- * @return
+ * @brief prints the Edge
+ * @return A string representation of the edge
  */
 template <typename E>
 QString Graph<E>::Edge::print() {
