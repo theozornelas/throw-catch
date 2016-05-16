@@ -166,6 +166,12 @@ public:
     QPushButton *removeSelectedSouvenir_2;
     QPushButton *removeSelectedSouvenir_3;
     QLabel *modifySouvenirsListLabel_2;
+    QTreeWidget *treeWidget;
+    QFrame *line;
+    QFrame *line_2;
+    QLabel *modifySouvenirsListLabel_3;
+    QLabel *modifyDescription_2;
+    QLabel *modifyDescription_3;
     QFrame *headerFrame;
     QLabel *teamNameLabel;
     QPushButton *adminLoginButton;
@@ -954,7 +960,7 @@ public:
         adminModifyStadiums->setObjectName(QStringLiteral("adminModifyStadiums"));
         removeSelectedSouvenir_2 = new QPushButton(adminModifyStadiums);
         removeSelectedSouvenir_2->setObjectName(QStringLiteral("removeSelectedSouvenir_2"));
-        removeSelectedSouvenir_2->setGeometry(QRect(270, 180, 231, 41));
+        removeSelectedSouvenir_2->setGeometry(QRect(480, 270, 231, 41));
         removeSelectedSouvenir_2->setStyleSheet(QLatin1String("QPushButton {\n"
 "background-color: #293539;\n"
 "color: white;\n"
@@ -963,7 +969,7 @@ public:
 "}"));
         removeSelectedSouvenir_3 = new QPushButton(adminModifyStadiums);
         removeSelectedSouvenir_3->setObjectName(QStringLiteral("removeSelectedSouvenir_3"));
-        removeSelectedSouvenir_3->setGeometry(QRect(270, 230, 231, 41));
+        removeSelectedSouvenir_3->setGeometry(QRect(60, 500, 231, 41));
         removeSelectedSouvenir_3->setStyleSheet(QLatin1String("QPushButton {\n"
 "background-color: #293539;\n"
 "color: white;\n"
@@ -974,6 +980,29 @@ public:
         modifySouvenirsListLabel_2->setObjectName(QStringLiteral("modifySouvenirsListLabel_2"));
         modifySouvenirsListLabel_2->setGeometry(QRect(30, 10, 311, 41));
         modifySouvenirsListLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
+        treeWidget = new QTreeWidget(adminModifyStadiums);
+        treeWidget->setObjectName(QStringLiteral("treeWidget"));
+        treeWidget->setGeometry(QRect(50, 160, 256, 291));
+        line = new QFrame(adminModifyStadiums);
+        line->setObjectName(QStringLiteral("line"));
+        line->setGeometry(QRect(410, 90, 20, 191));
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
+        line_2 = new QFrame(adminModifyStadiums);
+        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setGeometry(QRect(410, 330, 16, 221));
+        line_2->setFrameShape(QFrame::VLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+        modifySouvenirsListLabel_3 = new QLabel(adminModifyStadiums);
+        modifySouvenirsListLabel_3->setObjectName(QStringLiteral("modifySouvenirsListLabel_3"));
+        modifySouvenirsListLabel_3->setGeometry(QRect(403, 290, 41, 41));
+        modifySouvenirsListLabel_3->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
+        modifyDescription_2 = new QLabel(adminModifyStadiums);
+        modifyDescription_2->setObjectName(QStringLiteral("modifyDescription_2"));
+        modifyDescription_2->setGeometry(QRect(60, 50, 511, 21));
+        modifyDescription_3 = new QLabel(adminModifyStadiums);
+        modifyDescription_3->setObjectName(QStringLiteral("modifyDescription_3"));
+        modifyDescription_3->setGeometry(QRect(50, 130, 281, 21));
         display->addWidget(adminModifyStadiums);
         headerFrame = new QFrame(centralWidget);
         headerFrame->setObjectName(QStringLiteral("headerFrame"));
@@ -1173,6 +1202,11 @@ public:
         removeSelectedSouvenir_2->setText(QApplication::translate("MainWindow", "ADD STADIUMS FROM FILE", 0));
         removeSelectedSouvenir_3->setText(QApplication::translate("MainWindow", "UPDATE A STADIUM", 0));
         modifySouvenirsListLabel_2->setText(QApplication::translate("MainWindow", "MODIFY STADIUMS", 0));
+        QTreeWidgetItem *___qtreewidgetitem10 = treeWidget->headerItem();
+        ___qtreewidgetitem10->setText(0, QApplication::translate("MainWindow", "Stadium", 0));
+        modifySouvenirsListLabel_3->setText(QApplication::translate("MainWindow", "OR", 0));
+        modifyDescription_2->setText(QApplication::translate("MainWindow", "You can either update a stadium's information or add new stadiums from a file.", 0));
+        modifyDescription_3->setText(QApplication::translate("MainWindow", "Select a stadium you would like to update.", 0));
         teamNameLabel->setText(QApplication::translate("MainWindow", "thr  w-catch", 0));
         adminLoginButton->setText(QApplication::translate("MainWindow", "SIGN IN", 0));
         searchBar->setInputMask(QString());

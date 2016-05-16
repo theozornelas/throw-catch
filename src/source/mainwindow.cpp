@@ -80,7 +80,6 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
 
                 QSpinBox *qtyBox = new QSpinBox();
                 qtyBox->setRange(0, 99);
-//              qtyBox->setMaximumSize(50,50);
 
                 ui->listOfCurrentStadiumSouvenirs->setItemWidget(currentItem, 2, qtyBox);
             }
@@ -89,8 +88,12 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
             ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(1);
             ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(2);
 
+
             totalDistanceTraveled += stadiumsGraph->GetDistanceTo(*currentStadium);
             ui->totalDistanceTraveled->display(totalDistanceTraveled);
+
+            stadiumsGraph->Dijkstra(*currentStadium);
+
 
             /** Waits until user clicks 'next' button */
             QObject::connect(ui->currentTripNextStadium, SIGNAL(clicked()), &pause, SLOT(quit()));
