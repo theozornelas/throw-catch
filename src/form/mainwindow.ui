@@ -194,7 +194,7 @@ border: none;
         <string>VIEW STADIUMS</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="viewAdminStadiumsButton_2">
+      <widget class="QPushButton" name="adminModifyStadiumsButton">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -279,8 +279,8 @@ background-color: #EAEAE9
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>90</y>
+        <x>290</x>
+        <y>60</y>
         <width>59</width>
         <height>16</height>
        </rect>
@@ -341,8 +341,8 @@ QComboBox::drop-down{
      <widget class="QComboBox" name="comboBox_2">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>90</y>
+        <x>350</x>
+        <y>55</y>
         <width>171</width>
         <height>21</height>
        </rect>
@@ -411,9 +411,9 @@ QComboBox::drop-down{
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>130</y>
+        <y>100</y>
         <width>711</width>
-        <height>451</height>
+        <height>481</height>
        </rect>
       </property>
       <property name="sortingEnabled">
@@ -429,12 +429,12 @@ QComboBox::drop-down{
       </column>
       <column>
        <property name="text">
-        <string>Name</string>
+        <string>Team</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Seating Capacity</string>
+        <string>Capacity</string>
        </property>
       </column>
       <column>
@@ -2154,7 +2154,7 @@ border:none;
        <string>ADD STADIUMS FROM FILE</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="removeSelectedSouvenir_3">
+     <widget class="QPushButton" name="updateAStadiumButton">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -2175,7 +2175,7 @@ border:none;
        <string>UPDATE A STADIUM</string>
       </property>
      </widget>
-     <widget class="QLabel" name="modifySouvenirsListLabel_2">
+     <widget class="QLabel" name="modifyStadiumLabel">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -2191,7 +2191,7 @@ border:none;
        <string>MODIFY STADIUMS</string>
       </property>
      </widget>
-     <widget class="QTreeWidget" name="treeWidget">
+     <widget class="QTreeWidget" name="stadiumsToModifyList">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -2232,7 +2232,7 @@ border:none;
        <enum>Qt::Vertical</enum>
       </property>
      </widget>
-     <widget class="QLabel" name="modifySouvenirsListLabel_3">
+     <widget class="QLabel" name="modifyStadiumOrLabel">
       <property name="geometry">
        <rect>
         <x>403</x>
@@ -2248,7 +2248,7 @@ border:none;
        <string>OR</string>
       </property>
      </widget>
-     <widget class="QLabel" name="modifyDescription_2">
+     <widget class="QLabel" name="modifyStadiumsDescr">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -2261,7 +2261,7 @@ border:none;
        <string>You can either update a stadium's information or add new stadiums from a file.</string>
       </property>
      </widget>
-     <widget class="QLabel" name="modifyDescription_3">
+     <widget class="QLabel" name="modifyStadiumSelectDescr">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -2272,6 +2272,669 @@ border:none;
       </property>
       <property name="text">
        <string>Select a stadium you would like to update.</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="updateStadiumPage">
+     <widget class="QLabel" name="modifySouvenirsListLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>10</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 25 30pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
+      </property>
+      <property name="text">
+       <string>UPDATE A STADIUM</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="updateLeague">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>170</y>
+        <width>621</width>
+        <height>46</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="updateLeagueLabel">
+         <property name="font">
+          <font>
+           <family>Futura</family>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>League: </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="updateAmericanLeague">
+         <property name="text">
+          <string>American</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="updateNationalLeague">
+         <property name="text">
+          <string>National</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_11">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>60</y>
+        <width>621</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="updateStadiumName">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>3</y>
+         <width>601</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: none;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="updateStadiumLabel">
+          <property name="font">
+           <font>
+            <family>Futura</family>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Stadium:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="updateStadium">
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="updateTeam">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>46</y>
+         <width>601</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: none;
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QLabel" name="updateStadiumTeamNameLabel">
+          <property name="font">
+           <font>
+            <family>Futura</family>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Team name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="updateTeamName"/>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_13">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="removeSelectedSouvenir_3">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>540</y>
+        <width>121</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #01CDE6;
+color: white;
+border:none;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
+}</string>
+      </property>
+      <property name="text">
+       <string>CONFIRM</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="removeSelectedSouvenir_4">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>540</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #293539;
+color: white;
+border:none;
+	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
+}</string>
+      </property>
+      <property name="text">
+       <string>CANCEL</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="updateInformation">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>260</y>
+        <width>621</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="3" column="3">
+        <widget class="QLineEdit" name="updateDay">
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="maxLength">
+          <number>2</number>
+         </property>
+         <property name="placeholderText">
+          <string>Day</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="6">
+        <widget class="QFrame" name="frame_2">
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLineEdit" name="updateStreetAddress">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>30</y>
+            <width>191</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="placeholderText">
+           <string>Street Address</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="updateZipcode">
+          <property name="geometry">
+           <rect>
+            <x>420</x>
+            <y>60</y>
+            <width>171</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+          <property name="placeholderText">
+           <string>Zipcode</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="updateCity">
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>60</y>
+            <width>181</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="placeholderText">
+           <string>City</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="updateState">
+          <property name="geometry">
+           <rect>
+            <x>420</x>
+            <y>30</y>
+            <width>171</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="placeholderText">
+           <string>State or Province</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="updateAddress_2">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>55</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Futura</family>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Street:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="updateAddress_3">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>60</y>
+            <width>55</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Futura</family>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>City:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="updateAddress_4">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>30</y>
+            <width>101</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Futura</family>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>State/Country:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="updateAddress_5">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>60</y>
+            <width>101</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Futura</family>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Zipcode</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <spacer name="horizontalSpacer_16">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="4">
+        <widget class="QComboBox" name="updateMonth">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="currentText">
+          <string>Month</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Month</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>January</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>February</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>March</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>April</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>May</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>June</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>July</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>August</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>September</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>October</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>November</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>December</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QLineEdit" name="updateYear">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhNone</set>
+         </property>
+         <property name="maxLength">
+          <number>4</number>
+         </property>
+         <property name="placeholderText">
+          <string>Year</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3" colspan="3">
+        <widget class="QSpinBox" name="updateSeatingCapacity">
+         <property name="specialValueText">
+          <string/>
+         </property>
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" colspan="4">
+        <widget class="QLineEdit" name="updatePhoneNumber">
+         <property name="maxLength">
+          <number>20</number>
+         </property>
+         <property name="placeholderText">
+          <string>Phone number</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" colspan="5">
+        <widget class="QLineEdit" name="updateTypology">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="cursorPosition">
+          <number>0</number>
+         </property>
+         <property name="placeholderText">
+          <string>Typology</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_22">
+         <property name="font">
+          <font>
+           <family>Futura</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Typology:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="font">
+          <font>
+           <family>Futura</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Opening date:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_19">
+         <property name="font">
+          <font>
+           <family>Futura</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Seating capacity:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QLabel" name="label_21">
+         <property name="font">
+          <font>
+           <family>Futura</family>
+           <pointsize>13</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Box office number:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="updateStadiumTeamNameLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>234</y>
+        <width>181</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Futura</family>
+        <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Information</string>
       </property>
      </widget>
     </widget>
