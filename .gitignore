@@ -23,6 +23,7 @@ release/
 debug/
 test/test.app/
 
-src/ui_*
+src/ui_mainwindow.h
+src/ui_shoppingcart.h
 
 .DS_Store
