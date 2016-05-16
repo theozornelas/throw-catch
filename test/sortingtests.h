@@ -7,6 +7,7 @@
 #include <QList>
 #include "mainwindow.h"
 #include "quicksort.h"
+#include "graph.h"
 
 
 class SortingTests : public QObject
@@ -32,6 +33,8 @@ private slots:
     void test_SortDatesWithComparator();
     void test_SortStadiums();
     void test_SortStadiumsWithComparator();
+    void test_SortVertices();
+    void test_SortVerticesWithComparator();
 
 
 
@@ -92,7 +95,7 @@ void SortingTests::test_SortIntegers() {
     }
 
     // Sorts the vector
-    QuickSort(testVector, 0, testVector.size()-1);
+    QuickSort(testVector.begin(), testVector.end());
 
     // Checks to see if it sorted properly
     for(int i = 0; i < testVector.size()-1; ++i) {
@@ -118,11 +121,7 @@ void SortingTests::test_SortIntegersWithComparator() {
     }
 
     // Sorts the vector
-    QuickSort(testVector, 0, testVector.size()-1, std::less<int>());
-
-    for(int i = 0; i < testVector.size(); ++i) {
-        qDebug() << testVector[i];
-    }
+    QuickSort(testVector.begin(), testVector.end(), std::greater_equal<int>());
 
     // Checks to see if it sorted properly
     for(int i = 0; i < testVector.size()-1; ++i) {
@@ -149,7 +148,7 @@ void SortingTests::test_SortDates() {
     testVector.push_back(QDate(2007, 1, 1));
 
     // Sorts the vector
-    QuickSort(testVector, 0, testVector.size()-1);
+    QuickSort(testVector.begin(), testVector.end());
 
     // Checks to see if it sorted properly
     for(int i = 0; i < testVector.size()-1; ++i) {
@@ -165,24 +164,24 @@ void SortingTests::test_SortDates() {
  *********************************************************************/
 void SortingTests::test_SortDatesWithComparator() {
 
-//    // Initializes the QVector
-//    QVector<QDate> testVector;
+    // Initializes the QVector
+    QVector<QDate> testVector;
 
-//    testVector.push_back(QDate(2015, 10, 5));
-//    testVector.push_back(QDate(2008, 10, 5));
-//    testVector.push_back(QDate(2009, 10, 5));
-//    testVector.push_back(QDate(2007, 1, 15));
-//    testVector.push_back(QDate(2007, 2, 5));
-//    testVector.push_back(QDate(2007, 6, 20));
-//    testVector.push_back(QDate(2007, 1, 1));
+    testVector.push_back(QDate(2015, 10, 5));
+    testVector.push_back(QDate(2008, 10, 5));
+    testVector.push_back(QDate(2009, 10, 5));
+    testVector.push_back(QDate(2007, 1, 15));
+    testVector.push_back(QDate(2007, 2, 5));
+    testVector.push_back(QDate(2007, 6, 20));
+    testVector.push_back(QDate(2007, 1, 1));
 
-//    // Sorts the vector
-//    QuickSort(testVector, 0, testVector.size()-1, std::greater<QDate>());
+    // Sorts the vector
+    QuickSort(testVector.begin(), testVector.end(), std::greater_equal<QDate>());
 
-//    // Checks to see if it sorted properly
-//    for(int i = 0; i < testVector.size()-1; ++i) {
-//        QVERIFY(testVector[i] >= testVector[i+1]);
-//    }
+    // Checks to see if it sorted properly
+    for(int i = 0; i < testVector.size()-1; ++i) {
+        QVERIFY(testVector[i] >= testVector[i+1]);
+    }
 }
 
 /*********************************************************************
@@ -206,7 +205,7 @@ void SortingTests::test_SortStadiums() {
     testVector.push_back(Stadium(11));
 
     // Sorts the vector
-    QuickSort(testVector, 0, testVector.size()-1);
+    QuickSort(testVector.begin(), testVector.end());
 
     // Checks to see if it sorted properly
     for(int i = 0; i < testVector.size()-1; ++i) {
@@ -222,27 +221,47 @@ void SortingTests::test_SortStadiums() {
  *********************************************************************/
 void SortingTests::test_SortStadiumsWithComparator() {
 
-//    // Initializes the QVector
-//    QVector<Stadium> testVector;
+    // Initializes the QVector
+    QVector<Stadium> testVector;
 
-//    testVector.push_back(Stadium(11));
-//    testVector.push_back(Stadium(22));
-//    testVector.push_back(Stadium(33));
-//    testVector.push_back(Stadium(44));
-//    testVector.push_back(Stadium(55));
-//    testVector.push_back(Stadium(66));
-//    testVector.push_back(Stadium(77));
-//    testVector.push_back(Stadium(88));
-//    testVector.push_back(Stadium(99));
+    testVector.push_back(Stadium(11));
+    testVector.push_back(Stadium(22));
+    testVector.push_back(Stadium(33));
+    testVector.push_back(Stadium(44));
+    testVector.push_back(Stadium(55));
+    testVector.push_back(Stadium(66));
+    testVector.push_back(Stadium(77));
+    testVector.push_back(Stadium(88));
+    testVector.push_back(Stadium(99));
 
-//    // Sorts the vector
-//    QuickSort(testVector, 0, testVector.size()-1, std::greater<Stadium>());
+    // Sorts the vector
+    QuickSort(testVector.begin(), testVector.end(), std::greater_equal<Stadium>());
 
-//    // Checks to see if it sorted properly
-//    for(int i = 0; i < testVector.size()-1; ++i) {
-//        qDebug() << testVector[i] + " ";
-//        QVERIFY(testVector[i] >= testVector[i+1]);
-//    }
+    // Checks to see if it sorted properly
+    for(int i = 0; i < testVector.size()-1; ++i) {
+        QVERIFY(testVector[i] >= testVector[i+1]);
+    }
+}
+
+/*********************************************************************
+ * Tests sorting a QVector of Vertices using the QuickSort function.
+ *
+ * FAILS IF: - The QVector is not sorted from least to greatest
+ *********************************************************************/
+void SortingTests::test_SortVertices() {
+
+
+}
+
+/*********************************************************************
+ * Tests sorting a QVector of Vertices using the QuickSort function
+ * with a comparator passed in
+ *
+ * FAILS IF: - The QVector is not sorted from greatest to least
+ *********************************************************************/
+void SortingTests::test_SortVerticesWithComparator() {
+
+
 }
 
 /*** THIS ADDS THE TEST TO THE LIST OF CLASSES TO RUN ***/
