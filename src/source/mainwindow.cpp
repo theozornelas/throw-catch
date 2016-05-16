@@ -107,6 +107,93 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
     }
 }
 
+void MainWindow::tripProcess2(QVector<VertexItr> trip) {
+
+    // Comparitor class for vertexItr, pushes smallest weights to the bottom
+    struct {
+        bool operator()(const VertexItr &lhs, const VertexItr &rhs) {
+            return (lhs->getDistance() < rhs->getDistance());
+        }
+    } compStadium;
+
+    ui->display->setCurrentIndex(TRIP_PROCESS);
+    ui->currentTripNextStadium->setText("NEXT");
+    shoppingCart.clear();
+
+
+    QEventLoop pause;
+
+    if(!trip.empty()) {
+
+        double totalDistanceTraveled = 0;        // accumulator for trip distance
+        const int NUM_OF_STADIUMS = trip.size(); // number of stadiums to visit
+        qDebug() << "NUMBER OF STADIUMS TO VISIT: " << NUM_OF_STADIUMS;
+
+        // Loop once for every stadium on the trip list
+        for(int i = 0; i < NUM_OF_STADIUMS; i++) {
+
+            ui->currentTripProgressBar->setValue(((i+1)/(double)NUM_OF_STADIUMS)*100);
+
+            ui->currentTripStadiumCount->setText(QString::number((i+1))
+                                                 + " out of " + QString::number(NUM_OF_STADIUMS)
+                                                 + " stadiums have been visited");
+
+            /** Clears the current stadium sovenirs table,
+             * to prepare for new stadium's souvenir list */
+            ui->listOfCurrentStadiumSouvenirs->clear();
+
+            if(i >= NUM_OF_STADIUMS - 1) {
+                ui->currentTripNextStadium->setText("FINISH");
+            }
+
+            // pop the next stadium to visit and store in the class variable
+            currentStadium = *stadiums.get(db.getStadiumID((**trip.front()).getStadiumName())); // GROSS! :P
+            //currentStadiumItr = trip.front();
+            trip.pop_front();
+            ui->currentTripStadiumNameLabel->setText(currentStadium->getStadiumName());
+
+            QVector<Souvenir> souvenirs = currentStadium->getSouvenirs();
+
+            for(int j = 0; j < souvenirs.size(); j++) {
+                Souvenir souvenir = souvenirs[j];
+                QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfCurrentStadiumSouvenirs);
+                currentItem->setText(0, souvenir.getName());
+                currentItem->setText(1, "$" + QString::number(souvenir.getPrice()));
+
+                QSpinBox *qtyBox = new QSpinBox();
+                qtyBox->setRange(0, 99);
+
+                ui->listOfCurrentStadiumSouvenirs->setItemWidget(currentItem, 2, qtyBox);
+            }
+
+            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(0);
+            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(1);
+            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(2);
+
+            // add distance from last stop to this stop to the total distance
+            if(i != 0){
+                totalDistanceTraveled += stadiumsGraph->GetDistanceTo(*currentStadium);
+            }
+            ui->totalDistanceTraveled->display(totalDistanceTraveled);
+
+            stadiumsGraph->Dijkstra(*currentStadium);
+            std::sort(trip.begin(), trip.end(), compStadium);
+
+
+            /** Waits until user clicks 'next' button */
+            QObject::connect(ui->currentTripNextStadium, SIGNAL(clicked()), &pause, SLOT(quit()));
+            pause.exec();
+
+        }
+
+        ui->finalTotalDistance->display(totalDistanceTraveled);
+
+        currentStadium = NULL;
+        trip.clear();
+
+    }
+}
+
 void MainWindow::on_homePageButton_clicked()
 {
     ui->display->setCurrentIndex(HOME);
@@ -469,26 +556,27 @@ void MainWindow::on_addSelectedSouvenir_clicked()
 
 void MainWindow::on_confirmCustomTripButton_clicked()
 {
+    // Get starting point from the UI
     Stadium *s = *stadiums.get(db.getStadiumID(ui->startingStadiumComboBox->currentText()));
 
     if(s != NULL) {
-        QVector<Stadium *> trip;
+        QVector<VertexItr> trip;
 
-        stadiumsGraph->Dijkstra(*s);
-        trip.push_back(s);
+        // add starting point to front of vector
+        trip.push_back( stadiumsGraph->findVertex(*s) );
 
         QTreeWidgetItemIterator it(ui->selectedStadiumsList);
         QString stadiumName;
 
-        while (*it) {
+        // add the rest to the vector
+        while(*it) {
             stadiumName = (*it)->text(0);
             s = *stadiums.get(db.getStadiumID(stadiumName));
-            trip.push_back(s);
+            trip.push_back( stadiumsGraph->findVertex(*s) );
             it++;
         }
-
-        tripProcess(trip);
-
+        // Send the list to the trip processing method
+        tripProcess2(trip);
     }
 
 }
