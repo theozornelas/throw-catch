@@ -16,6 +16,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -97,8 +98,8 @@ public:
     QPushButton *confirmCustomTripButton;
     QLabel *startingStadiumLabel;
     QComboBox *startingStadiumComboBox;
-    QLabel *label;
-    QLabel *label_13;
+    QPushButton *removeFromItineraryButton;
+    QPushButton *addToItineraryButton;
     QWidget *minimumSpanningTreePage;
     QLabel *planATripLabel_2;
     QTreeWidget *MSTList;
@@ -116,6 +117,8 @@ public:
     QProgressBar *currentTripProgressBar;
     QLabel *currentTripProgressLabel;
     QLabel *currentTripStadiumCount;
+    QLCDNumber *totalDistanceTraveled;
+    QLabel *currentTripStadiumCount_2;
     QWidget *confrimPurchasesPage;
     QLabel *confirmPurchasesLabel;
     QLabel *grandTotalLabel;
@@ -124,6 +127,9 @@ public:
     QLabel *shoppingCartLabel;
     QPushButton *confirmPurchasesButton;
     QPushButton *updateShoppingCart;
+    QLabel *shoppingCartEmpty;
+    QLCDNumber *finalTotalDistance;
+    QLabel *grandTotalLabel_2;
     QWidget *adminLoginPage;
     QLabel *usernameLabel;
     QLabel *passwordLabel;
@@ -540,7 +546,7 @@ public:
         confirmCustomTripButton->setObjectName(QStringLiteral("confirmCustomTripButton"));
         confirmCustomTripButton->setGeometry(QRect(580, 510, 121, 31));
         confirmCustomTripButton->setStyleSheet(QLatin1String("QPushButton {\n"
-"background-color: #293539;\n"
+"background-color: #01CDE6;\n"
 "color: white;\n"
 "border:none;\n"
 "	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
@@ -579,14 +585,16 @@ public:
         startingStadiumComboBox->setInsertPolicy(QComboBox::InsertAtBottom);
         startingStadiumComboBox->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
         startingStadiumComboBox->setFrame(true);
-        label = new QLabel(customTripPage);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(340, 230, 71, 51));
-        label->setStyleSheet(QStringLiteral("image:url(:/icon/icons/right-arrow.png);"));
-        label_13 = new QLabel(customTripPage);
-        label_13->setObjectName(QStringLiteral("label_13"));
-        label_13->setGeometry(QRect(340, 280, 71, 51));
-        label_13->setStyleSheet(QStringLiteral("image:url(:/icon/icons/left-arrow.png);"));
+        removeFromItineraryButton = new QPushButton(customTripPage);
+        removeFromItineraryButton->setObjectName(QStringLiteral("removeFromItineraryButton"));
+        removeFromItineraryButton->setGeometry(QRect(340, 290, 71, 41));
+        removeFromItineraryButton->setStyleSheet(QLatin1String("image:url(:/icon/icons/left-arrow.png);\n"
+"border: none;"));
+        addToItineraryButton = new QPushButton(customTripPage);
+        addToItineraryButton->setObjectName(QStringLiteral("addToItineraryButton"));
+        addToItineraryButton->setGeometry(QRect(340, 240, 71, 41));
+        addToItineraryButton->setStyleSheet(QLatin1String("image:url(:/icon/icons/right-arrow.png);\n"
+"border: none;"));
         display->addWidget(customTripPage);
         minimumSpanningTreePage = new QWidget();
         minimumSpanningTreePage->setObjectName(QStringLiteral("minimumSpanningTreePage"));
@@ -617,7 +625,7 @@ public:
         currentTripStadiumNameLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         addSouvenirToShoppingCart = new QPushButton(tripProcessPage);
         addSouvenirToShoppingCart->setObjectName(QStringLiteral("addSouvenirToShoppingCart"));
-        addSouvenirToShoppingCart->setGeometry(QRect(280, 390, 121, 31));
+        addSouvenirToShoppingCart->setGeometry(QRect(280, 360, 121, 31));
         addSouvenirToShoppingCart->setStyleSheet(QLatin1String("QPushButton {\n"
 "background-color: #293539;\n"
 "color: white;\n"
@@ -626,14 +634,14 @@ public:
 "}"));
         currentTripWelcomeDescription = new QLabel(tripProcessPage);
         currentTripWelcomeDescription->setObjectName(QStringLiteral("currentTripWelcomeDescription"));
-        currentTripWelcomeDescription->setGeometry(QRect(60, 60, 331, 41));
+        currentTripWelcomeDescription->setGeometry(QRect(60, 60, 331, 20));
         QFont font3;
         font3.setPointSize(14);
         currentTripWelcomeDescription->setFont(font3);
         currentTripWelcomeDescription->setWordWrap(true);
         listOfCurrentStadiumSouvenirs = new QTreeWidget(tripProcessPage);
         listOfCurrentStadiumSouvenirs->setObjectName(QStringLiteral("listOfCurrentStadiumSouvenirs"));
-        listOfCurrentStadiumSouvenirs->setGeometry(QRect(40, 160, 361, 221));
+        listOfCurrentStadiumSouvenirs->setGeometry(QRect(40, 130, 361, 221));
         listOfCurrentStadiumSouvenirs->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         listOfCurrentStadiumSouvenirs->header()->setDefaultSectionSize(133);
         currentTripNextButtonLabel = new QLabel(tripProcessPage);
@@ -642,7 +650,7 @@ public:
         currentTripNextButtonLabel->setWordWrap(true);
         currentTripSouvenirLabel = new QLabel(tripProcessPage);
         currentTripSouvenirLabel->setObjectName(QStringLiteral("currentTripSouvenirLabel"));
-        currentTripSouvenirLabel->setGeometry(QRect(40, 130, 121, 21));
+        currentTripSouvenirLabel->setGeometry(QRect(40, 100, 121, 21));
         QFont font4;
         font4.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
         font4.setPointSize(20);
@@ -670,7 +678,7 @@ public:
         shoppingCartButton->setAutoDefault(false);
         currentTripProgressBar = new QProgressBar(tripProcessPage);
         currentTripProgressBar->setObjectName(QStringLiteral("currentTripProgressBar"));
-        currentTripProgressBar->setGeometry(QRect(30, 480, 371, 21));
+        currentTripProgressBar->setGeometry(QRect(30, 460, 371, 21));
         currentTripProgressBar->setStyleSheet(QLatin1String("QProgressBar {\n"
 "    border: 2px solid grey;\n"
 "    border-radius: 5px;\n"
@@ -684,15 +692,37 @@ public:
         currentTripProgressBar->setTextDirection(QProgressBar::TopToBottom);
         currentTripProgressLabel = new QLabel(tripProcessPage);
         currentTripProgressLabel->setObjectName(QStringLiteral("currentTripProgressLabel"));
-        currentTripProgressLabel->setGeometry(QRect(30, 450, 161, 21));
+        currentTripProgressLabel->setGeometry(QRect(30, 430, 161, 21));
         currentTripProgressLabel->setFont(font4);
         currentTripProgressLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         currentTripStadiumCount = new QLabel(tripProcessPage);
         currentTripStadiumCount->setObjectName(QStringLiteral("currentTripStadiumCount"));
-        currentTripStadiumCount->setGeometry(QRect(30, 503, 331, 31));
+        currentTripStadiumCount->setGeometry(QRect(30, 491, 421, 20));
         currentTripStadiumCount->setFont(font3);
         currentTripStadiumCount->setWordWrap(true);
+        totalDistanceTraveled = new QLCDNumber(tripProcessPage);
+        totalDistanceTraveled->setObjectName(QStringLiteral("totalDistanceTraveled"));
+        totalDistanceTraveled->setGeometry(QRect(150, 530, 131, 41));
+        totalDistanceTraveled->setDigitCount(6);
+        currentTripStadiumCount_2 = new QLabel(tripProcessPage);
+        currentTripStadiumCount_2->setObjectName(QStringLiteral("currentTripStadiumCount_2"));
+        currentTripStadiumCount_2->setGeometry(QRect(30, 540, 341, 31));
+        currentTripStadiumCount_2->setFont(font3);
+        currentTripStadiumCount_2->setWordWrap(true);
         display->addWidget(tripProcessPage);
+        currentTripStadiumNameLabel->raise();
+        addSouvenirToShoppingCart->raise();
+        currentTripWelcomeDescription->raise();
+        listOfCurrentStadiumSouvenirs->raise();
+        currentTripNextButtonLabel->raise();
+        currentTripSouvenirLabel->raise();
+        currentTripNextStadium->raise();
+        shoppingCartButton->raise();
+        currentTripProgressBar->raise();
+        currentTripProgressLabel->raise();
+        currentTripStadiumCount->raise();
+        currentTripStadiumCount_2->raise();
+        totalDistanceTraveled->raise();
         confrimPurchasesPage = new QWidget();
         confrimPurchasesPage->setObjectName(QStringLiteral("confrimPurchasesPage"));
         confirmPurchasesLabel = new QLabel(confrimPurchasesPage);
@@ -738,7 +768,30 @@ public:
 "border:none;\n"
 "	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
+        shoppingCartEmpty = new QLabel(confrimPurchasesPage);
+        shoppingCartEmpty->setObjectName(QStringLiteral("shoppingCartEmpty"));
+        shoppingCartEmpty->setGeometry(QRect(60, 130, 261, 16));
+        finalTotalDistance = new QLCDNumber(confrimPurchasesPage);
+        finalTotalDistance->setObjectName(QStringLiteral("finalTotalDistance"));
+        finalTotalDistance->setGeometry(QRect(220, 520, 131, 41));
+        finalTotalDistance->setDigitCount(6);
+        grandTotalLabel_2 = new QLabel(confrimPurchasesPage);
+        grandTotalLabel_2->setObjectName(QStringLiteral("grandTotalLabel_2"));
+        grandTotalLabel_2->setGeometry(QRect(50, 529, 161, 31));
+        grandTotalLabel_2->setStyleSheet(QLatin1String("font: 75 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
+"color: rgb(32, 32, 32)\n"
+""));
         display->addWidget(confrimPurchasesPage);
+        shoppingCartEmpty->raise();
+        confirmPurchasesLabel->raise();
+        grandTotalLabel->raise();
+        grandTotalAmount->raise();
+        shoppingCart->raise();
+        shoppingCartLabel->raise();
+        confirmPurchasesButton->raise();
+        updateShoppingCart->raise();
+        finalTotalDistance->raise();
+        grandTotalLabel_2->raise();
         adminLoginPage = new QWidget();
         adminLoginPage->setObjectName(QStringLiteral("adminLoginPage"));
         usernameLabel = new QLabel(adminLoginPage);
@@ -1046,13 +1099,13 @@ public:
         quickTripTakeTripButton->setText(QApplication::translate("MainWindow", "TAKE TRIP", 0));
         customTripLabel->setText(QApplication::translate("MainWindow", "PLAN CUSTOM TRIP", 0));
         QTreeWidgetItem *___qtreewidgetitem2 = stadiumsToSelectFromList->headerItem();
-        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Stadiums", 0));
+        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "Stadiums to Select From", 0));
         QTreeWidgetItem *___qtreewidgetitem3 = selectedStadiumsList->headerItem();
-        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Stadiums to travel to", 0));
+        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Itinerary", 0));
         confirmCustomTripButton->setText(QApplication::translate("MainWindow", "TAKE TRIP", 0));
         startingStadiumLabel->setText(QApplication::translate("MainWindow", "Please select your starting stadium:", 0));
-        label->setText(QString());
-        label_13->setText(QString());
+        removeFromItineraryButton->setText(QString());
+        addToItineraryButton->setText(QString());
         planATripLabel_2->setText(QApplication::translate("MainWindow", "MINIMUM SPANNING TREE", 0));
         QTreeWidgetItem *___qtreewidgetitem4 = MSTList->headerItem();
         ___qtreewidgetitem4->setText(2, QApplication::translate("MainWindow", "weight", 0));
@@ -1074,6 +1127,7 @@ public:
         currentTripProgressBar->setFormat(QString());
         currentTripProgressLabel->setText(QApplication::translate("MainWindow", "TRIP PROGRESS", 0));
         currentTripStadiumCount->setText(QApplication::translate("MainWindow", "_/_ stadiums have been visited.", 0));
+        currentTripStadiumCount_2->setText(QApplication::translate("MainWindow", "You have traveled                                       miles", 0));
         confirmPurchasesLabel->setText(QApplication::translate("MainWindow", "CONFIRM YOUR PURCHASES", 0));
         grandTotalLabel->setText(QApplication::translate("MainWindow", "GRAND TOTAL:", 0));
         grandTotalAmount->setText(QApplication::translate("MainWindow", "$0.00", 0));
@@ -1086,6 +1140,8 @@ public:
         shoppingCartLabel->setText(QApplication::translate("MainWindow", "SHOPPING CART", 0));
         confirmPurchasesButton->setText(QApplication::translate("MainWindow", "CONFIRM", 0));
         updateShoppingCart->setText(QApplication::translate("MainWindow", "update", 0));
+        shoppingCartEmpty->setText(QApplication::translate("MainWindow", "Your shopping cart is currently empty!", 0));
+        grandTotalLabel_2->setText(QApplication::translate("MainWindow", "TOTAL DISTANCE:", 0));
         usernameLabel->setText(QApplication::translate("MainWindow", "Username", 0));
         passwordLabel->setText(QApplication::translate("MainWindow", "Password", 0));
         loginButton->setText(QApplication::translate("MainWindow", "LOGIN", 0));

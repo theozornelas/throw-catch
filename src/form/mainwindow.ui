@@ -924,7 +924,7 @@ border:none;
       </property>
       <column>
        <property name="text">
-        <string>Stadiums</string>
+        <string>Stadiums to Select From</string>
        </property>
       </column>
      </widget>
@@ -939,7 +939,7 @@ border:none;
       </property>
       <column>
        <property name="text">
-        <string>Stadiums to travel to</string>
+        <string>Itinerary</string>
        </property>
       </column>
      </widget>
@@ -954,7 +954,7 @@ border:none;
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
-background-color: #293539;
+background-color: #01CDE6;
 color: white;
 border:none;
 	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
@@ -1029,33 +1029,35 @@ QComboBox::drop-down{
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QPushButton" name="removeFromItineraryButton">
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>230</y>
+        <y>290</y>
         <width>71</width>
-        <height>51</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">image:url(:/icon/icons/right-arrow.png);</string>
+       <string notr="true">image:url(:/icon/icons/left-arrow.png);
+border: none;</string>
       </property>
       <property name="text">
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_13">
+     <widget class="QPushButton" name="addToItineraryButton">
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>280</y>
+        <y>240</y>
         <width>71</width>
-        <height>51</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">image:url(:/icon/icons/left-arrow.png);</string>
+       <string notr="true">image:url(:/icon/icons/right-arrow.png);
+border: none;</string>
       </property>
       <property name="text">
        <string/>
@@ -1163,7 +1165,7 @@ QComboBox::drop-down{
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>390</y>
+        <y>360</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -1186,7 +1188,7 @@ border:none;
         <x>60</x>
         <y>60</y>
         <width>331</width>
-        <height>41</height>
+        <height>20</height>
        </rect>
       </property>
       <property name="font">
@@ -1205,7 +1207,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>160</y>
+        <y>130</y>
         <width>361</width>
         <height>221</height>
        </rect>
@@ -1252,7 +1254,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>130</y>
+        <y>100</y>
         <width>121</width>
         <height>21</height>
        </rect>
@@ -1320,7 +1322,7 @@ border-image:url(&quot;/Users/sarahsingletary/Documents/throw-catch/src/icons/sh
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>480</y>
+        <y>460</y>
         <width>371</width>
         <height>21</height>
        </rect>
@@ -1350,7 +1352,7 @@ QProgressBar::chunk {
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>450</y>
+        <y>430</y>
         <width>161</width>
         <height>21</height>
        </rect>
@@ -1375,9 +1377,9 @@ QProgressBar::chunk {
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>503</y>
-        <width>331</width>
-        <height>31</height>
+        <y>491</y>
+        <width>421</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="font">
@@ -1392,6 +1394,53 @@ QProgressBar::chunk {
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QLCDNumber" name="totalDistanceTraveled">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>530</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="digitCount">
+       <number>6</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="currentTripStadiumCount_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>341</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>You have traveled                                       miles</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <zorder>currentTripStadiumNameLabel</zorder>
+     <zorder>addSouvenirToShoppingCart</zorder>
+     <zorder>currentTripWelcomeDescription</zorder>
+     <zorder>listOfCurrentStadiumSouvenirs</zorder>
+     <zorder>currentTripNextButtonLabel</zorder>
+     <zorder>currentTripSouvenirLabel</zorder>
+     <zorder>currentTripNextStadium</zorder>
+     <zorder>shoppingCartButton</zorder>
+     <zorder>currentTripProgressBar</zorder>
+     <zorder>currentTripProgressLabel</zorder>
+     <zorder>currentTripStadiumCount</zorder>
+     <zorder>currentTripStadiumCount_2</zorder>
+     <zorder>totalDistanceTraveled</zorder>
     </widget>
     <widget class="QWidget" name="confrimPurchasesPage">
      <widget class="QLabel" name="confirmPurchasesLabel">
@@ -1547,6 +1596,60 @@ border:none;
        <string>update</string>
       </property>
      </widget>
+     <widget class="QLabel" name="shoppingCartEmpty">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>130</y>
+        <width>261</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Your shopping cart is currently empty!</string>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="finalTotalDistance">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>520</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="digitCount">
+       <number>6</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="grandTotalLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>529</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
+color: rgb(32, 32, 32)
+</string>
+      </property>
+      <property name="text">
+       <string>TOTAL DISTANCE:</string>
+      </property>
+     </widget>
+     <zorder>shoppingCartEmpty</zorder>
+     <zorder>confirmPurchasesLabel</zorder>
+     <zorder>grandTotalLabel</zorder>
+     <zorder>grandTotalAmount</zorder>
+     <zorder>shoppingCart</zorder>
+     <zorder>shoppingCartLabel</zorder>
+     <zorder>confirmPurchasesButton</zorder>
+     <zorder>updateShoppingCart</zorder>
+     <zorder>finalTotalDistance</zorder>
+     <zorder>grandTotalLabel_2</zorder>
     </widget>
     <widget class="QWidget" name="adminLoginPage">
      <widget class="QLabel" name="usernameLabel">

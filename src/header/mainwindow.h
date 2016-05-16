@@ -12,6 +12,11 @@
 #include <QTreeWidgetItem>
 #include <QMessageBox>
 #include <QRegExp>
+#include <QDebug>
+#include <QSpinBox>
+#include <QCompleter>
+#include <QCheckBox>
+#include <QFile>
 
 
 enum display {
@@ -49,6 +54,7 @@ public:
     ~MainWindow();
     bool isBlank(QString text);
     void addToCart(Souvenir *s);
+    void tripProcess(QVector<Stadium*> trip);
 
 private slots:
     void on_homePageButton_clicked();
@@ -108,6 +114,8 @@ private slots:
 
     void on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_quickTripTakeTripButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     DBManager db;
@@ -119,6 +127,11 @@ private:
     skiplist<int, Stadium*> stadiums;
     Stadium *currentStadium = NULL;
     bool adminPrivilege = false;
+
+    // Allows user to search stadium at any given moment
+    QCompleter *stadiumSearch;
+    QStringList searchNames;
+
 
 };
 

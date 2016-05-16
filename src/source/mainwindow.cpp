@@ -1,11 +1,6 @@
 #include "../header/mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDebug>
-#include <QSpinBox>
-#include <QCompleter>
-#include <QCheckBox>
-#include <QFile>
-#include <QFontDatabase>
+
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -20,12 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     keys = db.getAllStadiumsKeys();
 
-
-    QStringList searchNames;
-    QCompleter *stadiumSearch;
-
-    for(int i = 0; i < keys.size(); i++) {
-        searchNames << (*stadiums.get(keys[i]))->getStadiumName();
+    for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+        Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
+        searchNames << s->getStadiumName();
     }
 
     stadiumSearch = new QCompleter(searchNames,this);
@@ -41,6 +33,77 @@ MainWindow::~MainWindow()
 
 bool MainWindow::isBlank(QString text) {
     return text.trimmed() == "";
+}
+
+void MainWindow::tripProcess(QVector<Stadium*> trip) {
+
+    ui->display->setCurrentIndex(TRIP_PROCESS);
+    ui->currentTripNextStadium->setText("NEXT");
+    shoppingCart.clear();
+
+
+    QEventLoop pause;
+
+    if(!trip.empty()) {
+
+        double totalDistanceTraveled = 0;
+
+        const int NUM_OF_STADIUMS = trip.size();
+
+        for(int i = 0; i < trip.size(); i++) {
+
+            ui->currentTripProgressBar->setValue(((i+1)/(double)NUM_OF_STADIUMS)*100);
+
+            ui->currentTripStadiumCount->setText(QString::number((i+1))
+                                                 + " out of " + QString::number(NUM_OF_STADIUMS)
+                                                 + " stadiums have been visited");
+
+            /** Clears the current stadium sovenirs table,
+             * to prepare for new stadium's souvenir list */
+            ui->listOfCurrentStadiumSouvenirs->clear();
+
+            if(i >= trip.size() - 1) {
+                ui->currentTripNextStadium->setText("FINISH");
+            }
+
+
+            currentStadium = trip[i];
+            ui->currentTripStadiumNameLabel->setText(currentStadium->getStadiumName());
+
+            QVector<Souvenir> souvenirs = currentStadium->getSouvenirs();
+
+            for(int j = 0; j < souvenirs.size(); j++) {
+                Souvenir souvenir = souvenirs[j];
+                QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfCurrentStadiumSouvenirs);
+                currentItem->setText(0, souvenir.getName());
+                currentItem->setText(1, "$" + QString::number(souvenir.getPrice()));
+
+                QSpinBox *qtyBox = new QSpinBox();
+                qtyBox->setRange(0, 99);
+//              qtyBox->setMaximumSize(50,50);
+
+                ui->listOfCurrentStadiumSouvenirs->setItemWidget(currentItem, 2, qtyBox);
+            }
+
+            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(0);
+            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(1);
+            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(2);
+
+            totalDistanceTraveled += stadiumsGraph->GetDistanceTo(*currentStadium);
+            ui->totalDistanceTraveled->display(totalDistanceTraveled);
+
+            /** Waits until user clicks 'next' button */
+            QObject::connect(ui->currentTripNextStadium, SIGNAL(clicked()), &pause, SLOT(quit()));
+            pause.exec();
+
+        }
+
+        ui->finalTotalDistance->display(totalDistanceTraveled);
+
+        currentStadium = NULL;
+        trip.clear();
+
+    }
 }
 
 void MainWindow::on_homePageButton_clicked()
@@ -124,18 +187,19 @@ void MainWindow::on_customTripButton_clicked()
     ui->stadiumsToSelectFromList->clear();
     ui->selectedStadiumsList->clear();
     ui->startingStadiumComboBox->clear();
-    for(int i = 0; i < keys.size(); i++) {
-        Stadium *s = *stadiums.get(keys[i]);
+
+ for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+        Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
         ui->startingStadiumComboBox->addItem(s->getStadiumName());
     }
 }
 
 void MainWindow::on_startingStadiumComboBox_currentIndexChanged(const QString &arg1)
 {
-
     ui->stadiumsToSelectFromList->clear();
-    for(int i = 0; i < keys.size(); i++) {
-        Stadium *s = *stadiums.get(keys[i]);
+
+    for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+        Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
         if(s->getStadiumName() != arg1) {
             QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->stadiumsToSelectFromList);
             currentItem->setText(0, s->getStadiumName());
@@ -238,9 +302,9 @@ void MainWindow::on_shortestTripToAllButton_clicked()
 
     ui->quickTripList->clear();
 
-     for(int i = 0; i < keys.size(); i++) {
+     for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+        Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->quickTripList);
-        Stadium *s = *stadiums.get(keys[i]);
         currentItem->setText(0, s->getStadiumName());
         currentItem->setText(1, QString::number(stadiumsGraph->GetDistanceTo(*s)));
     }
@@ -302,9 +366,8 @@ void MainWindow::on_adminModifyButton_clicked()
 
     ui->listOfModifyStadiums->clear();
 
-
-    for(int i = 0; i < keys.size(); i++) {
-        Stadium *s = *stadiums.get(keys[i]);
+    for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+        Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiums);
         currentItem->setText(0, s->getStadiumName());
     }
@@ -405,69 +468,50 @@ void MainWindow::on_addSelectedSouvenir_clicked()
 
 void MainWindow::on_confirmCustomTripButton_clicked()
 {
-    ui->display->setCurrentIndex(TRIP_PROCESS);
-    ui->currentTripNextStadium->setText("NEXT");
-    shoppingCart.clear();
+    Stadium *s = *stadiums.get(db.getStadiumID(ui->startingStadiumComboBox->currentText()));
 
+    if(s != NULL) {
+        QVector<Stadium *> trip;
 
-    QEventLoop pause;
+        stadiumsGraph->Dijkstra(*s);
+        trip.push_back(s);
 
+        QTreeWidgetItemIterator it(ui->selectedStadiumsList);
+        QString stadiumName;
 
-    /** Iterates through each stadium */
-      // testing information at the momment
-
-    if(!keys.empty()) {
-
-        const int NUM_OF_STADIUMS = keys.size();
-
-        for(int i = 0; i < keys.size(); i++) {
-
-            ui->currentTripProgressBar->setValue(((i+1)/(double)NUM_OF_STADIUMS)*100);
-
-            ui->currentTripStadiumCount->setText(QString::number((i+1))
-                                                 + " out of " + QString::number(NUM_OF_STADIUMS)
-                                                 + " stadiums have been visited");
-
-            /** Clears the current stadium sovenirs table,
-             * to prepare for new stadium's souvenir list */
-            ui->listOfCurrentStadiumSouvenirs->clear();
-
-            if(i >= keys.size() - 1) {
-                ui->currentTripNextStadium->setText("FINISH");
-            }
-
-
-            currentStadium = *stadiums.get(keys[i]);
-            ui->currentTripStadiumNameLabel->setText(currentStadium->getStadiumName());
-
-            QVector<Souvenir> souvenirs = currentStadium->getSouvenirs();
-
-            for(int j = 0; j < souvenirs.size(); j++) {
-                Souvenir souvenir = souvenirs[j];
-                QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfCurrentStadiumSouvenirs);
-                currentItem->setText(0, souvenir.getName());
-                currentItem->setText(1, "$" + QString::number(souvenir.getPrice()));
-
-                QSpinBox *qtyBox = new QSpinBox();
-                qtyBox->setRange(0, 99);
-//                qtyBox->setMaximumSize(50,50);
-
-                ui->listOfCurrentStadiumSouvenirs->setItemWidget(currentItem, 2, qtyBox);
-            }
-
-            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(0);
-            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(1);
-            ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(2);
-
-            /** Waits until user clicks 'next' button */
-            QObject::connect(ui->currentTripNextStadium, SIGNAL(clicked()), &pause, SLOT(quit()));
-            pause.exec();
+        while (*it) {
+            stadiumName = (*it)->text(0);
+            s = *stadiums.get(db.getStadiumID(stadiumName));
+            trip.push_back(s);
+            it++;
         }
 
-        currentStadium = NULL;
-        
+        tripProcess(trip);
+
     }
-    
+
+}
+
+void MainWindow::on_quickTripTakeTripButton_clicked()
+{
+    QTreeWidgetItem* selectedStadium = ui->quickTripList->currentItem();
+
+    if(selectedStadium != NULL) {
+
+        Stadium *startingStadium = *stadiums.get(db.getStadiumID(ui->quickTripStartingStadium->text()));
+        Stadium *stadiumToVisit = *stadiums.get(db.getStadiumID(selectedStadium->data(0, 0).toString()));
+
+        if(startingStadium != NULL && stadiumToVisit != NULL) {
+            QVector<Stadium*> trip;
+            trip.push_back(startingStadium);
+            trip.push_back(stadiumToVisit);
+            tripProcess(trip);
+        }
+    }
+    else {
+        QMessageBox::warning(this, "Warning!", "Uh-oh, please select a stadium to visit.");
+
+    }
 
 
 }
@@ -559,9 +603,13 @@ void MainWindow::on_currentTripNextStadium_clicked()
 
         if(shoppingCart.empty()) {
             ui->shoppingCart->hide();
+            ui->updateShoppingCart->setVisible(false);
+            ui->grandTotalAmount->setText("$0.00");
+
         }
         else {
             ui->shoppingCart->clear();
+            ui->updateShoppingCart->setVisible(true);
             ui->shoppingCart->setVisible(true);
 
             QString currentStadium = "";
@@ -728,8 +776,8 @@ void MainWindow::on_viewAdminStadiumsButton_clicked()
 
     double grandTotalRevenue = 0;
 
-    for(int i = 0; i < keys.size(); i++) {
-        Stadium *s = *stadiums.get(keys[i]);
+    for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+        Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
 
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->adminStadiumList);
         currentItem->setText(0, s->getStadiumName());
@@ -761,6 +809,8 @@ void MainWindow::on_viewMoreInfoAboutStadiumButton_clicked()
     }
 
 }
+
+
 
 
 
