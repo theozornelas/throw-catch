@@ -295,7 +295,6 @@ void MainWindow::on_adminModifyButton_clicked()
 
     ui->listOfModifyStadiums->clear();
 
-
     for(int i = 0; i < keys.size(); i++) {
         Stadium *s = *stadiums.get(keys[i]);
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiums);
@@ -823,6 +822,10 @@ void MainWindow::on_removeSelectedSouvenir_2_clicked()
 
                 // insert stadium to skiplist
                 stadiums.insert(newStadiumID, newStadium);
+                // Add stadium to Database
+                db.AddNewStadium(newStadium);
+                // Add stadium ID to lookup list
+                keys.push_back(newStadiumID);
 
                 // insert stadium and edges into graph
                 QJsonArray adjAR = JsonStadium["adjacent"].toArray();
@@ -832,10 +835,8 @@ void MainWindow::on_removeSelectedSouvenir_2_clicked()
                     Stadium destination = **stadiums.get(destID);
                     int distance = edge["distance"].toInt();
 
-                    qDebug() << "(ID-" << destID << ") Stadium: " << edge["stadium"].toString()
-                             << "Distance: " << edge["distance"].toInt();
-
                     stadiumsGraph->insertEdge(*newStadium, destination, distance);
+                    qDebug() << "DISTANCE TO NEW STADIUM: " << stadiumsGraph->GetDistance(destination, *newStadium);
                 }
             }
             else{ qDebug() << "File contains no valid Stadium Object";}
