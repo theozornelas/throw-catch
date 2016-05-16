@@ -55,6 +55,7 @@ void ShoppingCart::setList(QVector<Souvenir*> shoppingCart, skiplist<int, Stadiu
             if(currentStadium != nextStadium) {
 
                 parent->setText(3, QString::number(stadiumTotal, 'f', 2));
+                grandTotal += stadiumTotal;
                 stadiumTotal = 0;
                 parent = new QTreeWidgetItem(ui->shoppingCart);
                 ui->shoppingCart->addTopLevelItem(parent);
@@ -81,8 +82,6 @@ void ShoppingCart::setList(QVector<Souvenir*> shoppingCart, skiplist<int, Stadiu
             itm->setTextAlignment(3, Qt::AlignCenter);
 
             stadiumTotal += souvenirTotal;
-            grandTotal += stadiumTotal;
-
 
             parent->addChild(itm);
             // Iterator increments to the next node
@@ -90,12 +89,12 @@ void ShoppingCart::setList(QVector<Souvenir*> shoppingCart, skiplist<int, Stadiu
         }
 
         parent->setText(3, QString::number(stadiumTotal, 'f', 2));
-        stadiumTotal = 0;
 
         grandTotal += stadiumTotal;
+        stadiumTotal = 0;
+
         ui->grandTotalAmount->setText("$" + QString::number(grandTotal, 'f', 2));
 
-
-
+        ui->shoppingCart->expandAll();
     }
 }

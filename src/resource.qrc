@@ -8,6 +8,9 @@
         <file>icons/shopping-cart-full-sign.png</file>
         <file>icons/right-arrow.png</file>
         <file>icons/left-arrow.png</file>
+        <file>icons/program-throw-catch.png</file>
+        <file>icons/program-baseball-field.png</file>
+        <file>icons/welcome-sign.png</file>
     </qresource>
     <qresource prefix="/font"/>
     <qresource prefix="/style"/>

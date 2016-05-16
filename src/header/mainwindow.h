@@ -134,6 +134,16 @@ private slots:
 
     void on_cancelStadiumUpdatesButton_clicked();
 
+    void on_confirmStadiumUpdateButton_clicked();
+    
+    void on_listOfModifyStadiumsSouvenirs_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
+    void on_password_returnPressed();
+
+    void on_searchBar_returnPressed();
+
+    void on_listOfModifyStadiumsSouvenirs_itemChanged(QTreeWidgetItem *item, int column);
+
 private:
     Ui::MainWindow *ui;
     DBManager db;
@@ -144,6 +154,7 @@ private:
     Graph<Stadium>* stadiumsGraph;
     skiplist<int, Stadium*> stadiums;
     Stadium *currentStadium = NULL;
+    Souvenir *currentSouvenir = NULL;
     bool adminPrivilege = false;
 
     // Allows user to search stadium at any given moment
