@@ -334,12 +334,12 @@ public:
         homePage->setObjectName(QStringLiteral("homePage"));
         viewStadiumHeading_2 = new QLabel(homePage);
         viewStadiumHeading_2->setObjectName(QStringLiteral("viewStadiumHeading_2"));
-        viewStadiumHeading_2->setGeometry(QRect(20, 10, 311, 41));
+        viewStadiumHeading_2->setGeometry(QRect(20, 10, 301, 41));
         viewStadiumHeading_2->setStyleSheet(QLatin1String("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 ""));
         frame_3 = new QFrame(homePage);
         frame_3->setObjectName(QStringLiteral("frame_3"));
-        frame_3->setGeometry(QRect(370, 0, 381, 611));
+        frame_3->setGeometry(QRect(330, 0, 421, 611));
         frame_3->setStyleSheet(QLatin1String("background-color: rgb(223, 223, 223);\n"
 "border: none;"));
         frame_3->setFrameShape(QFrame::StyledPanel);
@@ -358,8 +358,6 @@ public:
         viewStadiumHeading_3->setFont(font);
         viewStadiumHeading_3->setStyleSheet(QStringLiteral("background none;"));
         viewStadiumHeading_3->setWordWrap(true);
-        label_2->raise();
-        viewStadiumHeading_3->raise();
         label = new QLabel(homePage);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(130, 100, 401, 391));
@@ -1550,7 +1548,7 @@ public:
         viewStadiumHeading_3->setText(QApplication::translate("MainWindow", "Hi there! The basebal vacaction planner was created so you can experience your dream vacation to all  ", 0));
         label->setText(QString());
         viewStadiumHeading_4->setText(QApplication::translate("MainWindow", "your favorite baseball stadiums.", 0));
-        viewStadiumHeading_5->setText(QApplication::translate("MainWindow", "You can view stadiums, and can even view only American or National stadiums, along with sorting the stadiums by their attributes. Next, you can plan your dream trip and virtually take the trip. On each trip you take, you can purchase a souvenirs as a memory!\n"
+        viewStadiumHeading_5->setText(QApplication::translate("MainWindow", "You can view stadiums, and can even view only American or National stadiums, along with sorting the stadiums by their attributes. Next, you can plan your dream trip and virtually take the trip. On each trip you take, you can purchase souvenirs as a memory!\n"
 "\n"
 "            Happy traveling!", 0));
         viewStadiumHeading->setText(QApplication::translate("MainWindow", "VIEW STADIUMS", 0));

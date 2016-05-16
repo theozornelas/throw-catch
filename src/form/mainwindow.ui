@@ -232,7 +232,7 @@ border: none;
        <rect>
         <x>20</x>
         <y>10</y>
-        <width>311</width>
+        <width>301</width>
         <height>41</height>
        </rect>
       </property>
@@ -247,9 +247,9 @@ border: none;
      <widget class="QFrame" name="frame_3">
       <property name="geometry">
        <rect>
-        <x>370</x>
+        <x>330</x>
         <y>0</y>
-        <width>381</width>
+        <width>421</width>
         <height>611</height>
        </rect>
       </property>
@@ -305,9 +305,6 @@ background-color: none;</string>
         <bool>true</bool>
        </property>
       </widget>
-      <zorder>label_2</zorder>
-      <zorder>viewStadiumHeading_3</zorder>
-      <zorder>label</zorder>
      </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">
@@ -370,7 +367,7 @@ background-color: none;</string>
        <string notr="true">background-color: none;</string>
       </property>
       <property name="text">
-       <string>You can view stadiums, and can even view only American or National stadiums, along with sorting the stadiums by their attributes. Next, you can plan your dream trip and virtually take the trip. On each trip you take, you can purchase a souvenirs as a memory!
+       <string>You can view stadiums, and can even view only American or National stadiums, along with sorting the stadiums by their attributes. Next, you can plan your dream trip and virtually take the trip. On each trip you take, you can purchase souvenirs as a memory!
 
             Happy traveling!</string>
       </property>
