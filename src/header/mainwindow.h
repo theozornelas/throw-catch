@@ -33,7 +33,9 @@ enum display {
     ADMIN_HOME,
     ADMIN_STADIUMS,
     MODIFY_INFO,
-    MODIFY_SOUVENIRS
+    MODIFY_SOUVENIRS,
+    MODIFY_STADIUMS,
+    UPDATE_STADIUM,
 };
 
 enum options {
@@ -110,11 +112,14 @@ private slots:
     void viewSingleStadium(QString stadiumName);
 
     void viewStadiumBy(QString sortByType);
-    
 
     void on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1);
 
     void on_quickTripTakeTripButton_clicked();
+
+    void on_adminModifyStadiumsButton_clicked();
+
+    void on_updateAStadiumButton_clicked();
 
 private:
     Ui::MainWindow *ui;

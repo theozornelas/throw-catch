@@ -814,6 +814,51 @@ void MainWindow::on_viewMoreInfoAboutStadiumButton_clicked()
 }
 
 
+void MainWindow::on_adminModifyStadiumsButton_clicked()
+{
+    ui->display->setCurrentIndex(MODIFY_STADIUMS);
+    
+    ui->stadiumsToModifyList->clear();
 
+    for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+        Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
 
+        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->stadiumsToModifyList);
+        currentItem->setText(0, s->getStadiumName());
+    }
+    
+}
 
+void MainWindow::on_updateAStadiumButton_clicked()
+{
+    QTreeWidgetItem* selectedStadium = ui->stadiumsToModifyList->currentItem();
+
+    if(selectedStadium != NULL) {
+
+       currentStadium = *stadiums.get(db.getStadiumID(selectedStadium->data(0, 0).toString()));
+       ui->updateStadium->setText(currentStadium->getStadiumName());
+       ui->updateTeamName->setText(currentStadium->getTeamName());
+       ui->updateStreetAddress->setText(currentStadium->getAddress().streetAddress);
+       ui->updateCity->setText(currentStadium->getAddress().city);
+       ui->updateZipcode->setText(currentStadium->getAddress().zipCode);
+       ui->updateState->setText(currentStadium->getAddress().state);
+       ui->updateSeatingCapacity->setValue(currentStadium->getSeatingCapacity());
+       ui->updatePhoneNumber->setText(currentStadium->getBoxOfficeNumber());
+       ui->updateTypology->setText(currentStadium->getTypology());
+
+       if(currentStadium->getLeagueType() == "American") {
+           ui->updateAmericanLeague->setChecked(true);
+       }
+       else {
+           ui->updateNationalLeague->setChecked(true);
+       }
+
+       ui->display->setCurrentIndex(UPDATE_STADIUM);
+
+    }
+    else {
+        QMessageBox::warning(this, "Warning!", "Uh-oh, please select a stadium to update.");
+
+    }
+
+}
