@@ -103,7 +103,7 @@ border: none;
         <string notr="true">font: 25 20pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;</string>
        </property>
        <property name="text">
-        <string>TRIP</string>
+        <string>DREAM TRIP</string>
        </property>
       </widget>
       <widget class="QPushButton" name="viewStadiumsPageButton">
@@ -244,6 +244,145 @@ border: none;
        <string>HOME</string>
       </property>
      </widget>
+     <widget class="QFrame" name="frame_3">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>0</y>
+        <width>381</width>
+        <height>611</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(223, 223, 223);
+border: none;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>10</y>
+         <width>341</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-image:url(:/icon/icons/welcome-sign.png);
+background-color: none;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="viewStadiumHeading_3">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>80</y>
+         <width>351</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Futura</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background none;</string>
+       </property>
+       <property name="text">
+        <string>Hi there! The basebal vacaction planner was created so you can experience your dream vacation to all  </string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <zorder>label_2</zorder>
+      <zorder>viewStadiumHeading_3</zorder>
+      <zorder>label</zorder>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>100</y>
+        <width>401</width>
+        <height>391</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-image:url(:/icon/icons/program-throw-catch.png);
+background-color: none;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="viewStadiumHeading_4">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>110</y>
+        <width>351</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Futura</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: none;</string>
+      </property>
+      <property name="text">
+       <string>your favorite baseball stadiums.</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="viewStadiumHeading_5">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>140</y>
+        <width>251</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Futura</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: none;</string>
+      </property>
+      <property name="text">
+       <string>You can view stadiums, and can even view only American or National stadiums, along with sorting the stadiums by their attributes. Next, you can plan your dream trip and virtually take the trip. On each trip you take, you can purchase a souvenirs as a memory!
+
+            Happy traveling!</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <zorder>frame_3</zorder>
+     <zorder>viewStadiumHeading_2</zorder>
+     <zorder>label</zorder>
+     <zorder>viewStadiumHeading_4</zorder>
+     <zorder>viewStadiumHeading_5</zorder>
     </widget>
     <widget class="QWidget" name="viewStadiumsPage">
      <widget class="QLabel" name="viewStadiumHeading">
@@ -1443,6 +1582,26 @@ QProgressBar::chunk {
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QFrame" name="frame_4">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>100</y>
+        <width>221</width>
+        <height>391</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(223, 223, 223);
+border: none;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
      <zorder>currentTripStadiumNameLabel</zorder>
      <zorder>addSouvenirToShoppingCart</zorder>
      <zorder>currentTripWelcomeDescription</zorder>
@@ -1456,6 +1615,7 @@ QProgressBar::chunk {
      <zorder>currentTripStadiumCount</zorder>
      <zorder>currentTripStadiumCount_2</zorder>
      <zorder>totalDistanceTraveled</zorder>
+     <zorder>frame_4</zorder>
     </widget>
     <widget class="QWidget" name="confrimPurchasesPage">
      <widget class="QLabel" name="confirmPurchasesLabel">

@@ -746,6 +746,7 @@ void MainWindow::on_currentTripNextStadium_clicked()
                 if(currentStadium != nextStadium) {
 
                     parent->setText(4, QString::number(stadiumTotal, 'f', 2));
+                    grandTotal += stadiumTotal;
                     stadiumTotal = 0;
                     parent = new QTreeWidgetItem(ui->shoppingCart);
                     ui->shoppingCart->addTopLevelItem(parent);
@@ -775,8 +776,6 @@ void MainWindow::on_currentTripNextStadium_clicked()
                 itm->setTextAlignment(3, Qt::AlignCenter);
 
                 stadiumTotal += souvenirTotal;
-                grandTotal += stadiumTotal;
-
 
                 parent->addChild(itm);
                 // Iterator increments to the next node
@@ -784,9 +783,9 @@ void MainWindow::on_currentTripNextStadium_clicked()
             }
 
             parent->setText(4, QString::number(stadiumTotal, 'f', 2));
+            grandTotal += stadiumTotal;
             stadiumTotal = 0;
 
-            grandTotal += stadiumTotal;
             ui->grandTotalAmount->setText("$" + QString::number(grandTotal, 'f', 2));
         }
 
