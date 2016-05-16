@@ -13,8 +13,8 @@ DBManager::DBManager()
     _db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Remember to change path, will find a more generic way soon.
-//    QString path = "/Users/sarahsingletary/Documents/throw-catch/sqlite/throw-catch.db";    // Sarah MacbookPro
-    QString path = "D:/Ethan/Desktop/Working/2_Projects/!saddleback_CS/CS1D_Projects/throw-catch/sqlite/throw-catch.db";    // Ethan Win10 Workstation
+    QString path = "/Users/sarahsingletary/Documents/throw-catch/sqlite/throw-catch.db";    // Sarah MacbookPro
+//    QString path = "D:/Ethan/Desktop/Working/2_Projects/!saddleback_CS/CS1D_Projects/throw-catch/sqlite/throw-catch.db";    // Ethan Win10 Workstation
     _db.setDatabaseName(path);
     _qry = QSqlQuery(_db);
 
@@ -87,17 +87,41 @@ bool DBManager::RemoveSouvenir(int stadiumKey, QString name) {
 }
 
 
-//bool DBManager::ChangeSouvenirName(int stadiumKey, QString oldName, QString newName) {
+bool DBManager::updateSouvenirName(int stadiumKey, QString oldName, QString newName) {
+    QSqlQuery query;
 
-//}
+    query.prepare("UPDATE Souvenirs SET souvenir_name = :new_name WHERE stadium_id = :key AND souvenir_name = :old_name");
 
-//bool DBManager::ChangeSouvenirPrice(int stadiumKey, QString souvenirName, double newPrice) {
+    query.bindValue(":new_name", newName);
+    query.bindValue(":key", stadiumKey);
+    query.bindValue(":old_name", oldName);
 
-//}
+    return query.exec();
+}
 
-//bool DBManager::ChangeSouvenirQuantity(int stadiumKey, QString souvenirName, int newQuantity) {
+bool DBManager::updateSouvenirPrice(int stadiumKey, QString souvenirName, double newPrice) {
+    QSqlQuery query;
 
-//}
+    query.prepare("UPDATE Souvenirs SET price = :new_price WHERE stadium_id = :key AND souvenir_name = :souvenir_name");
+
+    query.bindValue(":new_price", newPrice);
+    query.bindValue(":key", stadiumKey);
+    query.bindValue(":souvenir_name", souvenirName);
+
+    return query.exec();
+}
+
+bool DBManager::updateSouvenirQuantity(int stadiumKey, QString souvenirName, int newQuantity) {
+    QSqlQuery query;
+
+    query.prepare("UPDATE Souvenirs SET quantity = :new_quantity WHERE stadium_id = :key AND souvenir_name = :souvenir_name");
+
+    query.bindValue(":new_quantity", newQuantity);
+    query.bindValue(":key", stadiumKey);
+    query.bindValue(":souvenir_name", souvenirName);
+
+    return query.exec();
+}
 
 /**
  * A C C E S S O R S
@@ -253,5 +277,54 @@ bool DBManager::AddNewStadium(Stadium *s) {
 
     return query.exec();
 
-
 }
+
+bool DBManager::UpdateStadium(Stadium *s) {
+    QSqlQuery query;
+
+    query.prepare("UPDATE Stadiums SET "
+                  "stadium_name = :stadium_name, "
+                  "team_name = :team_name, "
+                  "street_address = :street_address, "
+                  "city = :city, state = :state, zipcode = :zipcode, "
+                  "box_office_number = :box_office_number, "
+                  "date_opened = :date_opened, "
+                  "seating_capacity = :seating_capacity, "
+                  "surface = :surface, "
+                  "league_type = :league_type, "
+                  "typology = :typology "
+                  "WHERE id = :id");
+    
+    query.bindValue(":id", s->getStadiumID());
+    query.bindValue(":stadium_name", s->getStadiumName());
+    query.bindValue(":team_name", s->getTeamName());
+    query.bindValue(":street_address", s->getAddress().streetAddress);
+    query.bindValue(":city", s->getAddress().city);
+    query.bindValue(":state", s->getAddress().state);
+    query.bindValue(":zipcode", s->getAddress().zipCode);
+    query.bindValue(":box_office_number", s->getBoxOfficeNumber());
+    query.bindValue(":date_opened", s->getDateOpened());
+    query.bindValue(":seating_capacity", s->getSeatingCapacity());
+    query.bindValue(":surface", s->getSurface());
+    query.bindValue(":league_type", s->getLeagueType());
+    query.bindValue(":typology", s->getTypology());
+    
+    return query.exec();
+    
+}
+
+bool DBManager::addEdges(Stadium *origin, Stadium *destination, int weight) {
+    QSqlQuery query;
+
+    query.prepare("INSERT into Graph (origin_id, origin, destination_id, destination, weight) "
+                  "VALUES (:origin_id, :origin, :destination_id, :destination, :weight)");
+
+    query.bindValue(":origin_id", origin->getStadiumID());
+    query.bindValue(":origin", origin->getStadiumName());
+    query.bindValue(":destination_id", destination->getStadiumID());
+    query.bindValue(":destination", destination->getStadiumName());
+    query.bindValue(":weight", weight);
+
+    return query.exec();
+}
+
