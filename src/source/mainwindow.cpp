@@ -130,12 +130,12 @@ void MainWindow::viewStadiumBy(QString sortByType) {
     ui->viewStadiumsList->clear();
 
     ui->viewStadiumsList->setColumnWidth(0, 200);
-    ui->viewStadiumsList->setColumnWidth(1, 90);
-    ui->viewStadiumsList->setColumnWidth(2, 70);
-    ui->viewStadiumsList->setColumnWidth(3, 100);
+    ui->viewStadiumsList->setColumnWidth(1, 210);
+    ui->viewStadiumsList->setColumnWidth(2, 80);
+    ui->viewStadiumsList->setColumnWidth(3, 200);
     ui->viewStadiumsList->setColumnWidth(4, 100);
-    ui->viewStadiumsList->setColumnWidth(5, 90);
-    ui->viewStadiumsList->setColumnWidth(6, 90);
+    ui->viewStadiumsList->setColumnWidth(5, 120);
+    ui->viewStadiumsList->setColumnWidth(6, 170);
 
 
     if(sortByType != "All") {
@@ -147,8 +147,8 @@ void MainWindow::viewStadiumBy(QString sortByType) {
                 currentItem->setText(0, s->getStadiumName());
                 currentItem->setText(1, s->getTeamName());
                 currentItem->setText(2, QString::number(s->getSeatingCapacity()));
-                currentItem->setText(3, s->getAddress().streetAddress + " " + s->getAddress().city
-                                     + "\n" + s->getAddress().state + " " + s->getAddress().zipCode);
+                currentItem->setText(3, s->getAddress().streetAddress.trimmed() + ",\n" + s->getAddress().city
+                                     + ", " + s->getAddress().state + " " + s->getAddress().zipCode);
                 currentItem->setText(4, s->getSurface());
                 currentItem->setText(5, s->getDateOpened());
                 currentItem->setText(6, s->getTypology());
@@ -165,8 +165,8 @@ void MainWindow::viewStadiumBy(QString sortByType) {
             currentItem->setText(0, s->getStadiumName());
             currentItem->setText(1, s->getTeamName());
             currentItem->setText(2, QString::number(s->getSeatingCapacity()));
-            currentItem->setText(3, s->getAddress().streetAddress + " " + s->getAddress().city
-                                 + "\n" + s->getAddress().state + " " + s->getAddress().zipCode);
+            currentItem->setText(3, s->getAddress().streetAddress.trimmed() + ",\n" + s->getAddress().city
+                                 + ", " + s->getAddress().state + " " + s->getAddress().zipCode);
             currentItem->setText(4, s->getSurface());
             currentItem->setText(5, s->getDateOpened());
             currentItem->setText(6, s->getTypology());
@@ -710,8 +710,9 @@ void MainWindow::viewSingleStadium(QString stadiumName) {
         ui->singleStadiumNameLabel->setText(s->getStadiumName());
         ui->singleStadiumInfo->setVisible(true);
 
-        ui->singleStadiumAddress->setText(s->getAddress().streetAddress + " " + s->getAddress().city
-                                          + "\n" + s->getAddress().state + " " + s->getAddress().zipCode);
+
+        ui->singleStadiumAddress->setText(s->getAddress().streetAddress.trimmed() + ",\n" + s->getAddress().city
+                                          + ", " + s->getAddress().state + " " + s->getAddress().zipCode);
         ui->singleStadiumBoxOfficeNum->setText(s->getBoxOfficeNumber());
         ui->singleStadiumSeatingCapacity->setText(QString::number(s->getSeatingCapacity()));
         ui->singleStadiumSurface->setText(s->getSurface());
@@ -811,15 +812,8 @@ void MainWindow::on_viewMoreInfoAboutStadiumButton_clicked()
 
 }
 
-/**
- * @brief The slot for modifying the stadiums in admin mode
- */
-void MainWindow::on_viewAdminStadiumsButton_2_clicked()
-{
-    ui->display->setCurrentIndex(MODIFY_STADIUMS);
-}
 
-void MainWindow::on_removeSelectedSouvenir_2_clicked()
+void MainWindow::on_addStadiumFromFileButton_clicked()
 {
         QString filename = QFileDialog::getOpenFileName(
                                        this,                                    // The parent of this popup
@@ -853,7 +847,7 @@ void MainWindow::on_removeSelectedSouvenir_2_clicked()
                 Stadium* newStadium = new Stadium(newStadiumID, // ID should be 1 more than size
                                                    JsonStadium["stadiumName"].toString(),
                                                    JsonStadium["teamName"].toString(),
-                                                   JsonStadium["streetAddress"].toString(),
+                                                   JsonStadium["streetAddress"].toString().trimmed(),
                                                    JsonStadium["city"].toString(),
                                                    JsonStadium["state"].toString(),
                                                    JsonStadium["zipCode"].toString(),
@@ -883,6 +877,14 @@ void MainWindow::on_removeSelectedSouvenir_2_clicked()
                 db.AddNewStadium(newStadium);
                 // Add stadium ID to lookup list
                 keys.push_back(newStadiumID);
+
+                //Inserts and sets the autocomplete search
+                searchNames << newStadium->getStadiumName();
+
+                stadiumSearch = new QCompleter(searchNames,this);
+                stadiumSearch->setCaseSensitivity(Qt::CaseInsensitive);
+                ui->searchBar->setCompleter(stadiumSearch);
+
 
                 // insert stadium and edges into graph
                 QJsonArray adjAR = JsonStadium["adjacent"].toArray();
@@ -933,6 +935,12 @@ void MainWindow::on_updateAStadiumButton_clicked()
        ui->updateSeatingCapacity->setValue(currentStadium->getSeatingCapacity());
        ui->updatePhoneNumber->setText(currentStadium->getBoxOfficeNumber());
        ui->updateTypology->setText(currentStadium->getTypology());
+       
+       QDate stadiumDate = QDate::fromString(currentStadium->getDateOpened(), "MMMM d, yyyy");
+
+       ui->updateYear->setText(QString::number(stadiumDate.year()));
+       ui->updateMonth->setCurrentIndex(stadiumDate.month());
+       ui->updateDay->setText(QString::number(stadiumDate.day()));
 
        if(currentStadium->getLeagueType() == "American") {
            ui->updateAmericanLeague->setChecked(true);
@@ -948,4 +956,11 @@ void MainWindow::on_updateAStadiumButton_clicked()
         QMessageBox::warning(this, "Warning!", "Uh-oh, please select a stadium to update.");
 
     }
+}
+
+
+
+void MainWindow::on_cancelStadiumUpdatesButton_clicked()
+{
+    ui->display->setCurrentIndex(MODIFY_STADIUMS);
 }

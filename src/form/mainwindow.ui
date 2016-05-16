@@ -2133,7 +2133,7 @@ border:none;
      </widget>
     </widget>
     <widget class="QWidget" name="adminModifyStadiums">
-     <widget class="QPushButton" name="removeSelectedSouvenir_2">
+     <widget class="QPushButton" name="addStadiumFromFileButton">
       <property name="geometry">
        <rect>
         <x>480</x>
@@ -2197,7 +2197,7 @@ border:none;
         <x>50</x>
         <y>160</y>
         <width>256</width>
-        <height>291</height>
+        <height>321</height>
        </rect>
       </property>
       <column>
@@ -2359,9 +2359,9 @@ border:none;
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>60</y>
+        <y>70</y>
         <width>621</width>
-        <height>91</height>
+        <height>81</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -2431,7 +2431,7 @@ border:none;
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>46</y>
+         <y>37</y>
          <width>601</width>
          <height>41</height>
         </rect>
@@ -2502,7 +2502,7 @@ border:none;
        <string>CONFIRM</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="removeSelectedSouvenir_4">
+     <widget class="QPushButton" name="cancelStadiumUpdatesButton">
       <property name="geometry">
        <rect>
         <x>450</x>
@@ -2539,23 +2539,7 @@ border:none;
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="3" column="3">
-        <widget class="QLineEdit" name="updateDay">
-         <property name="maximumSize">
-          <size>
-           <width>50</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="maxLength">
-          <number>2</number>
-         </property>
-         <property name="placeholderText">
-          <string>Day</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="6">
+       <item row="0" column="0" colspan="7">
         <widget class="QFrame" name="frame_2">
          <property name="styleSheet">
           <string notr="true">border: none;</string>
@@ -2601,9 +2585,9 @@ border:none;
          <widget class="QLineEdit" name="updateCity">
           <property name="geometry">
            <rect>
-            <x>110</x>
+            <x>100</x>
             <y>60</y>
-            <width>181</width>
+            <width>191</width>
             <height>20</height>
            </rect>
           </property>
@@ -2705,7 +2689,7 @@ border:none;
            </font>
           </property>
           <property name="text">
-           <string>Zipcode</string>
+           <string>Zipcode:</string>
           </property>
          </widget>
         </widget>
@@ -2730,6 +2714,30 @@ border:none;
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox::down-arrow {
+		image: url(:/icon/icons/down_arrow.png);
+}
+
+QComboBox{
+ border: 0px solid   rgb(53, 53, 53);
+ background-color: rgb(255, 255, 255);
+ color:                      rgb(53, 53, 53); 
+ padding:                    5px 
+
+}
+
+QComboBox::drop-down{
+        border: 1px solid #5A5A5A;
+        background: #353535;
+    color:                      white;
+    font-weight:            bold;
+    padding:                    0px;
+}
+
+
+</string>
          </property>
          <property name="currentText">
           <string>Month</string>
@@ -2804,7 +2812,7 @@ border:none;
          </item>
         </widget>
        </item>
-       <item row="3" column="5">
+       <item row="3" column="6">
         <widget class="QLineEdit" name="updateYear">
          <property name="maximumSize">
           <size>
@@ -2823,7 +2831,7 @@ border:none;
          </property>
         </widget>
        </item>
-       <item row="2" column="3" colspan="3">
+       <item row="2" column="3" colspan="4">
         <widget class="QSpinBox" name="updateSeatingCapacity">
          <property name="specialValueText">
           <string/>
@@ -2833,7 +2841,7 @@ border:none;
          </property>
         </widget>
        </item>
-       <item row="1" column="2" colspan="4">
+       <item row="1" column="2" colspan="5">
         <widget class="QLineEdit" name="updatePhoneNumber">
          <property name="maxLength">
           <number>20</number>
@@ -2843,7 +2851,7 @@ border:none;
          </property>
         </widget>
        </item>
-       <item row="4" column="1" colspan="5">
+       <item row="4" column="1" colspan="6">
         <widget class="QLineEdit" name="updateTypology">
          <property name="text">
           <string/>
@@ -2853,21 +2861,6 @@ border:none;
          </property>
          <property name="placeholderText">
           <string>Typology</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_22">
-         <property name="font">
-          <font>
-           <family>Futura</family>
-          </font>
-         </property>
-         <property name="text">
-          <string>Typology:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -2886,15 +2879,15 @@ border:none;
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_19">
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_22">
          <property name="font">
           <font>
            <family>Futura</family>
           </font>
          </property>
          <property name="text">
-          <string>Seating capacity:</string>
+          <string>Typology:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2911,6 +2904,37 @@ border:none;
          </property>
          <property name="text">
           <string>Box office number:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_19">
+         <property name="font">
+          <font>
+           <family>Futura</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Seating capacity:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QLineEdit" name="updateDay">
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="maxLength">
+          <number>2</number>
+         </property>
+         <property name="placeholderText">
+          <string>Day</string>
          </property>
         </widget>
        </item>

@@ -18,6 +18,7 @@
 #include <QCheckBox>
 #include <QFile>
 #include <QFileDialog>
+#include <QDate>
 
 
 
@@ -126,9 +127,10 @@ private slots:
     void on_adminModifyStadiumsButton_clicked();
 
     void on_updateAStadiumButton_clicked();
-    void on_viewAdminStadiumsButton_2_clicked();
 
-    void on_removeSelectedSouvenir_2_clicked();
+    void on_addStadiumFromFileButton_clicked();
+
+    void on_cancelStadiumUpdatesButton_clicked();
 
 private:
     Ui::MainWindow *ui;
