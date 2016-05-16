@@ -23,4 +23,6 @@ release/
 debug/
 test/test.app/
 
+src/ui_*
+
 .DS_Store

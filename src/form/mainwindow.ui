@@ -2937,14 +2937,6 @@ border:none;
        <string>Information</string>
       </property>
      </widget>
-     <zorder>modifySouvenirsListLabel_2</zorder>
-     <zorder>updateLeague</zorder>
-     <zorder>frame</zorder>
-     <zorder>updateTeam</zorder>
-     <zorder>removeSelectedSouvenir_3</zorder>
-     <zorder>removeSelectedSouvenir_4</zorder>
-     <zorder>updateInformation</zorder>
-     <zorder>updateStadiumTeamNameLabel_2</zorder>
     </widget>
    </widget>
    <widget class="QFrame" name="headerFrame">

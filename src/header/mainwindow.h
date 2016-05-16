@@ -17,7 +17,13 @@
 #include <QCompleter>
 #include <QCheckBox>
 #include <QFile>
+#include <QFileDialog>
 
+
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 enum display {
     HOME,
@@ -120,6 +126,9 @@ private slots:
     void on_adminModifyStadiumsButton_clicked();
 
     void on_updateAStadiumButton_clicked();
+    void on_viewAdminStadiumsButton_2_clicked();
+
+    void on_removeSelectedSouvenir_2_clicked();
 
 private:
     Ui::MainWindow *ui;
