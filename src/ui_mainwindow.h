@@ -130,7 +130,10 @@ public:
     QLabel *currentTripStadiumCount;
     QLCDNumber *totalDistanceTraveled;
     QLabel *currentTripStadiumCount_2;
-    QFrame *frame_4;
+    QFrame *travel;
+    QLabel *travelGif;
+    QLabel *travelToName;
+    QLabel *travelFromName;
     QWidget *confrimPurchasesPage;
     QLabel *confirmPurchasesLabel;
     QLabel *grandTotalLabel;
@@ -827,13 +830,34 @@ public:
         currentTripStadiumCount_2->setGeometry(QRect(30, 540, 341, 31));
         currentTripStadiumCount_2->setFont(font6);
         currentTripStadiumCount_2->setWordWrap(true);
-        frame_4 = new QFrame(tripProcessPage);
-        frame_4->setObjectName(QStringLiteral("frame_4"));
-        frame_4->setGeometry(QRect(460, 100, 221, 391));
-        frame_4->setStyleSheet(QLatin1String("background-color: rgb(223, 223, 223);\n"
+        travel = new QFrame(tripProcessPage);
+        travel->setObjectName(QStringLiteral("travel"));
+        travel->setGeometry(QRect(440, 100, 261, 391));
+        travel->setStyleSheet(QLatin1String("background-color: rgb(223, 223, 223);\n"
 "border: none;"));
-        frame_4->setFrameShape(QFrame::StyledPanel);
-        frame_4->setFrameShadow(QFrame::Raised);
+        travel->setFrameShape(QFrame::StyledPanel);
+        travel->setFrameShadow(QFrame::Raised);
+        travelGif = new QLabel(travel);
+        travelGif->setObjectName(QStringLiteral("travelGif"));
+        travelGif->setGeometry(QRect(20, 0, 231, 391));
+        travelToName = new QLabel(travel);
+        travelToName->setObjectName(QStringLiteral("travelToName"));
+        travelToName->setGeometry(QRect(40, 30, 111, 101));
+        QFont font8;
+        font8.setFamily(QStringLiteral("Futura"));
+        font8.setPointSize(18);
+        font8.setBold(false);
+        font8.setItalic(false);
+        font8.setWeight(50);
+        travelToName->setFont(font8);
+        travelToName->setStyleSheet(QLatin1String("background-color: none;\n"
+"font: 18pt \"Futura\";"));
+        travelToName->setWordWrap(true);
+        travelFromName = new QLabel(travel);
+        travelFromName->setObjectName(QStringLiteral("travelFromName"));
+        travelFromName->setGeometry(QRect(120, 290, 151, 71));
+        travelFromName->setStyleSheet(QStringLiteral("font: 18pt \"Futura\";background-color: none;"));
+        travelFromName->setWordWrap(true);
         display->addWidget(tripProcessPage);
         currentTripStadiumNameLabel->raise();
         addSouvenirToShoppingCart->raise();
@@ -848,7 +872,7 @@ public:
         currentTripStadiumCount->raise();
         currentTripStadiumCount_2->raise();
         totalDistanceTraveled->raise();
-        frame_4->raise();
+        travel->raise();
         confrimPurchasesPage = new QWidget();
         confrimPurchasesPage->setObjectName(QStringLiteral("confrimPurchasesPage"));
         confirmPurchasesLabel = new QLabel(confrimPurchasesPage);
@@ -968,13 +992,13 @@ public:
         adminHomePageLabel_2 = new QLabel(viewAdminStadiumsPage);
         adminHomePageLabel_2->setObjectName(QStringLiteral("adminHomePageLabel_2"));
         adminHomePageLabel_2->setGeometry(QRect(40, 20, 311, 41));
-        QFont font8;
-        font8.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
-        font8.setPointSize(30);
-        font8.setBold(false);
-        font8.setItalic(false);
-        font8.setWeight(3);
-        adminHomePageLabel_2->setFont(font8);
+        QFont font9;
+        font9.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
+        font9.setPointSize(30);
+        font9.setBold(false);
+        font9.setItalic(false);
+        font9.setWeight(3);
+        adminHomePageLabel_2->setFont(font9);
         adminHomePageLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         viewMoreInfoAboutStadiumButton = new QPushButton(viewAdminStadiumsPage);
         viewMoreInfoAboutStadiumButton->setObjectName(QStringLiteral("viewMoreInfoAboutStadiumButton"));
@@ -992,9 +1016,9 @@ public:
         stadiumTotalRevenue = new QLabel(viewAdminStadiumsPage);
         stadiumTotalRevenue->setObjectName(QStringLiteral("stadiumTotalRevenue"));
         stadiumTotalRevenue->setGeometry(QRect(470, 520, 131, 31));
-        QFont font9;
-        font9.setPointSize(23);
-        stadiumTotalRevenue->setFont(font9);
+        QFont font10;
+        font10.setPointSize(23);
+        stadiumTotalRevenue->setFont(font10);
         stadiumTotalRevenueLabel = new QLabel(viewAdminStadiumsPage);
         stadiumTotalRevenueLabel->setObjectName(QStringLiteral("stadiumTotalRevenueLabel"));
         stadiumTotalRevenueLabel->setGeometry(QRect(220, 520, 241, 31));
@@ -1153,12 +1177,12 @@ public:
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         updateLeagueLabel = new QLabel(updateLeague);
         updateLeagueLabel->setObjectName(QStringLiteral("updateLeagueLabel"));
-        QFont font10;
-        font10.setFamily(QStringLiteral("Futura"));
-        font10.setPointSize(14);
-        font10.setBold(true);
-        font10.setWeight(75);
-        updateLeagueLabel->setFont(font10);
+        QFont font11;
+        font11.setFamily(QStringLiteral("Futura"));
+        font11.setPointSize(14);
+        font11.setBold(true);
+        font11.setWeight(75);
+        updateLeagueLabel->setFont(font11);
 
         horizontalLayout_5->addWidget(updateLeagueLabel);
 
@@ -1194,7 +1218,7 @@ public:
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         updateStadiumLabel = new QLabel(updateStadiumName);
         updateStadiumLabel->setObjectName(QStringLiteral("updateStadiumLabel"));
-        updateStadiumLabel->setFont(font10);
+        updateStadiumLabel->setFont(font11);
 
         horizontalLayout_6->addWidget(updateStadiumLabel);
 
@@ -1227,7 +1251,7 @@ public:
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         updateStadiumTeamNameLabel = new QLabel(updateTeam);
         updateStadiumTeamNameLabel->setObjectName(QStringLiteral("updateStadiumTeamNameLabel"));
-        updateStadiumTeamNameLabel->setFont(font10);
+        updateStadiumTeamNameLabel->setFont(font11);
 
         horizontalLayout_7->addWidget(updateStadiumTeamNameLabel);
 
@@ -1318,19 +1342,19 @@ public:
         updateAddress_2 = new QLabel(frame_2);
         updateAddress_2->setObjectName(QStringLiteral("updateAddress_2"));
         updateAddress_2->setGeometry(QRect(20, 30, 55, 20));
-        updateAddress_2->setFont(font10);
+        updateAddress_2->setFont(font11);
         updateAddress_3 = new QLabel(frame_2);
         updateAddress_3->setObjectName(QStringLiteral("updateAddress_3"));
         updateAddress_3->setGeometry(QRect(30, 60, 55, 20));
-        updateAddress_3->setFont(font10);
+        updateAddress_3->setFont(font11);
         updateAddress_4 = new QLabel(frame_2);
         updateAddress_4->setObjectName(QStringLiteral("updateAddress_4"));
         updateAddress_4->setGeometry(QRect(310, 30, 101, 20));
-        updateAddress_4->setFont(font10);
+        updateAddress_4->setFont(font11);
         updateAddress_5 = new QLabel(frame_2);
         updateAddress_5->setObjectName(QStringLiteral("updateAddress_5"));
         updateAddress_5->setGeometry(QRect(310, 60, 101, 20));
-        updateAddress_5->setFont(font10);
+        updateAddress_5->setFont(font11);
 
         gridLayout_4->addWidget(frame_2, 0, 0, 1, 7);
 
@@ -1405,32 +1429,32 @@ public:
 
         label_20 = new QLabel(updateInformation);
         label_20->setObjectName(QStringLiteral("label_20"));
-        QFont font11;
-        font11.setFamily(QStringLiteral("Futura"));
-        label_20->setFont(font11);
+        QFont font12;
+        font12.setFamily(QStringLiteral("Futura"));
+        label_20->setFont(font12);
         label_20->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_4->addWidget(label_20, 3, 0, 1, 1);
 
         label_22 = new QLabel(updateInformation);
         label_22->setObjectName(QStringLiteral("label_22"));
-        label_22->setFont(font11);
+        label_22->setFont(font12);
         label_22->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_4->addWidget(label_22, 4, 0, 1, 1);
 
         label_21 = new QLabel(updateInformation);
         label_21->setObjectName(QStringLiteral("label_21"));
-        QFont font12;
-        font12.setFamily(QStringLiteral("Futura"));
-        font12.setPointSize(13);
-        label_21->setFont(font12);
+        QFont font13;
+        font13.setFamily(QStringLiteral("Futura"));
+        font13.setPointSize(13);
+        label_21->setFont(font13);
 
         gridLayout_4->addWidget(label_21, 1, 0, 1, 2);
 
         label_19 = new QLabel(updateInformation);
         label_19->setObjectName(QStringLiteral("label_19"));
-        label_19->setFont(font11);
+        label_19->setFont(font12);
         label_19->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_4->addWidget(label_19, 2, 0, 1, 1);
@@ -1445,12 +1469,12 @@ public:
         updateStadiumTeamNameLabel_2 = new QLabel(updateStadiumPage);
         updateStadiumTeamNameLabel_2->setObjectName(QStringLiteral("updateStadiumTeamNameLabel_2"));
         updateStadiumTeamNameLabel_2->setGeometry(QRect(40, 234, 181, 17));
-        QFont font13;
-        font13.setFamily(QStringLiteral("Futura"));
-        font13.setPointSize(20);
-        font13.setBold(true);
-        font13.setWeight(75);
-        updateStadiumTeamNameLabel_2->setFont(font13);
+        QFont font14;
+        font14.setFamily(QStringLiteral("Futura"));
+        font14.setPointSize(20);
+        font14.setBold(true);
+        font14.setWeight(75);
+        updateStadiumTeamNameLabel_2->setFont(font14);
         updateStadiumInvalidErrorMessage = new QLabel(updateStadiumPage);
         updateStadiumInvalidErrorMessage->setObjectName(QStringLiteral("updateStadiumInvalidErrorMessage"));
         updateStadiumInvalidErrorMessage->setGeometry(QRect(40, 520, 371, 16));
@@ -1513,7 +1537,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "throw-catch", 0));
         homePageButton->setText(QApplication::translate("MainWindow", "HOME", 0));
         planATripButton->setText(QApplication::translate("MainWindow", "DREAM TRIP", 0));
         viewStadiumsPageButton->setText(QApplication::translate("MainWindow", "VIEW STADIUMS", 0));
@@ -1616,6 +1640,9 @@ public:
         currentTripProgressLabel->setText(QApplication::translate("MainWindow", "TRIP PROGRESS", 0));
         currentTripStadiumCount->setText(QApplication::translate("MainWindow", "_/_ stadiums have been visited.", 0));
         currentTripStadiumCount_2->setText(QApplication::translate("MainWindow", "You have traveled                                       miles", 0));
+        travelGif->setText(QString());
+        travelToName->setText(QApplication::translate("MainWindow", "travel_to_name", 0));
+        travelFromName->setText(QApplication::translate("MainWindow", "travel_from_name", 0));
         confirmPurchasesLabel->setText(QApplication::translate("MainWindow", "CONFIRM YOUR PURCHASES", 0));
         grandTotalLabel->setText(QApplication::translate("MainWindow", "GRAND TOTAL:", 0));
         grandTotalAmount->setText(QApplication::translate("MainWindow", "$0.00", 0));

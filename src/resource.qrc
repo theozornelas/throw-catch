@@ -11,6 +11,7 @@
         <file>icons/program-throw-catch.png</file>
         <file>icons/program-baseball-field.png</file>
         <file>icons/welcome-sign.png</file>
+        <file>icons/baseball-travel.gif</file>
     </qresource>
     <qresource prefix="/font"/>
     <qresource prefix="/style"/>

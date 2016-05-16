@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>throw-catch</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -1582,12 +1582,12 @@ QProgressBar::chunk {
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QFrame" name="frame_4">
+     <widget class="QFrame" name="travel">
       <property name="geometry">
        <rect>
-        <x>460</x>
+        <x>440</x>
         <y>100</y>
-        <width>221</width>
+        <width>261</width>
         <height>391</height>
        </rect>
       </property>
@@ -1601,6 +1601,67 @@ border: none;</string>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
+      <widget class="QLabel" name="travelGif">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>0</y>
+         <width>231</width>
+         <height>391</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="travelToName">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>30</y>
+         <width>111</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Futura</family>
+         <pointsize>18</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: none;
+font: 18pt &quot;Futura&quot;;</string>
+       </property>
+       <property name="text">
+        <string>travel_to_name</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="travelFromName">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>290</y>
+         <width>151</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 18pt &quot;Futura&quot;;background-color: none;</string>
+       </property>
+       <property name="text">
+        <string>travel_from_name</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
      </widget>
      <zorder>currentTripStadiumNameLabel</zorder>
      <zorder>addSouvenirToShoppingCart</zorder>
@@ -1615,7 +1676,7 @@ border: none;</string>
      <zorder>currentTripStadiumCount</zorder>
      <zorder>currentTripStadiumCount_2</zorder>
      <zorder>totalDistanceTraveled</zorder>
-     <zorder>frame_4</zorder>
+     <zorder>travel</zorder>
     </widget>
     <widget class="QWidget" name="confrimPurchasesPage">
      <widget class="QLabel" name="confirmPurchasesLabel">

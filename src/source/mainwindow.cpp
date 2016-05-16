@@ -1,6 +1,8 @@
 #include "../header/mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QMovie>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -45,6 +47,7 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
     if(!trip.empty()) {
 
         double totalDistanceTraveled = 0;
+        QString previousStadium = "Home";
 
         const int NUM_OF_STADIUMS = trip.size();
 
@@ -66,6 +69,7 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
 
 
             currentStadium = trip[i];
+
             ui->currentTripStadiumNameLabel->setText(currentStadium->getStadiumName());
 
             QVector<Souvenir> souvenirs = currentStadium->getSouvenirs();
@@ -82,6 +86,14 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
                 ui->listOfCurrentStadiumSouvenirs->setItemWidget(currentItem, 2, qtyBox);
             }
 
+            ui->travelFromName->setText(previousStadium);
+            ui->travelToName->setText(currentStadium->getStadiumName());
+            QMovie *animation = new QMovie(":/icon/icons/baseball-travel.gif");
+            ui->travelGif->setMovie(animation);
+            animation->start();
+
+
+
             ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(0);
             ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(1);
             ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(2);
@@ -92,10 +104,12 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
 
             stadiumsGraph->Dijkstra(*currentStadium);
 
-
             /** Waits until user clicks 'next' button */
             QObject::connect(ui->currentTripNextStadium, SIGNAL(clicked()), &pause, SLOT(quit()));
             pause.exec();
+
+            delete animation;
+            previousStadium = currentStadium->getStadiumName();
 
         }
 
@@ -127,6 +141,8 @@ void MainWindow::tripProcess2(QVector<VertexItr> trip) {
 
         double totalDistanceTraveled = 0;        // accumulator for trip distance
         const int NUM_OF_STADIUMS = trip.size(); // number of stadiums to visit
+        QString previousStadium = "Home";
+
         qDebug() << "NUMBER OF STADIUMS TO VISIT: " << NUM_OF_STADIUMS;
 
         // Loop once for every stadium on the trip list
@@ -137,6 +153,7 @@ void MainWindow::tripProcess2(QVector<VertexItr> trip) {
             ui->currentTripStadiumCount->setText(QString::number((i+1))
                                                  + " out of " + QString::number(NUM_OF_STADIUMS)
                                                  + " stadiums have been visited");
+
 
             /** Clears the current stadium sovenirs table,
              * to prepare for new stadium's souvenir list */
@@ -151,6 +168,9 @@ void MainWindow::tripProcess2(QVector<VertexItr> trip) {
             //currentStadiumItr = trip.front();
             trip.pop_front();
             ui->currentTripStadiumNameLabel->setText(currentStadium->getStadiumName());
+            ui->travelFromName->setText(previousStadium);
+            previousStadium = currentStadium->getStadiumName();
+            ui->travelToName->setText(currentStadium->getStadiumName());
 
             QVector<Souvenir> souvenirs = currentStadium->getSouvenirs();
 
@@ -166,6 +186,12 @@ void MainWindow::tripProcess2(QVector<VertexItr> trip) {
                 ui->listOfCurrentStadiumSouvenirs->setItemWidget(currentItem, 2, qtyBox);
             }
 
+
+            QMovie *animation = new QMovie(":/icon/icons/baseball-travel.gif");
+            ui->travelGif->setMovie(animation);
+            animation->start();
+
+
             ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(0);
             ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(1);
             ui->listOfCurrentStadiumSouvenirs->resizeColumnToContents(2);
@@ -178,6 +204,8 @@ void MainWindow::tripProcess2(QVector<VertexItr> trip) {
 
             stadiumsGraph->Dijkstra(*currentStadium);
             std::sort(trip.begin(), trip.end(), compStadium);
+
+
 
 
             /** Waits until user clicks 'next' button */
