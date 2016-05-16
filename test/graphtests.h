@@ -178,6 +178,9 @@ void GraphTests::test_AddStadium() {
 }
 
 void GraphTests::test_MSTPrim(){
+    int testWeight = 0;
+    int expectedWeight = 6513;
+
     stringGraph_->insertEdge("Seattle","Chicago", 2097);
     stringGraph_->insertEdge("Seattle","Denver", 1331);
     stringGraph_->insertEdge("Seattle","San Francisco", 807);
@@ -202,14 +205,22 @@ void GraphTests::test_MSTPrim(){
     stringGraph_->insertEdge("Atlanta","New York", 888);
     stringGraph_->insertEdge("New York","Boston", 214);
 
-    Graph<QString>::EdgeList output = stringGraph_->MSTPrim();
+    Graph<QString>::EdgeList output  = stringGraph_->MSTPrim();
+    Graph<QString>::EdgeList output2 = stringGraph_->PrimJarnek();
 
     for(Graph<QString>::EdgeItr i = output.begin(); i != output.end(); i++) {
-        qDebug() << i->print() << i->weight();
+ //       qDebug() << i->print() << i->weight();
+        testWeight += i->weight();
     }
+
+    QCOMPARE(output, output2);
+    QCOMPARE(testWeight, expectedWeight);
 }
 
 void GraphTests::test_MSTRealPrim(){
+    int testWeight = 0;
+    int expectedWeight = 6513;
+
     stringGraph_->insertEdge("Seattle","Chicago", 2097);
     stringGraph_->insertEdge("Seattle","Denver", 1331);
     stringGraph_->insertEdge("Seattle","San Francisco", 807);
@@ -235,10 +246,15 @@ void GraphTests::test_MSTRealPrim(){
     stringGraph_->insertEdge("New York","Boston", 214);
 
     Graph<QString>::EdgeList output = stringGraph_->PrimJarnek();
+    Graph<QString>::EdgeList output2 = stringGraph_->MSTPrim();
 
     for(Graph<QString>::EdgeItr i = output.begin(); i != output.end(); i++) {
-        qDebug() << i->print() << i->weight();
+//        qDebug() << i->print() << i->weight();
+        testWeight += i->weight();
     }
+
+    QCOMPARE(output, output2);
+    QCOMPARE(testWeight, expectedWeight);
 }
 
 void GraphTests::test_Dijkstra(){

@@ -4,9 +4,9 @@
 #include "testrunner.h"
 #include <QObject>
 #include <QString>
-#include "skiplist.h"
 #include "entry.h"
 #include "stadium.h"
+#include "skiplist.h"
 
 class SkipListTests : public QObject
 {

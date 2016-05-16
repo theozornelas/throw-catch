@@ -32,7 +32,8 @@ HEADERS  += header/mainwindow.h \
     header/priorityqueue.h \
     header/shoppingcart.h \
     header/CompleteTree.h \
-    header/HeapPriorityQueue.h
+    header/HeapPriorityQueue.h \
+    header/quicksort.h
 
 
 FORMS    += form/mainwindow.ui \
