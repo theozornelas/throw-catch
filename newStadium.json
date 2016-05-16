@@ -1,0 +1,20 @@
+{
+	"ObjType":"stadium",
+	"boxOfficeNumber":"702-962-4000",
+	"city":"Las Vegas",
+	"dateOpened":"April 11, 2016",
+	"leagueType":"American",
+	"seatingCapacity":50000,
+	"stadiumName":"Las Vegas Stadium",
+	"state":"NV",
+	"streetAddress":"123 Las Vegas Blvd",
+	"surface":"Grass",
+	"teamName":"Las Vegas Gamblers",
+	"typology":"Modern",
+	"zipCode":"89101",
+	"adjacent": [
+		{ "stadium":"O.co Coliseum", "distance":325 }
+		{ "stadium":"Dodger Stadium", "distance":300 }
+		{ "stadium":"Chase Field", "distance":250 }
+	]
+}
