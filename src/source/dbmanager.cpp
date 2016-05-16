@@ -13,8 +13,8 @@ DBManager::DBManager()
     _db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Remember to change path, will find a more generic way soon.
-    QString path = "/Users/sarahsingletary/Documents/throw-catch/sqlite/throw-catch.db";    // Sarah MacbookPro
-//    QString path = "D:/Ethan/Desktop/Working/2_Projects/!saddleback_CS/CS1D_Projects/throw-catch/sqlite/throw-catch.db";    // Ethan Win10 Workstation
+//    QString path = "/Users/sarahsingletary/Documents/throw-catch/sqlite/throw-catch.db";    // Sarah MacbookPro
+    QString path = "D:/Ethan/Desktop/Working/2_Projects/!saddleback_CS/CS1D_Projects/throw-catch/sqlite/throw-catch.db";    // Ethan Win10 Workstation
     _db.setDatabaseName(path);
     _qry = QSqlQuery(_db);
 

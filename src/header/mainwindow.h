@@ -12,14 +12,15 @@
 #include <QTreeWidgetItem>
 #include <QMessageBox>
 #include <QRegExp>
-#include <QFileDialog>
-
 #include <QDebug>
 #include <QSpinBox>
 #include <QCompleter>
 #include <QCheckBox>
 #include <QFile>
-#include <QFontDatabase>
+#include <QFileDialog>
+#include <QDate>
+
+
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -30,7 +31,7 @@ enum display {
     VIEW_STADIUMS,
     VIEW_SINGLE_STADIUM,
     PLAN_A_TRIP,
-    SHORTEST_TO_ALL,
+    QUICK_TRIP,
     CUSTOM_TRIP,
     MST_TRIP,
     TRIP_PROCESS,
@@ -40,7 +41,8 @@ enum display {
     ADMIN_STADIUMS,
     MODIFY_INFO,
     MODIFY_SOUVENIRS,
-    MODIFY_STADIUMS
+    MODIFY_STADIUMS,
+    UPDATE_STADIUM,
 };
 
 enum options {
@@ -55,12 +57,15 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    typedef Graph<Stadium>::VertexItr VertexItr;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     bool isBlank(QString text);
     void addToCart(Souvenir *s);
+    void tripProcess(QVector<Stadium*> trip);
+    void tripProcess2(QVector<VertexItr> trip);
 
 private slots:
     void on_homePageButton_clicked();
@@ -116,13 +121,18 @@ private slots:
     void viewSingleStadium(QString stadiumName);
 
     void viewStadiumBy(QString sortByType);
-    
 
     void on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1);
 
-    void on_viewAdminStadiumsButton_2_clicked();
+    void on_quickTripTakeTripButton_clicked();
 
-    void on_removeSelectedSouvenir_2_clicked();
+    void on_adminModifyStadiumsButton_clicked();
+
+    void on_updateAStadiumButton_clicked();
+
+    void on_addStadiumFromFileButton_clicked();
+
+    void on_cancelStadiumUpdatesButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -135,6 +145,11 @@ private:
     skiplist<int, Stadium*> stadiums;
     Stadium *currentStadium = NULL;
     bool adminPrivilege = false;
+
+    // Allows user to search stadium at any given moment
+    QCompleter *stadiumSearch;
+    QStringList searchNames;
+
 
 };
 

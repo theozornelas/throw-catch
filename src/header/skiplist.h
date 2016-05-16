@@ -88,6 +88,8 @@ public:
         V& operator*() {return pos_->value(); }
         /// Returns TRUE if iterators point to the same position
         bool operator==(const Iterator& p) const { return pos_ == p.pos_; }
+        /// Returns TRUE if iterators does not point to the same position
+        bool operator!=(const Iterator& p) const { return pos_ != p.pos_; }
         /// Traverse the list in the forward direction - Postfix requires int parameter?
         Iterator operator++(int) { if(pos_->type() != node::TAIL){ pos_ = pos_->right(); } return *this; }
         /// Traverse the list in the forward direction - prefix with no int parameter?
