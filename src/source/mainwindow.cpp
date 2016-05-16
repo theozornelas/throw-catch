@@ -342,7 +342,7 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
 
     double totalWeight = 0;
 
-    Graph<Stadium>::EdgeList edges = stadiumsGraph->MSTPrim();
+    Graph<Stadium>::EdgeList edges = stadiumsGraph->PrimJarnek();
 
     for(Graph<Stadium>::EdgeItr i = edges.begin(); i != edges.end(); i++) {
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->MSTList);
