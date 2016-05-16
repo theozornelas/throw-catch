@@ -64,6 +64,8 @@ void SkipListTests::test_constructObjList() {
                        "92671", "Number", "24-AUG-1980", 501234,
                        "Astroturf", "American", "Retro", 0);
 
+    qDebug() << dodgers.toJSON();
+
     StadList_->insert(1, dodgers);
 }
 

@@ -236,7 +236,7 @@ public:
     int GetDistanceTo(const E &e) { return findVertex(e)->getDistance(); }
     // Get Distance from vertex 'u' to vertex 'v' using dijkstra
     int GetDistance(const E &start, const E &end) { Dijkstra(start); return GetDistanceTo(end); }
-    // Returns an ordered vertex list of the path from the last dijkstra run and the given vertex 'e'
+    // Returns an ordered vertex list of the path from the last dijkstra origin to the given vertex 'e'
     VertexList shortestPathTo(const E &end);
 
     // Outputs the MST graph edges using the basic prim algortihm
@@ -456,9 +456,9 @@ void Graph<E>::Dijkstra(const E &e)
 }//END DIJKSTRA
 
 /**
- * @brief Gets the distance from u to v using greedy dijkstra
- * @param e [IN] The starting vertex
- * @return The distance from u to v as integer
+ * @brief Gets the distance from last dijkstra origin to end
+ * @param end [IN] The ending vertex
+ * @return ordered vector if vertices represeting path from last dijkstra origin to end
  */
 template <typename E>
 typename Graph<E>::VertexList Graph<E>::shortestPathTo(const E &end) {

@@ -12,7 +12,18 @@
 #include <QTreeWidgetItem>
 #include <QMessageBox>
 #include <QRegExp>
+#include <QFileDialog>
 
+#include <QDebug>
+#include <QSpinBox>
+#include <QCompleter>
+#include <QCheckBox>
+#include <QFile>
+#include <QFontDatabase>
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 enum display {
     HOME,
@@ -28,7 +39,8 @@ enum display {
     ADMIN_HOME,
     ADMIN_STADIUMS,
     MODIFY_INFO,
-    MODIFY_SOUVENIRS
+    MODIFY_SOUVENIRS,
+    MODIFY_STADIUMS
 };
 
 enum options {
@@ -107,6 +119,10 @@ private slots:
     
 
     void on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_viewAdminStadiumsButton_2_clicked();
+
+    void on_removeSelectedSouvenir_2_clicked();
 
 private:
     Ui::MainWindow *ui;

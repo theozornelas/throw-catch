@@ -4,6 +4,9 @@
 #include <QString>
 #include <QVector>
 #include <QDebug>
+#include <QFile>
+#include <QJsonObject>
+#include <QJsonDocument>
 #include "souvenir.h"
 using namespace std;
 
@@ -92,6 +95,8 @@ public:
     void setTotalRevenue(double revenue);
     void addToTotalRevenue(double addToRevenue);
 
+    // Save and load with JSON files
+    QJsonObject toJSON();
 
     // Mutators for Stadium's souvenir list.
     void addSouvenir(Souvenir *newSouvenir);

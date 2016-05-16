@@ -1,12 +1,5 @@
 #include "../header/mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDebug>
-#include <QSpinBox>
-#include <QCompleter>
-#include <QCheckBox>
-#include <QFile>
-#include <QFontDatabase>
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -301,7 +294,6 @@ void MainWindow::on_adminModifyButton_clicked()
 {
 
     ui->listOfModifyStadiums->clear();
-
 
     for(int i = 0; i < keys.size(); i++) {
         Stadium *s = *stadiums.get(keys[i]);
@@ -762,5 +754,94 @@ void MainWindow::on_viewMoreInfoAboutStadiumButton_clicked()
 
 }
 
+/**
+ * @brief The slot for modifying the stadiums in admin mode
+ */
+void MainWindow::on_viewAdminStadiumsButton_2_clicked()
+{
+    ui->display->setCurrentIndex(MODIFY_STADIUMS);
+}
+
+void MainWindow::on_removeSelectedSouvenir_2_clicked()
+{
+        QString filename = QFileDialog::getOpenFileName(
+                                       this,                                    // The parent of this popup
+                                       "Select New Stadium JSON",               // The caption on the file picker
+                                       QDir::currentPath(),                     // The default directory to show
+                                       "JSON File (*.json);;Text File (*.txt);;All Files (*.*)");
+
+        qDebug() << "FILE SELECTED: " << filename;
+
+        // Create the input file object
+        QFile inFile(filename);
+
+        // Open the input file object
+        if (!inFile.open(QIODevice::ReadOnly)) {
+                qWarning("Couldn't open file.");
+            }
+
+        // read the file into a string
+        QString stringFile = inFile.readAll();
+        inFile.close();
+
+        // open data into a JSON Object
+        QJsonDocument jsonFile = QJsonDocument::fromJson(stringFile.toUtf8());
+
+        // check to make sure file contains JSON object
+        if(jsonFile.isObject()){
+            // extract object and make sure it's a stadium
+            QJsonObject JsonStadium = jsonFile.object();
+            if(JsonStadium["ObjType"].toString() == "stadium"){
+                int newStadiumID = stadiums.size()+1;
+                Stadium* newStadium = new Stadium(newStadiumID, // ID should be 1 more than size
+                                                   JsonStadium["stadiumName"].toString(),
+                                                   JsonStadium["teamName"].toString(),
+                                                   JsonStadium["streetAddress"].toString(),
+                                                   JsonStadium["city"].toString(),
+                                                   JsonStadium["state"].toString(),
+                                                   JsonStadium["zipCode"].toString(),
+                                                   JsonStadium["boxOfficeNumber"].toString(),
+                                                   JsonStadium["dateOpened"].toString(),
+                                                   JsonStadium["seatingCapacity"].toInt(),
+                                                   JsonStadium["surface"].toString(),
+                                                   JsonStadium["leagueType"].toString(),
+                                                   JsonStadium["typology"].toString(),
+                                                   0);  // initial revenue is 0
+
+                qDebug() << JsonStadium["stadiumName"].toString();
+                qDebug() << JsonStadium["streetAddress"].toString();
+                qDebug() << JsonStadium["city"].toString() << ", "
+                         << JsonStadium["state"].toString() << JsonStadium["zipCode"].toString();
+                qDebug() << "PHONE NUM: " << JsonStadium["boxOfficeNumber"].toString();
+                qDebug() << "Team: " << JsonStadium["teamName"].toString();
+                qDebug() << "League: " << JsonStadium["leagueType"].toString();
+                qDebug() << "Date opened: " << JsonStadium["dateOpened"].toString();
+                qDebug() << "Seating Capactiy: " << JsonStadium["seatingCapacity"].toInt();
+                qDebug() << "Surface Type: " << JsonStadium["surface"].toString();
+                qDebug() << "Stadium Type: " << JsonStadium["typology"].toString();
+
+                // insert stadium to skiplist
+                stadiums.insert(newStadiumID, newStadium);
+                // Add stadium to Database
+                db.AddNewStadium(newStadium);
+                // Add stadium ID to lookup list
+                keys.push_back(newStadiumID);
+
+                // insert stadium and edges into graph
+                QJsonArray adjAR = JsonStadium["adjacent"].toArray();
+                for(int i = 0; i < adjAR.size(); i++){
+                    QJsonObject edge = adjAR.at(i).toObject();
+                    int destID   = db.getStadiumID(edge["stadium"].toString());
+                    Stadium destination = **stadiums.get(destID);
+                    int distance = edge["distance"].toInt();
+
+                    stadiumsGraph->insertEdge(*newStadium, destination, distance);
+                    qDebug() << "DISTANCE TO NEW STADIUM: " << stadiumsGraph->GetDistance(destination, *newStadium);
+                }
+            }
+            else{ qDebug() << "File contains no valid Stadium Object";}
+        }
+        else{ qDebug() << "File contains no valid JSON object!";}
 
 
+}
