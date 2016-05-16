@@ -46,10 +46,10 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
 
     if(!trip.empty()) {
 
-        double totalDistanceTraveled = 0;
+        double totalDistanceTraveled = 0;        // accumulator for trip distance
+        const int NUM_OF_STADIUMS = trip.size(); // number of stadiums to visit
 
-        const int NUM_OF_STADIUMS = trip.size();
-
+        // Loop once for every stadium on the trip list
         for(int i = 0; i < trip.size(); i++) {
 
             ui->currentTripProgressBar->setValue(((i+1)/(double)NUM_OF_STADIUMS)*100);
@@ -67,7 +67,7 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
             }
 
 
-            currentStadium = trip[i];
+            currentStadium = trip.pop;
             ui->currentTripStadiumNameLabel->setText(currentStadium->getStadiumName());
 
             QVector<Souvenir> souvenirs = currentStadium->getSouvenirs();
