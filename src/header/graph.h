@@ -21,6 +21,7 @@
 #include <climits>
 #include <functional>
 #include "HeapPriorityQueue.h"
+#include "quicksort.h"
 #define INF INT_MAX
 
 /**
@@ -160,15 +161,10 @@ public:
         bool isIncidentOn(Vertex v);
         // Checks if this vertex has been visited
         bool visited() { return visited_; }
-
-        /*** COMPARATOR***/
-        bool sortComp(Edge i,Edge j) { return (i<j); }
-
-        /*** OPERATOR OVERLOADS ***/
         // Print Method
         QString print();
 
-
+        /*** OPERATOR OVERLOADS ***/
         // Overload for the * Operator
         int& operator*() { return weight_; }
         // Overload the output stream operator
@@ -589,7 +585,7 @@ typename Graph<E>::EdgeList Graph<E>::MSTPrim() {
     unsigned int VertexCount = 0;  // Count of vertecies visited
 
     // sort the list of unused edges
-    unusedEdges.sort();
+    QuickSort(unusedEdges.begin(), unusedEdges.end());
 
     // add first vertex to the list and set it to visited
     vertices_.begin()->visit();
