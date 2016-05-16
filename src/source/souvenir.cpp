@@ -58,5 +58,8 @@ void Souvenir::addToQuantity(unsigned int addQty) {
     quantity += addQty;
 }
 
+void Souvenir::setStadiumID(int id) {
+    stadiumID = id;
+}
 
 

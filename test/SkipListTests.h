@@ -62,7 +62,9 @@ void SkipListTests::test_constructObjList() {
     StadList_ = new skiplist<int, Stadium>;
     Stadium dodgers(5, "Dodgers Stadium", "Dodgers", "1st Ave", "Los Angeles","CA",
                        "92671", "Number", "24-AUG-1980", 501234,
-                       "Astroturf", "American", "Retro");
+                       "Astroturf", "American", "Retro", 0);
+
+    qDebug() << dodgers.toJSON();
 
     StadList_->insert(1, dodgers);
 }

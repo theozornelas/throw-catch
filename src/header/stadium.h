@@ -4,6 +4,9 @@
 #include <QString>
 #include <QVector>
 #include <QDebug>
+#include <QFile>
+#include <QJsonObject>
+#include <QJsonDocument>
 #include "souvenir.h"
 using namespace std;
 
@@ -51,7 +54,7 @@ public:
             QString team, QString street, QString city,
             QString state, QString zipCode,
             QString number, QString date, unsigned int capacity,
-            QString surf, QString league, QString typo);
+            QString surf, QString league, QString typo, double revenue);
     // Constructor of testing, provides everything needed for text output
     Stadium(int id, QString name) : stadiumID(id), stadiumName(name) { }
     // Constructor for stadium with only an id, for comparisons and searches
@@ -65,7 +68,7 @@ public:
     unsigned int getStadiumID() const;
     QString      getStadiumName() const;
     QString      getTeamName() const;
-    QString      getAddress() const;
+    Address      getAddress() const;
     QString      getBoxOfficeNumber() const;
     QString      getDateOpened() const;
     unsigned int getSeatingCapacity() const;
@@ -73,6 +76,7 @@ public:
     QString      getLeagueType() const;
     QString      getTypology() const;
     QVector<Souvenir> getSouvenirs() const;
+    double       getTotalRevenue() const;
 
 
     /***************
@@ -88,7 +92,11 @@ public:
     void setSurface(QString newSurface);
     void setLeagueType(QString newLeagueType);
     void setTypology(QString typo);
+    void setTotalRevenue(double revenue);
+    void addToTotalRevenue(double addToRevenue);
 
+    // Save and load with JSON files
+    QJsonObject toJSON();
 
     // Mutators for Stadium's souvenir list.
     void addSouvenir(Souvenir *newSouvenir);
@@ -126,6 +134,7 @@ private:
     QString surface;
     QString leagueType;
     QString typology;
+    double totalRevenue;
 
     QVector<Souvenir> souvenirs;
 };

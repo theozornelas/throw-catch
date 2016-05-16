@@ -13,3 +13,6 @@ CONFIG += c++11
 SOURCES += source/main.cpp
 
 LIBS += -L../src -l$${APP_NAME}
+
+RESOURCES += \
+    ../src/resource.qrc

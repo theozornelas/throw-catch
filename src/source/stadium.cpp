@@ -25,7 +25,7 @@ Stadium::Stadium(int id, QString name,
                      QString team, QString street, QString city,
                      QString state, QString zipCode,
                      QString number, QString date, unsigned int capacity,
-                     QString surf, QString league,  QString typo)
+                     QString surf, QString league,  QString typo, double revenue)
 {
 
     stadiumID                    = id;
@@ -44,6 +44,7 @@ Stadium::Stadium(int id, QString name,
     surface                      = surf;
     leagueType                   = league;
     typology                     = typo;
+    totalRevenue                 = revenue;
 }
 
 /**
@@ -92,13 +93,10 @@ QString Stadium::getTeamName() const {
  *                     cityName, ST zipCode
  * @return a QString address
  */
-QString Stadium::getAddress() const {
+Address Stadium::getAddress() const {
 
 
-    QString str = stadiumAddress.streetAddress + "\n" +stadiumAddress.city + ", " +
-    stadiumAddress.state + " " + stadiumAddress.zipCode;
-
-    return str;
+    return stadiumAddress;
 }
 
 /**
@@ -147,6 +145,14 @@ QString Stadium::getLeagueType() const {
  */
 QString Stadium::getTypology() const {
     return typology;
+}
+
+/**
+ * @brief Stadium::getTotalRevenue
+ * @return a double totalRevenue
+ */
+double Stadium::getTotalRevenue() const {
+    return totalRevenue;
 }
 
 /**
@@ -232,7 +238,44 @@ void Stadium::setTypology(QString typo) {
     typology = typo;
 }
 
-// Mutators for Stadium's souvenir list.
+/**
+ * @brief returns this stadium as a JSON object
+ */
+QJsonObject Stadium::toJSON() {
+    // Create the stadium JSON object with nested Address Object
+    QJsonObject stadiumJSON;
+    stadiumJSON["ObjType"] = "stadium";
+    stadiumJSON["stadiumName"] = this->stadiumName;
+    stadiumJSON["teamName"] = this->teamName;
+
+    // Address Information
+    stadiumJSON["streetAddress"] = this->stadiumAddress.streetAddress;
+    stadiumJSON["city"] = this->stadiumAddress.city;
+    stadiumJSON["state"] = this->stadiumAddress.state;
+    stadiumJSON["zipCode"] = this->stadiumAddress.zipCode;
+
+    stadiumJSON["boxOfficeNumber"] = this->boxOfficeNumber;
+    stadiumJSON["dateOpened"] = this->dateOpened;
+    stadiumJSON["seatingCapacity"] = int(this->seatingCapacity);
+    stadiumJSON["surface"] = this->surface;
+    stadiumJSON["leagueType"] = this->leagueType;
+    stadiumJSON["typology"] = this->typology;
+
+    return stadiumJSON;
+}
+
+/**
+ * @brief Stadium::setTotalRevenue Changes totalRevenue to revenue
+ * @param revenue
+ */
+void Stadium::setTotalRevenue(double revenue) {
+    totalRevenue = revenue;
+}
+
+void Stadium::addToTotalRevenue(double addToRevenue) {
+    totalRevenue += addToRevenue;
+}
+
 /**
  * @brief Stadium::addSouvenir Adds a souvenir to the current stadium's list of souvenirs.
  * @param name
@@ -272,6 +315,3 @@ QVector<Souvenir> Stadium::getSouvenirs() const {
     return souvenirs;
 }
 
-void createGraph() {
-
-}

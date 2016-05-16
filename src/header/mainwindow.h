@@ -6,21 +6,43 @@
 #include "stadium.h"
 #include "skiplist.h"
 #include "graph.h"
+#include "shoppingcart.h"
 
+#include <QTableWidgetItem>
+#include <QTreeWidgetItem>
+#include <QMessageBox>
+#include <QRegExp>
+#include <QDebug>
+#include <QSpinBox>
+#include <QCompleter>
+#include <QCheckBox>
+#include <QFile>
+#include <QFileDialog>
+#include <QDate>
+
+
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 enum display {
     HOME,
     VIEW_STADIUMS,
+    VIEW_SINGLE_STADIUM,
     PLAN_A_TRIP,
-    SHORTEST_TO_ALL,
+    QUICK_TRIP,
     CUSTOM_TRIP,
     MST_TRIP,
     TRIP_PROCESS,
+    CONFIRM_SHOPPING_CART,
     ADMIN_LOGIN,
     ADMIN_HOME,
     ADMIN_STADIUMS,
     MODIFY_INFO,
-    MODIFY_SOUVENIRS
+    MODIFY_SOUVENIRS,
+    MODIFY_STADIUMS,
+    UPDATE_STADIUM,
 };
 
 enum options {
@@ -35,11 +57,15 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    typedef Graph<Stadium>::VertexItr VertexItr;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     bool isBlank(QString text);
+    void addToCart(Souvenir *s);
+    void tripProcess(QVector<Stadium*> trip);
+    void tripProcess2(QVector<VertexItr> trip);
 
 private slots:
     void on_homePageButton_clicked();
@@ -70,15 +96,60 @@ private slots:
 
     void on_shoppingCartButton_clicked();
 
+    void on_secretAdminLoginButton_clicked();
+
+    void on_addSouvenirToShoppingCart_clicked();
+
+    void on_currentTripNextStadium_clicked();
+
+    void on_searchButton_clicked();
+
+    void on_stadiumsToSelectFromList_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
+    void on_selectedStadiumsList_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
+    void on_confirmPurchasesButton_clicked();
+
+    void on_viewAdminStadiumsButton_clicked();
+
+    void on_startingStadiumComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_adminHomeButton_clicked();
+    
+    void on_viewMoreInfoAboutStadiumButton_clicked();
+
+    void viewSingleStadium(QString stadiumName);
+
+    void viewStadiumBy(QString sortByType);
+
+    void on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_quickTripTakeTripButton_clicked();
+
+    void on_adminModifyStadiumsButton_clicked();
+
+    void on_updateAStadiumButton_clicked();
+
+    void on_addStadiumFromFileButton_clicked();
+
+    void on_cancelStadiumUpdatesButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     DBManager db;
 
     QVector<int> keys;
+    QVector<Souvenir*> shoppingCart;
+
     Graph<Stadium>* stadiumsGraph;
     skiplist<int, Stadium*> stadiums;
     Stadium *currentStadium = NULL;
     bool adminPrivilege = false;
+
+    // Allows user to search stadium at any given moment
+    QCompleter *stadiumSearch;
+    QStringList searchNames;
+
 
 };
 
