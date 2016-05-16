@@ -223,8 +223,7 @@ border: none;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-background-color: #EAEAE9
+     <string notr="true">background-color: #EAEAE9
 </string>
     </property>
     <widget class="QWidget" name="homePage">
@@ -508,6 +507,8 @@ QComboBox::drop-down{
          <widget class="QLabel" name="label_9">
           <property name="font">
            <font>
+            <family>Futura</family>
+            <pointsize>16</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -521,6 +522,8 @@ QComboBox::drop-down{
          <widget class="QLabel" name="label_12">
           <property name="font">
            <font>
+            <family>Futura</family>
+            <pointsize>15</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -534,6 +537,8 @@ QComboBox::drop-down{
          <widget class="QLabel" name="label_8">
           <property name="font">
            <font>
+            <family>Futura</family>
+            <pointsize>15</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -547,6 +552,8 @@ QComboBox::drop-down{
          <widget class="QLabel" name="label_5">
           <property name="font">
            <font>
+            <family>Futura</family>
+            <pointsize>15</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -560,6 +567,8 @@ QComboBox::drop-down{
          <widget class="QLabel" name="label_6">
           <property name="font">
            <font>
+            <family>Futura</family>
+            <pointsize>15</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -573,6 +582,8 @@ QComboBox::drop-down{
          <widget class="QLabel" name="label_10">
           <property name="font">
            <font>
+            <family>Futura</family>
+            <pointsize>15</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -586,6 +597,8 @@ QComboBox::drop-down{
          <widget class="QLabel" name="label_11">
           <property name="font">
            <font>
+            <family>Futura</family>
+            <pointsize>15</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -599,6 +612,8 @@ QComboBox::drop-down{
          <widget class="QLabel" name="totalRevenueLabel">
           <property name="font">
            <font>
+            <family>Futura</family>
+            <pointsize>15</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -1682,7 +1697,7 @@ color: rgb(32, 32, 32)
       <property name="geometry">
        <rect>
         <x>320</x>
-        <y>330</y>
+        <y>310</y>
         <width>113</width>
         <height>32</height>
        </rect>
@@ -1803,7 +1818,7 @@ border:none;
      <widget class="QLabel" name="adminHomePageLabel_2">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>40</x>
         <y>20</y>
         <width>311</width>
         <height>41</height>
@@ -1849,7 +1864,7 @@ border:none;
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>50</x>
         <y>60</y>
         <width>451</width>
         <height>31</height>
@@ -2002,7 +2017,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>60</y>
+        <y>170</y>
         <width>521</width>
         <height>311</height>
        </rect>
@@ -2010,8 +2025,14 @@ border:none;
       <property name="horizontalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::DoubleClicked</set>
+      </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
       <attribute name="headerDefaultSectionSize">
        <number>150</number>
@@ -2031,7 +2052,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>460</x>
-        <y>30</y>
+        <y>140</y>
         <width>91</width>
         <height>20</height>
        </rect>
@@ -2052,7 +2073,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>470</x>
-        <y>380</y>
+        <y>490</y>
         <width>81</width>
         <height>21</height>
        </rect>
@@ -2073,7 +2094,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>380</y>
+        <y>490</y>
         <width>59</width>
         <height>16</height>
        </rect>
@@ -2086,7 +2107,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>380</y>
+        <y>490</y>
         <width>151</width>
         <height>21</height>
        </rect>
@@ -2096,7 +2117,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>260</x>
-        <y>380</y>
+        <y>490</y>
         <width>59</width>
         <height>16</height>
        </rect>
@@ -2109,7 +2130,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>380</y>
+        <y>490</y>
         <width>151</width>
         <height>21</height>
        </rect>
@@ -2119,7 +2140,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>410</y>
+        <y>520</y>
         <width>241</width>
         <height>20</height>
        </rect>
@@ -2129,6 +2150,23 @@ border:none;
       </property>
       <property name="text">
        <string>*** Invalid name or price.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="modifyStadiumsDescr_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>671</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>To modify a souvenir you can do any of the following:
+     1. ADD:        Input a name and a price for the new souvenir, then press the 'ADD' button.
+     2. DELETE:  Select a souvenir and press the 'DELETE' button.
+     3. UPDATE:  Double click on the souvenir that you would like to update, then press 'enter' on your keyboard.
+</string>
       </property>
      </widget>
     </widget>
@@ -2276,6 +2314,14 @@ border:none;
      </widget>
     </widget>
     <widget class="QWidget" name="updateStadiumPage">
+     <property name="styleSheet">
+      <string notr="true">QLineEdit { 
+                        border:1px outset; 
+                        border-radius: 1px; 
+                        border-color: rgb(114, 114, 114);
+                        color:rgb(0, 0, 0); 
+}</string>
+     </property>
      <widget class="QLabel" name="modifySouvenirsListLabel_2">
       <property name="geometry">
        <rect>
@@ -2407,8 +2453,22 @@ border:none;
         </item>
         <item>
          <widget class="QLineEdit" name="updateStadium">
-          <property name="frame">
-           <bool>true</bool>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit { 
+                        border:1px outset; 
+                        border-radius: 1px; 
+                        border-color: rgb(114, 114, 114);
+                        color:rgb(0, 0, 0); 
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="cursorPosition">
+           <number>0</number>
+          </property>
+          <property name="placeholderText">
+           <string>Stadium name</string>
           </property>
          </widget>
         </item>
@@ -2463,7 +2523,25 @@ border:none;
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="updateTeamName"/>
+         <widget class="QLineEdit" name="updateTeamName">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit { 
+                        border:1px outset; 
+                        border-radius: 1px; 
+                        border-color: rgb(114, 114, 114);
+                        color:rgb(0, 0, 0); 
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="cursorPosition">
+           <number>0</number>
+          </property>
+          <property name="placeholderText">
+           <string>Team name</string>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="horizontalSpacer_13">
@@ -2481,7 +2559,7 @@ border:none;
        </layout>
       </widget>
      </widget>
-     <widget class="QPushButton" name="removeSelectedSouvenir_3">
+     <widget class="QPushButton" name="confirmStadiumUpdateButton">
       <property name="geometry">
        <rect>
         <x>540</x>
@@ -2560,7 +2638,11 @@ border:none;
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QLineEdit { 
+                        border:1px outset; 
+                        border-radius: 1px; 
+                        border-color: rgb(114, 114, 114);
+}</string>
           </property>
           <property name="placeholderText">
            <string>Street Address</string>
@@ -2574,6 +2656,14 @@ border:none;
             <width>171</width>
             <height>20</height>
            </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit { 
+                        border:1px outset; 
+                        border-radius: 1px; 
+                        border-color: rgb(114, 114, 114);
+                        color:rgb(0, 0, 0); 
+}</string>
           </property>
           <property name="frame">
            <bool>true</bool>
@@ -2591,6 +2681,14 @@ border:none;
             <height>20</height>
            </rect>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit { 
+                        border:1px outset; 
+                        border-radius: 1px; 
+                        border-color: rgb(114, 114, 114);
+                        color:rgb(0, 0, 0); 
+}</string>
+          </property>
           <property name="placeholderText">
            <string>City</string>
           </property>
@@ -2604,8 +2702,16 @@ border:none;
             <height>20</height>
            </rect>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit { 
+                        border:1px outset; 
+                        border-radius: 1px; 
+                        border-color: rgb(114, 114, 114);
+                        color:rgb(0, 0, 0); 
+}</string>
+          </property>
           <property name="placeholderText">
-           <string>State or Province</string>
+           <string>State or Country</string>
           </property>
          </widget>
          <widget class="QLabel" name="updateAddress_2">
@@ -2843,11 +2949,19 @@ QComboBox::drop-down{
        </item>
        <item row="1" column="2" colspan="5">
         <widget class="QLineEdit" name="updatePhoneNumber">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit { 
+                        border:1px outset; 
+                        border-radius: 1px; 
+                        border-color: rgb(114, 114, 114);
+                        color:rgb(0, 0, 0); 
+}</string>
+         </property>
          <property name="maxLength">
           <number>20</number>
          </property>
          <property name="placeholderText">
-          <string>Phone number</string>
+          <string>Box office number</string>
          </property>
         </widget>
        </item>
@@ -2959,6 +3073,22 @@ QComboBox::drop-down{
       </property>
       <property name="text">
        <string>Information</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="updateStadiumInvalidErrorMessage">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>520</y>
+        <width>371</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: red;</string>
+      </property>
+      <property name="text">
+       <string>* All invalid text inputs are highlighted in red.</string>
       </property>
      </widget>
     </widget>

@@ -86,6 +86,7 @@ public:
     void setTeamName(QString newTeam);
     void setAddress(QString streetAddress, QString city,
                     QString state, QString zipCode);
+    void setAddress(Address newAddress);
     void setBoxOfficeNumber(QString newNumber);
     void setDateOpened(QString newDate);
     void setSeatingCapacity(unsigned int newCapacity);
@@ -94,6 +95,10 @@ public:
     void setTypology(QString typo);
     void setTotalRevenue(double revenue);
     void addToTotalRevenue(double addToRevenue);
+
+    // Finds a souvenir within the Stadium.
+    Souvenir* findSouvenir(QString name);
+
 
     // Save and load with JSON files
     QJsonObject toJSON();
@@ -122,7 +127,6 @@ public:
     bool operator>=(const Stadium& that) const { return this->stadiumID >= that.stadiumID; }
 
 private:
-    Souvenir* findSouvenir(QString name);
 
     unsigned int stadiumID;
     QString stadiumName;

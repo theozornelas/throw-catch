@@ -167,6 +167,7 @@ public:
     QLabel *newSouvenirPriceLabel;
     QLineEdit *newSouvenirPrice;
     QLabel *adminAddSouvenirErrorMessage;
+    QLabel *modifyStadiumsDescr_2;
     QWidget *adminModifyStadiums;
     QPushButton *addStadiumFromFileButton;
     QPushButton *updateAStadiumButton;
@@ -196,7 +197,7 @@ public:
     QLabel *updateStadiumTeamNameLabel;
     QLineEdit *updateTeamName;
     QSpacerItem *horizontalSpacer_13;
-    QPushButton *removeSelectedSouvenir_3;
+    QPushButton *confirmStadiumUpdateButton;
     QPushButton *cancelStadiumUpdatesButton;
     QFrame *updateInformation;
     QGridLayout *gridLayout_4;
@@ -221,6 +222,7 @@ public:
     QLabel *label_19;
     QLineEdit *updateDay;
     QLabel *updateStadiumTeamNameLabel_2;
+    QLabel *updateStadiumInvalidErrorMessage;
     QFrame *headerFrame;
     QLabel *teamNameLabel;
     QPushButton *adminLoginButton;
@@ -316,8 +318,7 @@ public:
         display = new QStackedWidget(centralWidget);
         display->setObjectName(QStringLiteral("display"));
         display->setGeometry(QRect(203, 40, 801, 596));
-        display->setStyleSheet(QLatin1String("\n"
-"background-color: #EAEAE9\n"
+        display->setStyleSheet(QLatin1String("background-color: #EAEAE9\n"
 ""));
         homePage = new QWidget();
         homePage->setObjectName(QStringLiteral("homePage"));
@@ -418,6 +419,8 @@ public:
         label_9 = new QLabel(verticalLayoutWidget);
         label_9->setObjectName(QStringLiteral("label_9"));
         QFont font;
+        font.setFamily(QStringLiteral("Futura"));
+        font.setPointSize(16);
         font.setBold(true);
         font.setWeight(75);
         label_9->setFont(font);
@@ -426,43 +429,48 @@ public:
 
         label_12 = new QLabel(verticalLayoutWidget);
         label_12->setObjectName(QStringLiteral("label_12"));
-        label_12->setFont(font);
+        QFont font1;
+        font1.setFamily(QStringLiteral("Futura"));
+        font1.setPointSize(15);
+        font1.setBold(true);
+        font1.setWeight(75);
+        label_12->setFont(font1);
 
         singleStadiumLayoutLabels->addWidget(label_12);
 
         label_8 = new QLabel(verticalLayoutWidget);
         label_8->setObjectName(QStringLiteral("label_8"));
-        label_8->setFont(font);
+        label_8->setFont(font1);
 
         singleStadiumLayoutLabels->addWidget(label_8);
 
         label_5 = new QLabel(verticalLayoutWidget);
         label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setFont(font);
+        label_5->setFont(font1);
 
         singleStadiumLayoutLabels->addWidget(label_5);
 
         label_6 = new QLabel(verticalLayoutWidget);
         label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setFont(font);
+        label_6->setFont(font1);
 
         singleStadiumLayoutLabels->addWidget(label_6);
 
         label_10 = new QLabel(verticalLayoutWidget);
         label_10->setObjectName(QStringLiteral("label_10"));
-        label_10->setFont(font);
+        label_10->setFont(font1);
 
         singleStadiumLayoutLabels->addWidget(label_10);
 
         label_11 = new QLabel(verticalLayoutWidget);
         label_11->setObjectName(QStringLiteral("label_11"));
-        label_11->setFont(font);
+        label_11->setFont(font1);
 
         singleStadiumLayoutLabels->addWidget(label_11);
 
         totalRevenueLabel = new QLabel(verticalLayoutWidget);
         totalRevenueLabel->setObjectName(QStringLiteral("totalRevenueLabel"));
-        totalRevenueLabel->setFont(font);
+        totalRevenueLabel->setFont(font1);
 
         singleStadiumLayoutLabels->addWidget(totalRevenueLabel);
 
@@ -486,10 +494,10 @@ public:
 
         singleStadiumAddress = new QLabel(verticalLayoutWidget_2);
         singleStadiumAddress->setObjectName(QStringLiteral("singleStadiumAddress"));
-        QFont font1;
-        font1.setPointSize(13);
-        font1.setKerning(true);
-        singleStadiumAddress->setFont(font1);
+        QFont font2;
+        font2.setPointSize(13);
+        font2.setKerning(true);
+        singleStadiumAddress->setFont(font2);
         singleStadiumAddress->setStyleSheet(QStringLiteral(""));
         singleStadiumAddress->setWordWrap(false);
 
@@ -570,7 +578,10 @@ public:
         quickTripStartingStadium = new QLabel(quickTripToAllPage);
         quickTripStartingStadium->setObjectName(QStringLiteral("quickTripStartingStadium"));
         quickTripStartingStadium->setGeometry(QRect(280, 116, 211, 16));
-        quickTripStartingStadium->setFont(font);
+        QFont font3;
+        font3.setBold(true);
+        font3.setWeight(75);
+        quickTripStartingStadium->setFont(font3);
         quickTripDescription = new QLabel(quickTripToAllPage);
         quickTripDescription->setObjectName(QStringLiteral("quickTripDescription"));
         quickTripDescription->setGeometry(QRect(40, 50, 611, 43));
@@ -668,9 +679,9 @@ public:
         mstTotalWeight = new QLabel(minimumSpanningTreePage);
         mstTotalWeight->setObjectName(QStringLiteral("mstTotalWeight"));
         mstTotalWeight->setGeometry(QRect(280, 390, 211, 21));
-        QFont font2;
-        font2.setPointSize(20);
-        mstTotalWeight->setFont(font2);
+        QFont font4;
+        font4.setPointSize(20);
+        mstTotalWeight->setFont(font4);
         display->addWidget(minimumSpanningTreePage);
         tripProcessPage = new QWidget();
         tripProcessPage->setObjectName(QStringLiteral("tripProcessPage"));
@@ -690,9 +701,9 @@ public:
         currentTripWelcomeDescription = new QLabel(tripProcessPage);
         currentTripWelcomeDescription->setObjectName(QStringLiteral("currentTripWelcomeDescription"));
         currentTripWelcomeDescription->setGeometry(QRect(60, 60, 331, 20));
-        QFont font3;
-        font3.setPointSize(14);
-        currentTripWelcomeDescription->setFont(font3);
+        QFont font5;
+        font5.setPointSize(14);
+        currentTripWelcomeDescription->setFont(font5);
         currentTripWelcomeDescription->setWordWrap(true);
         listOfCurrentStadiumSouvenirs = new QTreeWidget(tripProcessPage);
         listOfCurrentStadiumSouvenirs->setObjectName(QStringLiteral("listOfCurrentStadiumSouvenirs"));
@@ -706,13 +717,13 @@ public:
         currentTripSouvenirLabel = new QLabel(tripProcessPage);
         currentTripSouvenirLabel->setObjectName(QStringLiteral("currentTripSouvenirLabel"));
         currentTripSouvenirLabel->setGeometry(QRect(40, 100, 121, 21));
-        QFont font4;
-        font4.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
-        font4.setPointSize(20);
-        font4.setBold(false);
-        font4.setItalic(false);
-        font4.setWeight(3);
-        currentTripSouvenirLabel->setFont(font4);
+        QFont font6;
+        font6.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
+        font6.setPointSize(20);
+        font6.setBold(false);
+        font6.setItalic(false);
+        font6.setWeight(3);
+        currentTripSouvenirLabel->setFont(font6);
         currentTripSouvenirLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         currentTripNextStadium = new QPushButton(tripProcessPage);
         currentTripNextStadium->setObjectName(QStringLiteral("currentTripNextStadium"));
@@ -748,12 +759,12 @@ public:
         currentTripProgressLabel = new QLabel(tripProcessPage);
         currentTripProgressLabel->setObjectName(QStringLiteral("currentTripProgressLabel"));
         currentTripProgressLabel->setGeometry(QRect(30, 430, 161, 21));
-        currentTripProgressLabel->setFont(font4);
+        currentTripProgressLabel->setFont(font6);
         currentTripProgressLabel->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         currentTripStadiumCount = new QLabel(tripProcessPage);
         currentTripStadiumCount->setObjectName(QStringLiteral("currentTripStadiumCount"));
         currentTripStadiumCount->setGeometry(QRect(30, 491, 421, 20));
-        currentTripStadiumCount->setFont(font3);
+        currentTripStadiumCount->setFont(font5);
         currentTripStadiumCount->setWordWrap(true);
         totalDistanceTraveled = new QLCDNumber(tripProcessPage);
         totalDistanceTraveled->setObjectName(QStringLiteral("totalDistanceTraveled"));
@@ -762,7 +773,7 @@ public:
         currentTripStadiumCount_2 = new QLabel(tripProcessPage);
         currentTripStadiumCount_2->setObjectName(QStringLiteral("currentTripStadiumCount_2"));
         currentTripStadiumCount_2->setGeometry(QRect(30, 540, 341, 31));
-        currentTripStadiumCount_2->setFont(font3);
+        currentTripStadiumCount_2->setFont(font5);
         currentTripStadiumCount_2->setWordWrap(true);
         display->addWidget(tripProcessPage);
         currentTripStadiumNameLabel->raise();
@@ -793,7 +804,7 @@ public:
         grandTotalAmount = new QLabel(confrimPurchasesPage);
         grandTotalAmount->setObjectName(QStringLiteral("grandTotalAmount"));
         grandTotalAmount->setGeometry(QRect(590, 450, 121, 21));
-        grandTotalAmount->setFont(font2);
+        grandTotalAmount->setFont(font4);
         shoppingCart = new QTreeWidget(confrimPurchasesPage);
         shoppingCart->setObjectName(QStringLiteral("shoppingCart"));
         shoppingCart->setGeometry(QRect(50, 110, 611, 311));
@@ -857,7 +868,7 @@ public:
         passwordLabel->setGeometry(QRect(200, 240, 59, 16));
         loginButton = new QPushButton(adminLoginPage);
         loginButton->setObjectName(QStringLiteral("loginButton"));
-        loginButton->setGeometry(QRect(320, 330, 113, 32));
+        loginButton->setGeometry(QRect(320, 310, 113, 32));
         loginButton->setStyleSheet(QLatin1String("QPushButton {\n"
 "background-color: #293539;\n"
 "color: white;\n"
@@ -896,14 +907,14 @@ public:
         adminStadiumList->header()->setDefaultSectionSize(200);
         adminHomePageLabel_2 = new QLabel(viewAdminStadiumsPage);
         adminHomePageLabel_2->setObjectName(QStringLiteral("adminHomePageLabel_2"));
-        adminHomePageLabel_2->setGeometry(QRect(60, 20, 311, 41));
-        QFont font5;
-        font5.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
-        font5.setPointSize(30);
-        font5.setBold(false);
-        font5.setItalic(false);
-        font5.setWeight(3);
-        adminHomePageLabel_2->setFont(font5);
+        adminHomePageLabel_2->setGeometry(QRect(40, 20, 311, 41));
+        QFont font7;
+        font7.setFamily(QStringLiteral("Gill Sans,Gill Sans MT Condensed"));
+        font7.setPointSize(30);
+        font7.setBold(false);
+        font7.setItalic(false);
+        font7.setWeight(3);
+        adminHomePageLabel_2->setFont(font7);
         adminHomePageLabel_2->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         viewMoreInfoAboutStadiumButton = new QPushButton(viewAdminStadiumsPage);
         viewMoreInfoAboutStadiumButton->setObjectName(QStringLiteral("viewMoreInfoAboutStadiumButton"));
@@ -916,14 +927,14 @@ public:
 "}"));
         label_7 = new QLabel(viewAdminStadiumsPage);
         label_7->setObjectName(QStringLiteral("label_7"));
-        label_7->setGeometry(QRect(70, 60, 451, 31));
+        label_7->setGeometry(QRect(50, 60, 451, 31));
         label_7->setWordWrap(true);
         stadiumTotalRevenue = new QLabel(viewAdminStadiumsPage);
         stadiumTotalRevenue->setObjectName(QStringLiteral("stadiumTotalRevenue"));
         stadiumTotalRevenue->setGeometry(QRect(470, 520, 131, 31));
-        QFont font6;
-        font6.setPointSize(23);
-        stadiumTotalRevenue->setFont(font6);
+        QFont font8;
+        font8.setPointSize(23);
+        stadiumTotalRevenue->setFont(font8);
         stadiumTotalRevenueLabel = new QLabel(viewAdminStadiumsPage);
         stadiumTotalRevenueLabel->setObjectName(QStringLiteral("stadiumTotalRevenueLabel"));
         stadiumTotalRevenueLabel->setGeometry(QRect(220, 520, 241, 31));
@@ -966,13 +977,15 @@ public:
         modifySouvenirsListLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         listOfModifyStadiumsSouvenirs = new QTreeWidget(modifySouvenirItemPage);
         listOfModifyStadiumsSouvenirs->setObjectName(QStringLiteral("listOfModifyStadiumsSouvenirs"));
-        listOfModifyStadiumsSouvenirs->setGeometry(QRect(30, 60, 521, 311));
+        listOfModifyStadiumsSouvenirs->setGeometry(QRect(30, 170, 521, 311));
         listOfModifyStadiumsSouvenirs->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listOfModifyStadiumsSouvenirs->setEditTriggers(QAbstractItemView::DoubleClicked);
         listOfModifyStadiumsSouvenirs->setAlternatingRowColors(true);
+        listOfModifyStadiumsSouvenirs->setSelectionBehavior(QAbstractItemView::SelectRows);
         listOfModifyStadiumsSouvenirs->header()->setDefaultSectionSize(150);
         removeSelectedSouvenir = new QPushButton(modifySouvenirItemPage);
         removeSelectedSouvenir->setObjectName(QStringLiteral("removeSelectedSouvenir"));
-        removeSelectedSouvenir->setGeometry(QRect(460, 30, 91, 20));
+        removeSelectedSouvenir->setGeometry(QRect(460, 140, 91, 20));
         removeSelectedSouvenir->setStyleSheet(QLatin1String("QPushButton {\n"
 "background-color: #293539;\n"
 "color: white;\n"
@@ -981,7 +994,7 @@ public:
 "}"));
         addSelectedSouvenir = new QPushButton(modifySouvenirItemPage);
         addSelectedSouvenir->setObjectName(QStringLiteral("addSelectedSouvenir"));
-        addSelectedSouvenir->setGeometry(QRect(470, 380, 81, 21));
+        addSelectedSouvenir->setGeometry(QRect(470, 490, 81, 21));
         addSelectedSouvenir->setStyleSheet(QLatin1String("QPushButton {\n"
 "background-color: #293539;\n"
 "color: white;\n"
@@ -990,20 +1003,23 @@ public:
 "}"));
         newSouvenirNameLabel = new QLabel(modifySouvenirItemPage);
         newSouvenirNameLabel->setObjectName(QStringLiteral("newSouvenirNameLabel"));
-        newSouvenirNameLabel->setGeometry(QRect(30, 380, 59, 16));
+        newSouvenirNameLabel->setGeometry(QRect(30, 490, 59, 16));
         newSouvenirName = new QLineEdit(modifySouvenirItemPage);
         newSouvenirName->setObjectName(QStringLiteral("newSouvenirName"));
-        newSouvenirName->setGeometry(QRect(80, 380, 151, 21));
+        newSouvenirName->setGeometry(QRect(80, 490, 151, 21));
         newSouvenirPriceLabel = new QLabel(modifySouvenirItemPage);
         newSouvenirPriceLabel->setObjectName(QStringLiteral("newSouvenirPriceLabel"));
-        newSouvenirPriceLabel->setGeometry(QRect(260, 380, 59, 16));
+        newSouvenirPriceLabel->setGeometry(QRect(260, 490, 59, 16));
         newSouvenirPrice = new QLineEdit(modifySouvenirItemPage);
         newSouvenirPrice->setObjectName(QStringLiteral("newSouvenirPrice"));
-        newSouvenirPrice->setGeometry(QRect(300, 380, 151, 21));
+        newSouvenirPrice->setGeometry(QRect(300, 490, 151, 21));
         adminAddSouvenirErrorMessage = new QLabel(modifySouvenirItemPage);
         adminAddSouvenirErrorMessage->setObjectName(QStringLiteral("adminAddSouvenirErrorMessage"));
-        adminAddSouvenirErrorMessage->setGeometry(QRect(30, 410, 241, 20));
+        adminAddSouvenirErrorMessage->setGeometry(QRect(30, 520, 241, 20));
         adminAddSouvenirErrorMessage->setStyleSheet(QStringLiteral("color: #01CDE6"));
+        modifyStadiumsDescr_2 = new QLabel(modifySouvenirItemPage);
+        modifyStadiumsDescr_2->setObjectName(QStringLiteral("modifyStadiumsDescr_2"));
+        modifyStadiumsDescr_2->setGeometry(QRect(30, 50, 671, 81));
         display->addWidget(modifySouvenirItemPage);
         adminModifyStadiums = new QWidget();
         adminModifyStadiums->setObjectName(QStringLiteral("adminModifyStadiums"));
@@ -1055,6 +1071,12 @@ public:
         display->addWidget(adminModifyStadiums);
         updateStadiumPage = new QWidget();
         updateStadiumPage->setObjectName(QStringLiteral("updateStadiumPage"));
+        updateStadiumPage->setStyleSheet(QLatin1String("QLineEdit { \n"
+"                        border:1px outset; \n"
+"                        border-radius: 1px; \n"
+"                        border-color: rgb(114, 114, 114);\n"
+"                        color:rgb(0, 0, 0); \n"
+"}"));
         modifySouvenirsListLabel_2 = new QLabel(updateStadiumPage);
         modifySouvenirsListLabel_2->setObjectName(QStringLiteral("modifySouvenirsListLabel_2"));
         modifySouvenirsListLabel_2->setGeometry(QRect(40, 10, 311, 41));
@@ -1071,12 +1093,12 @@ public:
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         updateLeagueLabel = new QLabel(updateLeague);
         updateLeagueLabel->setObjectName(QStringLiteral("updateLeagueLabel"));
-        QFont font7;
-        font7.setFamily(QStringLiteral("Futura"));
-        font7.setPointSize(14);
-        font7.setBold(true);
-        font7.setWeight(75);
-        updateLeagueLabel->setFont(font7);
+        QFont font9;
+        font9.setFamily(QStringLiteral("Futura"));
+        font9.setPointSize(14);
+        font9.setBold(true);
+        font9.setWeight(75);
+        updateLeagueLabel->setFont(font9);
 
         horizontalLayout_5->addWidget(updateLeagueLabel);
 
@@ -1112,13 +1134,19 @@ public:
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         updateStadiumLabel = new QLabel(updateStadiumName);
         updateStadiumLabel->setObjectName(QStringLiteral("updateStadiumLabel"));
-        updateStadiumLabel->setFont(font7);
+        updateStadiumLabel->setFont(font9);
 
         horizontalLayout_6->addWidget(updateStadiumLabel);
 
         updateStadium = new QLineEdit(updateStadiumName);
         updateStadium->setObjectName(QStringLiteral("updateStadium"));
-        updateStadium->setFrame(true);
+        updateStadium->setStyleSheet(QLatin1String("QLineEdit { \n"
+"                        border:1px outset; \n"
+"                        border-radius: 1px; \n"
+"                        border-color: rgb(114, 114, 114);\n"
+"                        color:rgb(0, 0, 0); \n"
+"}"));
+        updateStadium->setCursorPosition(0);
 
         horizontalLayout_6->addWidget(updateStadium);
 
@@ -1139,12 +1167,19 @@ public:
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         updateStadiumTeamNameLabel = new QLabel(updateTeam);
         updateStadiumTeamNameLabel->setObjectName(QStringLiteral("updateStadiumTeamNameLabel"));
-        updateStadiumTeamNameLabel->setFont(font7);
+        updateStadiumTeamNameLabel->setFont(font9);
 
         horizontalLayout_7->addWidget(updateStadiumTeamNameLabel);
 
         updateTeamName = new QLineEdit(updateTeam);
         updateTeamName->setObjectName(QStringLiteral("updateTeamName"));
+        updateTeamName->setStyleSheet(QLatin1String("QLineEdit { \n"
+"                        border:1px outset; \n"
+"                        border-radius: 1px; \n"
+"                        border-color: rgb(114, 114, 114);\n"
+"                        color:rgb(0, 0, 0); \n"
+"}"));
+        updateTeamName->setCursorPosition(0);
 
         horizontalLayout_7->addWidget(updateTeamName);
 
@@ -1152,10 +1187,10 @@ public:
 
         horizontalLayout_7->addItem(horizontalSpacer_13);
 
-        removeSelectedSouvenir_3 = new QPushButton(updateStadiumPage);
-        removeSelectedSouvenir_3->setObjectName(QStringLiteral("removeSelectedSouvenir_3"));
-        removeSelectedSouvenir_3->setGeometry(QRect(540, 540, 121, 41));
-        removeSelectedSouvenir_3->setStyleSheet(QLatin1String("QPushButton {\n"
+        confirmStadiumUpdateButton = new QPushButton(updateStadiumPage);
+        confirmStadiumUpdateButton->setObjectName(QStringLiteral("confirmStadiumUpdateButton"));
+        confirmStadiumUpdateButton->setGeometry(QRect(540, 540, 121, 41));
+        confirmStadiumUpdateButton->setStyleSheet(QLatin1String("QPushButton {\n"
 "background-color: #01CDE6;\n"
 "color: white;\n"
 "border:none;\n"
@@ -1187,33 +1222,55 @@ public:
         updateStreetAddress = new QLineEdit(frame_2);
         updateStreetAddress->setObjectName(QStringLiteral("updateStreetAddress"));
         updateStreetAddress->setGeometry(QRect(100, 30, 191, 20));
-        updateStreetAddress->setStyleSheet(QStringLiteral(""));
+        updateStreetAddress->setStyleSheet(QLatin1String("QLineEdit { \n"
+"                        border:1px outset; \n"
+"                        border-radius: 1px; \n"
+"                        border-color: rgb(114, 114, 114);\n"
+"}"));
         updateZipcode = new QLineEdit(frame_2);
         updateZipcode->setObjectName(QStringLiteral("updateZipcode"));
         updateZipcode->setGeometry(QRect(420, 60, 171, 20));
+        updateZipcode->setStyleSheet(QLatin1String("QLineEdit { \n"
+"                        border:1px outset; \n"
+"                        border-radius: 1px; \n"
+"                        border-color: rgb(114, 114, 114);\n"
+"                        color:rgb(0, 0, 0); \n"
+"}"));
         updateZipcode->setFrame(true);
         updateCity = new QLineEdit(frame_2);
         updateCity->setObjectName(QStringLiteral("updateCity"));
         updateCity->setGeometry(QRect(100, 60, 191, 20));
+        updateCity->setStyleSheet(QLatin1String("QLineEdit { \n"
+"                        border:1px outset; \n"
+"                        border-radius: 1px; \n"
+"                        border-color: rgb(114, 114, 114);\n"
+"                        color:rgb(0, 0, 0); \n"
+"}"));
         updateState = new QLineEdit(frame_2);
         updateState->setObjectName(QStringLiteral("updateState"));
         updateState->setGeometry(QRect(420, 30, 171, 20));
+        updateState->setStyleSheet(QLatin1String("QLineEdit { \n"
+"                        border:1px outset; \n"
+"                        border-radius: 1px; \n"
+"                        border-color: rgb(114, 114, 114);\n"
+"                        color:rgb(0, 0, 0); \n"
+"}"));
         updateAddress_2 = new QLabel(frame_2);
         updateAddress_2->setObjectName(QStringLiteral("updateAddress_2"));
         updateAddress_2->setGeometry(QRect(20, 30, 55, 20));
-        updateAddress_2->setFont(font7);
+        updateAddress_2->setFont(font9);
         updateAddress_3 = new QLabel(frame_2);
         updateAddress_3->setObjectName(QStringLiteral("updateAddress_3"));
         updateAddress_3->setGeometry(QRect(30, 60, 55, 20));
-        updateAddress_3->setFont(font7);
+        updateAddress_3->setFont(font9);
         updateAddress_4 = new QLabel(frame_2);
         updateAddress_4->setObjectName(QStringLiteral("updateAddress_4"));
         updateAddress_4->setGeometry(QRect(310, 30, 101, 20));
-        updateAddress_4->setFont(font7);
+        updateAddress_4->setFont(font9);
         updateAddress_5 = new QLabel(frame_2);
         updateAddress_5->setObjectName(QStringLiteral("updateAddress_5"));
         updateAddress_5->setGeometry(QRect(310, 60, 101, 20));
-        updateAddress_5->setFont(font7);
+        updateAddress_5->setFont(font9);
 
         gridLayout_4->addWidget(frame_2, 0, 0, 1, 7);
 
@@ -1270,6 +1327,12 @@ public:
 
         updatePhoneNumber = new QLineEdit(updateInformation);
         updatePhoneNumber->setObjectName(QStringLiteral("updatePhoneNumber"));
+        updatePhoneNumber->setStyleSheet(QLatin1String("QLineEdit { \n"
+"                        border:1px outset; \n"
+"                        border-radius: 1px; \n"
+"                        border-color: rgb(114, 114, 114);\n"
+"                        color:rgb(0, 0, 0); \n"
+"}"));
         updatePhoneNumber->setMaxLength(20);
 
         gridLayout_4->addWidget(updatePhoneNumber, 1, 2, 1, 5);
@@ -1282,32 +1345,32 @@ public:
 
         label_20 = new QLabel(updateInformation);
         label_20->setObjectName(QStringLiteral("label_20"));
-        QFont font8;
-        font8.setFamily(QStringLiteral("Futura"));
-        label_20->setFont(font8);
+        QFont font10;
+        font10.setFamily(QStringLiteral("Futura"));
+        label_20->setFont(font10);
         label_20->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_4->addWidget(label_20, 3, 0, 1, 1);
 
         label_22 = new QLabel(updateInformation);
         label_22->setObjectName(QStringLiteral("label_22"));
-        label_22->setFont(font8);
+        label_22->setFont(font10);
         label_22->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_4->addWidget(label_22, 4, 0, 1, 1);
 
         label_21 = new QLabel(updateInformation);
         label_21->setObjectName(QStringLiteral("label_21"));
-        QFont font9;
-        font9.setFamily(QStringLiteral("Futura"));
-        font9.setPointSize(13);
-        label_21->setFont(font9);
+        QFont font11;
+        font11.setFamily(QStringLiteral("Futura"));
+        font11.setPointSize(13);
+        label_21->setFont(font11);
 
         gridLayout_4->addWidget(label_21, 1, 0, 1, 2);
 
         label_19 = new QLabel(updateInformation);
         label_19->setObjectName(QStringLiteral("label_19"));
-        label_19->setFont(font8);
+        label_19->setFont(font10);
         label_19->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_4->addWidget(label_19, 2, 0, 1, 1);
@@ -1322,12 +1385,16 @@ public:
         updateStadiumTeamNameLabel_2 = new QLabel(updateStadiumPage);
         updateStadiumTeamNameLabel_2->setObjectName(QStringLiteral("updateStadiumTeamNameLabel_2"));
         updateStadiumTeamNameLabel_2->setGeometry(QRect(40, 234, 181, 17));
-        QFont font10;
-        font10.setFamily(QStringLiteral("Futura"));
-        font10.setPointSize(20);
-        font10.setBold(true);
-        font10.setWeight(75);
-        updateStadiumTeamNameLabel_2->setFont(font10);
+        QFont font12;
+        font12.setFamily(QStringLiteral("Futura"));
+        font12.setPointSize(20);
+        font12.setBold(true);
+        font12.setWeight(75);
+        updateStadiumTeamNameLabel_2->setFont(font12);
+        updateStadiumInvalidErrorMessage = new QLabel(updateStadiumPage);
+        updateStadiumInvalidErrorMessage->setObjectName(QStringLiteral("updateStadiumInvalidErrorMessage"));
+        updateStadiumInvalidErrorMessage->setGeometry(QRect(40, 520, 371, 16));
+        updateStadiumInvalidErrorMessage->setStyleSheet(QStringLiteral("color: red;"));
         display->addWidget(updateStadiumPage);
         headerFrame = new QFrame(centralWidget);
         headerFrame->setObjectName(QStringLiteral("headerFrame"));
@@ -1524,6 +1591,11 @@ public:
         newSouvenirNameLabel->setText(QApplication::translate("MainWindow", "Name:", 0));
         newSouvenirPriceLabel->setText(QApplication::translate("MainWindow", "Price", 0));
         adminAddSouvenirErrorMessage->setText(QApplication::translate("MainWindow", "*** Invalid name or price.", 0));
+        modifyStadiumsDescr_2->setText(QApplication::translate("MainWindow", "To modify a souvenir you can do any of the following:\n"
+"     1. ADD:        Input a name and a price for the new souvenir, then press the 'ADD' button.\n"
+"     2. DELETE:  Select a souvenir and press the 'DELETE' button.\n"
+"     3. UPDATE:  Double click on the souvenir that you would like to update, then press 'enter' on your keyboard.\n"
+"", 0));
         addStadiumFromFileButton->setText(QApplication::translate("MainWindow", "ADD STADIUMS FROM FILE", 0));
         updateAStadiumButton->setText(QApplication::translate("MainWindow", "UPDATE A STADIUM", 0));
         modifyStadiumLabel->setText(QApplication::translate("MainWindow", "MODIFY STADIUMS", 0));
@@ -1537,13 +1609,17 @@ public:
         updateAmericanLeague->setText(QApplication::translate("MainWindow", "American", 0));
         updateNationalLeague->setText(QApplication::translate("MainWindow", "National", 0));
         updateStadiumLabel->setText(QApplication::translate("MainWindow", "Stadium:", 0));
+        updateStadium->setText(QString());
+        updateStadium->setPlaceholderText(QApplication::translate("MainWindow", "Stadium name", 0));
         updateStadiumTeamNameLabel->setText(QApplication::translate("MainWindow", "Team name:", 0));
-        removeSelectedSouvenir_3->setText(QApplication::translate("MainWindow", "CONFIRM", 0));
+        updateTeamName->setText(QString());
+        updateTeamName->setPlaceholderText(QApplication::translate("MainWindow", "Team name", 0));
+        confirmStadiumUpdateButton->setText(QApplication::translate("MainWindow", "CONFIRM", 0));
         cancelStadiumUpdatesButton->setText(QApplication::translate("MainWindow", "CANCEL", 0));
         updateStreetAddress->setPlaceholderText(QApplication::translate("MainWindow", "Street Address", 0));
         updateZipcode->setPlaceholderText(QApplication::translate("MainWindow", "Zipcode", 0));
         updateCity->setPlaceholderText(QApplication::translate("MainWindow", "City", 0));
-        updateState->setPlaceholderText(QApplication::translate("MainWindow", "State or Province", 0));
+        updateState->setPlaceholderText(QApplication::translate("MainWindow", "State or Country", 0));
         updateAddress_2->setText(QApplication::translate("MainWindow", "Street:", 0));
         updateAddress_3->setText(QApplication::translate("MainWindow", "City:", 0));
         updateAddress_4->setText(QApplication::translate("MainWindow", "State/Country:", 0));
@@ -1567,7 +1643,7 @@ public:
         updateMonth->setCurrentText(QApplication::translate("MainWindow", "Month", 0));
         updateYear->setPlaceholderText(QApplication::translate("MainWindow", "Year", 0));
         updateSeatingCapacity->setSpecialValueText(QString());
-        updatePhoneNumber->setPlaceholderText(QApplication::translate("MainWindow", "Phone number", 0));
+        updatePhoneNumber->setPlaceholderText(QApplication::translate("MainWindow", "Box office number", 0));
         updateTypology->setText(QString());
         updateTypology->setPlaceholderText(QApplication::translate("MainWindow", "Typology", 0));
         label_20->setText(QApplication::translate("MainWindow", "Opening date:", 0));
@@ -1576,6 +1652,7 @@ public:
         label_19->setText(QApplication::translate("MainWindow", "Seating capacity:", 0));
         updateDay->setPlaceholderText(QApplication::translate("MainWindow", "Day", 0));
         updateStadiumTeamNameLabel_2->setText(QApplication::translate("MainWindow", "Information", 0));
+        updateStadiumInvalidErrorMessage->setText(QApplication::translate("MainWindow", "* All invalid text inputs are highlighted in red.", 0));
         teamNameLabel->setText(QApplication::translate("MainWindow", "thr  w-catch", 0));
         adminLoginButton->setText(QApplication::translate("MainWindow", "SIGN IN", 0));
         searchBar->setInputMask(QString());

@@ -191,6 +191,14 @@ void Stadium::setAddress(QString streetAddress, QString city,
 }
 
 /**
+ * @brief Stadium::setAddress Changes the address to new address
+ * @param newAddress
+ */
+void Stadium::setAddress(Address newAddress) {
+    stadiumAddress = newAddress;
+}
+
+/**
  * @brief Stadium::setBoxOfficeNumber Changes the box office number to newNumber.
  * @param newNumber
  */
@@ -313,5 +321,25 @@ void Stadium::removeSouvenir(QString name) {
 
 QVector<Souvenir> Stadium::getSouvenirs() const {
     return souvenirs;
+}
+
+Souvenir* Stadium::findSouvenir(QString name) {
+    bool found = false;
+    Souvenir *foundSouvenir = NULL;
+    int i = 0;
+
+    while(!found && i < souvenirs.size()) {
+
+        if(name == souvenirs[i].getName()) {
+            foundSouvenir = &souvenirs[i];
+            found = true;
+        }
+        else {
+            i++;
+        }
+    }
+
+    return foundSouvenir;
+
 }
 

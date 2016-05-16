@@ -31,20 +31,23 @@ public:
      ****************/
     // Adding or updating information of a stadium.
      bool AddNewStadium(Stadium *s);
-    // void UpdateStadium(int stadiumKey, QString name...);
+     bool UpdateStadium(Stadium *s);
 
     // Adding, removing or changing information for souvenir.
     bool AddNewSouvenir(int stadiumKey, QString name, double price, int quantity);
     bool RemoveSouvenir(int stadiumKey, QString name);
-    bool ChangeSouvenirName(int stadiumKey, QString oldName, QString newName);
-    bool ChangeSouvenirPrice(int stadiumKey, QString souvenirName, double newPrice);
-    bool ChangeSouvenirQuantity(int stadiumKey, QString souvenirName, int newQuantity);
+    bool updateSouvenirName(int stadiumKey, QString oldName, QString newName);
+    bool updateSouvenirPrice(int stadiumKey, QString souvenirName, double newPrice);
+    bool updateSouvenirQuantity(int stadiumKey, QString souvenirName, int newQuantity);
     bool updateTotalRevenue(int stadiumKey, double newRevenue);
 
 
+    // ACCESSORS - Retrieves needed information for the GUI (keys for stadiums)
     int getStadiumID(QString stadiumName);
     QVector<int> getAllStadiumsKeys();
 
+    // Graph related methods 
+    bool addEdges(Stadium *origin, Stadium *destination, int weight);
     Graph<Stadium>* createGraph(skiplist<int, Stadium*> stadiumList);
 
 

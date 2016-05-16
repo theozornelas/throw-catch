@@ -95,7 +95,6 @@ void ShoppingCart::setList(QVector<Souvenir*> shoppingCart, skiplist<int, Stadiu
         grandTotal += stadiumTotal;
         ui->grandTotalAmount->setText("$" + QString::number(grandTotal, 'f', 2));
 
-
-
+        ui->shoppingCart->expandAll();
     }
 }

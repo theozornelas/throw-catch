@@ -449,6 +449,11 @@ void MainWindow::on_loginButton_clicked()
 
 }
 
+void MainWindow::on_password_returnPressed()
+{
+    on_loginButton_clicked();
+}
+
 void MainWindow::on_adminModifyButton_clicked()
 {
 
@@ -457,7 +462,10 @@ void MainWindow::on_adminModifyButton_clicked()
     for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
         Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
         QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->listOfModifyStadiums);
-        currentItem->setText(0, s->getStadiumName());
+
+        if(s != NULL) {
+            currentItem->setText(0, s->getStadiumName());
+        }
     }
 
     ui->display->setCurrentIndex(MODIFY_INFO);
@@ -511,6 +519,7 @@ void MainWindow::on_removeSelectedSouvenir_clicked()
 
         QString removeSouvenirName = currentSouvenir->data(0, 0).toString();
         currentStadium->removeSouvenir(removeSouvenirName);
+        qDebug() << "Removing a souvenir: " << db.RemoveSouvenir(currentStadium->getStadiumID(), removeSouvenirName);
     }
     else {
         QMessageBox::warning(this, "Warning!", "Uh-oh, please select a souvenir to delete.");
@@ -544,7 +553,10 @@ void MainWindow::on_addSelectedSouvenir_clicked()
             souvenirPrice = souvenirPrice.mid(1,souvenirPrice.size());
         }
 
-        currentStadium->addSouvenir(new Souvenir(currentStadium->getStadiumID(), souvenirName, souvenirPrice.toDouble(), 0));
+        Souvenir *s = new Souvenir(currentStadium->getStadiumID(), souvenirName, souvenirPrice.toDouble(), 0);
+        currentStadium->addSouvenir(s);
+        qDebug() << "Adding a souvenir: " << db.AddNewSouvenir(currentStadium->getStadiumID(), souvenirName, souvenirPrice.toDouble(), 0);
+
         on_modifyInformationNextButton_clicked();
     }
     else {
@@ -777,17 +789,27 @@ void MainWindow::on_currentTripNextStadium_clicked()
             grandTotal += stadiumTotal;
             ui->grandTotalAmount->setText("$" + QString::number(grandTotal, 'f', 2));
         }
+
+        ui->shoppingCart->expandAll();
+
     }
 }
 
+/****************************
+ *  VIEWING RANDOM STADIUM
+ ****************************/
 void MainWindow::on_searchButton_clicked()
 {
     viewSingleStadium(ui->searchBar->text());
 
     ui->searchBar->clear();
-
-
 }
+
+void MainWindow::on_searchBar_returnPressed()
+{
+    on_searchButton_clicked();
+}
+
 
 void MainWindow::viewSingleStadium(QString stadiumName) {
     int stadiumID = db.getStadiumID(stadiumName);
@@ -983,6 +1005,7 @@ void MainWindow::on_addStadiumFromFileButton_clicked()
                     int distance = edge["distance"].toInt();
 
                     stadiumsGraph->insertEdge(*newStadium, destination, distance);
+                    qDebug() << "Successfully added edges to database? " << db.addEdges(newStadium, &destination, distance);
                     qDebug() << "DISTANCE TO NEW STADIUM: " << stadiumsGraph->GetDistance(destination, *newStadium);
                 }
             }
@@ -1012,6 +1035,9 @@ void MainWindow::on_updateAStadiumButton_clicked()
     QTreeWidgetItem* selectedStadium = ui->stadiumsToModifyList->currentItem();
 
     if(selectedStadium != NULL) {
+
+        ui->updateStadiumInvalidErrorMessage->hide();
+
 
        currentStadium = *stadiums.get(db.getStadiumID(selectedStadium->data(0, 0).toString()));
        ui->updateStadium->setText(currentStadium->getStadiumName());
@@ -1051,4 +1077,167 @@ void MainWindow::on_updateAStadiumButton_clicked()
 void MainWindow::on_cancelStadiumUpdatesButton_clicked()
 {
     ui->display->setCurrentIndex(MODIFY_STADIUMS);
+}
+
+/**
+ * @brief MainWindow::on_confirmStadiumUpdateButton_clicked
+ *        Error checks all input, and if all input is valid,
+ *        program will update the current stadium as well
+ *        as update it within the database.
+ */
+void MainWindow::on_confirmStadiumUpdateButton_clicked()
+{
+    /** Let the error checking begin */
+
+    const QString validStyleSheet = "QLineEdit { "
+                                      "border:1px outset; border-radius: 1px; "
+                                      "border-color: rgb(114, 114, 114); }";
+
+    const QString invalidStyleSheet = "QLineEdit { "
+                                      "border:1px outset; border-radius: 1px; "
+                                      "border-color: red; }";
+
+    ui->updateStadium->setStyleSheet(validStyleSheet);
+    ui->updateTeamName->setStyleSheet(validStyleSheet);
+    ui->updatePhoneNumber->setStyleSheet(validStyleSheet);
+    ui->updateTypology->setStyleSheet(validStyleSheet);
+    ui->updateStreetAddress->setStyleSheet(validStyleSheet);
+    ui->updateCity->setStyleSheet(validStyleSheet);
+    ui->updateState->setStyleSheet(validStyleSheet);
+    ui->updateZipcode->setStyleSheet(validStyleSheet);
+    ui->updateDay->setStyleSheet(validStyleSheet);
+    ui->updateYear->setStyleSheet(validStyleSheet);
+
+    ui->updateStadiumInvalidErrorMessage->hide();
+
+    bool valid = true;
+    QString newStadiumName = ui->updateStadium->text();
+    QString newTeamName = ui->updateTeamName->text();
+    QString newBoxOfficeNumber = ui->updatePhoneNumber->text();
+    int     newSeatingCapacity = ui->updateSeatingCapacity->value();
+    QString newTypology = ui->updateTypology->text();
+
+    Address newAddress;
+    newAddress.streetAddress = ui->updateStreetAddress->text();
+    newAddress.city = ui->updateCity->text();
+    newAddress.state = ui->updateState->text();
+    newAddress.zipCode = ui->updateZipcode->text();
+
+
+    QString newLeagueType = (ui->updateAmericanLeague->isChecked() ? "American" : "National");
+
+    int month = ui->updateMonth->currentIndex();
+    int day = ui->updateDay->text().toInt();
+    int year = ui->updateYear->text().toInt();
+
+    /** Checks if date is a valid date */
+    QDate verifyDate(year, month, day);
+    QString newDateOpened;
+
+    if(verifyDate.isValid()) {
+        newDateOpened = verifyDate.toString("MMMM d, yyyy");
+        qDebug() << newDateOpened;
+    }
+    else {
+        valid = false;
+        ui->updateDay->setStyleSheet(invalidStyleSheet);
+        ui->updateYear->setStyleSheet(invalidStyleSheet);
+    }
+
+    /** Verifys if anything was left blank */
+    if(isBlank(newStadiumName)) { valid = false; ui->updateStadium->setStyleSheet(invalidStyleSheet); }
+    if(isBlank(newTeamName)) { valid = false; ui->updateTeamName->setStyleSheet(invalidStyleSheet); }
+    if(isBlank(newBoxOfficeNumber)) { valid = false; ui->updatePhoneNumber->setStyleSheet(invalidStyleSheet); }
+    if(isBlank(newTypology)) { valid = false; ui->updateTypology->setStyleSheet(invalidStyleSheet); }
+    if(isBlank(newAddress.streetAddress)) { valid = false; ui->updateStreetAddress->setStyleSheet(invalidStyleSheet); }
+    if(isBlank(newAddress.city)) { valid = false; ui->updateCity->setStyleSheet(invalidStyleSheet); }
+    if(isBlank(newAddress.state)) { valid = false; ui->updateState->setStyleSheet(invalidStyleSheet); }
+    if(isBlank(newAddress.zipCode)) { valid = false; ui->updateZipcode->setStyleSheet(invalidStyleSheet); }
+
+    /** Checks if box office number follows the format of (nnn)nnn-nnnn or +1 nnn-nnn-nnnn*/
+    QRegExp verifyAmericanBoxOfficeNumber("\\([0-9]{3}\\)[0-9]{3}-{1}[0-9]{4}");
+    QRegExp verifyCanadianBoxOfficeNumber("\\+1{1} [0-9]{3}-{1}[0-9]{3}-{1}[0-9]{4}");
+
+
+    if(!verifyAmericanBoxOfficeNumber.exactMatch(newBoxOfficeNumber)
+      && !verifyCanadianBoxOfficeNumber.exactMatch(newBoxOfficeNumber)) {
+        valid = false;
+        ui->updatePhoneNumber->setStyleSheet(invalidStyleSheet);
+    }
+
+    /** If valid, it will update the stadium */
+    if(valid) {
+        currentStadium->setStadiumName(newStadiumName);
+        currentStadium->setTeamName(newTeamName);
+        currentStadium->setBoxOfficeNumber(newBoxOfficeNumber);
+        currentStadium->setTypology(newTypology);
+        currentStadium->setAddress(newAddress);
+        currentStadium->setLeagueType(newLeagueType);
+        currentStadium->setDateOpened(newDateOpened);
+        currentStadium->setSeatingCapacity(newSeatingCapacity);
+
+        /** Updates it in the database */
+        db.UpdateStadium(currentStadium);
+
+        currentStadium = NULL;
+        on_adminModifyStadiumsButton_clicked();
+    }
+    else {
+        ui->updateStadiumInvalidErrorMessage->show();
+    }
+
+
+
+
+
+}
+
+
+void MainWindow::on_listOfModifyStadiumsSouvenirs_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    item->setFlags (item->flags () | Qt::ItemIsEditable);
+    if(currentStadium != NULL) {
+        QString itemName = item->data(0,0).toString();
+        currentSouvenir = currentStadium->findSouvenir(itemName);
+    }
+}
+
+
+void MainWindow::on_listOfModifyStadiumsSouvenirs_itemChanged(QTreeWidgetItem *item, int column)
+{
+
+    if(currentSouvenir != NULL) {
+    if(column == 0) {
+        QString newName = item->data(0,0).toString();
+        QString oldName = currentSouvenir->getName();
+        currentSouvenir->setName(newName);
+
+        qDebug() << "Successfully updated souvenir name: " <<
+                    db.updateSouvenirName(currentStadium->getStadiumID(), oldName, newName);
+
+    }
+    else if(column == 1) {
+        QString price = item->data(1, 0).toString();
+        QRegExp re("\\$?[0-9]+\\.?[0-9]*");
+
+        if(re.exactMatch(price)) {
+            if(price.at(0) == '$') {
+                price = price.mid(1,price.size());
+        }
+
+            currentSouvenir->setPrice(price.toDouble());
+
+            qDebug() << "Successfully updated souvenir price: " <<
+                        db.updateSouvenirPrice(currentStadium->getStadiumID(), currentSouvenir->getName(), price.toDouble());
+        }
+
+
+        item->setText(1, "$" + QString::number(currentSouvenir->getPrice(), 'f', 2));
+
+
+    }
+
+    currentSouvenir = NULL;
+}
+
 }
