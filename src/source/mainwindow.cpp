@@ -468,26 +468,27 @@ void MainWindow::on_addSelectedSouvenir_clicked()
 
 void MainWindow::on_confirmCustomTripButton_clicked()
 {
+    // Get starting point from the UI
     Stadium *s = *stadiums.get(db.getStadiumID(ui->startingStadiumComboBox->currentText()));
 
     if(s != NULL) {
         QVector<Stadium *> trip;
 
-        stadiumsGraph->Dijkstra(*s);
+        // add starting point to front of vector
         trip.push_back(s);
 
         QTreeWidgetItemIterator it(ui->selectedStadiumsList);
         QString stadiumName;
 
-        while (*it) {
+        // add the rest to the vector
+        while(*it) {
             stadiumName = (*it)->text(0);
             s = *stadiums.get(db.getStadiumID(stadiumName));
             trip.push_back(s);
             it++;
         }
-
+        // Send the list to the trip processing method
         tripProcess(trip);
-
     }
 
 }
