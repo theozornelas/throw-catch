@@ -244,15 +244,16 @@ public:
     // Outputs the MST using a PQueue and PrimJarnek
     EdgeList PrimJarnek();
 
+    // Finds the vertex containing 'e' and returns an iterator to that vertex
+    VertexItr findVertex(const E &e);
+    // Finds the edge connecting 'v' to 'w' with weight 'x'
+    EdgeItr findEdge(const E &v, const E &w, const int &x);
+
 protected:
     // Resets all the verticies and edges to un-visited
     void unvisitAll();
     // Resets the parent and distance of all vertecies for dijkstra
     void resetDijkstra();
-    // Finds the vertex containing 'e' and returns an iterator to that vertex
-    VertexItr findVertex(const E &e);
-    // Finds the edge connecting 'v' to 'w' with weight 'x'
-    EdgeItr findEdge(const E &v, const E &w, const int &x);
     // Depth First Search Traversal of the graph. Returns an ordered VertexList
     void dftHelper(Vertex &location, VertexList &outList);
 

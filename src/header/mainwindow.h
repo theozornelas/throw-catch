@@ -48,6 +48,7 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    typedef Graph<Stadium>::VertexItr VertexItr;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -55,6 +56,7 @@ public:
     bool isBlank(QString text);
     void addToCart(Souvenir *s);
     void tripProcess(QVector<Stadium*> trip);
+    void tripProcess2(QVector<VertexItr> trip);
 
 private slots:
     void on_homePageButton_clicked();
