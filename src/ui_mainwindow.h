@@ -93,6 +93,7 @@ public:
     QPushButton *customTripButton;
     QPushButton *minimumSpanningTreeButton;
     QLabel *planATripLabel;
+    QLabel *label_4;
     QWidget *quickTripToAllPage;
     QLabel *quickTripLabel;
     QTreeWidget *quickTripList;
@@ -139,7 +140,6 @@ public:
     QTreeWidget *shoppingCart;
     QLabel *shoppingCartLabel;
     QPushButton *confirmPurchasesButton;
-    QPushButton *updateShoppingCart;
     QLabel *shoppingCartEmpty;
     QLCDNumber *finalTotalDistance;
     QLabel *grandTotalLabel_2;
@@ -562,21 +562,30 @@ public:
 "}"));
         shortestTripToAllButton = new QPushButton(planATripPage);
         shortestTripToAllButton->setObjectName(QStringLiteral("shortestTripToAllButton"));
-        shortestTripToAllButton->setGeometry(QRect(180, 160, 411, 61));
+        shortestTripToAllButton->setGeometry(QRect(180, 320, 411, 61));
         shortestTripToAllButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         customTripButton = new QPushButton(planATripPage);
         customTripButton->setObjectName(QStringLiteral("customTripButton"));
-        customTripButton->setGeometry(QRect(180, 230, 411, 61));
+        customTripButton->setGeometry(QRect(180, 390, 411, 61));
         customTripButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         minimumSpanningTreeButton = new QPushButton(planATripPage);
         minimumSpanningTreeButton->setObjectName(QStringLiteral("minimumSpanningTreeButton"));
-        minimumSpanningTreeButton->setGeometry(QRect(180, 300, 411, 61));
+        minimumSpanningTreeButton->setGeometry(QRect(180, 460, 411, 61));
         minimumSpanningTreeButton->setStyleSheet(QStringLiteral("font: 25 20pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
         planATripLabel = new QLabel(planATripPage);
         planATripLabel->setObjectName(QStringLiteral("planATripLabel"));
         planATripLabel->setGeometry(QRect(20, 10, 311, 41));
         planATripLabel->setStyleSheet(QStringLiteral("font: 25 30pt \"Gill Sans\", \"Gill Sans MT Condensed\";"));
+        label_4 = new QLabel(planATripPage);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setGeometry(QRect(120, 50, 561, 271));
+        label_4->setStyleSheet(QStringLiteral("border-image:url(:/icon/icons/program-baseball-field.png);"));
         display->addWidget(planATripPage);
+        customTripButton->raise();
+        minimumSpanningTreeButton->raise();
+        planATripLabel->raise();
+        label_4->raise();
+        shortestTripToAllButton->raise();
         quickTripToAllPage = new QWidget();
         quickTripToAllPage->setObjectName(QStringLiteral("quickTripToAllPage"));
         quickTripLabel = new QLabel(quickTripToAllPage);
@@ -819,12 +828,14 @@ public:
         font8.setWeight(50);
         travelToName->setFont(font8);
         travelToName->setStyleSheet(QLatin1String("background-color: none;\n"
+"color: white;\n"
 "font: 18pt \"Futura\";"));
         travelToName->setWordWrap(true);
         travelFromName = new QLabel(travel);
         travelFromName->setObjectName(QStringLiteral("travelFromName"));
-        travelFromName->setGeometry(QRect(120, 290, 151, 71));
-        travelFromName->setStyleSheet(QStringLiteral("font: 18pt \"Futura\";background-color: none;"));
+        travelFromName->setGeometry(QRect(120, 290, 131, 91));
+        travelFromName->setStyleSheet(QLatin1String("font: 18pt \"Futura\";background-color: none;\n"
+"color: white;"));
         travelFromName->setWordWrap(true);
         display->addWidget(tripProcessPage);
         currentTripStadiumNameLabel->raise();
@@ -877,15 +888,6 @@ public:
 "border:none;\n"
 "	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
 "}"));
-        updateShoppingCart = new QPushButton(confrimPurchasesPage);
-        updateShoppingCart->setObjectName(QStringLiteral("updateShoppingCart"));
-        updateShoppingCart->setGeometry(QRect(50, 80, 91, 20));
-        updateShoppingCart->setStyleSheet(QLatin1String("QPushButton {\n"
-"background-color: #01CDE6;\n"
-"color: white;\n"
-"border:none;\n"
-"	font: 75 15pt \"Gill Sans\", \"Gill Sans MT Condensed\";\n"
-"}"));
         shoppingCartEmpty = new QLabel(confrimPurchasesPage);
         shoppingCartEmpty->setObjectName(QStringLiteral("shoppingCartEmpty"));
         shoppingCartEmpty->setGeometry(QRect(60, 130, 261, 16));
@@ -907,7 +909,6 @@ public:
         shoppingCart->raise();
         shoppingCartLabel->raise();
         confirmPurchasesButton->raise();
-        updateShoppingCart->raise();
         finalTotalDistance->raise();
         grandTotalLabel_2->raise();
         adminLoginPage = new QWidget();
@@ -1558,6 +1559,7 @@ public:
         customTripButton->setText(QApplication::translate("MainWindow", "CUSTOM TRIP", 0));
         minimumSpanningTreeButton->setText(QApplication::translate("MainWindow", "GENERATE MINIMUM SPANNING TREE", 0));
         planATripLabel->setText(QApplication::translate("MainWindow", "PLAN A TRIP", 0));
+        label_4->setText(QString());
         quickTripLabel->setText(QApplication::translate("MainWindow", "QUICK TRIP", 0));
         QTreeWidgetItem *___qtreewidgetitem1 = quickTripList->headerItem();
         ___qtreewidgetitem1->setText(1, QApplication::translate("MainWindow", "Distance from Starting Stadium", 0));
@@ -1611,7 +1613,6 @@ public:
         ___qtreewidgetitem6->setText(0, QApplication::translate("MainWindow", "Remove", 0));
         shoppingCartLabel->setText(QApplication::translate("MainWindow", "SHOPPING CART", 0));
         confirmPurchasesButton->setText(QApplication::translate("MainWindow", "CONFIRM", 0));
-        updateShoppingCart->setText(QApplication::translate("MainWindow", "update", 0));
         shoppingCartEmpty->setText(QApplication::translate("MainWindow", "Your shopping cart is currently empty!", 0));
         grandTotalLabel_2->setText(QApplication::translate("MainWindow", "TOTAL DISTANCE:", 0));
         usernameLabel->setText(QApplication::translate("MainWindow", "Username", 0));

@@ -144,9 +144,6 @@ private slots:
 
     void on_listOfModifyStadiumsSouvenirs_itemChanged(QTreeWidgetItem *item, int column);
 
-
-    void on_updateShoppingCart_clicked();
-    
 private:
     Ui::MainWindow *ui;
     DBManager db;

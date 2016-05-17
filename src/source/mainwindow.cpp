@@ -272,8 +272,8 @@ void MainWindow::viewStadiumBy(QString sortByType, QVector<Stadium*> stadiumList
 
 
     if(sortByType != "All") {
-        for(int row = 0; row < stadiumList.size(); row++) {
-            Stadium *s = stadiumList[row];
+        for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+            Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
 
             if(s->getLeagueType() == sortByType) {
                 QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->viewStadiumsList);
@@ -292,8 +292,8 @@ void MainWindow::viewStadiumBy(QString sortByType, QVector<Stadium*> stadiumList
     }
     else {
 
-        for(int row = 0; row < stadiumList.size(); row++) {
-            Stadium *s = stadiumList[row];
+        for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+            Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
             QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->viewStadiumsList);
             currentItem->setText(0, s->getStadiumName());
             currentItem->setText(1, s->getTeamName());
@@ -751,13 +751,13 @@ void MainWindow::on_currentTripNextStadium_clicked()
 
         if(shoppingCart.empty()) {
             ui->shoppingCart->hide();
-            ui->updateShoppingCart->setVisible(false);
+
+
             ui->grandTotalAmount->setText("$0.00");
 
         }
         else {
             ui->shoppingCart->clear();
-            ui->updateShoppingCart->setVisible(true);
             ui->shoppingCart->setVisible(true);
 
             QString currentStadium = "";
@@ -780,11 +780,10 @@ void MainWindow::on_currentTripNextStadium_clicked()
 
             parent->setText(1, currentStadium);
 
-            ui->shoppingCart->setColumnWidth(0, 70);
-            ui->shoppingCart->setColumnWidth(1, 200);
+            ui->shoppingCart->setColumnWidth(0, 200);
+            ui->shoppingCart->setColumnWidth(1, 70);
             ui->shoppingCart->setColumnWidth(2, 70);
             ui->shoppingCart->setColumnWidth(3, 70);
-            ui->shoppingCart->setColumnWidth(4, 70);
 
             while(it != shoppingCart.end())
             {
@@ -792,12 +791,12 @@ void MainWindow::on_currentTripNextStadium_clicked()
 
                 if(currentStadium != nextStadium) {
 
-                    parent->setText(4, QString::number(stadiumTotal, 'f', 2));
+                    parent->setText(3, QString::number(stadiumTotal, 'f', 2));
                     grandTotal += stadiumTotal;
                     stadiumTotal = 0;
                     parent = new QTreeWidgetItem(ui->shoppingCart);
                     ui->shoppingCart->addTopLevelItem(parent);
-                    parent->setText(1, nextStadium);
+                    parent->setText(0, nextStadium);
                     ui->shoppingCart->addTopLevelItem(parent);
 
                     currentStadium = nextStadium;
@@ -810,16 +809,14 @@ void MainWindow::on_currentTripNextStadium_clicked()
                 souvenirTotal = (*it)->getPrice() * (*it)->getQuantity();
 
                 QTreeWidgetItem *itm = new QTreeWidgetItem(parent);
-                QCheckBox *removeCheckBox = new QCheckBox();
 
-                ui->shoppingCart->setItemWidget(itm, 0, removeCheckBox);
 
-                itm->setText(1, souvenirName);
-                itm->setText(2, "$" + QString::number(subtotal, 'f', 2));
+                itm->setText(0, souvenirName);
+                itm->setText(1, "$" + QString::number(subtotal, 'f', 2));
                 itm->setTextAlignment(1, Qt::AlignCenter);
-                itm->setText(3, QString::number(qty));
+                itm->setText(2, QString::number(qty));
                 itm->setTextAlignment(2, Qt::AlignCenter);
-                itm->setText(4, "$" + QString::number(souvenirTotal, 'f', 2));
+                itm->setText(3, "$" + QString::number(souvenirTotal, 'f', 2));
                 itm->setTextAlignment(3, Qt::AlignCenter);
 
                 stadiumTotal += souvenirTotal;
@@ -829,7 +826,7 @@ void MainWindow::on_currentTripNextStadium_clicked()
                 it++;
             }
 
-            parent->setText(4, QString::number(stadiumTotal, 'f', 2));
+            parent->setText(3, QString::number(stadiumTotal, 'f', 2));
             grandTotal += stadiumTotal;
             stadiumTotal = 0;
 
@@ -1289,16 +1286,3 @@ void MainWindow::on_listOfModifyStadiumsSouvenirs_itemChanged(QTreeWidgetItem *i
 }
 
 
-
-void MainWindow::on_updateShoppingCart_clicked()
-{
-//    QTreeWidgetItemIterator it(ui->shoppingCart);
-
-//    while(*it) {
-//        bool toDelete = QCheckBox((*it)->data(0,0)).isChecked();
-        
-//        if()
-        
-//        it++;
-//    }
-}

@@ -774,7 +774,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>160</y>
+        <y>320</y>
         <width>411</width>
         <height>61</height>
        </rect>
@@ -790,7 +790,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>230</y>
+        <y>390</y>
         <width>411</width>
         <height>61</height>
        </rect>
@@ -806,7 +806,7 @@ border:none;
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>300</y>
+        <y>460</y>
         <width>411</width>
         <height>61</height>
        </rect>
@@ -834,6 +834,27 @@ border:none;
        <string>PLAN A TRIP</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>50</y>
+        <width>561</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-image:url(:/icon/icons/program-baseball-field.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <zorder>customTripButton</zorder>
+     <zorder>minimumSpanningTreeButton</zorder>
+     <zorder>planATripLabel</zorder>
+     <zorder>label_4</zorder>
+     <zorder>shortestTripToAllButton</zorder>
     </widget>
     <widget class="QWidget" name="quickTripToAllPage">
      <widget class="QLabel" name="quickTripLabel">
@@ -1549,6 +1570,7 @@ border: none;</string>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: none;
+color: white;
 font: 18pt &quot;Futura&quot;;</string>
        </property>
        <property name="text">
@@ -1563,12 +1585,13 @@ font: 18pt &quot;Futura&quot;;</string>
         <rect>
          <x>120</x>
          <y>290</y>
-         <width>151</width>
-         <height>71</height>
+         <width>131</width>
+         <height>91</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 18pt &quot;Futura&quot;;background-color: none;</string>
+        <string notr="true">font: 18pt &quot;Futura&quot;;background-color: none;
+color: white;</string>
        </property>
        <property name="text">
         <string>travel_from_name</string>
@@ -1726,27 +1749,6 @@ border:none;
        <string>CONFIRM</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="updateShoppingCart">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>80</y>
-        <width>91</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-background-color: #01CDE6;
-color: white;
-border:none;
-	font: 75 15pt &quot;Gill Sans&quot;, &quot;Gill Sans MT Condensed&quot;;
-}</string>
-      </property>
-      <property name="text">
-       <string>update</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="shoppingCartEmpty">
       <property name="geometry">
        <rect>
@@ -1798,7 +1800,6 @@ color: rgb(32, 32, 32)
      <zorder>shoppingCart</zorder>
      <zorder>shoppingCartLabel</zorder>
      <zorder>confirmPurchasesButton</zorder>
-     <zorder>updateShoppingCart</zorder>
      <zorder>finalTotalDistance</zorder>
      <zorder>grandTotalLabel_2</zorder>
     </widget>
