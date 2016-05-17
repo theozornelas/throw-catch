@@ -120,7 +120,7 @@ private slots:
 
     void viewSingleStadium(QString stadiumName);
 
-    void viewStadiumBy(QString sortByType);
+    void viewStadiumBy(QString sortByType, QVector<Stadium*> stadiumList);
 
     void on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1);
 
@@ -144,6 +144,9 @@ private slots:
 
     void on_listOfModifyStadiumsSouvenirs_itemChanged(QTreeWidgetItem *item, int column);
 
+
+    void on_updateShoppingCart_clicked();
+    
 private:
     Ui::MainWindow *ui;
     DBManager db;

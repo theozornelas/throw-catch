@@ -229,18 +229,36 @@ void MainWindow::on_homePageButton_clicked()
 
 void MainWindow::on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1)
 {
-    viewStadiumBy(arg1);
+    QTreeWidgetItemIterator it(ui->viewStadiumsList);
+    QVector<Stadium*> list;
+    QString stadiumName;
+
+    while(*it) {
+        stadiumName = (*it)->text(0);
+        Stadium *s = *stadiums.get(db.getStadiumID(stadiumName));
+        list.push_back(s);
+        it++;
+    }
+
+    viewStadiumBy(arg1, list);
 }
 
 
 void MainWindow::on_viewStadiumsPageButton_clicked()
 {
     ui->display->setCurrentIndex(VIEW_STADIUMS);
-    viewStadiumBy(ui->viewStadiumByComboBox->currentText());
+    QVector<Stadium*> list;
+
+    for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
+           Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
+           list.push_back(s);
+    }
+
+    viewStadiumBy(ui->viewStadiumByComboBox->currentText(), list);
 }
 
 
-void MainWindow::viewStadiumBy(QString sortByType) {
+void MainWindow::viewStadiumBy(QString sortByType, QVector<Stadium*> stadiumList) {
 
     ui->viewStadiumsList->clear();
 
@@ -254,8 +272,8 @@ void MainWindow::viewStadiumBy(QString sortByType) {
 
 
     if(sortByType != "All") {
-        for(int row = 0; row < keys.length(); row++) {
-            Stadium *s = *stadiums.get(keys[row]);
+        for(int row = 0; row < stadiumList.size(); row++) {
+            Stadium *s = stadiumList[row];
 
             if(s->getLeagueType() == sortByType) {
                 QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->viewStadiumsList);
@@ -265,7 +283,8 @@ void MainWindow::viewStadiumBy(QString sortByType) {
                 currentItem->setText(3, s->getAddress().streetAddress.trimmed() + ",\n" + s->getAddress().city
                                      + ", " + s->getAddress().state + " " + s->getAddress().zipCode);
                 currentItem->setText(4, s->getSurface());
-                currentItem->setText(5, s->getDateOpened());
+                QDate currentDate = QDate::fromString(s->getDateOpened(), "MMMM d, yyyy");
+                currentItem->setData(5, 0, currentDate);
                 currentItem->setText(6, s->getTypology());
             }
 
@@ -273,9 +292,8 @@ void MainWindow::viewStadiumBy(QString sortByType) {
     }
     else {
 
-
-        for(int row = 0; row < keys.length(); row++) {
-            Stadium *s = *stadiums.get(keys[row]);
+        for(int row = 0; row < stadiumList.size(); row++) {
+            Stadium *s = stadiumList[row];
             QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->viewStadiumsList);
             currentItem->setText(0, s->getStadiumName());
             currentItem->setText(1, s->getTeamName());
@@ -283,7 +301,8 @@ void MainWindow::viewStadiumBy(QString sortByType) {
             currentItem->setText(3, s->getAddress().streetAddress.trimmed() + ",\n" + s->getAddress().city
                                  + ", " + s->getAddress().state + " " + s->getAddress().zipCode);
             currentItem->setText(4, s->getSurface());
-            currentItem->setText(5, s->getDateOpened());
+            QDate currentDate = QDate::fromString(s->getDateOpened(), "MMMM d, yyyy");
+            currentItem->setData(5, 0, currentDate);
             currentItem->setText(6, s->getTypology());
 
         }
@@ -1267,4 +1286,19 @@ void MainWindow::on_listOfModifyStadiumsSouvenirs_itemChanged(QTreeWidgetItem *i
     currentSouvenir = NULL;
 }
 
+}
+
+
+
+void MainWindow::on_updateShoppingCart_clicked()
+{
+//    QTreeWidgetItemIterator it(ui->shoppingCart);
+
+//    while(*it) {
+//        bool toDelete = QCheckBox((*it)->data(0,0)).isChecked();
+        
+//        if()
+        
+//        it++;
+//    }
 }

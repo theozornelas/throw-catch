@@ -63,9 +63,7 @@ public:
     QWidget *viewStadiumsPage;
     QLabel *viewStadiumHeading;
     QLabel *label_3;
-    QLabel *label_4;
     QComboBox *viewStadiumByComboBox;
-    QComboBox *comboBox_2;
     QTreeWidget *viewStadiumsList;
     QWidget *viewSingleStadiumPage;
     QLabel *singleStadiumNameLabel;
@@ -390,39 +388,11 @@ public:
         label_3 = new QLabel(viewStadiumsPage);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(20, 60, 59, 16));
-        label_4 = new QLabel(viewStadiumsPage);
-        label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setGeometry(QRect(290, 60, 59, 16));
         viewStadiumByComboBox = new QComboBox(viewStadiumsPage);
         viewStadiumByComboBox->setObjectName(QStringLiteral("viewStadiumByComboBox"));
         viewStadiumByComboBox->setGeometry(QRect(80, 56, 171, 21));
         viewStadiumByComboBox->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
 "		image:url(:/icon/icons/down_arrow.png);\n"
-"}\n"
-"\n"
-"QComboBox{\n"
-" border: 0px solid   rgb(53, 53, 53);\n"
-" background-color: rgb(255, 255, 255);\n"
-" color:                      rgb(53, 53, 53); \n"
-" padding:                    5px \n"
-"\n"
-"}\n"
-"\n"
-"QComboBox::drop-down{\n"
-"        border: 1px solid #5A5A5A;\n"
-"        background: #353535;\n"
-"    color:                      white;\n"
-"    font-weight:            bold;\n"
-"    padding:                    0px;\n"
-"}\n"
-"\n"
-"\n"
-""));
-        comboBox_2 = new QComboBox(viewStadiumsPage);
-        comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
-        comboBox_2->setGeometry(QRect(350, 55, 171, 21));
-        comboBox_2->setStyleSheet(QLatin1String("QComboBox::down-arrow {\n"
-"		image: url(:/icon/icons/down_arrow.png);\n"
 "}\n"
 "\n"
 "QComboBox{\n"
@@ -1553,22 +1523,11 @@ public:
 "            Happy traveling!", 0));
         viewStadiumHeading->setText(QApplication::translate("MainWindow", "VIEW STADIUMS", 0));
         label_3->setText(QApplication::translate("MainWindow", "View by:", 0));
-        label_4->setText(QApplication::translate("MainWindow", "Sort by:", 0));
         viewStadiumByComboBox->clear();
         viewStadiumByComboBox->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "All", 0)
          << QApplication::translate("MainWindow", "American", 0)
          << QApplication::translate("MainWindow", "National", 0)
-        );
-        comboBox_2->clear();
-        comboBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Stadium", 0)
-         << QApplication::translate("MainWindow", "Name", 0)
-         << QApplication::translate("MainWindow", "Seating Capacity", 0)
-         << QApplication::translate("MainWindow", "Location", 0)
-         << QApplication::translate("MainWindow", "Surface", 0)
-         << QApplication::translate("MainWindow", "Date opened", 0)
-         << QApplication::translate("MainWindow", "Typology", 0)
         );
         QTreeWidgetItem *___qtreewidgetitem = viewStadiumsList->headerItem();
         ___qtreewidgetitem->setText(6, QApplication::translate("MainWindow", "Typology", 0));
