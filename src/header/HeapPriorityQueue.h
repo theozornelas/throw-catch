@@ -22,16 +22,35 @@ class HeapPriorityQueue {
 public:
   /*** CONSTANT UTILITY METHODS ***/
   // Returns the size of the queue
+    /**
+   * @brief size
+   * @return
+   */
   int size() const { return tree_.size(); }
   // Returns TRUE if the queue is empty
+  /**
+   * @brief empty
+   * @return
+   */
   bool empty() const { return tree_.size() == 0; }
 
   /*** NON-CONSTANT UTILITY METHODS ***/
   // Returns the min element in the queue
+  /**
+   * @brief top
+   * @return
+   */
   E& top() { return *(tree_.root());}
   // Inserts an element into the queue
+  /**
+   * @brief push
+   * @param e
+   */
   void push(const E &e);
   // Removes the minimum element from the queue
+  /**
+   * @brief pop
+   */
   void pop();
 
 private:
@@ -70,6 +89,7 @@ void HeapPriorityQueue<E,C>::push(const E &e) {
  *  This method removes the next element from the queue.
  *  It then restores heap order by bubbling down
  */
+
 template <typename E, typename C>
 void HeapPriorityQueue<E,C>::pop() {
   // If there is only one node left, remove it!
