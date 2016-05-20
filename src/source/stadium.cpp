@@ -319,10 +319,19 @@ void Stadium::removeSouvenir(QString name) {
     }
 }
 
+/**
+ * @brief Gets all the Souvenirs associated with this stadium
+ * @return vector of Souvenir objects
+ */
 QVector<Souvenir> Stadium::getSouvenirs() const {
     return souvenirs;
 }
 
+/**
+ * @brief Stadium::findSouvenir
+ * @param name [IN] the name of the Souvenir to find
+ * @return the Souvenir object with name 'name'
+ */
 Souvenir* Stadium::findSouvenir(QString name) {
     bool found = false;
     Souvenir *foundSouvenir = NULL;
