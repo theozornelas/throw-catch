@@ -60,12 +60,27 @@ class MainWindow : public QMainWindow
     typedef Graph<Stadium>::VertexItr VertexItr;
 
 public:
+    /********************************
+     *  CONSTURCTOR AND DESTRUCTOR
+     *******************************/
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    /********************
+     *  HELPER METHODS
+     *******************/
+
+    /** T/F if a string is empty/blank. **/
     bool isBlank(QString text);
+    /** Adds a desired souvenir to the global shopping cart **/
     void addToCart(Souvenir *s);
+    /** Trip process for only quick trip request **/
     void tripProcess(QVector<Stadium*> trip);
+    /** Trip process for custom trip request only **/
     void tripProcess2(QVector<VertexItr> trip);
+
+    /** Private slots are signals that respond to any triggers when
+     *  a user is using the program. (ex. clicking a button) **/
 
 private slots:
     void on_homePageButton_clicked();
@@ -146,16 +161,16 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    DBManager db;
+    DBManager db; // Database that allows program to access, modify, & delete data.
 
-    QVector<int> keys;
-    QVector<Souvenir*> shoppingCart;
+    QVector<int> keys;   // List of keys that corresond to stadium's id within database.
+    QVector<Souvenir*> shoppingCart; // Shopping cart of souvenirs
 
-    Graph<Stadium>* stadiumsGraph;
-    skiplist<int, Stadium*> stadiums;
-    Stadium *currentStadium = NULL;
-    Souvenir *currentSouvenir = NULL;
-    bool adminPrivilege = false;
+    Graph<Stadium>* stadiumsGraph;  // Global graph, that allows user to take a trip.
+    skiplist<int, Stadium*> stadiums; // Skiplist of stadiums (stadium_id --> stadium object)
+    Stadium *currentStadium = NULL;   // Allows the program to keep track of what current stadium is being requested.
+    Souvenir *currentSouvenir = NULL;  // Allows program to keep track of what current souvenir is being requested.
+    bool adminPrivilege = false; // Allows program to verify if user has admin privilege to do what is requested.
 
     // Allows user to search stadium at any given moment
     QCompleter *stadiumSearch;

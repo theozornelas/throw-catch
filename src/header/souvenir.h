@@ -12,7 +12,12 @@ using namespace std;
  */
 class Souvenir {
 public:
+    /*****************************
+     * CONSTRUCTORS & DESTRUCTOR *
+     *****************************/
+    // Default constructor, intializes all needed attributes
     Souvenir();
+    // Non-default constructor, filling all needed attributes
     Souvenir(unsigned int id, QString name,
              double price, unsigned int qty);
     ~Souvenir();
@@ -20,6 +25,7 @@ public:
     /***************
      *  ACCESSORS
      **************/
+    // Retrieves the stadium ID, the id given is based off database.
     unsigned int getStadiumID() const;
     QString      getName() const;
     double       getPrice() const;
