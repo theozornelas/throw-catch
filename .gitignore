@@ -22,6 +22,7 @@ app/Makefile.*
 release/
 debug/
 test/test.app/
+docs/
 
 src/ui_mainwindow.h
 src/ui_shoppingcart.h
