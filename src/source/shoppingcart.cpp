@@ -2,7 +2,10 @@
 #include "ui_shoppingcart.h"
 #include "../header/shoppingcart.h"
 
-
+/**
+ * @brief ShoppingCart::ShoppingCart Initializes the ui to appear on the screen.
+ * @param parent
+ */
 ShoppingCart::ShoppingCart(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ShoppingCart)
@@ -10,11 +13,23 @@ ShoppingCart::ShoppingCart(QWidget *parent) :
     ui->setupUi(this);
 }
 
+/**
+ * @brief ShoppingCart::~ShoppingCart Destructor, closes the ui properly.
+ */
 ShoppingCart::~ShoppingCart()
 {
     delete ui;
 }
 
+/**
+ * @brief ShoppingCart::setList Initializes all needed functionality for ui
+ *                              to display a table (QTreeWidget) on the gui
+ *                              with sub-cost, total cost, total quantity
+ *                              of each item from the customer's shopping
+ *                              experience. Along with an overall grand total.
+ * @param shoppingCart
+ * @param stadiums
+ */
 void ShoppingCart::setList(QVector<Souvenir*> shoppingCart, skiplist<int, Stadium*> stadiums) {
 
     if(shoppingCart.empty()) {

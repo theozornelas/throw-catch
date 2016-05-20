@@ -16,6 +16,9 @@
  * structure. The data to be stored and the comparator is templated.
  *   typename E - The data to store in the heap
  *   typename C - The comparator to use while sorting the queue
+ *
+ * @author Ethan Slattery
+ * @date   12APR2016
  */
 template <typename E, typename C>
 class HeapPriorityQueue {

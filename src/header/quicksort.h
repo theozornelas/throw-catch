@@ -5,21 +5,12 @@
 #include <algorithm>
 #include <iterator>
 
-/**************
- * PROTOTYPES *
- **************/
-//template <typename E>
-//void QuickSort(QVector<E> &vecToSort, int first, int last);
-
-//template <typename E, typename Comparator>
-//void QuickSort(QVector<E> &vecToSort, int first, int last, Comparator compare);
-
-
-/***************
- * DEFINITIONS *
- ***************/
-
-// Performs a Quick Sort using the comparator passed in
+/**
+ * @brief Performs a quicksort on the data between the first and last iterators using the comparator specified
+ * @param first [IN] The beginning iterator of the structure to sort
+ * @param last [IN] The last iterator of the structure to sort
+ * @param compare [IN] A comparator to perform the sort with
+ */
 template< typename Iterator, typename Compare >
 void QuickSort( Iterator first, Iterator last, Compare compare ) {
     if(first != last) {
@@ -45,7 +36,11 @@ void QuickSort( Iterator first, Iterator last, Compare compare ) {
     }// End if(first != last)
 }
 
-// If a comparator isn't passed in, this sorts it from least to greatest
+/**
+ * @brief Performs a quicksort on the data between the first and last iterators, sorting from least to greatest
+ * @param first [IN] The beginning iterator of the structure to sort
+ * @param last [IN] The last iterator of the structure to sort
+ */
 template< typename Iterator >
 inline void QuickSort( Iterator first, Iterator last ) {
     QuickSort( first, last, std::less_equal< typename std::iterator_traits< Iterator >::value_type >() );

@@ -15,20 +15,28 @@
  * This class creates a complete binary tree, or a tree where every level has the
  * maximum number of nodes possible, and the nodes in the last level fill from
  * left to right.
+ *
+ * @author Ethan Slattery
+ * @date   12APR2016
  */
 template <typename E>
 class CompleteTree {
 public:
+
   // Constructor: Initialized the vector to a size of one, since we do not use index 0
     /**
    * @brief CompleteTree
    */
+
+  /// Constructor: Initialized the vector to a size of one, since we do not use index 0
+
   CompleteTree() : V(1) {}
 
-  // Typedef for a position in the tree
+  /// Typedef for a position in the tree
   typedef typename std::vector<E>::iterator Position;
 
   /*** CONSTANT UTILITY METHODS ***/
+
   // Returns TRUE if the tree is empty
   /**
    * @brief empty
@@ -83,8 +91,9 @@ public:
    * @return
    */
   Position addLast(const E& e) { V.push_back(e); return last(); }
-  // Remove an element from the end of the tree
+  /// Remove an element from the end of the tree
   void removeLast() { V.pop_back(); }
+
 
   // Swaps the contents of two positions in the tree
   /**
@@ -119,6 +128,7 @@ public:
 
 protected:
   /*** UTILITY METHODS ***/
+
   // Maps an index in the vector to a position in the tree
   /**
    * @brief pos

@@ -19,6 +19,9 @@ class ShoppingCart : public QWidget
 public:
     explicit ShoppingCart(QWidget *parent = 0);
     ~ShoppingCart();
+
+    /** ACCESSORS **/
+    // Initializes the list, and set the QTreeWidget within the ui.
     void setList(QVector<Souvenir*> shoppingCart, skiplist<int, Stadium*> stadiums);
 
 

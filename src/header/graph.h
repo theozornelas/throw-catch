@@ -26,7 +26,11 @@
 
 /**
  *  @brief Undirected Graph
- *  A graph with built in algorithms and features
+ *  A graph with built in algorithms and features. Uses a adjacency list structure for implementation with iterators used to pass
+ *  references to the data around instead of copies of the data.
+ *
+ * @author Ethan Slattery
+ * @date   12APR2016
  */
 template <typename E>
 class Graph {
@@ -35,7 +39,7 @@ public:
     class Vertex;
     class Edge;
 
-    /*** TYPEDEF FOR CLASS USE ***/
+    /*** TYPEDEFS FOR CLASS USE ***/
     typedef std::list<Vertex> VertexList;
     typedef std::list<Edge> EdgeList;
     typedef typename VertexList::iterator VertexItr;
@@ -47,6 +51,7 @@ public:
 
     /**
      * @brief The Vertex class
+     * Vertex insisde the graph holds the data methods for workign with vertices
      */
     class Vertex {
     public:
@@ -131,6 +136,8 @@ public:
 
     /**
      * @brief The Edge class
+     * Edge within the graph holds the weight between two incident vertecies
+     * and methods to manipulate that data and access the adjacent vertrices
      */
     class Edge {
     public:
@@ -359,6 +366,7 @@ void Graph<E>::insertEdge(const E& v, const E& w, const int& x)
 
 /**
  * @brief Adds a vertex to the graph with the data 'x'
+ * @param e [IN] the data to insert into the new vertex
  */
 template <typename E>
 void Graph<E>::insertVertex(const E &e) {
