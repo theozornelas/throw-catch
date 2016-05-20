@@ -99,7 +99,6 @@ public:
     // Finds a souvenir within the Stadium.
     Souvenir* findSouvenir(QString name);
 
-
     // Save and load with JSON files
     QJsonObject toJSON();
 

@@ -26,49 +26,129 @@ protected:
 public:
     /*** CONSTRUCTORS AND DESTRUCTORS***/
     // Basic skip list constructor
+    /**
+     * @brief skiplist
+     */
     skiplist();
 
     /***  UTILITY METHODS ***/
-    /// Inserts an item into the list using key and value
+    // Inserts an item into the list using key and value
+    /**
+     * @brief insert
+     * @param k
+     * @param v
+     */
     void insert(const K &k, const V &v) { insert(item(k, v)); }
     // Removes a key and associated values from the list
+    /**
+     * @brief erase
+     * @param k
+     */
     void erase(const K &k);
     // Gets the value with the specified key
+    /**
+     * @brief get
+     * @param k
+     * @return
+     */
     Iterator get(const K &k) { return Iterator(search(k)); }
 
     /*** CONSTANT UTILITY FUNCTIONS ***/
-    /// Returns the size of the list
+    // Returns the size of the list
+     /**
+    * @brief size
+    * @return
+    */
     int size() const { return size_; }
     /// Returns the height of the list, or the number of levels in the skip list
+    /**
+     * @brief height
+     * @return
+     */
     int height() const { return height_; }
     // Outputs the skiplist in the returned string (ASCII OUTPUT)
+    /**
+     * @brief print
+     * @return
+     */
     std::string print() const;
     // Outputs the skiplist vertically in the returned string (ASCII OUTPUT)
+    /**
+     * @brief printVert
+     * @return
+     */
     std::string printVert() const;
 
     /*** Iterator Methods ***/
     // TODO - Returns an Iterator to the first item in the list
+    /**
+     * @brief begin
+     * @return
+     */
     Iterator begin() { Iterator temp(head_); temp++; return temp; }
     // TODO - Returns an Iterator to the end() of the list
+    /**
+     * @brief end
+     * @return
+     */
     Iterator end() { return Iterator(tail_); }
 
 protected:
     /*** UTILITY METHODS ***/
     // inserts an entry into the list
+    /**
+     * @brief insert
+     * @param e
+     */
     void insert(const item &e);
     /// Gets a random value between 0 and 1
+    /**
+     * @brief flipCoin
+     * @return
+     */
     bool flipCoin() { return static_cast<bool>(rand()%2); }
     // Returns the column of the node
+
+    /**
+     * @brief column
+     * @param n
+     * @return
+     */
     int column(node* n) const;
     // Finds the location in the base list of the key of the largest key less
+
+    /**
+     * @brief search
+     * @param k
+     * @return
+     */
     node* search(const K &k) const;
     // Adds a new empty level above all the current levels in the list
+
+    /**
+     * @brief addBlankLevel
+     */
     void addBlankLevel();
 
 private:
+    /**
+     * @brief head_
+     */
     node* head_;   //< The head of the upper-most list level (-infinity)
+
+    /**
+     * @brief tail_
+     */
     node* tail_;   //< The tail of the upper-most list level (infinity)
+
+    /**
+     * @brief height_
+     */
     int   height_; //< The Height of the structure
+
+    /**
+     * @brief size_
+     */
     int   size_;   //< The total number of nodes in the full list (bottom level)
 
 public:
@@ -79,25 +159,62 @@ public:
     class Iterator {
     public:
         /// Basic Iterator constructor to the given position, always points to bottom level
+        /**
+         * @brief Iterator
+         * @param position
+         */
         Iterator(node* position) : pos_(position) { while(pos_->down() != nullptr){ pos_ = pos_->down(); } }
 
         /*** OPERATOR OVERLOADS ***/
         /// Returns a read only version of value at this location
+        /**
+         * @brief operator *
+         * @return
+         */
         const V& operator*() const {return pos_->value(); }
         /// Returns a read/write version of the value at this location
+        /**
+         * @brief operator *
+         * @return
+         */
         V& operator*() {return pos_->value(); }
         /// Returns TRUE if iterators point to the same position
+        /**
+         * @brief operator ==
+         * @param p
+         * @return
+         */
         bool operator==(const Iterator& p) const { return pos_ == p.pos_; }
         /// Returns TRUE if iterators does not point to the same position
+        /**
+         * @brief operator !=
+         * @param p
+         * @return
+         */
         bool operator!=(const Iterator& p) const { return pos_ != p.pos_; }
         /// Traverse the list in the forward direction - Postfix requires int parameter?
+        /**
+         * @brief operator ++
+         * @return
+         */
         Iterator operator++(int) { if(pos_->type() != node::TAIL){ pos_ = pos_->right(); } return *this; }
         /// Traverse the list in the forward direction - prefix with no int parameter?
+        /**
+         * @brief operator ++
+         * @return
+         */
         Iterator& operator++() { if(pos_->type() != node::TAIL){ pos_ = pos_->right(); } return *this; }
         /// Traverse the list in the reverse direction
+        /**
+         * @brief operator --
+         * @return
+         */
         Iterator& operator--() { if(pos_->type() != node::HEAD){ pos_ = pos_->left(); } return *this; }
 
     private:
+        /**
+         * @brief pos_
+         */
         node* pos_;  // Position of the iterator
     };// END OF ITERATOR CLASS****************************************************************
 
@@ -108,50 +225,128 @@ protected:
     class node {
     public:
         /*** ENUM FOR NODE TYPE - USED FOR SEARCHING AND COMPARING ***/
+        /**
+         * @brief The nodeType enum
+         */
         enum nodeType { REGULAR, HEAD, TAIL };
 
         /*** CONSTRUCTOR FOR THE NODE ***/
         /// Default constructor for the node sets all values to null
+        /**
+         * @brief node
+         */
         node() : up_(nullptr), down_(nullptr), left_(nullptr), right_(nullptr), nodeType_(REGULAR) { }
         // Non default constructor
+        /**
+         * @brief node
+         * @param up
+         * @param down
+         * @param left
+         * @param right
+         * @param Type
+         */
         node(node* up, node* down, node* left, node* right, nodeType Type = REGULAR);
 
         /*** SET METHODS - SETS THE POINTERS ***/
         /// Sets the node up from this node
+        /**
+         * @brief setUp
+         * @param up
+         */
         void setUp(node* up)       { up_ = up; }
         /// Sets the node down from this node
+        /**
+         * @brief setDown
+         * @param down
+         */
         void setDown(node* down)   { down_ = down; }
         /// Sets the node left from this node
+        /**
+         * @brief setLeft
+         * @param left
+         */
         void setLeft(node* left)   { left_ = left; }
         /// Sets the node right from this node
+        /**
+         * @brief setRight
+         * @param right
+         */
         void setRight(node* right) { right_ = right; }
 
         /*** GET METHODS - GETS THE DIFFERENT POINTERS***/
         /// Gets the node up from this node
+        /**
+         * @brief up
+         * @return
+         */
         node* up() const { return up_; }
         /// Gets the node down from this node
+        /**
+         * @brief down
+         * @return
+         */
         node* down() const { return down_; }
         /// Gets the node left from this node
+        /**
+         * @brief left
+         * @return
+         */
         node* left() const { return left_; }
         /// Gets the node right from this node
+        /**
+         * @brief right
+         * @return
+         */
         node* right() const { return right_; }
 
         /*** UTILITY METHODS ***/
         /// Returns the type of node for comparison purposes
+        /**
+         * @brief type
+         * @return
+         */
         nodeType type() const { return nodeType_; }
         /// returns the key of this node
+        /**
+         * @brief key
+         * @return
+         */
         K key() const { return data_.key(); }
         /// Returns the value in this node
+        /**
+         * @brief value
+         * @return
+         */
         V& value() {return data_.value(); }
         /// Returns TRUE if the data list for this node is empty
+        /**
+         * @brief empty
+         * @return
+         */
         bool empty() const { return data_.empty(); }
         /// sets the node status as a head node
+        /**
+         * @brief setNodeType
+         * @param n
+         */
         void setNodeType(const nodeType& n) { nodeType_ = n; }
         /// Adds an element to this node
+        /**
+         * @brief add
+         * @param e
+         */
         void add(const item &e) { data_ = e; }
         /// Adds an element to this node by values
+        /**
+         * @brief add
+         * @param k
+         * @param v
+         */
         void add(const K &k, const V &v) { add(item(k,v)); }
         /// Clears the data from this node
+        /**
+         * @brief clear
+         */
         void clear() { data_.clear(); }
 
         /*** COMPARISON OPERATOR OVERLOADS ***/
@@ -163,6 +358,7 @@ protected:
         bool operator!=(const node& that) const;
 
     private:
+
         item     data_;     //< List of Entries for this node, should have matching keys
         node*    up_;       //< Pointer to the node the next level up
         node*    down_;     //< Pointer to the node the next level down
@@ -313,7 +509,7 @@ void skiplist<K,V>::insert(const item &e) {
   }//END OF NEW NODE INSERT
 }//END OF INSERT METHOD
 
-///**
+//**
 // * @brief Returns an iterator to the beginning of the vector of Entry objects
 // * @param k [IN] The key of the item to get
 // */
@@ -328,9 +524,17 @@ void skiplist<K,V>::insert(const item &e) {
  */
 template <typename K, typename V>
 void skiplist<K,V>::addBlankLevel() {
+
+  //create a level node
   node* newHead = new node(nullptr, head_, nullptr, nullptr, node::HEAD);
+
+  //create a pointer for the tail
   node* newTail = new node(nullptr, tail_, newHead, nullptr, node::TAIL);
+
+  //new head points to the tail
   newHead->setRight(newTail);
+
+  //set head
   head_->setUp(newHead);
   tail_->setUp(newTail);
   head_ = newHead;
@@ -455,6 +659,11 @@ std::string skiplist<K,V>::printVert() const {
 
 /**
  * @brief The non-default constructor of the node class, where you can set the links
+ * @param up
+ * @param down
+ * @param left
+ * @param right
+ * @param type
  */
 template <typename K, typename V>
 skiplist<K,V>::node::node(node *up, node *down, node *left, node *right, nodeType Type)
@@ -468,6 +677,7 @@ skiplist<K,V>::node::node(node *up, node *down, node *left, node *right, nodeTyp
 
 /**
  * @brief overloads the < operator
+ * @param that
  */
 template <typename K, typename V>
 bool skiplist<K,V>::node::operator<(const node& that) const
@@ -485,6 +695,7 @@ bool skiplist<K,V>::node::operator<(const node& that) const
 
 /**
  * @brief overloads the > operator
+ * @param that
  */
 template <typename K, typename V>
 bool skiplist<K,V>::node::operator>(const node& that) const
@@ -502,6 +713,7 @@ bool skiplist<K,V>::node::operator>(const node& that) const
 
 /**
  * @breif overloads the <= operator
+ * @param that
  */
 template <typename K, typename V>
 bool skiplist<K,V>::node::operator<=(const node& that) const
@@ -513,6 +725,7 @@ bool skiplist<K,V>::node::operator<=(const node& that) const
 
 /**
  * @breif overloads the >= operator
+ * @param that
  */
 template <typename K, typename V>
 bool skiplist<K,V>::node::operator>=(const node& that) const
@@ -524,6 +737,7 @@ bool skiplist<K,V>::node::operator>=(const node& that) const
 
 /**
  * @breif overloads the == operator
+ * @param that
  */
 template <typename K, typename V>
 bool skiplist<K,V>::node::operator==(const node &that) const {
@@ -540,6 +754,7 @@ bool skiplist<K,V>::node::operator==(const node &that) const {
 
 /**
  * @breif overloads the != operator
+ * @param that
  */
 template <typename K, typename V>
 bool skiplist<K,V>::node::operator!=(const node &that) const {

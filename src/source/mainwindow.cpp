@@ -3,6 +3,16 @@
 
 #include <QMovie>
 
+/**
+ * @brief MainWindow::MainWindow Displays the window of the program.
+ *                               Retrieves all needed information from
+ *                               the database for this program, such as
+ *                               stadiums and a universal global graph of
+ *                               all the connecting edges and vertex. The
+ *                               constructor also intializes the search bar.
+ *
+ * @param parent
+ */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -26,15 +36,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
+/**
+ * @brief MainWindow::~MainWindow Properly closes the window and exits program.
+ */
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+/**
+ * @brief MainWindow::isBlank A helper method to check if a QString is blank or not.
+ * @param text
+ * @return T/F if the QString is blank
+ */
 bool MainWindow::isBlank(QString text) {
     return text.trimmed() == "";
 }
 
+/**
+ * @brief MainWindow::tripProcess A method that helps initialize every time the user clicks
+ *        the button 'next' on their trip. Such as initializing the current stadium their
+ *        visiting souvenir's list, along with updating the mileage (how much they have
+ *        traveled) and how far they are into the trip (ex. 1/5 stadiums have been visisted).
+ * @param trip
+ */
 void MainWindow::tripProcess(QVector<Stadium*> trip) {
 
     ui->display->setCurrentIndex(TRIP_PROCESS);
@@ -121,6 +146,12 @@ void MainWindow::tripProcess(QVector<Stadium*> trip) {
     }
 }
 
+/**
+ * @brief MainWindow::tripProcess2 This method exactly similar to the original trip
+ *        process, however their trip process is meant for custom trips only. As it
+ *        recursively calls the Dijkstra formula to find the next stadium to visit.
+ * @param trip
+ */
 void MainWindow::tripProcess2(QVector<VertexItr> trip) {
 
     // Comparitor class for vertexItr, pushes smallest weights to the bottom
@@ -222,11 +253,19 @@ void MainWindow::tripProcess2(QVector<VertexItr> trip) {
     }
 }
 
+/**
+ * @brief MainWindow::on_homePageButton_clicked Trigger for if a user clicks the home button.
+ */
 void MainWindow::on_homePageButton_clicked()
 {
     ui->display->setCurrentIndex(HOME);
 }
 
+/**
+ * @brief MainWindow::on_viewStadiumByComboBox_currentIndexChanged Checks if a user has selected
+ *        to view the list of stadiums based off a view set (ex: Viewing only AMERICAN stadiums).
+ * @param arg1
+ */
 void MainWindow::on_viewStadiumByComboBox_currentIndexChanged(const QString &arg1)
 {
     QTreeWidgetItemIterator it(ui->viewStadiumsList);
@@ -243,7 +282,10 @@ void MainWindow::on_viewStadiumByComboBox_currentIndexChanged(const QString &arg
     viewStadiumBy(arg1, list);
 }
 
-
+/**
+ * @brief MainWindow::on_viewStadiumsPageButton_clicked Trigger for if user clicks the
+ *        view stadiums button.
+ */
 void MainWindow::on_viewStadiumsPageButton_clicked()
 {
     ui->display->setCurrentIndex(VIEW_STADIUMS);
@@ -257,7 +299,12 @@ void MainWindow::on_viewStadiumsPageButton_clicked()
     viewStadiumBy(ui->viewStadiumByComboBox->currentText(), list);
 }
 
-
+/**
+ * @brief MainWindow::viewStadiumBy A method to help resort the list and excludes
+ *        what is requested by the user. Such as only viewing American stadiums.
+ * @param sortByType
+ * @param stadiumList
+ */
 void MainWindow::viewStadiumBy(QString sortByType, QVector<Stadium*> stadiumList) {
 
     ui->viewStadiumsList->clear();
@@ -270,7 +317,7 @@ void MainWindow::viewStadiumBy(QString sortByType, QVector<Stadium*> stadiumList
     ui->viewStadiumsList->setColumnWidth(5, 120);
     ui->viewStadiumsList->setColumnWidth(6, 170);
 
-
+    // Sets the list if user requested stadium to be viewed by a specific view type.
     if(sortByType != "All") {
         for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
             Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
@@ -287,11 +334,10 @@ void MainWindow::viewStadiumBy(QString sortByType, QVector<Stadium*> stadiumList
                 currentItem->setData(5, 0, currentDate);
                 currentItem->setText(6, s->getTypology());
             }
-
         }
     }
     else {
-
+        // Sets the list for if the list of stadium is going to be viewed by all.
         for(skiplist<int, Stadium*>::Iterator itr = stadiums.begin(); itr != stadiums.end(); itr++) {
             Stadium *s = *stadiums.get(db.getStadiumID((*itr)->getStadiumName()));
             QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->viewStadiumsList);
@@ -309,12 +355,17 @@ void MainWindow::viewStadiumBy(QString sortByType, QVector<Stadium*> stadiumList
     }
 }
 
-
+/**
+ * @brief MainWindow::on_planATripButton_clicked User has clicked on plan a trip button.
+ */
 void MainWindow::on_planATripButton_clicked()
 {
     ui->display->setCurrentIndex(PLAN_A_TRIP);
 }
 
+/**
+ * @brief MainWindow::on_customTripButton_clicked User has clicked on the custom trip button.
+ */
 void MainWindow::on_customTripButton_clicked()
 {
     ui->display->setCurrentIndex(CUSTOM_TRIP);
@@ -329,6 +380,12 @@ void MainWindow::on_customTripButton_clicked()
     }
 }
 
+/**
+ * @brief MainWindow::on_startingStadiumComboBox_currentIndexChanged Checks if a user has
+ *        requested a new stadium to start at, if so the program checked if
+ *        the stadium is not already in their trips to visit if so it will swap them.
+ * @param arg1
+ */
 void MainWindow::on_startingStadiumComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->stadiumsToSelectFromList->clear();
@@ -360,7 +417,12 @@ void MainWindow::on_startingStadiumComboBox_currentIndexChanged(const QString &a
 
 }
 
-
+/**
+ * @brief MainWindow::on_stadiumsToSelectFromList_itemDoubleClicked Allows a user to
+ *        double click on a stadium to add to their iternary list.
+ * @param item
+ * @param column
+ */
 void MainWindow::on_stadiumsToSelectFromList_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     QString selectedStadiumName = item->text(0);
@@ -371,6 +433,12 @@ void MainWindow::on_stadiumsToSelectFromList_itemDoubleClicked(QTreeWidgetItem *
     delete item;
 }
 
+/**
+ * @brief MainWindow::on_selectedStadiumsList_itemDoubleClicked Allows a user to double
+ *        click on stadiums they have changed their mind on visiting.
+ * @param item
+ * @param column
+ */
 void MainWindow::on_selectedStadiumsList_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     QString selectedStadiumName = item->text(0);
@@ -382,7 +450,11 @@ void MainWindow::on_selectedStadiumsList_itemDoubleClicked(QTreeWidgetItem *item
 }
 
 
-
+/**
+ * @brief MainWindow::on_minimumSpanningTreeButton_clicked Displays all the distances
+ *        from starting stadium Dodger Stadium. User is then allowed to decide which
+ *        'quick trip' they would like to take.
+ */
 void MainWindow::on_minimumSpanningTreeButton_clicked()
 {
     ui->display->setCurrentIndex(MST_TRIP);
@@ -411,6 +483,10 @@ void MainWindow::on_minimumSpanningTreeButton_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_shortestTripToAllButton_clicked Also known as the 'quick trip' button.
+ *        User clicks on planning a 'quick trip' button.
+ */
 void MainWindow::on_shortestTripToAllButton_clicked()
 {
     ui->display->setCurrentIndex(QUICK_TRIP);
@@ -420,20 +496,6 @@ void MainWindow::on_shortestTripToAllButton_clicked()
     stadiumsGraph->Dijkstra(s);
 
     ui->quickTripStartingStadium->setText(startingStadiumName);
-
-
-//    Graph<Stadium>::VertexList path = stadiumsGraph->shortestPathTo(**stadiums.get(db.getStadiumID("Wrigley Field")));
-//    Graph<Stadium>::VertexItr itr = path.begin();
-//    while(itr != path.end()){
-//        QTreeWidgetItem *currentItem = new QTreeWidgetItem(ui->shortestTripList);
-//        Stadium s = **itr;
-//        currentItem->setText(0, s.getStadiumName());
-//        currentItem->setText(1, QString::number((itr)->getDistance(), 'f', 2));
-//        totalWeight += (itr)->getDistance();
-
-//        itr++;
-
-//    }
 
     ui->quickTripList->clear();
 
@@ -449,6 +511,9 @@ void MainWindow::on_shortestTripToAllButton_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_adminLoginButton_clicked User has clicked on the log-in button on homepage.
+ */
 void MainWindow::on_adminLoginButton_clicked()
 {
     if(!adminPrivilege) {
@@ -466,6 +531,11 @@ void MainWindow::on_adminLoginButton_clicked()
     }
 }
 
+/**
+ * @brief MainWindow::on_loginButton_clicked User has confirmed their input for username and
+ *        password and wants to to log in. This method verifies that the username and password
+ *        is correct. For now, program only allows adminstrations to have accounts.
+ */
 void MainWindow::on_loginButton_clicked()
 {
     ui->adminLoginErrorMessage->setVisible(false);
@@ -496,11 +566,20 @@ void MainWindow::on_loginButton_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_password_returnPressed User has pressed enter after typing
+ *        in their password, which then triggers the loginButton_clicked().
+ */
 void MainWindow::on_password_returnPressed()
 {
     on_loginButton_clicked();
 }
 
+/**
+ * @brief MainWindow::on_adminModifyButton_clicked Modifying souvenirs. Admin clicked on the
+ *        button 'modifying souvenirs'. Redirected to a page of a list of stadiums, where they
+ *        chould to select a stadium that they would like to modifies it's souvenirs list.
+ */
 void MainWindow::on_adminModifyButton_clicked()
 {
 
@@ -557,7 +636,10 @@ void MainWindow::on_modifyInformationNextButton_clicked()
 
 }
 
-
+/**
+ * @brief MainWindow::on_removeSelectedSouvenir_clicked Checks if an admin has selected
+ *        their desire souvenir to remove from a stadium's souvenir list.
+ */
 void MainWindow::on_removeSelectedSouvenir_clicked()
 {
     QTreeWidgetItem* currentSouvenir = ui->listOfModifyStadiumsSouvenirs->currentItem();
@@ -576,6 +658,10 @@ void MainWindow::on_removeSelectedSouvenir_clicked()
     on_modifyInformationNextButton_clicked();
 }
 
+/**
+ * @brief MainWindow::on_addSelectedSouvenir_clicked Verifys if admin has put in the
+ *        right/proper input fields to create a new souvenir for the current stadium.
+ */
 void MainWindow::on_addSelectedSouvenir_clicked()
 {
     bool valid = true;
@@ -585,6 +671,8 @@ void MainWindow::on_addSelectedSouvenir_clicked()
     QString souvenirName = ui->newSouvenirName->text();
     QString souvenirPrice = ui->newSouvenirPrice->text();
 
+    // regular expression ensures that the price matches
+    // either $4.00, $4, 4.00, or 4.
     QRegExp re("\\$?[0-9]+\\.?[0-9]*");
 
     if(isBlank(souvenirName) || isBlank(souvenirPrice)) {
@@ -613,6 +701,10 @@ void MainWindow::on_addSelectedSouvenir_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_confirmCustomTripButton_clicked The user has finish selecting their
+ *        desire stadiums to visit, and has requested to take their trip.
+ */
 void MainWindow::on_confirmCustomTripButton_clicked()
 {
     // Get starting point from the UI
@@ -640,6 +732,10 @@ void MainWindow::on_confirmCustomTripButton_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_quickTripTakeTripButton_clicked User has requested to confirm and take
+ *        their quick trip, that starts at Dodger Stadium and visit only ONE other stadium.
+ */
 void MainWindow::on_quickTripTakeTripButton_clicked()
 {
     QTreeWidgetItem* selectedStadium = ui->quickTripList->currentItem();
@@ -664,6 +760,10 @@ void MainWindow::on_quickTripTakeTripButton_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_shoppingCartButton_clicked During the trip, the user is allowed to
+ *        view their shopping cart at any given moment by just clicking the shopping cart icon.
+ */
 void MainWindow::on_shoppingCartButton_clicked()
 {
     ShoppingCart *currentShoppingCart = new ShoppingCart();
@@ -673,11 +773,21 @@ void MainWindow::on_shoppingCartButton_clicked()
     currentShoppingCart->setFocus();
 }
 
+/**
+ * @brief MainWindow::on_secretAdminLoginButton_clicked If any user on the program
+ *        clicks the baseball within throw-catch. It will take them to their login.
+ *        Awesome secret login.
+ */
 void MainWindow::on_secretAdminLoginButton_clicked()
 {
     on_adminLoginButton_clicked();
 }
 
+/**
+ * @brief MainWindow::on_addSouvenirToShoppingCart_clicked During the trip, the user is
+ *        allowed to purchase souvenirs, if a user clicks the button 'add to cart' the
+ *        item will be added.
+ */
 void MainWindow::on_addSouvenirToShoppingCart_clicked()
 {
     QString name;
@@ -712,6 +822,11 @@ void MainWindow::on_addSouvenirToShoppingCart_clicked()
     
 }
 
+/**
+ * @brief MainWindow::addToCart A helper method to ensure the reqeusted souvenir to be
+ *        potentially bought is added to the shopping cart.
+ * @param s
+ */
 void MainWindow::addToCart(Souvenir *s) {
 
     /** First checks if the item already exists within
@@ -742,8 +857,10 @@ void MainWindow::addToCart(Souvenir *s) {
 }
 
 
-
-
+/**
+ * @brief MainWindow::on_currentTripNextStadium_clicked User has reqeusted to travel to the
+ *        next Stdaium during their trip proccess.
+ */
 void MainWindow::on_currentTripNextStadium_clicked()
 {
     if(ui->currentTripNextStadium->text() == "FINISH") {
@@ -778,7 +895,7 @@ void MainWindow::on_currentTripNextStadium_clicked()
             ui->shoppingCart->addTopLevelItem(parent);
             currentStadium = (*stadiums.get((*it)->getStadiumID()))->getStadiumName();
 
-            parent->setText(1, currentStadium);
+            parent->setText(0, currentStadium);
 
             ui->shoppingCart->setColumnWidth(0, 200);
             ui->shoppingCart->setColumnWidth(1, 70);
@@ -841,6 +958,10 @@ void MainWindow::on_currentTripNextStadium_clicked()
 /****************************
  *  VIEWING RANDOM STADIUM
  ****************************/
+/**
+ * @brief MainWindow::on_searchButton_clicked Trigger for if a user clicks the magnifying glass icon
+ *        to search for a desired stadium. Calls helper method viewSingleStdaium(...).
+ */
 void MainWindow::on_searchButton_clicked()
 {
     viewSingleStadium(ui->searchBar->text());
@@ -848,12 +969,22 @@ void MainWindow::on_searchButton_clicked()
     ui->searchBar->clear();
 }
 
+/**
+ * @brief MainWindow::on_searchBar_returnPressed Also another trigger for searching a stadium, user has
+ *        pressed enter instead of clicking the magnifying glass icon.
+ */
 void MainWindow::on_searchBar_returnPressed()
 {
     on_searchButton_clicked();
 }
 
-
+/**
+ * @brief MainWindow::viewSingleStadium Helper function to display the page of viewing
+ *        a single stadium information. If an admin is currently logged in they have the
+ *        capability of viewing a stadium's total revenue. The function also ensures
+ *        if a specified stadium is not found, they it will alert the user it wasn't found.
+ * @param stadiumName
+ */
 void MainWindow::viewSingleStadium(QString stadiumName) {
     int stadiumID = db.getStadiumID(stadiumName);
 
@@ -893,7 +1024,13 @@ void MainWindow::viewSingleStadium(QString stadiumName) {
 
 }
 
-
+/**
+ * @brief MainWindow::on_confirmPurchasesButton_clicked Trigger if user confirms that they
+ *        do indeed want to purchase all items in their shopping cart. This method
+ *        adds up the total revenue from each stadium and adds it to stadium's total
+ *        revenue attribute. This method also verifys the user's purchase and displays
+ *        the overall grand total.
+ */
 void MainWindow::on_confirmPurchasesButton_clicked()
 {
     QString stadiumName;
@@ -903,10 +1040,11 @@ void MainWindow::on_confirmPurchasesButton_clicked()
     while (*it) {
 
         stadiumName = (*it)->text(1);
-        totalSpentAtStadium = (*it)->text(4).toDouble();
+        totalSpentAtStadium = (*it)->text(3).toDouble();
         Stadium *s = *stadiums.get(db.getStadiumID(stadiumName));
 
         if(s != NULL) {
+            qDebug() << totalSpentAtStadium;
             s->addToTotalRevenue(totalSpentAtStadium);
             db.updateTotalRevenue(s->getStadiumID(), s->getTotalRevenue());
         }
@@ -920,6 +1058,11 @@ void MainWindow::on_confirmPurchasesButton_clicked()
     ui->display->setCurrentIndex(HOME);
 }
 
+/**
+ * @brief MainWindow::on_viewAdminStadiumsButton_clicked Admin has requested to
+ *        view a list of stadiums. List of stadiums provide it's name along with
+ *        the total revenue.
+ */
 void MainWindow::on_viewAdminStadiumsButton_clicked()
 {
     ui->display->setCurrentIndex(ADMIN_STADIUMS);
@@ -944,12 +1087,19 @@ void MainWindow::on_viewAdminStadiumsButton_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_adminHomeButton_clicked Trigger for if admin home button is clicked.
+ */
 void MainWindow::on_adminHomeButton_clicked()
 {
     ui->display->setCurrentIndex(ADMIN_HOME);
 }
 
-
+/**
+ * @brief MainWindow::on_viewMoreInfoAboutStadiumButton_clicked If admin wants to view more
+ *        about a stadium, they can select a stadium and view more. Calls helper method
+ *        view single stadium, which has all admin functionality of viewing total revenue, etc.
+ */
 void MainWindow::on_viewMoreInfoAboutStadiumButton_clicked()
 {
     QTreeWidgetItem* selectedStadium = ui->adminStadiumList->currentItem();
@@ -965,7 +1115,12 @@ void MainWindow::on_viewMoreInfoAboutStadiumButton_clicked()
 
 }
 
-
+/**
+ * @brief MainWindow::on_addStadiumFromFileButton_clicked Allow admin to select a json file
+ *        and add new stadiums to the list. When a stadium or stadiums is added, it connecting
+ *        edges and attributes are not only added to the current global list, but added to
+ *        the database for persistent data.
+ */
 void MainWindow::on_addStadiumFromFileButton_clicked()
 {
         QString filename = QFileDialog::getOpenFileName(
@@ -1058,6 +1213,9 @@ void MainWindow::on_addStadiumFromFileButton_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_adminModifyStadiumsButton_clicked Trigger for if an admin request to modify a stadium.
+ */
 void MainWindow::on_adminModifyStadiumsButton_clicked()
 {
     ui->display->setCurrentIndex(MODIFY_STADIUMS);
@@ -1073,6 +1231,11 @@ void MainWindow::on_adminModifyStadiumsButton_clicked()
 
 }
 
+/**
+ * @brief MainWindow::on_updateAStadiumButton_clicked Once button is clicked on,
+ *        it redirects the admin to a page of a list of stadiums, where they can
+ *        select a stadium to alter it's info.
+ */
 void MainWindow::on_updateAStadiumButton_clicked()
 {
     QTreeWidgetItem* selectedStadium = ui->stadiumsToModifyList->currentItem();
@@ -1116,7 +1279,10 @@ void MainWindow::on_updateAStadiumButton_clicked()
 }
 
 
-
+/**
+ * @brief MainWindow::on_cancelStadiumUpdatesButton_clicked Admin clicks on 'cancel' when
+ *        modifying a stadium, therefore all changes made on that page are ignored.
+ */
 void MainWindow::on_cancelStadiumUpdatesButton_clicked()
 {
     ui->display->setCurrentIndex(MODIFY_STADIUMS);
@@ -1235,7 +1401,12 @@ void MainWindow::on_confirmStadiumUpdateButton_clicked()
 
 }
 
-
+/**
+ * @brief MainWindow::on_listOfModifyStadiumsSouvenirs_itemDoubleClicked Allows the user to modify an item
+ *        within the current stadium's souvenir list just by clicking then editing the text.
+ * @param item
+ * @param column
+ */
 void MainWindow::on_listOfModifyStadiumsSouvenirs_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     item->setFlags (item->flags () | Qt::ItemIsEditable);
@@ -1245,7 +1416,13 @@ void MainWindow::on_listOfModifyStadiumsSouvenirs_itemDoubleClicked(QTreeWidgetI
     }
 }
 
-
+/**
+ * @brief MainWindow::on_listOfModifyStadiumsSouvenirs_itemChanged A trigger that confirms that a user
+ *        has modify a souvenir within a stadium's list and double checks if it is valid input before
+ *        confirming that desired change.
+ * @param item
+ * @param column
+ */
 void MainWindow::on_listOfModifyStadiumsSouvenirs_itemChanged(QTreeWidgetItem *item, int column)
 {
 
